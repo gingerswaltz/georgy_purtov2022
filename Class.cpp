@@ -40,7 +40,7 @@ int BankDepos::getLicNum() const {  // все методы которые не �
 }
 
 void BankDepos::setLicNum(unsigned short x) {  // прописать везде unsigned short кроме money
-    if (x > 9999 && x <= 99999) throw invalid_argument("License number is invalid!");
+    if (x > 9999) throw invalid_argument("License number is invalid!");
     lic = x;
 }
 
@@ -49,16 +49,16 @@ int BankDepos::getClientCode()const {
 }
 
 void BankDepos::setClientCode(unsigned short x) {
-    if (x > 99999 && x <= 999999) throw invalid_argument("Client code number is too big!");
+    if (x > 99999) throw invalid_argument("Client code number invalid!");
     code = x;
 }
 
-int BankDepos::get_Proc()const {
+float BankDepos::get_Proc()const {
     return proc;
 }
 
 void BankDepos::set_Proc(float x) {
-    if (x < 0 && x == 0) throw invalid_argument("Procent number is too little!");
+    if (x < 0) throw invalid_argument("Procent number is too little!");
     proc = x;
 }
 
@@ -79,7 +79,7 @@ void BankDepos::set_Date(unsigned short x, unsigned short y) {
 
 
 
-int BankDepos::get_Money()const {
+float BankDepos::get_Money()const {
     return money;
 }
 

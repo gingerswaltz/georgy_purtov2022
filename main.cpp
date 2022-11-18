@@ -1,11 +1,11 @@
 #include "Class.h"
 #include <iostream>
+#include <fstream>
 using namespace std;
 int main(int argc, char const* argv[])
 {
-    string s_check ="y";
-   
-    do {
+    string path_in = "output.txt";
+    string path_out = "output.txt";
         BankDepos deposit; // инициализировали объект
         auto y = 0; //  ввод поля даты
         auto x = 0.0;  // ввод данных
@@ -44,9 +44,33 @@ int main(int argc, char const* argv[])
         case 0: // 0: switch завершается
             break;
         }
-        std::cout << "Add new deposit? Print y/n\n"; // диалог на добавление вклада
-        std::cin >> s_check;
-        if (s_check == "n") return 0;
-    } while ((s_check != "n") or (s_check != "N"));
+       ofstream fout;
+        fout.open(path_out, ofstream::app);
+        if (!fout.is_open()) { std::cout << "Open file error" << endl; } 
+        else { 
+            std::cout << "File is opened!" << endl; 
+            fout.write((char*)&deposit, sizeof(BankDepos));
+        
+            }
+       
+        ifstream fin;
+        fin.open(path_in);
+
+        if (!fin.is_open()) { std::cout << "Open file error" << endl; }
+        else {
+            std::cout << "File is opened!" << endl;
+            BankDepos deposit_file;
+            while (fin.read((char*)&deposit_file, sizeof(BankDepos)))
+            {
+                deposit_file.toString();
+            }
+            fin.close();
+            deposit_file.toString();
+
+        }
+
+            return 0;
+  
+    
 
 }
