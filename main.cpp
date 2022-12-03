@@ -1,76 +1,19 @@
-#include "Class.h"
-#include <iostream>
-#include <fstream>
-using namespace std;
-int main(int argc, char const* argv[])
-{
-    string path_in = "output.txt";
-    string path_out = "output.txt";
-        BankDepos deposit; // –∏–Ω–∏—Ü–∏–∞–ª–∏–∑–∏—Ä–æ–≤–∞–ª–∏ –æ–±—ä–µ–∫—Ç
-        auto y = 0; //  –≤–≤–æ–¥ –ø–æ–ª—è –¥–∞—Ç—ã
-        auto x = 0.0;  // –≤–≤–æ–¥ –¥–∞–Ω–Ω—ã—Ö
-        string s; // —Å—Ç—Ä–æ–∫–∞ –¥–ª—è –≤–≤–æ–¥–∞ —Å–æ–≥–ª–∞—Å–∏—è –∏–ª–∏ –æ—Ç–∫–∞–∑–∞ (y/n)
-        std::cout << "Input client lic number\n"; // –≤–≤–æ–¥ –ª–∏—Ü–µ–≤–æ–≥–æ —Å—á–µ—Ç–∞
-        cin >> x;
-        deposit.setLicNum(x); // –∑–∞–¥–∞–ª–∏ –ª–∏—Ü–µ–≤–æ–π —Å—á–µ—Ç
-        std::cout << "Input client code number\n"; // –≤–≤–æ–¥ –∫–æ–¥–∞ –∫–ª–∏–µ–Ω—Ç–∞
-        cin >> x;
-        deposit.setClientCode(x);// –∑–∞–¥–∞–ª–∏ –∫–æ–¥ –∫–ª–∏–µ–Ω—Ç–∞
-        std::cout << "Input client procent number\n"; // –≤–≤–æ–¥ –ø—Ä–æ—Ü–µ–Ω—Ç–æ–≤
-        cin >> x;
-        deposit.set_Proc(x);// –∑–∞–¥–∞–ª–∏ –ø—Ä–æ—Ü–µ–Ω—Ç—ã
-        std::cout << "Input client deposit money number\n"; // –≤–≤–æ–¥ –≤–∫–ª–∞–¥–∞
-        cin >> x;
-        deposit.set_Money(x);// –∑–∞–¥–∞–ª–∏ –≤–∫–ª–∞–¥ 
-        std::cout << "Input deposit day and month number\n"; // –≤–≤–æ–¥ –¥–∞—Ç—ã
-        cin >> x >> y;
-        deposit.set_Date(x, y);// –∑–∞–¥–∞–ª–∏ –¥–∞—Ç—É
-        cout << "Client data: \n" << deposit.toString() << '\n';  // –≤—ã–≤–µ–ª–∏ –≤—Å–µ –≤–≤–µ–¥–µ–Ω–Ω—ã–µ –¥–∞–Ω–Ω—ã–µ
-        std::cout << "Change the deposit? Print y/n\n"; // –¥–∏–∞–ª–æ–≥ –Ω–∞ –¥–æ–±–∞–≤–ª–µ–Ω–∏–µ/–∏–∑—ã–º–∞–Ω–∏–µ –¥–µ–Ω–µ–≥ –≤–∫–ª–∞–¥–∞
-        std::cin >> s;
-        unsigned n; // —Ñ–ª–∞–≥-–ø–µ—Ä–µ–º–µ–Ω–Ω–∞—è 
-        if (s == "y") n = 1; else n = 0;
-        switch (n) // –ø–µ—Ä–µ–∫–ª—é—á–µ–Ω–∏–µ N –ø–æ –∑–Ω–∞—á–µ–Ω–∏—è–º:
-        {
-        case 1: { // 1: –≤–≤–æ–¥–∏–º –Ω–æ–≤–æ–µ —á–∏—Å–ª–æ –¥–µ–Ω–µ–≥ (–∏–∑—ã–º–∞–µ–º –∏–ª–∏ –¥–æ–±–∞–≤–ª—è–µ–º), 
-            //–∑–∞—Ç–µ–º –≤—ã–∑—ã–≤–∞–µ–º —Å–æ–æ—Ç–≤–µ—Ç—Å—Ç–≤—É—é—â–∏–π –º–µ—Ç–æ–¥ –∏ –ø–æ–ª—É—á–∞–µ–º –Ω–æ–≤–æ–µ –∑–Ω–∞—á–µ–Ω–∏–µ –≤–∫–ª–∞–¥–∞
-            auto money_c = 0.0;
-            std::cout << "Enter the number of changing:";
-            std::cin >> money_c;
-            deposit.change(money_c);
-            std::cout << "New amount of deposit:" << deposit.get_Money() << '\n';
+#include "Building.h"
+/// ÏÓÊÌÓ ÎË Á‡ÔËÒ‡Ú¸ Ó·˙ÂÍÚ ·‡ÁÓ‚Ó„Ó ÍÎ‡ÒÒ‡ ‚ Ó·˙ÂÍÚ ÔÓËÁ‚Ó‰ÌÓ„Ó Ë Ì‡Ó·ÓÓÚ
+int main() {
+	Building * building = new Building(); // ËÌËˆË‡ÎËÁ‡ˆËˇ ÍÎ‡ÒÒ‡ ÓÒÌÓ‚ÌÓ„Ó
+	House* house = new House(); // ËÌËˆË‡ÎËÁ‡ˆËˇ ÍÎ‡ÒÒ‡ Ì‡ÒÎÂ‰ÌËÍ‡ 1
+	Building* building1 = house; // ÔÓÎËÏÓÙËÁÏ 1 (? ÌÂ ÁÌ‡˛ Á‡˜ÂÏ ÌÛÊÌÓ ÛÚÓ˜ÌËÚ¸ Û ÔÂÔÓ‰‡‚‡ÚÂÎˇ)
+	Office* office = new Office(); // ËÌËˆË‡ÎËÁ‡ˆËˇ ÍÎ‡ÒÒ‡ Ì‡ÒÎÂ‰ÌËÍ‡ 2
+	Building* building2 = office; // ÔÓÎËÏÓÙËÁÏ 2
 
-        }
-        case 0: // 0: switch –∑–∞–≤–µ—Ä—à–∞–µ—Ç—Å—è
-            break;
-        }
-       ofstream fout;
-        fout.open(path_out, ofstream::app);
-        if (!fout.is_open()) { std::cout << "Open file error" << endl; } 
-        else { 
-            std::cout << "File is opened!" << endl; 
-            fout.write((char*)&deposit, sizeof(BankDepos));
-        
-            }
-       
-        ifstream fin;
-        fin.open(path_in);
 
-        if (!fin.is_open()) { std::cout << "Open file error" << endl; }
-        else {
-            std::cout << "File is opened!" << endl;
-            BankDepos deposit_file;
-            while (fin.read((char*)&deposit_file, sizeof(BankDepos)))
-            {
-                deposit_file.toString();
-            }
-            fin.close();
-            deposit_file.toString();
+	cout << building->to_string() << endl << endl;  //  Î‡ÒÒ ÓÒÌÓ‚ÌÓÈ. ¬˚ÁÓ‚ to_string ËÁ Bulding
 
-        }
+	cout << building1->to_string() << endl << endl; //  Î‡ÒÒ Ì‡ÒÎÂ‰ÌËÍ 1. ¬˚ÁÓ‚ to_string ËÁ House
 
-            return 0;
-  
-    
+	cout << building2->to_string() << endl; //  Î‡ÒÒ Ì‡ÒÎÂ‰ÌËÍ 2. ¬˚ÁÓ‚ to_string ËÁ Office
 
+	delete building; delete building1; delete building2; // Ó˜ËÒÚÍ‡ Ô‡ÏˇÚË
+	return 0;
 }
