@@ -27,7 +27,7 @@
 //    return 0;
 //}
 
-///// Метод ньютона
+///// Метод хорд
 #include <iostream>
 #include <cmath>
 using namespace std;
