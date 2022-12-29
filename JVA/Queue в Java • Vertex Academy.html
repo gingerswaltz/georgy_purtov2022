@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)https://vertex-academy.com/tutorials/ru/queue-java-primer/ -->
+<html lang="ru-RU" prefix="og: http://ogp.me/ns#"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://vertex-academy.com/tutorials/xmlrpc.php">
+ <title>Queue в Java • Vertex Academy</title>
+<meta name="robots" content="max-image-preview:large">
+
+<!-- This site is optimized with the Yoast SEO Premium plugin v3.1.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="Что такое Queue в Java. Расскажем что этот такое на конкретных примерах. Это одна из статей по коллекциям в Java. Уровень - для начинающих.">
+<meta name="robots" content="noodp">
+<link rel="canonical" href="https://vertex-academy.com/tutorials/ru/queue-java-primer/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Queue в Java • Vertex Academy">
+<meta property="og:description" content="Что такое Queue в Java. Расскажем что этот такое на конкретных примерах. Это одна из статей по коллекциям в Java. Уровень - для начинающих.">
+<meta property="og:url" content="https://vertex-academy.com/tutorials/ru/queue-java-primer/">
+<meta property="og:site_name" content="Vertex Academy">
+<meta property="article:publisher" content="https://www.facebook.com/vertex.academy/">
+<meta property="article:tag" content="queue java пример">
+<meta property="article:tag" content="коллекция queue java">
+<meta property="article:tag" content="очередь java">
+<meta property="article:section" content="Java">
+<meta property="article:published_time" content="2018-06-02T13:12:26+03:00">
+<meta property="article:modified_time" content="2018-07-18T15:56:30+03:00">
+<meta property="og:updated_time" content="2018-07-18T15:56:30+03:00">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/06/queue-java.jpg">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/06/interfeis-queue-java.jpg">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/06/Interfeis-queue-v-java.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/06/lifo-v-java-1.jpg">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/Capture-d’écran-2018-05-29-à-18.39.20.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/Capture-d’écran-2018-05-29-à-18.59.40.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/Capture-d’écran-2018-05-29-à-19.01.25.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/Capture-d’écran-2018-05-29-à-19.02.58.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/Capture-d’écran-2018-05-29-à-18.45.13.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/Capture-d’écran-2018-05-29-à-18.46.26.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/Capture-d’écran-2018-05-29-à-19.06.57.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/Capture-d’écran-2018-05-29-à-19.09.36.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/Capture-d’écran-2018-05-29-à-19.11.24.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="Что такое Queue в Java. Расскажем что этот такое на конкретных примерах. Это одна из статей по коллекциям в Java. Уровень - для начинающих.">
+<meta name="twitter:title" content="Queue в Java • Vertex Academy">
+<meta name="twitter:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/06/queue-java.jpg">
+<meta property="DC.date.issued" content="2018-06-02T13:12:26+03:00">
+<!-- / Yoast SEO Premium plugin. -->
+
+<link rel="dns-prefetch" href="https://ws.sharethis.com/">
+<link rel="dns-prefetch" href="https://www.google.com/">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://maxcdn.bootstrapcdn.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Vertex Academy » Лента" href="https://vertex-academy.com/tutorials/ru/feed/">
+<script async="" src="./Queue в Java • Vertex Academy_files/analytics.js.Без названия"></script><script type="text/javascript" async="" src="./Queue в Java • Vertex Academy_files/recaptcha__ru.js.Без названия" crossorigin="anonymous" integrity="sha384-WCHHeiWXPyOSuQaugVRjpNMJWxOfrULCjvKrlTSUG0uYesAzPmzciQ1RewjGsnQf"></script><script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/vertex-academy.com\/tutorials\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.0.2"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode,e=(p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0),i.toDataURL());return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script><script src="./Queue в Java • Vertex Academy_files/wp-emoji-release.min.js.Без названия" type="text/javascript" defer=""></script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+		<style type="text/css">
+	.wp-pagenavi{margin-left:auto !important; margin-right:auto; !important}
+	</style>
+  <link rel="stylesheet" id="crayon-css" href="./Queue в Java • Vertex Academy_files/crayon.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="crayon-theme-classic-css" href="./Queue в Java • Vertex Academy_files/classic.css" type="text/css" media="all">
+<link rel="stylesheet" id="crayon-font-courier-new-css" href="./Queue в Java • Vertex Academy_files/courier-new.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-block-library-css" href="./Queue в Java • Vertex Academy_files/style.min.css" type="text/css" media="all">
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<link rel="stylesheet" id="adsns_css-css" href="./Queue в Java • Vertex Academy_files/adsns.css" type="text/css" media="all">
+<link rel="stylesheet" id="contact-form-7-css" href="./Queue в Java • Vertex Academy_files/styles.css" type="text/css" media="all">
+<link rel="stylesheet" id="colormag_google_fonts-css" href="./Queue в Java • Vertex Academy_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="colormag_style-css" href="./Queue в Java • Vertex Academy_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="colormag-fontawesome-css" href="./Queue в Java • Vertex Academy_files/font-awesome.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-pagenavi-style-css" href="./Queue в Java • Vertex Academy_files/css3_orange_glossy.css" type="text/css" media="all">
+<script type="text/javascript" src="./Queue в Java • Vertex Academy_files/jquery.min.js.Без названия" id="jquery-core-js"></script>
+<script type="text/javascript" src="./Queue в Java • Vertex Academy_files/jquery-migrate.min.js.Без названия" id="jquery-migrate-js"></script>
+<script type="text/javascript" id="crayon_js-js-extra">
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"https:\/\/vertex-academy.com\/tutorials\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"\u041d\u0430\u0436\u043c\u0438\u0442\u0435 %s \u0434\u043b\u044f \u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f, %s \u0434\u043b\u044f \u0432\u0441\u0442\u0430\u0432\u043a\u0438","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Queue в Java • Vertex Academy_files/crayon.min.js.Без названия" id="crayon_js-js"></script>
+<script type="text/javascript" src="./Queue в Java • Vertex Academy_files/colormag-custom.js.Без названия" id="colormag-custom-js"></script>
+<script id="st_insights_js" type="text/javascript" src="./Queue в Java • Vertex Academy_files/st_insights.js.Без названия"></script>
+<link rel="https://api.w.org/" href="https://vertex-academy.com/tutorials/wp-json/"><link rel="alternate" type="application/json" href="https://vertex-academy.com/tutorials/wp-json/wp/v2/posts/9247"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://vertex-academy.com/tutorials/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://vertex-academy.com/tutorials/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 6.0.2">
+<link rel="shortlink" href="https://vertex-academy.com/tutorials/?p=9247">
+<link rel="alternate" type="application/json+oembed" href="https://vertex-academy.com/tutorials/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fqueue-java-primer%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://vertex-academy.com/tutorials/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fqueue-java-primer%2F&amp;format=xml">
+
+<script type="text/javascript">
+	function addHandler(object, event, handler) {
+		if (typeof object.addEventListener != 'undefined') 
+			object.addEventListener(event, handler, false);
+		else
+			if (typeof object.attachEvent != 'undefined')
+				object.attachEvent('on' + event, handler);
+			else 
+				throw 'Incompatible browser';
+	}
+</script>
+	<style type="text/css">
+	 .wp-pagenavi
+	{
+		font-size:12px !important;
+	}
+	</style>
+	<!-- Vertex Academy Internal Styles --><style type="text/css"> .colormag-button,blockquote,button,input[type=reset],input[type=button],input[type=submit]{background-color:#f26027}#site-title a,.next a:hover,.previous a:hover,.social-links i.fa:hover,a{color:#f26027}.fa.search-top:hover{background-color:#f26027}#site-navigation{border-top:4px solid #f26027}.home-icon.front_page_on,.main-navigation a:hover,.main-navigation ul li ul li a:hover,.main-navigation ul li ul li:hover>a,.main-navigation ul li.current-menu-ancestor>a,.main-navigation ul li.current-menu-item ul li a:hover,.main-navigation ul li.current-menu-item>a,.main-navigation ul li.current_page_ancestor>a,.main-navigation ul li.current_page_item>a,.main-navigation ul li:hover>a,.main-small-navigation li a:hover,.site-header .menu-toggle:hover{background-color:#f26027}.main-small-navigation .current-menu-item>a,.main-small-navigation .current_page_item>a{background:#f26027}.promo-button-area a:hover{border:2px solid #f26027;background-color:#f26027}#content .wp-pagenavi .current,#content .wp-pagenavi a:hover,.format-link .entry-content a,.pagination span{background-color:#f26027}.pagination a span:hover{color:#f26027;border-color:#f26027}#content .comments-area a.comment-edit-link:hover,#content .comments-area a.comment-permalink:hover,#content .comments-area article header cite a:hover,.comments-area .comment-author-link a:hover{color:#f26027}.comments-area .comment-author-link span{background-color:#f26027}.comment .comment-reply-link:hover,.nav-next a,.nav-previous a{color:#f26027}#secondary .widget-title{border-bottom:2px solid #f26027}#secondary .widget-title span{background-color:#f26027}.footer-widgets-area .widget-title{border-bottom:2px solid #f26027}.footer-widgets-area .widget-title span{background-color:#f26027}.footer-widgets-area a:hover{color:#f26027}.advertisement_above_footer .widget-title{border-bottom:2px solid #f26027}.advertisement_above_footer .widget-title span{background-color:#f26027}a#scroll-up i{color:#f26027}.page-header .page-title{border-bottom:2px solid #f26027}#content .post .article-content .above-entry-meta .cat-links a,.page-header .page-title span{background-color:#f26027}#content .post .article-content .entry-title a:hover,.entry-meta .byline i,.entry-meta .cat-links i,.entry-meta a,.post .entry-title a:hover,.search .entry-title a:hover{color:#f26027}.entry-meta .post-format i{background-color:#f26027}.entry-meta .comments-link a:hover,.entry-meta .edit-link a:hover,.entry-meta .posted-on a:hover,.entry-meta .tag-links a:hover,.single #content .tags a:hover{color:#f26027}.more-link,.no-post-thumbnail{background-color:#f26027}.post-box .entry-meta .cat-links a:hover,.post-box .entry-meta .posted-on a:hover,.post.post-box .entry-title a:hover{color:#f26027}.widget_featured_slider .slide-content .above-entry-meta .cat-links a{background-color:#f26027}.widget_featured_slider .slide-content .below-entry-meta .byline a:hover,.widget_featured_slider .slide-content .below-entry-meta .comments a:hover,.widget_featured_slider .slide-content .below-entry-meta .posted-on a:hover,.widget_featured_slider .slide-content .entry-title a:hover{color:#f26027}.widget_highlighted_posts .article-content .above-entry-meta .cat-links a{background-color:#f26027}.byline a:hover,.comments a:hover,.edit-link a:hover,.posted-on a:hover,.tag-links a:hover,.widget_highlighted_posts .article-content .below-entry-meta .byline a:hover,.widget_highlighted_posts .article-content .below-entry-meta .comments a:hover,.widget_highlighted_posts .article-content .below-entry-meta .posted-on a:hover,.widget_highlighted_posts .article-content .entry-title a:hover{color:#f26027}.widget_featured_posts .article-content .above-entry-meta .cat-links a{background-color:#f26027}.widget_featured_posts .article-content .entry-title a:hover{color:#f26027}.widget_featured_posts .widget-title{border-bottom:2px solid #f26027}.widget_featured_posts .widget-title span{background-color:#f26027}.related-posts-main-title .fa,.single-related-posts .article-content .entry-title a:hover{color:#f26027}</style>
+
+<style type="text/css"></style>
+
+<style type="text/css">
+.synved-social-resolution-single {
+display: inline-block;
+}
+.synved-social-resolution-normal {
+display: inline-block;
+}
+.synved-social-resolution-hidef {
+display: none;
+}
+
+@media only screen and (min--moz-device-pixel-ratio: 2),
+only screen and (-o-min-device-pixel-ratio: 2/1),
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-device-pixel-ratio: 2),
+only screen and (min-resolution: 2dppx),
+only screen and (min-resolution: 192dpi) {
+	.synved-social-resolution-normal {
+	display: none;
+	}
+	.synved-social-resolution-hidef {
+	display: inline-block;
+	}
+}
+</style>
+<script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-1426849340859996",
+    enable_page_level_ads: false
+  });
+</script>
+
+<style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style></head>
+
+<body class="post-template-default single single-post postid-9247 single-format-standard  wide"><div id="pratikabuSTTDiv" class="pratikabusttdiv-no-print" style="bottom: 20px; right: 20px; opacity: 1; display: block;"><img id="pratikabuSTTArrowUp" style="float: right; opacity: 0.5; cursor: pointer; width: 48px; height: 48px;" class="pratikabuSTTImg pratikabuSTTRotate180" src="chrome-extension://hegiignepmecppikdlbohnnbfjdoaghj/icons/pratikabu-stt-48-1.png"><div id="pratikabuSTTDiv2" class="pratikabusttdiv-no-print" style="width: 48px; opacity: 0; display: block; margin-left: 0px;"><img id="pratikabuSTTClear" class="pratikabuSTTImg" style="opacity: 0.5; cursor: pointer;" src="chrome-extension://hegiignepmecppikdlbohnnbfjdoaghj/icons/pratikabu-stt-clear-24.png"><img id="pratikabuSTTPageUp" class="pratikabuSTTImg" style="opacity: 0.5; cursor: pointer;" src="chrome-extension://hegiignepmecppikdlbohnnbfjdoaghj/icons/pratikabu-stt-pageup-24.png"><img id="pratikabuSTTSettings" class="pratikabuSTTImg" style="opacity: 0.5; cursor: pointer;" src="chrome-extension://hegiignepmecppikdlbohnnbfjdoaghj/icons/pratikabu-stt-settings-24.png"><img id="pratikabuSTTPageDown" class="pratikabuSTTImg pratikabuSTTRotate180" style="opacity: 0.5; cursor: pointer;" src="chrome-extension://hegiignepmecppikdlbohnnbfjdoaghj/icons/pratikabu-stt-pageup-24.png"></div></div>
+<div id="page" class="hfeed site">
+      <header id="masthead" class="site-header clearfix">
+      <div id="header-text-nav-container" class="clearfix">
+                     <div class="news-bar">
+               <div class="inner-wrap clearfix">
+                  
+                  
+                  	<div class="social-links clearfix">
+		<ul>
+		<li><a href="https://www.facebook.com/vertex.academy/" target="_blank"><i class="fa fa-facebook"></i></a></li><li><a href="https://vk.com/vertex_academy" target="_blank"><i class="fa fa-vk"></i></a></li><li><a href="https://www.youtube.com/channel/UC7b-dJ56vQaMh2wr972iG6Q" target="_blank"><i class="fa fa-youtube"></i></a></li>		</ul>
+	</div><!-- .social-links -->
+	               </div>
+            </div>
+         
+         
+         <div class="inner-wrap">
+
+            <div id="header-text-nav-wrap" class="clearfix">
+               <div id="header-left-section"> 
+                                    <div id="header-text" class="screen-reader-text">
+                                             <h3 id="site-title">
+                           <a href="https://vertex-academy.com/tutorials/ru/" title="Vertex Academy" rel="home">Vertex Academy</a>
+                        </h3>
+                                                                  <p id="site-description">Tutorials</p>
+                     <!-- #site-description -->
+                  </div><!-- #header-text -->
+               </div><!-- #header-left-section -->
+               <div id="header-right-section">
+                                    <div id="header-right-sidebar" class="clearfix">
+                  
+                  </div>
+                                 </div><!-- #header-right-section -->
+
+            </div><!-- #header-text-nav-wrap -->
+
+         </div><!-- .inner-wrap -->
+
+         
+         <div id="site-navigation-sticky-wrapper" class="sticky-wrapper" style="height: 56px;"><nav id="site-navigation" class="main-navigation clearfix" role="navigation">
+            <div class="inner-wrap clearfix">
+                                    <div id="header-logo-image">
+
+                        <a href="https://vertex-academy.com/" title="Vertex Academy" rel="home"><img src="./Queue в Java • Vertex Academy_files/vertex-tutorials3.png" alt="Vertex Academy"></a>
+                     </div><!-- #header-logo-image -->
+                                 <h4 class="menu-toggle"></h4>
+               <div class="menu-primary-container"><ul id="menu-menu-ru" class="menunav-menu"><li id="menu-item-1032" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-1032"><a href="https://vertex-academy.com/tutorials/ru/category/java/">Java</a>
+<ul class="sub-menu">
+	<li id="menu-item-6085" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6085"><a href="https://vertex-academy.com/tutorials/ru/java-8-uchebnik/">Java 8</a></li>
+	<li id="menu-item-1033" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1033"><a href="https://vertex-academy.com/tutorials/ru/category/java/java-start-java/">Java Start</a></li>
+	<li id="menu-item-10141" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-10141"><a href="https://vertex-academy.com/tutorials/ru/category/java/java-oop/">Java ООП</a></li>
+	<li id="menu-item-10147" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10147"><a href="https://vertex-academy.com/tutorials/ru/category/java/java-professional-ru/">Java Professional</a></li>
+	<li id="menu-item-1034" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1034"><a href="https://vertex-academy.com/tutorials/ru/category/java/jdbc/">JDBC</a></li>
+</ul>
+</li>
+<li id="menu-item-1031" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1031"><a href="https://vertex-academy.com/tutorials/ru/category/front-end/">Front-End</a>
+<ul class="sub-menu">
+	<li id="menu-item-1883" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1883"><a href="https://vertex-academy.com/tutorials/ru/category/front-end/html/">HTML</a></li>
+	<li id="menu-item-10153" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10153"><a href="https://vertex-academy.com/tutorials/ru/category/front-end/css/">CSS</a></li>
+</ul>
+</li>
+<li id="menu-item-7701" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7701"><a href="https://vertex-academy.com/tutorials/ru/queue-java-primer/#">Linux</a>
+<ul class="sub-menu">
+	<li id="menu-item-7664" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7664"><a href="https://vertex-academy.com/tutorials/ru/category/linux/ubuntu/">Ubuntu</a></li>
+</ul>
+</li>
+<li id="menu-item-1017" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1017"><a href="https://vertex-academy.com/tutorials/ru/kontakty/">Контакты</a></li>
+<li id="menu-item-7296" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7296"><a href="https://vertex-academy.com/tutorials/ru/queue-java-primer/#">Самоучители</a>
+<ul class="sub-menu">
+	<li id="menu-item-7297" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7297"><a href="https://vertex-academy.com/tutorials/ru/samouchitel-po-java-s-nulya/">Java с нуля</a></li>
+	<li id="menu-item-7298" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7298"><a href="https://vertex-academy.com/tutorials/ru/java-8-uchebnik/">Java 8</a></li>
+	<li id="menu-item-7299" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7299"><a href="https://vertex-academy.com/tutorials/ru/java-9-uchebnik-teoriya-primery/">Java 9</a></li>
+	<li id="menu-item-7300" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7300"><a href="https://vertex-academy.com/tutorials/ru/samouchitel-po-htmlcss-s-nulya/">HTML</a></li>
+</ul>
+</li>
+</ul></div>                              
+               <div class="lang-chooser">
+                  <i class="fa fa-globe lang-ico" aria-hidden="true"></i>
+                  <aside id="polylang-8" class="widget widget_polylang clearfix"><ul>
+	<li class="lang-item lang-item-18 lang-item-en no-translation lang-item-first"><a lang="en-US" hreflang="en-US" href="https://vertex-academy.com/tutorials/en/">English</a></li>
+	<li class="lang-item lang-item-21 lang-item-ru current-lang"><a lang="ru-RU" hreflang="ru-RU" href="https://vertex-academy.com/tutorials/ru/queue-java-primer/">Русский</a></li>
+	<li class="lang-item lang-item-323 lang-item-uk no-translation"><a lang="uk" hreflang="uk" href="https://vertex-academy.com/tutorials/uk/">Українська</a></li>
+</ul>
+</aside>                 </div>
+
+                  <div class="search-form-top">
+               
+                     <form action="https://vertex-academy.com/tutorials/ru/" class="search-form searchform clearfix" method="get">
+   <div class="search-wrap">
+      <input type="text" placeholder="Поиск" class="s field" name="s">
+      <button class="search-icon" type="submit"></button>
+   </div>
+</form><!-- .searchform -->                  </div>
+              
+                           </div>
+         </nav></div>
+
+      </div><!-- #header-text-nav-container -->
+
+      
+   </header>
+         <div id="main" class="clearfix">
+      <div class="inner-wrap clearfix">
+         
+		<div id="progress" style="width: 0%; top: 56px;"></div>
+	<div id="primary">
+		<div id="content" class="clearfix">
+
+			
+				
+<article id="post-9247" class="post-9247 post type-post status-publish format-standard hentry category-java category-java-oop tag-queue-java-primer tag-kollekciya-queue-java tag-ochered-java">
+	
+   
+   
+   <div class="article-content clearfix">
+
+   
+   <div class="above-entry-meta"><span class="cat-links"><a href="https://vertex-academy.com/tutorials/ru/category/java/" rel="category tag">Java</a>&nbsp;<a href="https://vertex-academy.com/tutorials/ru/category/java/java-oop/" rel="category tag">Java ООП</a>&nbsp;</span></div>
+      <header class="entry-header">
+   		<h1 class="entry-title">
+   			Queue в Java   		</h1>
+   	</header>
+
+   	<div class="below-entry-meta">
+      <span class="posted-on"><a href="https://vertex-academy.com/tutorials/ru/queue-java-primer/" title="13:12" rel="bookmark"><i class="fa fa-calendar-o"></i> <time class="entry-date published" datetime="2018-06-02T13:12:26+03:00">2 июня, 2018</time><time class="updated" datetime="2018-07-18T15:56:30+03:00">18 июля, 2018</time></a></span>
+      <span class="byline"><span class="author vcard"><i class="fa fa-user"></i><a class="url fn n" href="https://vertex-academy.com/tutorials/ru/author/vertex/" title="Vertex Academy">Vertex Academy</a></span></span>
+
+      <span class="tag-links"><i class="fa fa-tags"></i><a href="https://vertex-academy.com/tutorials/ru/tag/queue-java-primer/" rel="tag">queue java пример</a>,<a href="https://vertex-academy.com/tutorials/ru/tag/kollekciya-queue-java/" rel="tag">коллекция queue java</a>,<a href="https://vertex-academy.com/tutorials/ru/tag/ochered-java/" rel="tag">очередь java</a></span></div>
+   	<div class="entry-content clearfix">
+   		<div class="synved-social-container synved-social-container-share" style="text-align: right"><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-normal synved-social-provider-facebook nolightbox" data-provider="facebook" target="_blank" rel="nofollow" title="Share on Facebook" href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fqueue-java-primer%2F&amp;t=Queue%20%D0%B2%20Java&amp;s=100&amp;p[url]=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fqueue-java-primer%2F&amp;p[title]=Queue%20%D0%B2%20Java" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="Facebook" title="Share on Facebook" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Queue в Java • Vertex Academy_files/facebook.png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-normal synved-social-provider-twitter nolightbox" data-provider="twitter" target="_blank" rel="nofollow" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fqueue-java-primer%2F&amp;text=Check%20this%20out" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="twitter" title="Share on Twitter" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Queue в Java • Vertex Academy_files/twitter.png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-normal synved-social-provider-tumblr nolightbox" data-provider="tumblr" target="_blank" rel="nofollow" title="Share on VK" href="http://vk.com/share.php?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fqueue-java-primer%2F&amp;text=Check%20this%20out&amp;title%%&amp;img%%" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;"><img alt="tumblr" title="Share on VK" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Queue в Java • Vertex Academy_files/tumblr.png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-hidef synved-social-provider-facebook nolightbox" data-provider="facebook" target="_blank" rel="nofollow" title="Share on Facebook" href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fqueue-java-primer%2F&amp;t=Queue%20%D0%B2%20Java&amp;s=100&amp;p[url]=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fqueue-java-primer%2F&amp;p[title]=Queue%20%D0%B2%20Java" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="Facebook" title="Share on Facebook" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Queue в Java • Vertex Academy_files/facebook(1).png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-hidef synved-social-provider-twitter nolightbox" data-provider="twitter" target="_blank" rel="nofollow" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fqueue-java-primer%2F&amp;text=Check%20this%20out" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="twitter" title="Share on Twitter" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Queue в Java • Vertex Academy_files/twitter(1).png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-hidef synved-social-provider-tumblr nolightbox" data-provider="tumblr" target="_blank" rel="nofollow" title="Share on VK" href="http://vk.com/share.php?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fqueue-java-primer%2F&amp;text=Check%20this%20out&amp;title%%&amp;img%%" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;"><img alt="tumblr" title="Share on VK" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Queue в Java • Vertex Academy_files/tumblr(1).png"></a></div><div id="ca-pub-1426849340859996:3177001332" class="ads ads_before"><script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- In-Post Adsense -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1426849340859996" data-ad-slot="3177001332" data-ad-format="auto"><iframe id="aswift_0" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./Queue в Java • Vertex Academy_files/saved_resource(1).html"><iframe id="google_ads_frame0" src="./Queue в Java • Vertex Academy_files/saved_resource(2).html"></iframe></iframe></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p><img class="alignnone size-full wp-image-9579" src="./Queue в Java • Vertex Academy_files/queue-java.jpg" alt="" width="550" height="227"></p>
+<p><em>Данная статья:</em></p>
+<ul>
+<li><em>написана командой <a href="https://vertex-academy.com/">Vertex Academy</a>.&nbsp;</em></li>
+<li>это одна из статей из нашего <a href="https://vertex-academy.com/tutorials/ru/samouchitel-po-java-s-nulya/">"Самоучителя по Java"</a></li>
+</ul>
+<hr>
+<p>Привет!&nbsp;В нашем самоучителе мы рассматриваем следующие коллекции:</p>
+<ul>
+<li>Список (<strong>List</strong>)&nbsp; - см. статью <a href="https://vertex-academy.com/tutorials/ru/list-java-primer/">"List в Java"</a>, а также статью <a href="https://vertex-academy.com/tutorials/ru/arraylist-v-java/">"Что такое ArrayList"</a></li>
+<li>Множество (<strong>Set</strong>)&nbsp; &nbsp;- см. статью <a href="https://vertex-academy.com/tutorials/ru/set-v-java-hashset/">"Set в Java"&nbsp;</a></li>
+<li>Очередь (<strong>Queue</strong>)</li>
+</ul>
+<p>Это статья про структуру данных <strong>очередь</strong> (<strong>Queue</strong>) - один из способов хранения данных в Java.</p>
+<h1><strong><span style="font-size: 14pt;">Что такое&nbsp;очередь (Queue) в Java</span></strong></h1>
+<p>Очередь - это очень интересный тип хранения данных. Мы можем проводить с ней ограниченное количество операций - обычно только с верхним элементом, и не имеем доступа к "середине" очереди.</p>
+<p>Выглядит странно? На самом деле, есть много примеров из повседневной жизни, которые помогут нам представить механизм работы очереди.</p>
+<p>Во-первых... Очередь!</p>
+<p><img loading="lazy" class="alignnone wp-image-9581" src="./Queue в Java • Vertex Academy_files/interfeis-queue-java.jpg" alt="" width="265" height="278"></p>
+<ul>
+<li>В идеале, мы не можем встать в середину очереди - <strong>только в конец</strong>. А тот, кто приходит первым, первый получает мороженное <img draggable="false" role="img" class="emoji" alt="🙂" src="./Queue в Java • Vertex Academy_files/1f642.svg"> Или справку. Или что там еще. Точно так же работает и <strong>Queue</strong>. Мы не можем ничего вставить в середину очереди - только в конец.</li>
+<li>Тем не менее, убирать элемент можно и <strong>из середины очереди</strong> - так, например, человек в любой момент может махнуть рукой и сказать: "А, я уже три часа тут стою - пойду домой!"</li>
+<li>Более того, элемент <strong>не всегда может влезть в очередь</strong> (в смысле в&nbsp;<strong>Queue</strong>). Например, не сталкивались с &nbsp;тем, что доходит очередь до Вас - и как раз начинается обед? <img draggable="false" role="img" class="emoji" alt="🙁" src="./Queue в Java • Vertex Academy_files/1f641.svg"> Или касса закрывается?</li>
+</ul>
+<p>Вот, теперь Вы видите, что очередь работает совсем как.. ну, очередь)</p>
+<h2><strong><span style="font-size: 14pt;">Какие есть виды очередей (Queue)</span></strong></h2>
+<p>Для начала Вам хватит знания одного типа - <strong>PriorityQueue</strong>.</p>
+<p><img loading="lazy" class="alignnone wp-image-9584" src="./Queue в Java • Vertex Academy_files/Interfeis-queue-v-java.png" alt="" width="373" height="321"></p>
+<p>Что интересного в&nbsp;<strong>PriorityQueue</strong>? Дело в том, что элементы в ней располагаются не только по порядку, но и <strong>по приоритету</strong>. Этот приоритет можно задавать самостоятельно, но для начинающих это может быть пока немного сложная тема. Пока Вам стоит знать, что если создавать очередь из стандартных типов данных (<strong>Integer</strong>, <strong>Float</strong>, <strong>String</strong>), у нее будет стандартный приоритет:</p>
+<ul>
+<li>для чисел по возрастанию</li>
+<li>для строк по алфавиту</li>
+</ul>
+<h2><strong><span style="font-size: 14pt;">FIFO и LIFO в Java</span></strong></h2>
+<p>Кстати, "принцип очереди" - то, что первый, кто пришел, первым получает мороженое - обозначается английской аббревиатурой <strong>FIFO</strong> (<strong>"First in first out"</strong>). Переводится как "первый пришел первый вышел". Кроме очереди можно привести пример с конвейером - то, что ты положил раньше на конвейерную ленту, первым станет готовым продуктом и поедет в магазин.</p>
+<p>Также в Java есть структуры, которые работают чуть-чуть по-другому. В таких структурах тот элемент, который поступил первым, первым вынимается. Можно провести аналогию со стопкой тарелок - та тарелка, которую ты поставил первой, оказывается в самом низу. Очень неудобно доставать, правда?</p>
+<p><img loading="lazy" class="alignnone size-full wp-image-9589" src="./Queue в Java • Vertex Academy_files/lifo-v-java-1.jpg" alt="" width="300" height="186"></p>
+<p>Поэтому мы моем тарелки, начиная с самой верхней - т.е. той, которую мы поставили последней. Этот принцип называется <strong>LIFO</strong> ("<strong>Last in first out</strong>", "последний пришел первый вышел"). По такому принципу работает еще одна структура данных, очень похожая на очередь - стэк. Тот что overflow <img draggable="false" role="img" class="emoji" alt="🙂" src="./Queue в Java • Vertex Academy_files/1f642.svg"> Но это так, на будущее.</p>
+<h2><span style="font-size: 14pt;"><strong>Операции с Queue</strong></span></h2>
+<p>1. <strong>add()</strong> - добавляет элемент в конец очереди.</p>
+<ul>
+<li>Поправка: если очередь с приоритетом - т.е. <strong>PriorityQueue </strong>- элемент ставится не обязательно в конец, а в соответствии со своим приоритетом</li>
+</ul>
+<p>2. <strong>remove()</strong> и <strong>poll()</strong> - удаляет верхний элемент из очереди.</p>
+<p>3. <strong>offer()</strong> - пытается вставить элемент в конец очереди.</p>
+<p>4. <strong>peek()</strong> и <strong>element()</strong> - показывают верхний элемент очереди</p>
+<p><span style="font-size: 18pt;"><strong>Пример 1</strong></span></p>
+<ul>
+<li><strong>add()</strong> - добавляем элемент в конец очереди. (Поправка: если очередь с приоритетом - т.е. <strong>PriorityQueue </strong>- элемент ставится не обязательно в конец, а в соответствии со своим приоритетом):</li>
+</ul>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0defb6f50510913277" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">public class Test {
+
+    public static void main(String[] args) {
+
+        PriorityQueue&lt;Integer&gt; myPriorityQueue = new PriorityQueue&lt;Integer&gt;();
+
+        myPriorityQueue.add(1);
+        myPriorityQueue.add(2);
+        myPriorityQueue.add(3);
+        for(int pq : myPriorityQueue) {
+            System.out.println(pq);
+        }
+    }
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0defb6f50510913277-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f50510913277-2">2</div><div class="crayon-num" data-line="crayon-63ad0defb6f50510913277-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f50510913277-4">4</div><div class="crayon-num" data-line="crayon-63ad0defb6f50510913277-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f50510913277-6">6</div><div class="crayon-num" data-line="crayon-63ad0defb6f50510913277-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f50510913277-8">8</div><div class="crayon-num" data-line="crayon-63ad0defb6f50510913277-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f50510913277-10">10</div><div class="crayon-num" data-line="crayon-63ad0defb6f50510913277-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f50510913277-12">12</div><div class="crayon-num" data-line="crayon-63ad0defb6f50510913277-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f50510913277-14">14</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0defb6f50510913277-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">Test</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f50510913277-2">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f50510913277-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-i">args</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f50510913277-4">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f50510913277-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">PriorityQueue</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-h"> </span><span class="crayon-i">myPriorityQueue</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-i">PriorityQueue</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f50510913277-6">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f50510913277-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f50510913277-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0defb6f50510913277-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f50510913277-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-i">pq</span><span class="crayon-h"> </span><span class="crayon-sy">:</span><span class="crayon-h"> </span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-63ad0defb6f50510913277-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-i">pq</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f50510913277-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-63ad0defb6f50510913277-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f50510913277-14"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p>Тут мы добавили три <strong>Integer</strong>-а: 1, 2 и 3. Потом мы вывели нашу очередь в консоль - получили:</p>
+<p><img loading="lazy" class="alignnone size-full wp-image-9386" src="./Queue в Java • Vertex Academy_files/Capture-d’écran-2018-05-29-à-18.39.20.png" alt="" width="315" height="99"></p>
+<p><span style="font-size: 18pt;"><strong>Пример 2</strong></span></p>
+<ul>
+<li><strong>remove()</strong> и <strong>poll()</strong> - удаляем верхний элемент из очереди. Так сказать, "Три часа жду - надоело, иду домой!" <img draggable="false" role="img" class="emoji" alt="🙂" src="./Queue в Java • Vertex Academy_files/1f642.svg"></li>
+</ul>
+<p style="padding-left: 30px;">Но в чем между ними разница?</p>
+<ol>
+<li>У метода&nbsp;<strong>remove()&nbsp;</strong>есть две формы -&nbsp;<strong>remove() </strong>и&nbsp;<strong>remove(Object o)</strong>, а у <strong>poll() </strong>- только одна. В первой форме оба метода одинаковые - они убирают "голову" (первый элемент) очереди. Обезглавливают так сказать <img draggable="false" role="img" class="emoji" alt="🙂" src="./Queue в Java • Vertex Academy_files/1f642.svg"></li>
+</ol>
+<p style="padding-left: 30px;">Например, тут мы используем метод <strong>remove()</strong>:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0defb6f57821439969" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">public class Test {
+
+    public static void main(String[] args) {
+
+        PriorityQueue&lt;Integer&gt; myPriorityQueue = new PriorityQueue&lt;Integer&gt;();
+
+        myPriorityQueue.add(1);
+        myPriorityQueue.add(2);
+        myPriorityQueue.add(3);
+
+        for(int i: myPriorityQueue)
+            System.out.println(i);
+        myPriorityQueue.remove();
+        System.out.println("After removing:");
+        for(int i: myPriorityQueue)
+            System.out.println(i);
+    }
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0defb6f57821439969-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f57821439969-2">2</div><div class="crayon-num" data-line="crayon-63ad0defb6f57821439969-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f57821439969-4">4</div><div class="crayon-num" data-line="crayon-63ad0defb6f57821439969-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f57821439969-6">6</div><div class="crayon-num" data-line="crayon-63ad0defb6f57821439969-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f57821439969-8">8</div><div class="crayon-num" data-line="crayon-63ad0defb6f57821439969-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f57821439969-10">10</div><div class="crayon-num" data-line="crayon-63ad0defb6f57821439969-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f57821439969-12">12</div><div class="crayon-num" data-line="crayon-63ad0defb6f57821439969-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f57821439969-14">14</div><div class="crayon-num" data-line="crayon-63ad0defb6f57821439969-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f57821439969-16">16</div><div class="crayon-num" data-line="crayon-63ad0defb6f57821439969-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f57821439969-18">18</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0defb6f57821439969-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">Test</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f57821439969-2">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f57821439969-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-i">args</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f57821439969-4">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f57821439969-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">PriorityQueue</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-h"> </span><span class="crayon-i">myPriorityQueue</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-i">PriorityQueue</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f57821439969-6">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f57821439969-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f57821439969-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0defb6f57821439969-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f57821439969-10">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f57821439969-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-i">i</span><span class="crayon-sy">:</span><span class="crayon-h"> </span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f57821439969-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-i">i</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0defb6f57821439969-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">remove</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f57821439969-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-s">"After removing:"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0defb6f57821439969-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-i">i</span><span class="crayon-sy">:</span><span class="crayon-h"> </span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f57821439969-16"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-i">i</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0defb6f57821439969-17"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f57821439969-18"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p></p>
+<p style="padding-left: 30px;">Получаем:</p>
+<p style="padding-left: 30px;"><img loading="lazy" class="alignnone size-full wp-image-9391" src="./Queue в Java • Vertex Academy_files/Capture-d’écran-2018-05-29-à-18.59.40.png" alt="" width="360" height="138"></p>
+<p>Точно то же самое получим, если напишем вместо <strong>remove()</strong>&nbsp;<strong>poll()</strong>:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0defb6f5a584543904" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">public class Test {
+
+    public static void main(String[] args) {
+
+        PriorityQueue&lt;Integer&gt; myPriorityQueue = new PriorityQueue&lt;Integer&gt;();
+
+        myPriorityQueue.add(1);
+        myPriorityQueue.add(2);
+        myPriorityQueue.add(3);
+
+        for(int i: myPriorityQueue)
+            System.out.println(i);
+        myPriorityQueue.poll();
+        System.out.println("After removing:");
+        for(int i: myPriorityQueue)
+            System.out.println(i);
+    }
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0defb6f5a584543904-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5a584543904-2">2</div><div class="crayon-num" data-line="crayon-63ad0defb6f5a584543904-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5a584543904-4">4</div><div class="crayon-num" data-line="crayon-63ad0defb6f5a584543904-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5a584543904-6">6</div><div class="crayon-num" data-line="crayon-63ad0defb6f5a584543904-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5a584543904-8">8</div><div class="crayon-num" data-line="crayon-63ad0defb6f5a584543904-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5a584543904-10">10</div><div class="crayon-num" data-line="crayon-63ad0defb6f5a584543904-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5a584543904-12">12</div><div class="crayon-num" data-line="crayon-63ad0defb6f5a584543904-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5a584543904-14">14</div><div class="crayon-num" data-line="crayon-63ad0defb6f5a584543904-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5a584543904-16">16</div><div class="crayon-num" data-line="crayon-63ad0defb6f5a584543904-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5a584543904-18">18</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0defb6f5a584543904-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">Test</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5a584543904-2">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f5a584543904-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-i">args</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5a584543904-4">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f5a584543904-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">PriorityQueue</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-h"> </span><span class="crayon-i">myPriorityQueue</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-i">PriorityQueue</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5a584543904-6">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f5a584543904-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5a584543904-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0defb6f5a584543904-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5a584543904-10">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f5a584543904-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-i">i</span><span class="crayon-sy">:</span><span class="crayon-h"> </span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5a584543904-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-i">i</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0defb6f5a584543904-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">poll</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5a584543904-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-s">"After removing:"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0defb6f5a584543904-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-i">i</span><span class="crayon-sy">:</span><span class="crayon-h"> </span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5a584543904-16"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-i">i</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0defb6f5a584543904-17"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5a584543904-18"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p></p>
+<p style="padding-left: 30px;"><img loading="lazy" class="alignnone size-full wp-image-9392" src="./Queue в Java • Vertex Academy_files/Capture-d’écran-2018-05-29-à-19.01.25.png" alt="" width="423" height="136"></p>
+<p style="padding-left: 30px;">Но&nbsp;<strong>remove(Object o)&nbsp;</strong>позволяет убирать любой элемент, не только сверху. Например, попробуем убрать двойку - она лежит в середине очереди:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0defb6f5c705241540" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">public class Test {
+
+    public static void main(String[] args) {
+
+        PriorityQueue&lt;Integer&gt; myPriorityQueue = new PriorityQueue&lt;Integer&gt;();
+
+        myPriorityQueue.add(1);
+        myPriorityQueue.add(2);
+        myPriorityQueue.add(3);
+
+        for(int i: myPriorityQueue)
+            System.out.println(i);
+        myPriorityQueue.remove(2);
+        System.out.println("After removing:");
+        for(int i: myPriorityQueue)
+            System.out.println(i);
+    }
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0defb6f5c705241540-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5c705241540-2">2</div><div class="crayon-num" data-line="crayon-63ad0defb6f5c705241540-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5c705241540-4">4</div><div class="crayon-num" data-line="crayon-63ad0defb6f5c705241540-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5c705241540-6">6</div><div class="crayon-num" data-line="crayon-63ad0defb6f5c705241540-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5c705241540-8">8</div><div class="crayon-num" data-line="crayon-63ad0defb6f5c705241540-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5c705241540-10">10</div><div class="crayon-num" data-line="crayon-63ad0defb6f5c705241540-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5c705241540-12">12</div><div class="crayon-num" data-line="crayon-63ad0defb6f5c705241540-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5c705241540-14">14</div><div class="crayon-num" data-line="crayon-63ad0defb6f5c705241540-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5c705241540-16">16</div><div class="crayon-num" data-line="crayon-63ad0defb6f5c705241540-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5c705241540-18">18</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0defb6f5c705241540-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">Test</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5c705241540-2">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f5c705241540-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-i">args</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5c705241540-4">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f5c705241540-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">PriorityQueue</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-h"> </span><span class="crayon-i">myPriorityQueue</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-i">PriorityQueue</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5c705241540-6">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f5c705241540-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5c705241540-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0defb6f5c705241540-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5c705241540-10">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f5c705241540-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-i">i</span><span class="crayon-sy">:</span><span class="crayon-h"> </span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5c705241540-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-i">i</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0defb6f5c705241540-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">remove</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5c705241540-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-s">"After removing:"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0defb6f5c705241540-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-i">i</span><span class="crayon-sy">:</span><span class="crayon-h"> </span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5c705241540-16"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-i">i</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0defb6f5c705241540-17"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5c705241540-18"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p></p>
+<p style="padding-left: 30px;">Получаем:</p>
+<p><img loading="lazy" class="alignnone size-full wp-image-9394" src="./Queue в Java • Vertex Academy_files/Capture-d’écran-2018-05-29-à-19.02.58.png" alt="" width="400" height="143"></p>
+<p>Как видите, двойки нет <img draggable="false" role="img" class="emoji" alt="🙂" src="./Queue в Java • Vertex Academy_files/1f642.svg"></p>
+<ol>
+<li>Методы будут действовать по-разному если у нас пустая очередь. Например:</li>
+</ol>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0defb6f5e056972261" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">public class Test {
+
+    public static void main(String[] args) {
+
+        PriorityQueue&lt;Integer&gt; myPriorityQueue = new PriorityQueue&lt;Integer&gt;();
+
+        myPriorityQueue.remove();
+    }
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0defb6f5e056972261-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5e056972261-2">2</div><div class="crayon-num" data-line="crayon-63ad0defb6f5e056972261-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5e056972261-4">4</div><div class="crayon-num" data-line="crayon-63ad0defb6f5e056972261-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5e056972261-6">6</div><div class="crayon-num" data-line="crayon-63ad0defb6f5e056972261-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f5e056972261-8">8</div><div class="crayon-num" data-line="crayon-63ad0defb6f5e056972261-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0defb6f5e056972261-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">Test</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5e056972261-2">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f5e056972261-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-i">args</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5e056972261-4">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f5e056972261-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">PriorityQueue</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-h"> </span><span class="crayon-i">myPriorityQueue</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-i">PriorityQueue</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5e056972261-6">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f5e056972261-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">remove</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f5e056972261-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-63ad0defb6f5e056972261-9"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p>Если мы попытаемся вызвать метод <strong>remove()&nbsp;</strong>на пустом листе, получим <strong>Exception</strong>:</p>
+<p><img loading="lazy" class="alignnone size-full wp-image-9387" src="./Queue в Java • Vertex Academy_files/Capture-d’écran-2018-05-29-à-18.45.13.png" alt="" width="560" height="92"></p>
+<p>Если <strong>poll()</strong> - ничего не произойдет:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0defb6f60162108616" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">public class Test {
+
+    public static void main(String[] args) {
+
+        PriorityQueue&lt;Integer&gt; myPriorityQueue = new PriorityQueue&lt;Integer&gt;();
+
+        myPriorityQueue.poll();
+    }
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0defb6f60162108616-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f60162108616-2">2</div><div class="crayon-num" data-line="crayon-63ad0defb6f60162108616-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f60162108616-4">4</div><div class="crayon-num" data-line="crayon-63ad0defb6f60162108616-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f60162108616-6">6</div><div class="crayon-num" data-line="crayon-63ad0defb6f60162108616-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f60162108616-8">8</div><div class="crayon-num" data-line="crayon-63ad0defb6f60162108616-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0defb6f60162108616-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">Test</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f60162108616-2">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f60162108616-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-i">args</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f60162108616-4">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f60162108616-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">PriorityQueue</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-h"> </span><span class="crayon-i">myPriorityQueue</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-i">PriorityQueue</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f60162108616-6">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f60162108616-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">poll</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f60162108616-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-63ad0defb6f60162108616-9"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p>Получаем:</p>
+<p><img loading="lazy" class="alignnone size-full wp-image-9388" src="./Queue в Java • Vertex Academy_files/Capture-d’écran-2018-05-29-à-18.46.26.png" alt="" width="362" height="51"></p>
+<p>Вывод:</p>
+<ul>
+<li>хотите&nbsp;<strong>Exception</strong> (т.е. если пустая очередь - недопустимое состояние)<strong>&nbsp;</strong>- берите&nbsp;<strong>remove()</strong></li>
+<li>Если нет - берите <strong>poll()</strong></li>
+</ul>
+<p><span style="font-size: 18pt;"><strong>Пример 3</strong></span></p>
+<ul>
+<li><strong>offer()</strong> - пытается вставить в конец очереди. С английского "offer" переводится как "предложить". Почему "предлагаем"? Потому что в очередях с фиксированным размером у нас может не получится вставить элемент в очередь. Давайте попробуем его использовать:</li>
+</ul>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0defb6f62873816614" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">public class Test {
+
+    public static void main(String[] args) {
+
+        PriorityQueue&lt;Integer&gt; myPriorityQueue = new PriorityQueue&lt;Integer&gt;();
+
+        myPriorityQueue.add(1);
+        myPriorityQueue.add(2);
+        myPriorityQueue.add(3);
+        myPriorityQueue.offer(22);
+
+        for(int i: myPriorityQueue)
+            System.out.println(i);
+    }
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0defb6f62873816614-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f62873816614-2">2</div><div class="crayon-num" data-line="crayon-63ad0defb6f62873816614-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f62873816614-4">4</div><div class="crayon-num" data-line="crayon-63ad0defb6f62873816614-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f62873816614-6">6</div><div class="crayon-num" data-line="crayon-63ad0defb6f62873816614-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f62873816614-8">8</div><div class="crayon-num" data-line="crayon-63ad0defb6f62873816614-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f62873816614-10">10</div><div class="crayon-num" data-line="crayon-63ad0defb6f62873816614-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f62873816614-12">12</div><div class="crayon-num" data-line="crayon-63ad0defb6f62873816614-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f62873816614-14">14</div><div class="crayon-num" data-line="crayon-63ad0defb6f62873816614-15">15</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0defb6f62873816614-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">Test</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f62873816614-2">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f62873816614-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-i">args</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f62873816614-4">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f62873816614-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">PriorityQueue</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-h"> </span><span class="crayon-i">myPriorityQueue</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-i">PriorityQueue</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f62873816614-6">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f62873816614-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f62873816614-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0defb6f62873816614-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f62873816614-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">offer</span><span class="crayon-sy">(</span><span class="crayon-cn">22</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0defb6f62873816614-11">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f62873816614-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-i">i</span><span class="crayon-sy">:</span><span class="crayon-h"> </span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-63ad0defb6f62873816614-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-i">i</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f62873816614-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-63ad0defb6f62873816614-15"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p style="padding-left: 30px;">Получаем:</p>
+<p><img loading="lazy" class="alignnone size-full wp-image-9397" src="./Queue в Java • Vertex Academy_files/Capture-d’écran-2018-05-29-à-19.06.57.png" alt="" width="297" height="110"></p>
+<p style="padding-left: 30px;">Ура! Предложение принято <img draggable="false" role="img" class="emoji" alt="🙂" src="./Queue в Java • Vertex Academy_files/1f642.svg"></p>
+<p><span style="font-size: 18pt;"><strong>Пример 4</strong></span></p>
+<ul>
+<li><strong>peek()</strong>&nbsp;(от англ. "подсматривать"), и&nbsp;<strong>element()</strong>&nbsp;- показывают верхний элемент очереди. Например:</li>
+</ul>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0defb6f64717775023" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">public class Test {
+
+    public static void main(String[] args) {
+
+        PriorityQueue&lt;Integer&gt; myPriorityQueue = new PriorityQueue&lt;Integer&gt;();
+
+        myPriorityQueue.add(1);
+        myPriorityQueue.add(2);
+        myPriorityQueue.add(3);
+
+        System.out.println(myPriorityQueue.peek());
+    }
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0defb6f64717775023-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f64717775023-2">2</div><div class="crayon-num" data-line="crayon-63ad0defb6f64717775023-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f64717775023-4">4</div><div class="crayon-num" data-line="crayon-63ad0defb6f64717775023-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f64717775023-6">6</div><div class="crayon-num" data-line="crayon-63ad0defb6f64717775023-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f64717775023-8">8</div><div class="crayon-num" data-line="crayon-63ad0defb6f64717775023-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f64717775023-10">10</div><div class="crayon-num" data-line="crayon-63ad0defb6f64717775023-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f64717775023-12">12</div><div class="crayon-num" data-line="crayon-63ad0defb6f64717775023-13">13</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0defb6f64717775023-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">Test</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f64717775023-2">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f64717775023-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-i">args</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f64717775023-4">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f64717775023-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">PriorityQueue</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-h"> </span><span class="crayon-i">myPriorityQueue</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-i">PriorityQueue</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f64717775023-6">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f64717775023-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f64717775023-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0defb6f64717775023-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f64717775023-10">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f64717775023-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">peek</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f64717775023-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-63ad0defb6f64717775023-13"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p style="padding-left: 30px;">Получаем:</p>
+<p style="padding-left: 30px;"><img loading="lazy" class="alignnone size-full wp-image-9400" src="./Queue в Java • Vertex Academy_files/Capture-d’écran-2018-05-29-à-19.09.36.png" alt="" width="298" height="71"></p>
+<p style="padding-left: 30px;">Все верно, мы получили первый элемент - единицу.</p>
+<p style="padding-left: 30px;">Или, давайте попробуем применить <strong>element()</strong>:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0defb6f66256480928" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">public class Test {
+
+    public static void main(String[] args) {
+
+        PriorityQueue&lt;Integer&gt; myPriorityQueue = new PriorityQueue&lt;Integer&gt;();
+
+        myPriorityQueue.add(1);
+        myPriorityQueue.add(2);
+        myPriorityQueue.add(3);
+
+        System.out.println(myPriorityQueue.element());
+    }
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0defb6f66256480928-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f66256480928-2">2</div><div class="crayon-num" data-line="crayon-63ad0defb6f66256480928-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f66256480928-4">4</div><div class="crayon-num" data-line="crayon-63ad0defb6f66256480928-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f66256480928-6">6</div><div class="crayon-num" data-line="crayon-63ad0defb6f66256480928-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f66256480928-8">8</div><div class="crayon-num" data-line="crayon-63ad0defb6f66256480928-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f66256480928-10">10</div><div class="crayon-num" data-line="crayon-63ad0defb6f66256480928-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0defb6f66256480928-12">12</div><div class="crayon-num" data-line="crayon-63ad0defb6f66256480928-13">13</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0defb6f66256480928-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">Test</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f66256480928-2">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f66256480928-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-i">args</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f66256480928-4">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f66256480928-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">PriorityQueue</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-h"> </span><span class="crayon-i">myPriorityQueue</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-i">PriorityQueue</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f66256480928-6">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f66256480928-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f66256480928-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0defb6f66256480928-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f66256480928-10">&nbsp;</div><div class="crayon-line" id="crayon-63ad0defb6f66256480928-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-i">myPriorityQueue</span><span class="crayon-sy">.</span><span class="crayon-e">element</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0defb6f66256480928-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-63ad0defb6f66256480928-13"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p style="padding-left: 30px;">Получаем то же самое - единицу:</p>
+<p><img loading="lazy" class="alignnone size-full wp-image-9401" src="./Queue в Java • Vertex Academy_files/Capture-d’écran-2018-05-29-à-19.11.24.png" alt="" width="261" height="71"></p>
+<p>Поздравляем - теперь Вы знаете, что такое очередь и как ей пользоваться! Увидимся в следующих уроках <img draggable="false" role="img" class="emoji" alt="😉" src="./Queue в Java • Vertex Academy_files/1f609.svg"></p>
+<hr>
+<p><em>Надеемся, что наша статья была Вам полезна.&nbsp; Можно записаться к нам на курсы по Java&nbsp;</em><em>на <a href="https://vertex-academy.com/">сайте</a>.</em></p>
+<div id="ca-pub-1426849340859996:3859527614" class="ads ads_after"><script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Home-top -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1426849340859996" data-ad-slot="3859527614" data-ad-format="auto"><iframe id="aswift_1" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./Queue в Java • Vertex Academy_files/saved_resource(3).html"><iframe id="google_ads_frame1" src="./Queue в Java • Vertex Academy_files/saved_resource(4).html"></iframe></iframe></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><div class="synved-social-container synved-social-container-share" style="text-align: right"><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-normal synved-social-provider-facebook nolightbox" data-provider="facebook" target="_blank" rel="nofollow" title="Share on Facebook" href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fqueue-java-primer%2F&amp;t=Queue%20%D0%B2%20Java&amp;s=100&amp;p[url]=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fqueue-java-primer%2F&amp;p[title]=Queue%20%D0%B2%20Java" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="Facebook" title="Share on Facebook" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Queue в Java • Vertex Academy_files/facebook.png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-normal synved-social-provider-twitter nolightbox" data-provider="twitter" target="_blank" rel="nofollow" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fqueue-java-primer%2F&amp;text=Check%20this%20out" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="twitter" title="Share on Twitter" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Queue в Java • Vertex Academy_files/twitter.png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-normal synved-social-provider-tumblr nolightbox" data-provider="tumblr" target="_blank" rel="nofollow" title="Share on VK" href="http://vk.com/share.php?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fqueue-java-primer%2F&amp;text=Check%20this%20out&amp;title%%&amp;img%%" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;"><img alt="tumblr" title="Share on VK" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Queue в Java • Vertex Academy_files/tumblr.png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-hidef synved-social-provider-facebook nolightbox" data-provider="facebook" target="_blank" rel="nofollow" title="Share on Facebook" href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fqueue-java-primer%2F&amp;t=Queue%20%D0%B2%20Java&amp;s=100&amp;p[url]=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fqueue-java-primer%2F&amp;p[title]=Queue%20%D0%B2%20Java" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="Facebook" title="Share on Facebook" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Queue в Java • Vertex Academy_files/facebook(1).png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-hidef synved-social-provider-twitter nolightbox" data-provider="twitter" target="_blank" rel="nofollow" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fqueue-java-primer%2F&amp;text=Check%20this%20out" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="twitter" title="Share on Twitter" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Queue в Java • Vertex Academy_files/twitter(1).png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-hidef synved-social-provider-tumblr nolightbox" data-provider="tumblr" target="_blank" rel="nofollow" title="Share on VK" href="http://vk.com/share.php?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fqueue-java-primer%2F&amp;text=Check%20this%20out&amp;title%%&amp;img%%" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;"><img alt="tumblr" title="Share on VK" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Queue в Java • Vertex Academy_files/tumblr(1).png"></a></div><br><div class="synved-social-container synved-social-container-follow" style="text-align: center"><a class="synved-social-button synved-social-button-follow synved-social-size-24 synved-social-resolution-normal synved-social-provider-facebook nolightbox" data-provider="facebook" target="_blank" rel="nofollow" title="Follow us on Facebook" href="https://www.facebook.com/vertex.academy" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="Facebook" title="Follow us on Facebook" class="synved-share-image synved-social-image synved-social-image-follow" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Queue в Java • Vertex Academy_files/facebook.png"></a><a class="synved-social-button synved-social-button-follow synved-social-size-24 synved-social-resolution-normal synved-social-provider-twitter nolightbox" data-provider="twitter" target="_blank" rel="nofollow" title="Follow us on Twitter" href="https://twitter.com/vertex_academy" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="twitter" title="Follow us on Twitter" class="synved-share-image synved-social-image synved-social-image-follow" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Queue в Java • Vertex Academy_files/twitter.png"></a><a class="synved-social-button synved-social-button-follow synved-social-size-24 synved-social-resolution-normal synved-social-provider-tumblr nolightbox" data-provider="tumblr" target="_blank" rel="nofollow" title="Follow Us On VK" href="https://vk.com/vertex_academy" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;"><img alt="tumblr" title="Follow Us On VK" class="synved-share-image synved-social-image synved-social-image-follow" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Queue в Java • Vertex Academy_files/tumblr.png"></a><a class="synved-social-button synved-social-button-follow synved-social-size-24 synved-social-resolution-hidef synved-social-provider-facebook nolightbox" data-provider="facebook" target="_blank" rel="nofollow" title="Follow us on Facebook" href="https://www.facebook.com/vertex.academy" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="Facebook" title="Follow us on Facebook" class="synved-share-image synved-social-image synved-social-image-follow" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Queue в Java • Vertex Academy_files/facebook(1).png"></a><a class="synved-social-button synved-social-button-follow synved-social-size-24 synved-social-resolution-hidef synved-social-provider-twitter nolightbox" data-provider="twitter" target="_blank" rel="nofollow" title="Follow us on Twitter" href="https://twitter.com/vertex_academy" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="twitter" title="Follow us on Twitter" class="synved-share-image synved-social-image synved-social-image-follow" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Queue в Java • Vertex Academy_files/twitter(1).png"></a><a class="synved-social-button synved-social-button-follow synved-social-size-24 synved-social-resolution-hidef synved-social-provider-tumblr nolightbox" data-provider="tumblr" target="_blank" rel="nofollow" title="Follow Us On VK" href="https://vk.com/vertex_academy" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;"><img alt="tumblr" title="Follow Us On VK" class="synved-share-image synved-social-image synved-social-image-follow" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Queue в Java • Vertex Academy_files/tumblr(1).png"></a></div>   	</div>
+
+   </div>
+
+	</article>
+			
+		</div><!-- #content -->
+
+      
+		<ul class="default-wp-page clearfix">
+			<li class="previous"><a href="https://vertex-academy.com/tutorials/ru/set-v-java-hashset/" rel="prev"><span class="meta-nav">←</span> Set в Java. Hashset пример</a></li>
+			<li class="next"><a href="https://vertex-academy.com/tutorials/ru/abstraktnyj-klass-java/" rel="next">Абстрактный класс в Java <span class="meta-nav">→</span></a></li>
+		</ul>
+	
+      
+      
+
+
+      		 <aside id="knews_widget-3" class="widget widget_knews_widget amr_widget clearfix"><h3 class="widget-title"><span>Subscribe me</span></h3><div class="knews_add_user knewsform_container" id="knewsform_1">
+					<style type="text/css">
+					div.knews_add_user textarea.knewscomment {position:absolute; top:-3000px; left:-3000px;}
+					div.knews_add_user fieldset {border:0;}
+					div.knews_add_user fieldset.knewstermsplus {height:0 !important; overflow:hidden !important; padding:0 !important; margin:0 !important; border:0 !important}</style>
+					<form action="https://vertex-academy.com/tutorials/wp-admin/admin-ajax.php" method="post"><p>Subscribe to our newsletter we will keep you up-to-date:</p><fieldset class="name"><input type="text" name="name" value="" placeholder="Name:" title="Name:" style="display:block; margin-bottom:10px;"><input type="hidden" value="1" name="required_name"></fieldset><textarea name="knewscomment" autocomplete="off" class="knewscomment" style="width:150px; height:80px" rows="5" cols="20"></textarea><fieldset class="knewstermsplus"><input type="text" name="email" value="" placeholder=""><input type="checkbox" name="knewstermsplus" value="1" title="I agree terms and conditions."><label for="knewstermsplus">I agree terms and conditions.*</label></fieldset><fieldset class="knewsemail"><input type="text" name="knewsemail2" value="" placeholder="Email:" title="Email:" style="display:block; margin-bottom:10px;"></fieldset><input type="hidden" name="user_knews_list" value="1"><input type="hidden" name="lang_user" value="ru"><input type="hidden" name="lang_locale_user" value=""><input type="hidden" name="knewskey" value="04e3ec2be5db6c06fcab2dc26f708f4b"><fieldset class="knewsbutton"><input class="knewsbutton" type="submit" value="Send" style="display:block; margin-bottom:10px;"></fieldset>
+						<input type="hidden" name="action" value="knewsAddUser">
+					</form>
+				</div></aside>	</div><!-- #primary -->
+
+	
+<div id="secondary">
+			
+		<aside id="text-12" class="widget widget_text clearfix">			<div class="textwidget"><p><script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><br>
+<!-- 300*250 Medium Rectangle --><br>
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-1426849340859996" data-ad-slot="2629650858"><iframe id="aswift_2" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./Queue в Java • Vertex Academy_files/saved_resource(5).html"><iframe id="google_ads_frame2" src="./Queue в Java • Vertex Academy_files/saved_resource(6).html"></iframe></iframe></ins><br>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+</div>
+		</aside><aside id="knews_widget-4" class="widget widget_knews_widget clearfix"><h3 class="widget-title"><span>Subscribe me</span></h3><div class="knews_add_user knewsform_container" id="knewsform_2">
+					<style type="text/css">
+					div.knews_add_user textarea.knewscomment {position:absolute; top:-3000px; left:-3000px;}
+					div.knews_add_user fieldset {border:0;}
+					div.knews_add_user fieldset.knewstermsplus {height:0 !important; overflow:hidden !important; padding:0 !important; margin:0 !important; border:0 !important}</style>
+					<form action="https://vertex-academy.com/tutorials/wp-admin/admin-ajax.php" method="post"><p>Subscribe to our newsletter we will keep you up-to-date:</p><fieldset class="name"><input type="text" name="name" value="" placeholder="Name:" title="Name:" style="display:block; margin-bottom:10px;"><input type="hidden" value="1" name="required_name"></fieldset><textarea name="knewscomment" autocomplete="off" class="knewscomment" style="width:150px; height:80px" rows="5" cols="20"></textarea><fieldset class="knewstermsplus"><input type="text" name="email" value="" placeholder=""><input type="checkbox" name="knewstermsplus" value="1" title="I agree terms and conditions."><label for="knewstermsplus">I agree terms and conditions.*</label></fieldset><fieldset class="knewsemail"><input type="text" name="knewsemail2" value="" placeholder="Email:" title="Email:" style="display:block; margin-bottom:10px;"></fieldset><input type="hidden" name="user_knews_list" value="1"><input type="hidden" name="lang_user" value="ru"><input type="hidden" name="lang_locale_user" value=""><input type="hidden" name="knewskey" value="04e3ec2be5db6c06fcab2dc26f708f4b"><fieldset class="knewsbutton"><input class="knewsbutton" type="submit" value="Send" style="display:block; margin-bottom:10px;"></fieldset>
+						<input type="hidden" name="action" value="knewsAddUser">
+					</form>
+				</div></aside><aside id="text-15" class="widget widget_text clearfix">			<div class="textwidget"><p><script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><br>
+<!-- Sidebar-top-2 --><br>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1426849340859996" data-ad-slot="4878818019" data-ad-format="auto"><iframe id="aswift_3" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./Queue в Java • Vertex Academy_files/saved_resource(7).html"><iframe id="google_ads_frame3" src="./Queue в Java • Vertex Academy_files/saved_resource(8).html"></iframe></iframe></ins><br>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+</div>
+		</aside><aside id="tag_cloud-2" class="widget widget_tag_cloud clearfix"><h3 class="widget-title"><span>Метки</span></h3><div class="tagcloud"><a href="https://vertex-academy.com/tutorials/ru/tag/arraylist-java-primer/" class="tag-cloud-link tag-link-1387 tag-link-position-1" style="font-size: 8pt;" aria-label="arraylist java пример (2 элемента)">arraylist java пример</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/collect-ru/" class="tag-cloud-link tag-link-722 tag-link-position-2" style="font-size: 9.8064516129032pt;" aria-label="collect (3 элемента)">collect</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/completablefuture-ru/" class="tag-cloud-link tag-link-1016 tag-link-position-3" style="font-size: 8pt;" aria-label="CompletableFuture (2 элемента)">CompletableFuture</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/english-for-it/" class="tag-cloud-link tag-link-414 tag-link-position-4" style="font-size: 9.8064516129032pt;" aria-label="English for IT (3 элемента)">English for IT</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/enum-java/" class="tag-cloud-link tag-link-1653 tag-link-position-5" style="font-size: 9.8064516129032pt;" aria-label="enum java (3 элемента)">enum java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/enum-metody/" class="tag-cloud-link tag-link-1829 tag-link-position-6" style="font-size: 8pt;" aria-label="enum методы (2 элемента)">enum методы</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/filter/" class="tag-cloud-link tag-link-704 tag-link-position-7" style="font-size: 11.311827956989pt;" aria-label="filter (4 элемента)">filter</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/foreach-ru/" class="tag-cloud-link tag-link-696 tag-link-position-8" style="font-size: 8pt;" aria-label="forEach (2 элемента)">forEach</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/html5/" class="tag-cloud-link tag-link-192 tag-link-position-9" style="font-size: 11.311827956989pt;" aria-label="html5 (4 элемента)">html5</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-ru/" class="tag-cloud-link tag-link-49 tag-link-position-10" style="font-size: 22pt;" aria-label="Java (25 элементов)">Java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java8/" class="tag-cloud-link tag-link-698 tag-link-position-11" style="font-size: 18.838709677419pt;" aria-label="Java8 (15 элементов)">Java8</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-8/" class="tag-cloud-link tag-link-684 tag-link-position-12" style="font-size: 20.344086021505pt;" aria-label="java 8 (19 элементов)">java 8</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-8-completable-future-ru/" class="tag-cloud-link tag-link-1020 tag-link-position-13" style="font-size: 8pt;" aria-label="java 8 completable future (2 элемента)">java 8 completable future</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-8-date-time/" class="tag-cloud-link tag-link-1282 tag-link-position-14" style="font-size: 15.075268817204pt;" aria-label="java 8 date time (8 элементов)">java 8 date time</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-8-date-time-api/" class="tag-cloud-link tag-link-1284 tag-link-position-15" style="font-size: 15.075268817204pt;" aria-label="java 8 date time api (8 элементов)">java 8 date time api</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-8-stream/" class="tag-cloud-link tag-link-806 tag-link-position-16" style="font-size: 8pt;" aria-label="java 8 stream (2 элемента)">java 8 stream</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-8-data-i-vremya/" class="tag-cloud-link tag-link-1280 tag-link-position-17" style="font-size: 13.569892473118pt;" aria-label="java 8 дата и время (6 элементов)">java 8 дата и время</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java9/" class="tag-cloud-link tag-link-1104 tag-link-position-18" style="font-size: 9.8064516129032pt;" aria-label="java9 (3 элемента)">java9</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-9/" class="tag-cloud-link tag-link-1102 tag-link-position-19" style="font-size: 12.516129032258pt;" aria-label="Java 9 (5 элементов)">Java 9</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-9-jshell-ru/" class="tag-cloud-link tag-link-1272 tag-link-position-20" style="font-size: 8pt;" aria-label="java 9 JShell (2 элемента)">java 9 JShell</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-core/" class="tag-cloud-link tag-link-58 tag-link-position-21" style="font-size: 8pt;" aria-label="Java Core (2 элемента)">Java Core</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-project-repl-ru/" class="tag-cloud-link tag-link-1274 tag-link-position-22" style="font-size: 8pt;" aria-label="java project repl (2 элемента)">java project repl</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-reflection/" class="tag-cloud-link tag-link-1879 tag-link-position-23" style="font-size: 8pt;" aria-label="java reflection (2 элемента)">java reflection</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-rabota-s-datoj-i-vremenem/" class="tag-cloud-link tag-link-1403 tag-link-position-24" style="font-size: 11.311827956989pt;" aria-label="java работа с датой и временем (4 элемента)">java работа с датой и временем</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/lambda/" class="tag-cloud-link tag-link-706 tag-link-position-25" style="font-size: 9.8064516129032pt;" aria-label="lambda (3 элемента)">lambda</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/lambda-expression/" class="tag-cloud-link tag-link-688 tag-link-position-26" style="font-size: 12.516129032258pt;" aria-label="Lambda expression (5 элементов)">Lambda expression</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/map-ru/" class="tag-cloud-link tag-link-740 tag-link-position-27" style="font-size: 8pt;" aria-label="map (2 элемента)">map</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/method-reference/" class="tag-cloud-link tag-link-700 tag-link-position-28" style="font-size: 8pt;" aria-label="method reference (2 элемента)">method reference</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/oop-ru/" class="tag-cloud-link tag-link-596 tag-link-position-29" style="font-size: 9.8064516129032pt;" aria-label="OOP (3 элемента)">OOP</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/serializable-i-enum/" class="tag-cloud-link tag-link-1833 tag-link-position-30" style="font-size: 8pt;" aria-label="serializable и enum (2 элемента)">serializable и enum</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/stream/" class="tag-cloud-link tag-link-702 tag-link-position-31" style="font-size: 18.086021505376pt;" aria-label="Stream (13 элементов)">Stream</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/anglijskij-dlya-it/" class="tag-cloud-link tag-link-566 tag-link-position-32" style="font-size: 8pt;" aria-label="английский для IT (2 элемента)">английский для IT</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/vozvesti-v-stepen-java-ru/" class="tag-cloud-link tag-link-966 tag-link-position-33" style="font-size: 8pt;" aria-label="возвести в степень java (2 элемента)">возвести в степень java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/dvumernye-massivy-java/" class="tag-cloud-link tag-link-480 tag-link-position-34" style="font-size: 8pt;" aria-label="двумерные массивы java (2 элемента)">двумерные массивы java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/kak-poluchit-massiv-znachenij-enum/" class="tag-cloud-link tag-link-1835 tag-link-position-35" style="font-size: 8pt;" aria-label="как получить массив значений enum (2 элемента)">как получить массив значений enum</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/%d0%ba%d0%bb%d0%b0%d1%81%d1%81/" class="tag-cloud-link tag-link-178 tag-link-position-36" style="font-size: 8pt;" aria-label="класс (2 элемента)">класс</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/klass-math/" class="tag-cloud-link tag-link-438 tag-link-position-37" style="font-size: 8pt;" aria-label="класс Math (2 элемента)">класс Math</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/modifikator-static/" class="tag-cloud-link tag-link-674 tag-link-position-38" style="font-size: 8pt;" aria-label="модификатор static (2 элемента)">модификатор static</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/modifikator-static-java/" class="tag-cloud-link tag-link-676 tag-link-position-39" style="font-size: 8pt;" aria-label="модификатор static java (2 элемента)">модификатор static java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/modifikatory-java/" class="tag-cloud-link tag-link-514 tag-link-position-40" style="font-size: 11.311827956989pt;" aria-label="модификаторы java (4 элемента)">модификаторы java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/modifikatory-dostupa-java/" class="tag-cloud-link tag-link-518 tag-link-position-41" style="font-size: 8pt;" aria-label="модификаторы доступа java (2 элемента)">модификаторы доступа java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/rabota-so-strokami-java/" class="tag-cloud-link tag-link-634 tag-link-position-42" style="font-size: 9.8064516129032pt;" aria-label="работа со строками java (3 элемента)">работа со строками java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/%d1%86%d0%b8%d0%ba%d0%bb%d1%8b-java/" class="tag-cloud-link tag-link-63 tag-link-position-43" style="font-size: 11.311827956989pt;" aria-label="циклы java (4 элемента)">циклы java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/cikly-v-java/" class="tag-cloud-link tag-link-478 tag-link-position-44" style="font-size: 8pt;" aria-label="циклы в java (2 элемента)">циклы в java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/chto-takoe-git/" class="tag-cloud-link tag-link-1923 tag-link-position-45" style="font-size: 8pt;" aria-label="что такое git (2 элемента)">что такое git</a></div>
+</aside><aside id="text-18" class="widget widget_text clearfix">			<div class="textwidget"><p><script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><br>
+<!-- Sidebar-top-3 --><br>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1426849340859996" data-ad-slot="1002619352" data-ad-format="auto"><iframe id="aswift_4" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./Queue в Java • Vertex Academy_files/saved_resource(9).html"><iframe id="google_ads_frame4" src="./Queue в Java • Vertex Academy_files/saved_resource(10).html"></iframe></iframe></ins><br>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+</div>
+		</aside><aside id="text-2" class="widget widget_text clearfix"><h3 class="widget-title"><span>Administrator</span></h3>			<div class="textwidget">[userlist inpage='2'  data='profile_fields' include='1']</div>
+		</aside>
+	</div>
+	
+<input type="hidden" name="cD9aiiRBSBdy" id="cD9aiiRBSBdy">
+<script type="text/javascript">
+function fcbu4vG7Ar8Dd() {
+	var o=document.getElementById("cD9aiiRBSBdy");
+	o.value="EUd0lGnTzAEe";
+}
+var bKF41GazKmSSo = document.getElementById("submit");
+if (bKF41GazKmSSo) {
+	var c0hyJAAg4pQHW = document.getElementById("cD9aiiRBSBdy");
+	var pTnGd5wGm843C = bKF41GazKmSSo.parentNode;
+	pTnGd5wGm843C.appendChild(c0hyJAAg4pQHW, bKF41GazKmSSo);
+	addHandler(bKF41GazKmSSo, "mousedown", fcbu4vG7Ar8Dd);
+	addHandler(bKF41GazKmSSo, "keypress", fcbu4vG7Ar8Dd);
+}
+</script>
+
+		</div><!-- .inner-wrap -->
+	</div><!-- #main -->
+   			<footer id="colophon" class="clearfix">
+			
+			<div class="footer-socket-wrapper clearfix">
+				<div class="inner-wrap">
+					<div class="footer-socket-area">
+                  <div class="footer-socket-right-section">
+   							<div class="social-links clearfix">
+		<ul>
+		<li><a href="https://www.facebook.com/vertex.academy/" target="_blank"><i class="fa fa-facebook"></i></a></li><li><a href="https://vk.com/vertex_academy" target="_blank"><i class="fa fa-vk"></i></a></li><li><a href="https://www.youtube.com/channel/UC7b-dJ56vQaMh2wr972iG6Q" target="_blank"><i class="fa fa-youtube"></i></a></li>		</ul>
+	</div><!-- .social-links -->
+	                  </div>
+                  <div class="footer-socket-left-sectoin">
+   						<div class="copyright">Copyright © 2022 <a href="https://vertex-academy.com/tutorials/ru/" title="Vertex Academy"><span>Vertex Academy</span></a>. All rights reserved.<br></div>                  </div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<a href="https://vertex-academy.com/tutorials/ru/queue-java-primer/#masthead" id="scroll-up" style="display: none;"><i class="fa fa-chevron-up"></i></a>
+	</div><!-- #page -->
+
+   <div class="self-teach"><a href="https://vertex-academy.com/tutorials/ru/queue-java-primer/#tutor">Самоучители<span>--узнать детальнее--</span></a></div>
+	<script type="text/javascript" src="./Queue в Java • Vertex Academy_files/regenerator-runtime.min.js.Без названия" id="regenerator-runtime-js"></script>
+<script type="text/javascript" src="./Queue в Java • Vertex Academy_files/wp-polyfill.min.js.Без названия" id="wp-polyfill-js"></script>
+<script type="text/javascript" id="contact-form-7-js-extra">
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"https:\/\/vertex-academy.com\/tutorials\/wp-json\/","namespace":"contact-form-7\/v1"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Queue в Java • Vertex Academy_files/index.js.Без названия" id="contact-form-7-js"></script>
+<script type="text/javascript" src="./Queue в Java • Vertex Academy_files/jquery.bxslider.min.js.Без названия" id="colormag-bxslider-js"></script>
+<script type="text/javascript" src="./Queue в Java • Vertex Academy_files/colormag-slider-setting.js.Без названия" id="colormag_slider-js"></script>
+<script type="text/javascript" src="./Queue в Java • Vertex Academy_files/navigation.js.Без названия" id="colormag-navigation-js"></script>
+<script type="text/javascript" src="./Queue в Java • Vertex Academy_files/jquery.sticky.js.Без названия" id="colormag-sticky-menu-js"></script>
+<script type="text/javascript" src="./Queue в Java • Vertex Academy_files/sticky-setting.js.Без названия" id="colormag-sticky-menu-setting-js"></script>
+<script type="text/javascript" src="./Queue в Java • Vertex Academy_files/jquery.fitvids.js.Без названия" id="colormag-fitvids-js"></script>
+<script type="text/javascript" src="./Queue в Java • Vertex Academy_files/fitvids-setting.js.Без названия" id="colormag-fitvids-setting-js"></script>
+<script type="text/javascript" src="./Queue в Java • Vertex Academy_files/api.js.Без названия" id="google-recaptcha-js"></script>
+<script type="text/javascript" id="wpcf7-recaptcha-js-extra">
+/* <![CDATA[ */
+var wpcf7_recaptcha = {"sitekey":"6LfS97UcAAAAALBiQr5tDprxsDxuwBEowV4dUKPD","actions":{"homepage":"homepage","contactform":"contactform"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Queue в Java • Vertex Academy_files/index.js(1).Без названия" id="wpcf7-recaptcha-js"></script>
+<script type="text/javascript" src="./Queue в Java • Vertex Academy_files/knews_subscribe.js.Без названия" id="knews_subscribe-js"></script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async="" src="./Queue в Java • Vertex Academy_files/js"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-‎62731553-2');
+	</script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-62731553-2', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+<div><div class="grecaptcha-badge" data-style="bottomright" style="width: 256px; height: 60px; display: block; transition: right 0.3s ease 0s; position: fixed; bottom: 14px; right: -186px; box-shadow: gray 0px 0px 5px; border-radius: 2px; overflow: hidden;"><div class="grecaptcha-logo"><iframe title="reCAPTCHA" src="./Queue в Java • Vertex Academy_files/anchor.html" width="256" height="60" role="presentation" name="a-8539cbpr8ha6" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe></div><div class="grecaptcha-error"></div><textarea id="g-recaptcha-response-100000" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div><iframe style="display: none;" src="./Queue в Java • Vertex Academy_files/saved_resource(11).html"></iframe></div></body></html>

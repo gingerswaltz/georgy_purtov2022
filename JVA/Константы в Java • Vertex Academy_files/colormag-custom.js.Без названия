@@ -1,0 +1,49 @@
+// For Search Icon Toggle effect added at the top
+jQuery(document).ready(function(){
+   jQuery(".search-top").click(function(){
+      jQuery("#masthead .search-form-top").toggle();
+   });
+});
+
+jQuery(document).ready(function(){
+
+
+	jQuery('.fa-twitter').removeClass('fa-twitter').addClass('fa-vk');
+	jQuery('.menu-primary-container>ul>li:has(ul)>a').click(function(){return false;});
+	jQuery("#commentform input[type='email'], #commentform input[type='text'],#commentform input[type='url'],#commentform textarea").val('');
+	jQuery('#progress').css('width',jQuery(this).scrollTop()/(jQuery(document).height()-jQuery(window).height())*100+"%")
+	.css('top',(jQuery('#site-navigation').offset().top+jQuery('#site-navigation').height()-jQuery(this).scrollTop())+"px");
+	jQuery("#scroll-up").hide();
+	jQuery(function () {
+		jQuery(window).scroll(function () {
+			if (jQuery(this).scrollTop() > 1000) {
+				jQuery('#scroll-up').fadeIn();
+			} else {
+				jQuery('#scroll-up').fadeOut();
+			}
+			jQuery('#progress').css('width',jQuery(this).scrollTop()/(jQuery(document).height()-jQuery(window).height())*100+"%");
+			jQuery('#progress').css('top',(jQuery('#site-navigation').offset().top+jQuery('#site-navigation').height()-jQuery(this).scrollTop())+"px");
+			
+		});
+		jQuery('a#scroll-up').click(function () {
+			jQuery('body,html').animate({
+				scrollTop: 0
+			}, 800);
+			return false;
+		});
+	});
+	
+	jQuery('a[href^="#"]').click(function(){
+		var target = jQuery(this).attr('href');
+		jQuery('html, body').animate({scrollTop: jQuery(target).offset().top-80}, 800);
+		return false;
+	});
+
+	jQuery('.slide-toggle').on('click', function(){
+		let _this = jQuery(this);
+		jQuery(this).parent().find('div').animate({maxHeight: '1000px'},1200);
+	})  
+	
+		
+	
+});

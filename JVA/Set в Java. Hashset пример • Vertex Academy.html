@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)https://vertex-academy.com/tutorials/ru/set-v-java-hashset/ -->
+<html lang="ru-RU" prefix="og: http://ogp.me/ns#"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://vertex-academy.com/tutorials/xmlrpc.php">
+ <title>Set в Java. Hashset пример • Vertex Academy</title>
+<meta name="robots" content="max-image-preview:large">
+
+<!-- This site is optimized with the Yoast SEO Premium plugin v3.1.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="Set в Java. Какие есть виды множеств. Рассмотрим на примере hashset в Java. Уровень - для начинающих.">
+<meta name="robots" content="noodp">
+<link rel="canonical" href="https://vertex-academy.com/tutorials/ru/set-v-java-hashset/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Set в Java. Hashset пример • Vertex Academy">
+<meta property="og:description" content="Set в Java. Какие есть виды множеств. Рассмотрим на примере hashset в Java. Уровень - для начинающих.">
+<meta property="og:url" content="https://vertex-academy.com/tutorials/ru/set-v-java-hashset/">
+<meta property="og:site_name" content="Vertex Academy">
+<meta property="article:publisher" content="https://www.facebook.com/vertex.academy/">
+<meta property="article:tag" content="hashset java пример">
+<meta property="article:tag" content="hashset в java">
+<meta property="article:tag" content="коллекция set java">
+<meta property="article:tag" content="множество set java">
+<meta property="article:section" content="Java">
+<meta property="article:published_time" content="2018-06-02T02:36:09+03:00">
+<meta property="article:modified_time" content="2018-07-18T15:56:02+03:00">
+<meta property="og:updated_time" content="2018-07-18T15:56:02+03:00">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/06/set-java-vertex.jpg">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/1-11.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/2-6.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/06/set-java.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/4-3.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/Capture-d’écran-2018-05-29-à-16.27.19.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/Capture-d’écran-2018-05-29-à-16.29.15.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/Capture-d’écran-2018-05-29-à-16.34.03.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/Capture-d’écran-2018-05-29-à-16.35.58.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/Capture-d’écran-2018-05-29-à-16.38.24.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/Capture-d’écran-2018-05-29-à-16.39.36.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/Capture-d’écran-2018-05-29-à-16.43.04.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="Set в Java. Какие есть виды множеств. Рассмотрим на примере hashset в Java. Уровень - для начинающих.">
+<meta name="twitter:title" content="Set в Java. Hashset пример • Vertex Academy">
+<meta name="twitter:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/06/set-java-vertex.jpg">
+<meta property="DC.date.issued" content="2018-06-02T02:36:09+03:00">
+<!-- / Yoast SEO Premium plugin. -->
+
+<link rel="dns-prefetch" href="https://ws.sharethis.com/">
+<link rel="dns-prefetch" href="https://www.google.com/">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://maxcdn.bootstrapcdn.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Vertex Academy » Лента" href="https://vertex-academy.com/tutorials/ru/feed/">
+<script async="" src="./Set в Java. Hashset пример • Vertex Academy_files/analytics.js.Без названия"></script><script type="text/javascript" async="" src="./Set в Java. Hashset пример • Vertex Academy_files/recaptcha__ru.js.Без названия" crossorigin="anonymous" integrity="sha384-WCHHeiWXPyOSuQaugVRjpNMJWxOfrULCjvKrlTSUG0uYesAzPmzciQ1RewjGsnQf"></script><script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/vertex-academy.com\/tutorials\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.0.2"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode,e=(p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0),i.toDataURL());return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script><script src="./Set в Java. Hashset пример • Vertex Academy_files/wp-emoji-release.min.js.Без названия" type="text/javascript" defer=""></script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+		<style type="text/css">
+	.wp-pagenavi{margin-left:auto !important; margin-right:auto; !important}
+	</style>
+  <link rel="stylesheet" id="crayon-css" href="./Set в Java. Hashset пример • Vertex Academy_files/crayon.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="crayon-theme-classic-css" href="./Set в Java. Hashset пример • Vertex Academy_files/classic.css" type="text/css" media="all">
+<link rel="stylesheet" id="crayon-font-courier-new-css" href="./Set в Java. Hashset пример • Vertex Academy_files/courier-new.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-block-library-css" href="./Set в Java. Hashset пример • Vertex Academy_files/style.min.css" type="text/css" media="all">
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<link rel="stylesheet" id="adsns_css-css" href="./Set в Java. Hashset пример • Vertex Academy_files/adsns.css" type="text/css" media="all">
+<link rel="stylesheet" id="contact-form-7-css" href="./Set в Java. Hashset пример • Vertex Academy_files/styles.css" type="text/css" media="all">
+<link rel="stylesheet" id="colormag_google_fonts-css" href="./Set в Java. Hashset пример • Vertex Academy_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="colormag_style-css" href="./Set в Java. Hashset пример • Vertex Academy_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="colormag-fontawesome-css" href="./Set в Java. Hashset пример • Vertex Academy_files/font-awesome.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-pagenavi-style-css" href="./Set в Java. Hashset пример • Vertex Academy_files/css3_orange_glossy.css" type="text/css" media="all">
+<script type="text/javascript" src="./Set в Java. Hashset пример • Vertex Academy_files/jquery.min.js.Без названия" id="jquery-core-js"></script>
+<script type="text/javascript" src="./Set в Java. Hashset пример • Vertex Academy_files/jquery-migrate.min.js.Без названия" id="jquery-migrate-js"></script>
+<script type="text/javascript" id="crayon_js-js-extra">
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"https:\/\/vertex-academy.com\/tutorials\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"\u041d\u0430\u0436\u043c\u0438\u0442\u0435 %s \u0434\u043b\u044f \u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f, %s \u0434\u043b\u044f \u0432\u0441\u0442\u0430\u0432\u043a\u0438","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Set в Java. Hashset пример • Vertex Academy_files/crayon.min.js.Без названия" id="crayon_js-js"></script>
+<script type="text/javascript" src="./Set в Java. Hashset пример • Vertex Academy_files/colormag-custom.js.Без названия" id="colormag-custom-js"></script>
+<script id="st_insights_js" type="text/javascript" src="./Set в Java. Hashset пример • Vertex Academy_files/st_insights.js.Без названия"></script>
+<link rel="https://api.w.org/" href="https://vertex-academy.com/tutorials/wp-json/"><link rel="alternate" type="application/json" href="https://vertex-academy.com/tutorials/wp-json/wp/v2/posts/9245"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://vertex-academy.com/tutorials/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://vertex-academy.com/tutorials/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 6.0.2">
+<link rel="shortlink" href="https://vertex-academy.com/tutorials/?p=9245">
+<link rel="alternate" type="application/json+oembed" href="https://vertex-academy.com/tutorials/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fset-v-java-hashset%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://vertex-academy.com/tutorials/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fset-v-java-hashset%2F&amp;format=xml">
+
+<script type="text/javascript">
+	function addHandler(object, event, handler) {
+		if (typeof object.addEventListener != 'undefined') 
+			object.addEventListener(event, handler, false);
+		else
+			if (typeof object.attachEvent != 'undefined')
+				object.attachEvent('on' + event, handler);
+			else 
+				throw 'Incompatible browser';
+	}
+</script>
+	<style type="text/css">
+	 .wp-pagenavi
+	{
+		font-size:12px !important;
+	}
+	</style>
+	<!-- Vertex Academy Internal Styles --><style type="text/css"> .colormag-button,blockquote,button,input[type=reset],input[type=button],input[type=submit]{background-color:#f26027}#site-title a,.next a:hover,.previous a:hover,.social-links i.fa:hover,a{color:#f26027}.fa.search-top:hover{background-color:#f26027}#site-navigation{border-top:4px solid #f26027}.home-icon.front_page_on,.main-navigation a:hover,.main-navigation ul li ul li a:hover,.main-navigation ul li ul li:hover>a,.main-navigation ul li.current-menu-ancestor>a,.main-navigation ul li.current-menu-item ul li a:hover,.main-navigation ul li.current-menu-item>a,.main-navigation ul li.current_page_ancestor>a,.main-navigation ul li.current_page_item>a,.main-navigation ul li:hover>a,.main-small-navigation li a:hover,.site-header .menu-toggle:hover{background-color:#f26027}.main-small-navigation .current-menu-item>a,.main-small-navigation .current_page_item>a{background:#f26027}.promo-button-area a:hover{border:2px solid #f26027;background-color:#f26027}#content .wp-pagenavi .current,#content .wp-pagenavi a:hover,.format-link .entry-content a,.pagination span{background-color:#f26027}.pagination a span:hover{color:#f26027;border-color:#f26027}#content .comments-area a.comment-edit-link:hover,#content .comments-area a.comment-permalink:hover,#content .comments-area article header cite a:hover,.comments-area .comment-author-link a:hover{color:#f26027}.comments-area .comment-author-link span{background-color:#f26027}.comment .comment-reply-link:hover,.nav-next a,.nav-previous a{color:#f26027}#secondary .widget-title{border-bottom:2px solid #f26027}#secondary .widget-title span{background-color:#f26027}.footer-widgets-area .widget-title{border-bottom:2px solid #f26027}.footer-widgets-area .widget-title span{background-color:#f26027}.footer-widgets-area a:hover{color:#f26027}.advertisement_above_footer .widget-title{border-bottom:2px solid #f26027}.advertisement_above_footer .widget-title span{background-color:#f26027}a#scroll-up i{color:#f26027}.page-header .page-title{border-bottom:2px solid #f26027}#content .post .article-content .above-entry-meta .cat-links a,.page-header .page-title span{background-color:#f26027}#content .post .article-content .entry-title a:hover,.entry-meta .byline i,.entry-meta .cat-links i,.entry-meta a,.post .entry-title a:hover,.search .entry-title a:hover{color:#f26027}.entry-meta .post-format i{background-color:#f26027}.entry-meta .comments-link a:hover,.entry-meta .edit-link a:hover,.entry-meta .posted-on a:hover,.entry-meta .tag-links a:hover,.single #content .tags a:hover{color:#f26027}.more-link,.no-post-thumbnail{background-color:#f26027}.post-box .entry-meta .cat-links a:hover,.post-box .entry-meta .posted-on a:hover,.post.post-box .entry-title a:hover{color:#f26027}.widget_featured_slider .slide-content .above-entry-meta .cat-links a{background-color:#f26027}.widget_featured_slider .slide-content .below-entry-meta .byline a:hover,.widget_featured_slider .slide-content .below-entry-meta .comments a:hover,.widget_featured_slider .slide-content .below-entry-meta .posted-on a:hover,.widget_featured_slider .slide-content .entry-title a:hover{color:#f26027}.widget_highlighted_posts .article-content .above-entry-meta .cat-links a{background-color:#f26027}.byline a:hover,.comments a:hover,.edit-link a:hover,.posted-on a:hover,.tag-links a:hover,.widget_highlighted_posts .article-content .below-entry-meta .byline a:hover,.widget_highlighted_posts .article-content .below-entry-meta .comments a:hover,.widget_highlighted_posts .article-content .below-entry-meta .posted-on a:hover,.widget_highlighted_posts .article-content .entry-title a:hover{color:#f26027}.widget_featured_posts .article-content .above-entry-meta .cat-links a{background-color:#f26027}.widget_featured_posts .article-content .entry-title a:hover{color:#f26027}.widget_featured_posts .widget-title{border-bottom:2px solid #f26027}.widget_featured_posts .widget-title span{background-color:#f26027}.related-posts-main-title .fa,.single-related-posts .article-content .entry-title a:hover{color:#f26027}</style>
+
+<style type="text/css"></style>
+
+<style type="text/css">
+.synved-social-resolution-single {
+display: inline-block;
+}
+.synved-social-resolution-normal {
+display: inline-block;
+}
+.synved-social-resolution-hidef {
+display: none;
+}
+
+@media only screen and (min--moz-device-pixel-ratio: 2),
+only screen and (-o-min-device-pixel-ratio: 2/1),
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-device-pixel-ratio: 2),
+only screen and (min-resolution: 2dppx),
+only screen and (min-resolution: 192dpi) {
+	.synved-social-resolution-normal {
+	display: none;
+	}
+	.synved-social-resolution-hidef {
+	display: inline-block;
+	}
+}
+</style>
+<script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-1426849340859996",
+    enable_page_level_ads: false
+  });
+</script>
+
+<style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style></head>
+
+<body class="post-template-default single single-post postid-9245 single-format-standard  wide"><div id="pratikabuSTTDiv" class="pratikabusttdiv-no-print" style="bottom: 20px; right: 20px; opacity: 1; display: block;"><img id="pratikabuSTTArrowUp" style="float: right; opacity: 0.5; cursor: pointer; width: 48px; height: 48px;" class="pratikabuSTTImg pratikabuSTTRotate180" src="chrome-extension://hegiignepmecppikdlbohnnbfjdoaghj/icons/pratikabu-stt-48-1.png"><div id="pratikabuSTTDiv2" class="pratikabusttdiv-no-print" style="width: 48px; opacity: 0; display: block; margin-left: 0px;"><img id="pratikabuSTTClear" class="pratikabuSTTImg" style="opacity: 0.5; cursor: pointer;" src="chrome-extension://hegiignepmecppikdlbohnnbfjdoaghj/icons/pratikabu-stt-clear-24.png"><img id="pratikabuSTTPageUp" class="pratikabuSTTImg" style="opacity: 0.5; cursor: pointer;" src="chrome-extension://hegiignepmecppikdlbohnnbfjdoaghj/icons/pratikabu-stt-pageup-24.png"><img id="pratikabuSTTSettings" class="pratikabuSTTImg" style="opacity: 0.5; cursor: pointer;" src="chrome-extension://hegiignepmecppikdlbohnnbfjdoaghj/icons/pratikabu-stt-settings-24.png"><img id="pratikabuSTTPageDown" class="pratikabuSTTImg pratikabuSTTRotate180" style="opacity: 0.5; cursor: pointer;" src="chrome-extension://hegiignepmecppikdlbohnnbfjdoaghj/icons/pratikabu-stt-pageup-24.png"></div></div>
+<div id="page" class="hfeed site">
+      <header id="masthead" class="site-header clearfix">
+      <div id="header-text-nav-container" class="clearfix">
+                     <div class="news-bar">
+               <div class="inner-wrap clearfix">
+                  
+                  
+                  	<div class="social-links clearfix">
+		<ul>
+		<li><a href="https://www.facebook.com/vertex.academy/" target="_blank"><i class="fa fa-facebook"></i></a></li><li><a href="https://vk.com/vertex_academy" target="_blank"><i class="fa fa-vk"></i></a></li><li><a href="https://www.youtube.com/channel/UC7b-dJ56vQaMh2wr972iG6Q" target="_blank"><i class="fa fa-youtube"></i></a></li>		</ul>
+	</div><!-- .social-links -->
+	               </div>
+            </div>
+         
+         
+         <div class="inner-wrap">
+
+            <div id="header-text-nav-wrap" class="clearfix">
+               <div id="header-left-section"> 
+                                    <div id="header-text" class="screen-reader-text">
+                                             <h3 id="site-title">
+                           <a href="https://vertex-academy.com/tutorials/ru/" title="Vertex Academy" rel="home">Vertex Academy</a>
+                        </h3>
+                                                                  <p id="site-description">Tutorials</p>
+                     <!-- #site-description -->
+                  </div><!-- #header-text -->
+               </div><!-- #header-left-section -->
+               <div id="header-right-section">
+                                    <div id="header-right-sidebar" class="clearfix">
+                  
+                  </div>
+                                 </div><!-- #header-right-section -->
+
+            </div><!-- #header-text-nav-wrap -->
+
+         </div><!-- .inner-wrap -->
+
+         
+         <div id="site-navigation-sticky-wrapper" class="sticky-wrapper" style="height: 56px;"><nav id="site-navigation" class="main-navigation clearfix" role="navigation">
+            <div class="inner-wrap clearfix">
+                                    <div id="header-logo-image">
+
+                        <a href="https://vertex-academy.com/" title="Vertex Academy" rel="home"><img src="./Set в Java. Hashset пример • Vertex Academy_files/vertex-tutorials3.png" alt="Vertex Academy"></a>
+                     </div><!-- #header-logo-image -->
+                                 <h4 class="menu-toggle"></h4>
+               <div class="menu-primary-container"><ul id="menu-menu-ru" class="menunav-menu"><li id="menu-item-1032" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-1032"><a href="https://vertex-academy.com/tutorials/ru/category/java/">Java</a>
+<ul class="sub-menu">
+	<li id="menu-item-6085" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6085"><a href="https://vertex-academy.com/tutorials/ru/java-8-uchebnik/">Java 8</a></li>
+	<li id="menu-item-1033" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1033"><a href="https://vertex-academy.com/tutorials/ru/category/java/java-start-java/">Java Start</a></li>
+	<li id="menu-item-10141" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-10141"><a href="https://vertex-academy.com/tutorials/ru/category/java/java-oop/">Java ООП</a></li>
+	<li id="menu-item-10147" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-10147"><a href="https://vertex-academy.com/tutorials/ru/category/java/java-professional-ru/">Java Professional</a></li>
+	<li id="menu-item-1034" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1034"><a href="https://vertex-academy.com/tutorials/ru/category/java/jdbc/">JDBC</a></li>
+</ul>
+</li>
+<li id="menu-item-1031" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1031"><a href="https://vertex-academy.com/tutorials/ru/category/front-end/">Front-End</a>
+<ul class="sub-menu">
+	<li id="menu-item-1883" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1883"><a href="https://vertex-academy.com/tutorials/ru/category/front-end/html/">HTML</a></li>
+	<li id="menu-item-10153" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10153"><a href="https://vertex-academy.com/tutorials/ru/category/front-end/css/">CSS</a></li>
+</ul>
+</li>
+<li id="menu-item-7701" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7701"><a href="https://vertex-academy.com/tutorials/ru/set-v-java-hashset/#">Linux</a>
+<ul class="sub-menu">
+	<li id="menu-item-7664" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7664"><a href="https://vertex-academy.com/tutorials/ru/category/linux/ubuntu/">Ubuntu</a></li>
+</ul>
+</li>
+<li id="menu-item-1017" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1017"><a href="https://vertex-academy.com/tutorials/ru/kontakty/">Контакты</a></li>
+<li id="menu-item-7296" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7296"><a href="https://vertex-academy.com/tutorials/ru/set-v-java-hashset/#">Самоучители</a>
+<ul class="sub-menu">
+	<li id="menu-item-7297" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7297"><a href="https://vertex-academy.com/tutorials/ru/samouchitel-po-java-s-nulya/">Java с нуля</a></li>
+	<li id="menu-item-7298" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7298"><a href="https://vertex-academy.com/tutorials/ru/java-8-uchebnik/">Java 8</a></li>
+	<li id="menu-item-7299" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7299"><a href="https://vertex-academy.com/tutorials/ru/java-9-uchebnik-teoriya-primery/">Java 9</a></li>
+	<li id="menu-item-7300" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7300"><a href="https://vertex-academy.com/tutorials/ru/samouchitel-po-htmlcss-s-nulya/">HTML</a></li>
+</ul>
+</li>
+</ul></div>                              
+               <div class="lang-chooser">
+                  <i class="fa fa-globe lang-ico" aria-hidden="true"></i>
+                  <aside id="polylang-8" class="widget widget_polylang clearfix"><ul>
+	<li class="lang-item lang-item-18 lang-item-en no-translation lang-item-first"><a lang="en-US" hreflang="en-US" href="https://vertex-academy.com/tutorials/en/">English</a></li>
+	<li class="lang-item lang-item-21 lang-item-ru current-lang"><a lang="ru-RU" hreflang="ru-RU" href="https://vertex-academy.com/tutorials/ru/set-v-java-hashset/">Русский</a></li>
+	<li class="lang-item lang-item-323 lang-item-uk no-translation"><a lang="uk" hreflang="uk" href="https://vertex-academy.com/tutorials/uk/">Українська</a></li>
+</ul>
+</aside>                 </div>
+
+                  <div class="search-form-top">
+               
+                     <form action="https://vertex-academy.com/tutorials/ru/" class="search-form searchform clearfix" method="get">
+   <div class="search-wrap">
+      <input type="text" placeholder="Поиск" class="s field" name="s">
+      <button class="search-icon" type="submit"></button>
+   </div>
+</form><!-- .searchform -->                  </div>
+              
+                           </div>
+         </nav></div>
+
+      </div><!-- #header-text-nav-container -->
+
+      
+   </header>
+         <div id="main" class="clearfix">
+      <div class="inner-wrap clearfix">
+         
+		<div id="progress" style="width: 0%; top: 56px;"></div>
+	<div id="primary">
+		<div id="content" class="clearfix">
+
+			
+				
+<article id="post-9245" class="post-9245 post type-post status-publish format-standard hentry category-java category-java-professional-ru category-java-oop tag-hashset-java-primer tag-hashset-v-java tag-kollekciya-set-java tag-mnozhestvo-set-java">
+	
+   
+   
+   <div class="article-content clearfix">
+
+   
+   <div class="above-entry-meta"><span class="cat-links"><a href="https://vertex-academy.com/tutorials/ru/category/java/" rel="category tag">Java</a>&nbsp;<a href="https://vertex-academy.com/tutorials/ru/category/java/java-professional-ru/" rel="category tag">Java Professional</a>&nbsp;<a href="https://vertex-academy.com/tutorials/ru/category/java/java-oop/" rel="category tag">Java ООП</a>&nbsp;</span></div>
+      <header class="entry-header">
+   		<h1 class="entry-title">
+   			Set в Java. Hashset пример   		</h1>
+   	</header>
+
+   	<div class="below-entry-meta">
+      <span class="posted-on"><a href="https://vertex-academy.com/tutorials/ru/set-v-java-hashset/" title="02:36" rel="bookmark"><i class="fa fa-calendar-o"></i> <time class="entry-date published" datetime="2018-06-02T02:36:09+03:00">2 июня, 2018</time><time class="updated" datetime="2018-07-18T15:56:02+03:00">18 июля, 2018</time></a></span>
+      <span class="byline"><span class="author vcard"><i class="fa fa-user"></i><a class="url fn n" href="https://vertex-academy.com/tutorials/ru/author/vertex/" title="Vertex Academy">Vertex Academy</a></span></span>
+
+      <span class="tag-links"><i class="fa fa-tags"></i><a href="https://vertex-academy.com/tutorials/ru/tag/hashset-java-primer/" rel="tag">hashset java пример</a>,<a href="https://vertex-academy.com/tutorials/ru/tag/hashset-v-java/" rel="tag">hashset в java</a>,<a href="https://vertex-academy.com/tutorials/ru/tag/kollekciya-set-java/" rel="tag">коллекция set java</a>,<a href="https://vertex-academy.com/tutorials/ru/tag/mnozhestvo-set-java/" rel="tag">множество set java</a></span></div>
+   	<div class="entry-content clearfix">
+   		<div class="synved-social-container synved-social-container-share" style="text-align: right"><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-normal synved-social-provider-facebook nolightbox" data-provider="facebook" target="_blank" rel="nofollow" title="Share on Facebook" href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fset-v-java-hashset%2F&amp;t=Set%20%D0%B2%20Java.%20Hashset%20%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80&amp;s=100&amp;p[url]=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fset-v-java-hashset%2F&amp;p[title]=Set%20%D0%B2%20Java.%20Hashset%20%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="Facebook" title="Share on Facebook" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Set в Java. Hashset пример • Vertex Academy_files/facebook.png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-normal synved-social-provider-twitter nolightbox" data-provider="twitter" target="_blank" rel="nofollow" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fset-v-java-hashset%2F&amp;text=Check%20this%20out" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="twitter" title="Share on Twitter" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Set в Java. Hashset пример • Vertex Academy_files/twitter.png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-normal synved-social-provider-tumblr nolightbox" data-provider="tumblr" target="_blank" rel="nofollow" title="Share on VK" href="http://vk.com/share.php?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fset-v-java-hashset%2F&amp;text=Check%20this%20out&amp;title%%&amp;img%%" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;"><img alt="tumblr" title="Share on VK" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Set в Java. Hashset пример • Vertex Academy_files/tumblr.png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-hidef synved-social-provider-facebook nolightbox" data-provider="facebook" target="_blank" rel="nofollow" title="Share on Facebook" href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fset-v-java-hashset%2F&amp;t=Set%20%D0%B2%20Java.%20Hashset%20%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80&amp;s=100&amp;p[url]=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fset-v-java-hashset%2F&amp;p[title]=Set%20%D0%B2%20Java.%20Hashset%20%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="Facebook" title="Share on Facebook" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Set в Java. Hashset пример • Vertex Academy_files/facebook(1).png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-hidef synved-social-provider-twitter nolightbox" data-provider="twitter" target="_blank" rel="nofollow" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fset-v-java-hashset%2F&amp;text=Check%20this%20out" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="twitter" title="Share on Twitter" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Set в Java. Hashset пример • Vertex Academy_files/twitter(1).png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-hidef synved-social-provider-tumblr nolightbox" data-provider="tumblr" target="_blank" rel="nofollow" title="Share on VK" href="http://vk.com/share.php?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fset-v-java-hashset%2F&amp;text=Check%20this%20out&amp;title%%&amp;img%%" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;"><img alt="tumblr" title="Share on VK" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Set в Java. Hashset пример • Vertex Academy_files/tumblr(1).png"></a></div><div id="ca-pub-1426849340859996:3177001332" class="ads ads_before"><script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- In-Post Adsense -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1426849340859996" data-ad-slot="3177001332" data-ad-format="auto"><iframe id="aswift_0" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./Set в Java. Hashset пример • Vertex Academy_files/saved_resource(1).html"><iframe id="google_ads_frame0" src="./Set в Java. Hashset пример • Vertex Academy_files/saved_resource(2).html"></iframe></iframe></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p><img class="alignnone size-full wp-image-9565" src="./Set в Java. Hashset пример • Vertex Academy_files/set-java-vertex.jpg" alt="" width="400" height="178"></p>
+<p><em>Данная статья:</em></p>
+<ul>
+<li><em>написана командой <a href="https://vertex-academy.com/">Vertex Academy</a>.&nbsp;</em></li>
+<li>это одна из статей из нашего <a href="https://vertex-academy.com/tutorials/ru/samouchitel-po-java-s-nulya/">"Самоучителя по Java"</a></li>
+</ul>
+<hr>
+<p>Привет!&nbsp;В нашем самоучителе мы рассмотрим следующие коллекции:</p>
+<ul>
+<li>Список (<strong>List</strong>)&nbsp; &nbsp;- см. статью <a href="https://vertex-academy.com/tutorials/ru/list-java-primer/">"List в Java"</a>, а также <a href="https://vertex-academy.com/tutorials/ru/arraylist-v-java/">"Что такое ArrayList"</a></li>
+<li>Множество (<strong>Set</strong>)</li>
+<li>Очередь (<strong>Queue</strong>) - см. статью <a href="https://vertex-academy.com/tutorials/ru/queue-java-primer/">"Queue в Java"</a></li>
+</ul>
+<p>Это статья про структуру данных <strong>множество</strong> (<strong>Set</strong>) - один из способов хранения данных в Java.</p>
+<h1><strong><span style="font-size: 14pt;">Что такое&nbsp;множество (Set)&nbsp;</span></strong></h1>
+<p>Как мы уже говорили, множество - это такой же способ хранения данных, как массив или список. Но особенность множества в том, что оно может хранить только уникальные значения.</p>
+<p>Например, если у нас есть множество <strong>Integer</strong>-ов - в нем лежат числа 1, 2 , 3, 4 и 5:</p>
+<p><img loading="lazy" class="alignnone size-full wp-image-9320" src="./Set в Java. Hashset пример • Vertex Academy_files/1-11.png" alt="" width="300" height="226"></p>
+<p>Если мы попробуем добавить туда единицу, у нас не получится - потому что в множестве уже есть единица:</p>
+<p><img loading="lazy" class="alignnone size-full wp-image-9322" src="./Set в Java. Hashset пример • Vertex Academy_files/2-6.png" alt="" width="300" height="187"></p>
+<p>Таким образом, множество <strong>обеспечивает</strong> <strong>уникальность своих элементов</strong>. Можете быть спокойны - дублироваться в множествах ничего не будет.</p>
+<h2><strong><span style="font-size: 14pt;">Какие есть виды множеств</span></strong></h2>
+<p>Как и <a href="https://vertex-academy.com/tutorials/ru/list-java-primer/"><strong>List</strong></a>, множество - это всего лишь интерфейс. Давайте посмотрим, какие реализации существуют в Java.</p>
+<p><img loading="lazy" class="alignnone wp-image-9569" src="./Set в Java. Hashset пример • Vertex Academy_files/set-java.png" alt="" width="358" height="456"></p>
+<p>Как видите, есть три основные виды множеств - <strong>HashSet</strong>, <strong>LinkedHashSet</strong> и <strong>TreeSet</strong>. Есть и другие - но пока мы только знакомимся с <strong>Set</strong>-ми, пока нам знать нам их совсем не обязательно <img draggable="false" role="img" class="emoji" alt="🙂" src="./Set в Java. Hashset пример • Vertex Academy_files/1f642.svg"></p>
+<p>Среди&nbsp;<strong>HashSet</strong>, <strong>LinkedHashSet</strong> и <strong>TreeSet </strong>чаще всего используется <strong>HashSet</strong>.</p>
+<h2><strong><span style="font-size: 14pt;">Чем отличаются&nbsp;HashSet, LinkedHashSet и TreeSet</span></strong></h2>
+<ul>
+<li><strong>HashSet </strong>хранит элементы в&nbsp;произвольном порядке, но зато быстро ищет. Подходит, если порядок Вам не важен, но важна скорость. Более того, для оптимизации поиска,&nbsp;<strong>HashSet</strong><strong>&nbsp;</strong>будет хранить элементы так, как ему удобно.</li>
+<li><strong>LinkedHashSet&nbsp;</strong>будет хранить элементы в порядке добавления, но зато работает медленнее.</li>
+<li><strong>TreeSet</strong>&nbsp;хранит элементы отсортированными.</li>
+</ul>
+<p>Отлично, теперь Вы знаете когда что использовать. Давайте посмотрим, как работать с множествами. Для удобства мы будем показывать примеры на <strong>HashSet</strong>.</p>
+<p><span style="font-size: 14pt;"><strong>Синтаксис</strong></span></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0deee88e0992971007" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">HashSet&lt;String&gt; myHashSet = new HashSet&lt;String&gt;();</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0deee88e0992971007-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0deee88e0992971007-1"><span class="crayon-i">HashSet</span><span class="crayon-h">&lt;</span><span class="crayon-t">String</span><span class="crayon-h">&gt;</span><span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-i">HashSet</span><span class="crayon-h">&lt;</span><span class="crayon-t">String</span><span class="crayon-h">&gt;</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0008 seconds] -->
+<p>Обратите внимание - как и в списках, мы указываем тип данных, которые находятся в множестве:</p>
+<p><img loading="lazy" class="alignnone size-full wp-image-9343" src="./Set в Java. Hashset пример • Vertex Academy_files/4-3.png" alt="" width="391" height="31" srcset="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/4-3.png 391w, https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/4-3-390x31.png 390w" sizes="(max-width: 391px) 100vw, 391px"></p>
+<p><span style="font-size: 14pt;"><strong>Операции с множествами</strong></span></p>
+<p>1. <strong>add()</strong> - добавляет элемент в множество</p>
+<p>2. <strong>remove()</strong> - удаляет элемент из множества</p>
+<p>3. <strong>contains()</strong> - определяет, есть ли элемент в множестве</p>
+<p>4. <strong>size()</strong> - возвращает размер множества</p>
+<p>5. <strong>clear()</strong> - удаляет все элементы из коллекции</p>
+<p>6. <strong>isEmpty()</strong> - возвращает true если множество пустое, и false если там есть хотя бы 1 элемент</p>
+<p><span style="font-size: 18pt;"><strong>Пример 1</strong></span></p>
+<ul>
+<li><strong>add()</strong> - добавляет элемент в множество. Например:</li>
+</ul>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0deee88e7962007127" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">public class Test {
+
+    public static void main(String[] args) {
+
+        HashSet&lt;Integer&gt; myHashSet = new HashSet&lt;Integer&gt;();
+        
+        myHashSet.add(1);
+        myHashSet.add(2);
+        myHashSet.add(3);
+
+    }
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0deee88e7962007127-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88e7962007127-2">2</div><div class="crayon-num" data-line="crayon-63ad0deee88e7962007127-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88e7962007127-4">4</div><div class="crayon-num" data-line="crayon-63ad0deee88e7962007127-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88e7962007127-6">6</div><div class="crayon-num" data-line="crayon-63ad0deee88e7962007127-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88e7962007127-8">8</div><div class="crayon-num" data-line="crayon-63ad0deee88e7962007127-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88e7962007127-10">10</div><div class="crayon-num" data-line="crayon-63ad0deee88e7962007127-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88e7962007127-12">12</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0deee88e7962007127-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">Test</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88e7962007127-2">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88e7962007127-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-i">args</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88e7962007127-4">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88e7962007127-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">HashSet</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-i">HashSet</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88e7962007127-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-63ad0deee88e7962007127-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88e7962007127-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0deee88e7962007127-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88e7962007127-10">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88e7962007127-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88e7962007127-12"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p>Тут мы добавили в множество <strong>Integer</strong>-ов три числа - 1, 2 и 3. Давайте теперь добавим цикл <strong>for each</strong> и выведем коллекцию на экран:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0deee88ea651996281" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">public class Test {
+
+    public static void main(String[] args) {
+
+        HashSet&lt;Integer&gt; myHashSet = new HashSet&lt;Integer&gt;();
+
+        myHashSet.add(1);
+        myHashSet.add(2);
+        myHashSet.add(3);
+
+        for (int i : myHashSet)
+            System.out.println(i);
+    }
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0deee88ea651996281-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ea651996281-2">2</div><div class="crayon-num" data-line="crayon-63ad0deee88ea651996281-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ea651996281-4">4</div><div class="crayon-num" data-line="crayon-63ad0deee88ea651996281-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ea651996281-6">6</div><div class="crayon-num" data-line="crayon-63ad0deee88ea651996281-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ea651996281-8">8</div><div class="crayon-num" data-line="crayon-63ad0deee88ea651996281-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ea651996281-10">10</div><div class="crayon-num" data-line="crayon-63ad0deee88ea651996281-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ea651996281-12">12</div><div class="crayon-num" data-line="crayon-63ad0deee88ea651996281-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ea651996281-14">14</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0deee88ea651996281-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">Test</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ea651996281-2">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88ea651996281-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-i">args</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ea651996281-4">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88ea651996281-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">HashSet</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-i">HashSet</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ea651996281-6">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88ea651996281-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ea651996281-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0deee88ea651996281-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ea651996281-10">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88ea651996281-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-i">i</span><span class="crayon-h"> </span><span class="crayon-sy">:</span><span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ea651996281-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-i">i</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0deee88ea651996281-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ea651996281-14"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p>Получим:</p>
+<p><img loading="lazy" class="alignnone size-full wp-image-9347" src="./Set в Java. Hashset пример • Vertex Academy_files/Capture-d’écran-2018-05-29-à-16.27.19.png" alt="" width="345" height="91"></p>
+<p>Отлично, все как мы хотели <img draggable="false" role="img" class="emoji" alt="🙂" src="./Set в Java. Hashset пример • Vertex Academy_files/1f642.svg"> Давайте теперь для интереса попробуем добавить элемент, который у нас уже есть - например единицу:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0deee88ec647645113" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">public class Test {
+
+    public static void main(String[] args) {
+
+        HashSet&lt;Integer&gt; myHashSet = new HashSet&lt;Integer&gt;();
+
+        myHashSet.add(1);
+        myHashSet.add(2);
+        myHashSet.add(3);
+        // We add 1 one more time
+        myHashSet.add(1);
+
+        for (int i : myHashSet)
+            System.out.println(i);
+    }
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0deee88ec647645113-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ec647645113-2">2</div><div class="crayon-num" data-line="crayon-63ad0deee88ec647645113-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ec647645113-4">4</div><div class="crayon-num" data-line="crayon-63ad0deee88ec647645113-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ec647645113-6">6</div><div class="crayon-num" data-line="crayon-63ad0deee88ec647645113-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ec647645113-8">8</div><div class="crayon-num" data-line="crayon-63ad0deee88ec647645113-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ec647645113-10">10</div><div class="crayon-num" data-line="crayon-63ad0deee88ec647645113-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ec647645113-12">12</div><div class="crayon-num" data-line="crayon-63ad0deee88ec647645113-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ec647645113-14">14</div><div class="crayon-num" data-line="crayon-63ad0deee88ec647645113-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ec647645113-16">16</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0deee88ec647645113-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">Test</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ec647645113-2">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88ec647645113-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-i">args</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ec647645113-4">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88ec647645113-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">HashSet</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-i">HashSet</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ec647645113-6">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88ec647645113-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ec647645113-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0deee88ec647645113-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ec647645113-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">// We add 1 one more time</span></div><div class="crayon-line" id="crayon-63ad0deee88ec647645113-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ec647645113-12">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88ec647645113-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-i">i</span><span class="crayon-h"> </span><span class="crayon-sy">:</span><span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ec647645113-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-i">i</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0deee88ec647645113-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ec647645113-16"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p>В консоли получим то же самое:</p>
+<p><img loading="lazy" class="alignnone size-full wp-image-9349" src="./Set в Java. Hashset пример • Vertex Academy_files/Capture-d’écran-2018-05-29-à-16.29.15.png" alt="" width="353" height="98"></p>
+<p>Кстати, хотя тут мы не видим что элементы хранятся в произвольном порядке, не давайте себя обмануть <img draggable="false" role="img" class="emoji" alt="🙂" src="./Set в Java. Hashset пример • Vertex Academy_files/1f642.svg"> Всегда в порядке добавления будут храниться только элементы&nbsp;<strong>LinkedHashSet</strong>, а отсортировано -&nbsp;<strong>TreeSet</strong>. Сейчас нам просто повезло <img draggable="false" role="img" class="emoji" alt="🙂" src="./Set в Java. Hashset пример • Vertex Academy_files/1f642.svg"></p>
+<p><span style="font-size: 18pt;"><strong>Пример 2</strong></span></p>
+<ul>
+<li><strong>remove() </strong>- удаляет элемент из множества. Например, дополним код из примера выше:</li>
+</ul>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0deee88ee401024797" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">public class Test {
+
+    public static void main(String[] args) {
+
+        HashSet&lt;Integer&gt; myHashSet = new HashSet&lt;Integer&gt;();
+
+        myHashSet.add(1);
+        myHashSet.add(2);
+        myHashSet.add(3);
+
+        System.out.println("Before remove:");
+        for (int i : myHashSet)
+            System.out.println(i);
+
+        myHashSet.remove(1);
+        System.out.println("After remove:");
+        for (int i : myHashSet)
+            System.out.println(i);
+
+    }
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0deee88ee401024797-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ee401024797-2">2</div><div class="crayon-num" data-line="crayon-63ad0deee88ee401024797-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ee401024797-4">4</div><div class="crayon-num" data-line="crayon-63ad0deee88ee401024797-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ee401024797-6">6</div><div class="crayon-num" data-line="crayon-63ad0deee88ee401024797-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ee401024797-8">8</div><div class="crayon-num" data-line="crayon-63ad0deee88ee401024797-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ee401024797-10">10</div><div class="crayon-num" data-line="crayon-63ad0deee88ee401024797-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ee401024797-12">12</div><div class="crayon-num" data-line="crayon-63ad0deee88ee401024797-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ee401024797-14">14</div><div class="crayon-num" data-line="crayon-63ad0deee88ee401024797-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ee401024797-16">16</div><div class="crayon-num" data-line="crayon-63ad0deee88ee401024797-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ee401024797-18">18</div><div class="crayon-num" data-line="crayon-63ad0deee88ee401024797-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ee401024797-20">20</div><div class="crayon-num" data-line="crayon-63ad0deee88ee401024797-21">21</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0deee88ee401024797-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">Test</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ee401024797-2">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88ee401024797-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-i">args</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ee401024797-4">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88ee401024797-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">HashSet</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-i">HashSet</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ee401024797-6">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88ee401024797-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ee401024797-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0deee88ee401024797-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ee401024797-10">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88ee401024797-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-s">"Before remove:"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ee401024797-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-i">i</span><span class="crayon-h"> </span><span class="crayon-sy">:</span><span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-63ad0deee88ee401024797-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-i">i</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ee401024797-14">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88ee401024797-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">remove</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ee401024797-16"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-s">"After remove:"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0deee88ee401024797-17"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-i">i</span><span class="crayon-h"> </span><span class="crayon-sy">:</span><span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ee401024797-18"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-i">i</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0deee88ee401024797-19">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ee401024797-20"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-63ad0deee88ee401024797-21"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0009 seconds] -->
+<p>В консоли получаем:</p>
+<p><img loading="lazy" class="alignnone size-full wp-image-9352" src="./Set в Java. Hashset пример • Vertex Academy_files/Capture-d’écran-2018-05-29-à-16.34.03.png" alt="" width="336" height="150"></p>
+<p><span style="font-size: 18pt;"><strong>Пример 3</strong></span></p>
+<ul>
+<li><strong>contains()</strong> - определяет, есть ли элемент в множестве. Например:</li>
+</ul>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0deee88ef594673739" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">public class Test {
+
+    public static void main(String[] args) {
+
+        HashSet&lt;Integer&gt; myHashSet = new HashSet&lt;Integer&gt;();
+
+        myHashSet.add(1);
+        myHashSet.add(2);
+        myHashSet.add(3);
+
+        System.out.println("Does myHashSet contain '1'? " + myHashSet.contains(1));
+        System.out.println("Does myHashSet contain '11'? " + myHashSet.contains(11));
+
+    }
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0deee88ef594673739-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ef594673739-2">2</div><div class="crayon-num" data-line="crayon-63ad0deee88ef594673739-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ef594673739-4">4</div><div class="crayon-num" data-line="crayon-63ad0deee88ef594673739-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ef594673739-6">6</div><div class="crayon-num" data-line="crayon-63ad0deee88ef594673739-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ef594673739-8">8</div><div class="crayon-num" data-line="crayon-63ad0deee88ef594673739-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ef594673739-10">10</div><div class="crayon-num" data-line="crayon-63ad0deee88ef594673739-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ef594673739-12">12</div><div class="crayon-num" data-line="crayon-63ad0deee88ef594673739-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88ef594673739-14">14</div><div class="crayon-num" data-line="crayon-63ad0deee88ef594673739-15">15</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0deee88ef594673739-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">Test</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ef594673739-2">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88ef594673739-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-i">args</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ef594673739-4">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88ef594673739-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">HashSet</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-i">HashSet</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ef594673739-6">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88ef594673739-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ef594673739-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0deee88ef594673739-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ef594673739-10">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88ef594673739-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-s">"Does myHashSet contain '1'? "</span><span class="crayon-h"> </span>+<span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">contains</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ef594673739-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-s">"Does myHashSet contain '11'? "</span><span class="crayon-h"> </span>+<span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">contains</span><span class="crayon-sy">(</span><span class="crayon-cn">11</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0deee88ef594673739-13">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88ef594673739-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-63ad0deee88ef594673739-15"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p>В консоли получим:</p>
+<p><img loading="lazy" class="alignnone size-full wp-image-9353" src="./Set в Java. Hashset пример • Vertex Academy_files/Capture-d’écran-2018-05-29-à-16.35.58.png" alt="" width="379" height="80"></p>
+<p><span style="font-size: 18pt;"><strong>Пример 4&nbsp;</strong></span></p>
+<ul>
+<li><strong>size()</strong> - возвращает размер множества. Например:</li>
+</ul>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0deee88f3431195582" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">public class Test {
+
+    public static void main(String[] args) {
+
+        HashSet&lt;Integer&gt; myHashSet = new HashSet&lt;Integer&gt;();
+
+        System.out.println("Before we add anything myHashSet size is " + myHashSet.size());
+
+        myHashSet.add(1);
+        myHashSet.add(2);
+        myHashSet.add(3);
+
+        System.out.println("Now myHashSet size is " + myHashSet.size());
+    }
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0deee88f3431195582-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f3431195582-2">2</div><div class="crayon-num" data-line="crayon-63ad0deee88f3431195582-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f3431195582-4">4</div><div class="crayon-num" data-line="crayon-63ad0deee88f3431195582-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f3431195582-6">6</div><div class="crayon-num" data-line="crayon-63ad0deee88f3431195582-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f3431195582-8">8</div><div class="crayon-num" data-line="crayon-63ad0deee88f3431195582-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f3431195582-10">10</div><div class="crayon-num" data-line="crayon-63ad0deee88f3431195582-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f3431195582-12">12</div><div class="crayon-num" data-line="crayon-63ad0deee88f3431195582-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f3431195582-14">14</div><div class="crayon-num" data-line="crayon-63ad0deee88f3431195582-15">15</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0deee88f3431195582-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">Test</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f3431195582-2">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88f3431195582-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-i">args</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f3431195582-4">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88f3431195582-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">HashSet</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-i">HashSet</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f3431195582-6">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88f3431195582-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-s">"Before we add anything myHashSet size is "</span><span class="crayon-h"> </span>+<span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">size</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f3431195582-8">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88f3431195582-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f3431195582-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0deee88f3431195582-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f3431195582-12">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88f3431195582-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-s">"Now myHashSet size is "</span><span class="crayon-h"> </span>+<span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">size</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f3431195582-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-63ad0deee88f3431195582-15"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p>Получаем:</p>
+<p><img loading="lazy" class="alignnone size-full wp-image-9355" src="./Set в Java. Hashset пример • Vertex Academy_files/Capture-d’écran-2018-05-29-à-16.38.24.png" alt="" width="438" height="79"></p>
+<p><span style="font-size: 18pt;"><strong>Пример 5&nbsp;</strong></span></p>
+<ul>
+<li><strong>clear()</strong> - удаляет все элементы из коллекции:</li>
+</ul>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0deee88f5562350361" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">public class Test {
+
+    public static void main(String[] args) {
+
+        HashSet&lt;Integer&gt; myHashSet = new HashSet&lt;Integer&gt;();
+
+        System.out.println("Before we add anything myHashSet size is " + myHashSet.size());
+
+        myHashSet.add(1);
+        myHashSet.add(2);
+        myHashSet.add(3);
+
+        System.out.println("Now myHashSet size is " + myHashSet.size());
+
+        myHashSet.clear();
+        System.out.println("After clear myHashSet size is " + myHashSet.size());
+    }
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0deee88f5562350361-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f5562350361-2">2</div><div class="crayon-num" data-line="crayon-63ad0deee88f5562350361-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f5562350361-4">4</div><div class="crayon-num" data-line="crayon-63ad0deee88f5562350361-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f5562350361-6">6</div><div class="crayon-num" data-line="crayon-63ad0deee88f5562350361-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f5562350361-8">8</div><div class="crayon-num" data-line="crayon-63ad0deee88f5562350361-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f5562350361-10">10</div><div class="crayon-num" data-line="crayon-63ad0deee88f5562350361-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f5562350361-12">12</div><div class="crayon-num" data-line="crayon-63ad0deee88f5562350361-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f5562350361-14">14</div><div class="crayon-num" data-line="crayon-63ad0deee88f5562350361-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f5562350361-16">16</div><div class="crayon-num" data-line="crayon-63ad0deee88f5562350361-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f5562350361-18">18</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0deee88f5562350361-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">Test</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f5562350361-2">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88f5562350361-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-i">args</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f5562350361-4">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88f5562350361-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">HashSet</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-i">HashSet</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f5562350361-6">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88f5562350361-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-s">"Before we add anything myHashSet size is "</span><span class="crayon-h"> </span>+<span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">size</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f5562350361-8">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88f5562350361-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f5562350361-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0deee88f5562350361-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f5562350361-12">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88f5562350361-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-s">"Now myHashSet size is "</span><span class="crayon-h"> </span>+<span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">size</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f5562350361-14">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88f5562350361-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">clear</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f5562350361-16"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-s">"After clear myHashSet size is "</span><span class="crayon-h"> </span>+<span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">size</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0deee88f5562350361-17"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f5562350361-18"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p>Получаем:</p>
+<p><img loading="lazy" class="alignnone size-full wp-image-9356" src="./Set в Java. Hashset пример • Vertex Academy_files/Capture-d’écran-2018-05-29-à-16.39.36.png" alt="" width="407" height="89"></p>
+<p><span style="font-size: 18pt;"><strong>Пример 6</strong></span></p>
+<ul>
+<li><strong>isEmpty()</strong> - возвращает true если множество пустое, и false если там есть хотя бы один элемент:</li>
+</ul>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0deee88f6900956944" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">public class Test {
+
+    public static void main(String[] args) {
+
+        HashSet&lt;Integer&gt; myHashSet = new HashSet&lt;Integer&gt;();
+
+        System.out.println("At the beginning myHashSet is empty: " + myHashSet.isEmpty());
+
+        myHashSet.add(1);
+        myHashSet.add(2);
+        myHashSet.add(3);
+
+        System.out.println("After adding elements myHashSet is empty: " + myHashSet.isEmpty());
+
+        myHashSet.clear();
+
+        System.out.println("After clear myHashSet is empty: " + myHashSet.isEmpty());
+    }
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0deee88f6900956944-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f6900956944-2">2</div><div class="crayon-num" data-line="crayon-63ad0deee88f6900956944-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f6900956944-4">4</div><div class="crayon-num" data-line="crayon-63ad0deee88f6900956944-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f6900956944-6">6</div><div class="crayon-num" data-line="crayon-63ad0deee88f6900956944-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f6900956944-8">8</div><div class="crayon-num" data-line="crayon-63ad0deee88f6900956944-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f6900956944-10">10</div><div class="crayon-num" data-line="crayon-63ad0deee88f6900956944-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f6900956944-12">12</div><div class="crayon-num" data-line="crayon-63ad0deee88f6900956944-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f6900956944-14">14</div><div class="crayon-num" data-line="crayon-63ad0deee88f6900956944-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f6900956944-16">16</div><div class="crayon-num" data-line="crayon-63ad0deee88f6900956944-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0deee88f6900956944-18">18</div><div class="crayon-num" data-line="crayon-63ad0deee88f6900956944-19">19</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0deee88f6900956944-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">Test</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f6900956944-2">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88f6900956944-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-i">args</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f6900956944-4">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88f6900956944-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">HashSet</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-i">HashSet</span><span class="crayon-h">&lt;</span><span class="crayon-t">Integer</span><span class="crayon-h">&gt;</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f6900956944-6">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88f6900956944-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-s">"At the beginning myHashSet is empty: "</span><span class="crayon-h"> </span>+<span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">isEmpty</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f6900956944-8">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88f6900956944-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f6900956944-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0deee88f6900956944-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f6900956944-12">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88f6900956944-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-s">"After adding elements myHashSet is empty: "</span><span class="crayon-h"> </span>+<span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">isEmpty</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f6900956944-14">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88f6900956944-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">clear</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f6900956944-16">&nbsp;</div><div class="crayon-line" id="crayon-63ad0deee88f6900956944-17"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-s">"After clear myHashSet is empty: "</span><span class="crayon-h"> </span>+<span class="crayon-h"> </span><span class="crayon-i">myHashSet</span><span class="crayon-sy">.</span><span class="crayon-e">isEmpty</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0deee88f6900956944-18"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-63ad0deee88f6900956944-19"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0008 seconds] -->
+<p>В результате получаем:</p>
+<p><img loading="lazy" class="alignnone size-full wp-image-9359" src="./Set в Java. Hashset пример • Vertex Academy_files/Capture-d’écran-2018-05-29-à-16.43.04.png" alt="" width="453" height="89"></p>
+<hr>
+<p><em>Надеемся, что наша статья была Вам полезна.&nbsp; Можно записаться к нам на курсы по Java&nbsp;</em><em>на <a href="https://vertex-academy.com/">сайте</a>.</em></p>
+<div id="ca-pub-1426849340859996:3859527614" class="ads ads_after"><script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Home-top -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1426849340859996" data-ad-slot="3859527614" data-ad-format="auto"><iframe id="aswift_1" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./Set в Java. Hashset пример • Vertex Academy_files/saved_resource(3).html"><iframe id="google_ads_frame1" src="./Set в Java. Hashset пример • Vertex Academy_files/saved_resource(4).html"></iframe></iframe></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><div class="synved-social-container synved-social-container-share" style="text-align: right"><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-normal synved-social-provider-facebook nolightbox" data-provider="facebook" target="_blank" rel="nofollow" title="Share on Facebook" href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fset-v-java-hashset%2F&amp;t=Set%20%D0%B2%20Java.%20Hashset%20%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80&amp;s=100&amp;p[url]=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fset-v-java-hashset%2F&amp;p[title]=Set%20%D0%B2%20Java.%20Hashset%20%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="Facebook" title="Share on Facebook" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Set в Java. Hashset пример • Vertex Academy_files/facebook.png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-normal synved-social-provider-twitter nolightbox" data-provider="twitter" target="_blank" rel="nofollow" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fset-v-java-hashset%2F&amp;text=Check%20this%20out" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="twitter" title="Share on Twitter" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Set в Java. Hashset пример • Vertex Academy_files/twitter.png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-normal synved-social-provider-tumblr nolightbox" data-provider="tumblr" target="_blank" rel="nofollow" title="Share on VK" href="http://vk.com/share.php?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fset-v-java-hashset%2F&amp;text=Check%20this%20out&amp;title%%&amp;img%%" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;"><img alt="tumblr" title="Share on VK" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Set в Java. Hashset пример • Vertex Academy_files/tumblr.png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-hidef synved-social-provider-facebook nolightbox" data-provider="facebook" target="_blank" rel="nofollow" title="Share on Facebook" href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fset-v-java-hashset%2F&amp;t=Set%20%D0%B2%20Java.%20Hashset%20%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80&amp;s=100&amp;p[url]=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fset-v-java-hashset%2F&amp;p[title]=Set%20%D0%B2%20Java.%20Hashset%20%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="Facebook" title="Share on Facebook" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Set в Java. Hashset пример • Vertex Academy_files/facebook(1).png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-hidef synved-social-provider-twitter nolightbox" data-provider="twitter" target="_blank" rel="nofollow" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fset-v-java-hashset%2F&amp;text=Check%20this%20out" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="twitter" title="Share on Twitter" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Set в Java. Hashset пример • Vertex Academy_files/twitter(1).png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-hidef synved-social-provider-tumblr nolightbox" data-provider="tumblr" target="_blank" rel="nofollow" title="Share on VK" href="http://vk.com/share.php?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fset-v-java-hashset%2F&amp;text=Check%20this%20out&amp;title%%&amp;img%%" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;"><img alt="tumblr" title="Share on VK" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Set в Java. Hashset пример • Vertex Academy_files/tumblr(1).png"></a></div><br><div class="synved-social-container synved-social-container-follow" style="text-align: center"><a class="synved-social-button synved-social-button-follow synved-social-size-24 synved-social-resolution-normal synved-social-provider-facebook nolightbox" data-provider="facebook" target="_blank" rel="nofollow" title="Follow us on Facebook" href="https://www.facebook.com/vertex.academy" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="Facebook" title="Follow us on Facebook" class="synved-share-image synved-social-image synved-social-image-follow" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Set в Java. Hashset пример • Vertex Academy_files/facebook.png"></a><a class="synved-social-button synved-social-button-follow synved-social-size-24 synved-social-resolution-normal synved-social-provider-twitter nolightbox" data-provider="twitter" target="_blank" rel="nofollow" title="Follow us on Twitter" href="https://twitter.com/vertex_academy" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="twitter" title="Follow us on Twitter" class="synved-share-image synved-social-image synved-social-image-follow" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Set в Java. Hashset пример • Vertex Academy_files/twitter.png"></a><a class="synved-social-button synved-social-button-follow synved-social-size-24 synved-social-resolution-normal synved-social-provider-tumblr nolightbox" data-provider="tumblr" target="_blank" rel="nofollow" title="Follow Us On VK" href="https://vk.com/vertex_academy" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;"><img alt="tumblr" title="Follow Us On VK" class="synved-share-image synved-social-image synved-social-image-follow" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Set в Java. Hashset пример • Vertex Academy_files/tumblr.png"></a><a class="synved-social-button synved-social-button-follow synved-social-size-24 synved-social-resolution-hidef synved-social-provider-facebook nolightbox" data-provider="facebook" target="_blank" rel="nofollow" title="Follow us on Facebook" href="https://www.facebook.com/vertex.academy" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="Facebook" title="Follow us on Facebook" class="synved-share-image synved-social-image synved-social-image-follow" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Set в Java. Hashset пример • Vertex Academy_files/facebook(1).png"></a><a class="synved-social-button synved-social-button-follow synved-social-size-24 synved-social-resolution-hidef synved-social-provider-twitter nolightbox" data-provider="twitter" target="_blank" rel="nofollow" title="Follow us on Twitter" href="https://twitter.com/vertex_academy" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="twitter" title="Follow us on Twitter" class="synved-share-image synved-social-image synved-social-image-follow" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Set в Java. Hashset пример • Vertex Academy_files/twitter(1).png"></a><a class="synved-social-button synved-social-button-follow synved-social-size-24 synved-social-resolution-hidef synved-social-provider-tumblr nolightbox" data-provider="tumblr" target="_blank" rel="nofollow" title="Follow Us On VK" href="https://vk.com/vertex_academy" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;"><img alt="tumblr" title="Follow Us On VK" class="synved-share-image synved-social-image synved-social-image-follow" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Set в Java. Hashset пример • Vertex Academy_files/tumblr(1).png"></a></div>   	</div>
+
+   </div>
+
+	</article>
+			
+		</div><!-- #content -->
+
+      
+		<ul class="default-wp-page clearfix">
+			<li class="previous"><a href="https://vertex-academy.com/tutorials/ru/list-java-primer/" rel="prev"><span class="meta-nav">←</span> List в Java</a></li>
+			<li class="next"><a href="https://vertex-academy.com/tutorials/ru/queue-java-primer/" rel="next">Queue в Java <span class="meta-nav">→</span></a></li>
+		</ul>
+	
+      
+      
+
+
+      		 <aside id="knews_widget-3" class="widget widget_knews_widget amr_widget clearfix"><h3 class="widget-title"><span>Subscribe me</span></h3><div class="knews_add_user knewsform_container" id="knewsform_1">
+					<style type="text/css">
+					div.knews_add_user textarea.knewscomment {position:absolute; top:-3000px; left:-3000px;}
+					div.knews_add_user fieldset {border:0;}
+					div.knews_add_user fieldset.knewstermsplus {height:0 !important; overflow:hidden !important; padding:0 !important; margin:0 !important; border:0 !important}</style>
+					<form action="https://vertex-academy.com/tutorials/wp-admin/admin-ajax.php" method="post"><p>Subscribe to our newsletter we will keep you up-to-date:</p><fieldset class="name"><input type="text" name="name" value="" placeholder="Name:" title="Name:" style="display:block; margin-bottom:10px;"><input type="hidden" value="1" name="required_name"></fieldset><textarea name="knewscomment" autocomplete="off" class="knewscomment" style="width:150px; height:80px" rows="5" cols="20"></textarea><fieldset class="knewstermsplus"><input type="text" name="email" value="" placeholder=""><input type="checkbox" name="knewstermsplus" value="1" title="I agree terms and conditions."><label for="knewstermsplus">I agree terms and conditions.*</label></fieldset><fieldset class="knewsemail"><input type="text" name="knewsemail2" value="" placeholder="Email:" title="Email:" style="display:block; margin-bottom:10px;"></fieldset><input type="hidden" name="user_knews_list" value="1"><input type="hidden" name="lang_user" value="ru"><input type="hidden" name="lang_locale_user" value=""><input type="hidden" name="knewskey" value="04e3ec2be5db6c06fcab2dc26f708f4b"><fieldset class="knewsbutton"><input class="knewsbutton" type="submit" value="Send" style="display:block; margin-bottom:10px;"></fieldset>
+						<input type="hidden" name="action" value="knewsAddUser">
+					</form>
+				</div></aside>	</div><!-- #primary -->
+
+	
+<div id="secondary">
+			
+		<aside id="text-12" class="widget widget_text clearfix">			<div class="textwidget"><p><script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><br>
+<!-- 300*250 Medium Rectangle --><br>
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-1426849340859996" data-ad-slot="2629650858"><iframe id="aswift_2" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./Set в Java. Hashset пример • Vertex Academy_files/saved_resource(5).html"><iframe id="google_ads_frame2" src="./Set в Java. Hashset пример • Vertex Academy_files/saved_resource(6).html"></iframe></iframe></ins><br>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+</div>
+		</aside><aside id="knews_widget-4" class="widget widget_knews_widget clearfix"><h3 class="widget-title"><span>Subscribe me</span></h3><div class="knews_add_user knewsform_container" id="knewsform_2">
+					<style type="text/css">
+					div.knews_add_user textarea.knewscomment {position:absolute; top:-3000px; left:-3000px;}
+					div.knews_add_user fieldset {border:0;}
+					div.knews_add_user fieldset.knewstermsplus {height:0 !important; overflow:hidden !important; padding:0 !important; margin:0 !important; border:0 !important}</style>
+					<form action="https://vertex-academy.com/tutorials/wp-admin/admin-ajax.php" method="post"><p>Subscribe to our newsletter we will keep you up-to-date:</p><fieldset class="name"><input type="text" name="name" value="" placeholder="Name:" title="Name:" style="display:block; margin-bottom:10px;"><input type="hidden" value="1" name="required_name"></fieldset><textarea name="knewscomment" autocomplete="off" class="knewscomment" style="width:150px; height:80px" rows="5" cols="20"></textarea><fieldset class="knewstermsplus"><input type="text" name="email" value="" placeholder=""><input type="checkbox" name="knewstermsplus" value="1" title="I agree terms and conditions."><label for="knewstermsplus">I agree terms and conditions.*</label></fieldset><fieldset class="knewsemail"><input type="text" name="knewsemail2" value="" placeholder="Email:" title="Email:" style="display:block; margin-bottom:10px;"></fieldset><input type="hidden" name="user_knews_list" value="1"><input type="hidden" name="lang_user" value="ru"><input type="hidden" name="lang_locale_user" value=""><input type="hidden" name="knewskey" value="04e3ec2be5db6c06fcab2dc26f708f4b"><fieldset class="knewsbutton"><input class="knewsbutton" type="submit" value="Send" style="display:block; margin-bottom:10px;"></fieldset>
+						<input type="hidden" name="action" value="knewsAddUser">
+					</form>
+				</div></aside><aside id="text-15" class="widget widget_text clearfix">			<div class="textwidget"><p><script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><br>
+<!-- Sidebar-top-2 --><br>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1426849340859996" data-ad-slot="4878818019" data-ad-format="auto"><iframe id="aswift_3" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./Set в Java. Hashset пример • Vertex Academy_files/saved_resource(7).html"><iframe id="google_ads_frame3" src="./Set в Java. Hashset пример • Vertex Academy_files/saved_resource(8).html"></iframe></iframe></ins><br>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+</div>
+		</aside><aside id="tag_cloud-2" class="widget widget_tag_cloud clearfix"><h3 class="widget-title"><span>Метки</span></h3><div class="tagcloud"><a href="https://vertex-academy.com/tutorials/ru/tag/arraylist-java-primer/" class="tag-cloud-link tag-link-1387 tag-link-position-1" style="font-size: 8pt;" aria-label="arraylist java пример (2 элемента)">arraylist java пример</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/collect-ru/" class="tag-cloud-link tag-link-722 tag-link-position-2" style="font-size: 9.8064516129032pt;" aria-label="collect (3 элемента)">collect</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/completablefuture-ru/" class="tag-cloud-link tag-link-1016 tag-link-position-3" style="font-size: 8pt;" aria-label="CompletableFuture (2 элемента)">CompletableFuture</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/english-for-it/" class="tag-cloud-link tag-link-414 tag-link-position-4" style="font-size: 9.8064516129032pt;" aria-label="English for IT (3 элемента)">English for IT</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/enum-java/" class="tag-cloud-link tag-link-1653 tag-link-position-5" style="font-size: 9.8064516129032pt;" aria-label="enum java (3 элемента)">enum java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/enum-java-metody/" class="tag-cloud-link tag-link-1827 tag-link-position-6" style="font-size: 8pt;" aria-label="enum java методы (2 элемента)">enum java методы</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/enum-metody/" class="tag-cloud-link tag-link-1829 tag-link-position-7" style="font-size: 8pt;" aria-label="enum методы (2 элемента)">enum методы</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/filter/" class="tag-cloud-link tag-link-704 tag-link-position-8" style="font-size: 11.311827956989pt;" aria-label="filter (4 элемента)">filter</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/foreach-ru/" class="tag-cloud-link tag-link-696 tag-link-position-9" style="font-size: 8pt;" aria-label="forEach (2 элемента)">forEach</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/html5/" class="tag-cloud-link tag-link-192 tag-link-position-10" style="font-size: 11.311827956989pt;" aria-label="html5 (4 элемента)">html5</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-ru/" class="tag-cloud-link tag-link-49 tag-link-position-11" style="font-size: 22pt;" aria-label="Java (25 элементов)">Java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-8/" class="tag-cloud-link tag-link-684 tag-link-position-12" style="font-size: 20.344086021505pt;" aria-label="java 8 (19 элементов)">java 8</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java8/" class="tag-cloud-link tag-link-698 tag-link-position-13" style="font-size: 18.838709677419pt;" aria-label="Java8 (15 элементов)">Java8</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-8-date-time/" class="tag-cloud-link tag-link-1282 tag-link-position-14" style="font-size: 15.075268817204pt;" aria-label="java 8 date time (8 элементов)">java 8 date time</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-8-date-time-api/" class="tag-cloud-link tag-link-1284 tag-link-position-15" style="font-size: 15.075268817204pt;" aria-label="java 8 date time api (8 элементов)">java 8 date time api</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-8-stream/" class="tag-cloud-link tag-link-806 tag-link-position-16" style="font-size: 8pt;" aria-label="java 8 stream (2 элемента)">java 8 stream</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-8-data-i-vremya/" class="tag-cloud-link tag-link-1280 tag-link-position-17" style="font-size: 13.569892473118pt;" aria-label="java 8 дата и время (6 элементов)">java 8 дата и время</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-9/" class="tag-cloud-link tag-link-1102 tag-link-position-18" style="font-size: 12.516129032258pt;" aria-label="Java 9 (5 элементов)">Java 9</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java9/" class="tag-cloud-link tag-link-1104 tag-link-position-19" style="font-size: 9.8064516129032pt;" aria-label="java9 (3 элемента)">java9</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-9-jshell-ru/" class="tag-cloud-link tag-link-1272 tag-link-position-20" style="font-size: 8pt;" aria-label="java 9 JShell (2 элемента)">java 9 JShell</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-core/" class="tag-cloud-link tag-link-58 tag-link-position-21" style="font-size: 8pt;" aria-label="Java Core (2 элемента)">Java Core</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-project-repl-ru/" class="tag-cloud-link tag-link-1274 tag-link-position-22" style="font-size: 8pt;" aria-label="java project repl (2 элемента)">java project repl</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-reflection/" class="tag-cloud-link tag-link-1879 tag-link-position-23" style="font-size: 8pt;" aria-label="java reflection (2 элемента)">java reflection</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-rabota-s-datoj-i-vremenem/" class="tag-cloud-link tag-link-1403 tag-link-position-24" style="font-size: 11.311827956989pt;" aria-label="java работа с датой и временем (4 элемента)">java работа с датой и временем</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/lambda/" class="tag-cloud-link tag-link-706 tag-link-position-25" style="font-size: 9.8064516129032pt;" aria-label="lambda (3 элемента)">lambda</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/lambda-expression/" class="tag-cloud-link tag-link-688 tag-link-position-26" style="font-size: 12.516129032258pt;" aria-label="Lambda expression (5 элементов)">Lambda expression</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/map-ru/" class="tag-cloud-link tag-link-740 tag-link-position-27" style="font-size: 8pt;" aria-label="map (2 элемента)">map</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/method-reference/" class="tag-cloud-link tag-link-700 tag-link-position-28" style="font-size: 8pt;" aria-label="method reference (2 элемента)">method reference</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/oop-ru/" class="tag-cloud-link tag-link-596 tag-link-position-29" style="font-size: 9.8064516129032pt;" aria-label="OOP (3 элемента)">OOP</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/serializable-i-enum/" class="tag-cloud-link tag-link-1833 tag-link-position-30" style="font-size: 8pt;" aria-label="serializable и enum (2 элемента)">serializable и enum</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/stream/" class="tag-cloud-link tag-link-702 tag-link-position-31" style="font-size: 18.086021505376pt;" aria-label="Stream (13 элементов)">Stream</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/anglijskij-dlya-it/" class="tag-cloud-link tag-link-566 tag-link-position-32" style="font-size: 8pt;" aria-label="английский для IT (2 элемента)">английский для IT</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/vozvesti-v-stepen-java-ru/" class="tag-cloud-link tag-link-966 tag-link-position-33" style="font-size: 8pt;" aria-label="возвести в степень java (2 элемента)">возвести в степень java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/dvumernye-massivy-java/" class="tag-cloud-link tag-link-480 tag-link-position-34" style="font-size: 8pt;" aria-label="двумерные массивы java (2 элемента)">двумерные массивы java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/kak-poluchit-massiv-znachenij-enum/" class="tag-cloud-link tag-link-1835 tag-link-position-35" style="font-size: 8pt;" aria-label="как получить массив значений enum (2 элемента)">как получить массив значений enum</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/%d0%ba%d0%bb%d0%b0%d1%81%d1%81/" class="tag-cloud-link tag-link-178 tag-link-position-36" style="font-size: 8pt;" aria-label="класс (2 элемента)">класс</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/klass-math/" class="tag-cloud-link tag-link-438 tag-link-position-37" style="font-size: 8pt;" aria-label="класс Math (2 элемента)">класс Math</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/metody-strok-java/" class="tag-cloud-link tag-link-644 tag-link-position-38" style="font-size: 8pt;" aria-label="методы строк java (2 элемента)">методы строк java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/modifikatory-java/" class="tag-cloud-link tag-link-514 tag-link-position-39" style="font-size: 11.311827956989pt;" aria-label="модификаторы java (4 элемента)">модификаторы java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/modifikatory-dostupa-java/" class="tag-cloud-link tag-link-518 tag-link-position-40" style="font-size: 8pt;" aria-label="модификаторы доступа java (2 элемента)">модификаторы доступа java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/rabota-so-strokami-java/" class="tag-cloud-link tag-link-634 tag-link-position-41" style="font-size: 9.8064516129032pt;" aria-label="работа со строками java (3 элемента)">работа со строками java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/stroki-v-java/" class="tag-cloud-link tag-link-642 tag-link-position-42" style="font-size: 8pt;" aria-label="строки в java (2 элемента)">строки в java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/%d1%86%d0%b8%d0%ba%d0%bb%d1%8b-java/" class="tag-cloud-link tag-link-63 tag-link-position-43" style="font-size: 11.311827956989pt;" aria-label="циклы java (4 элемента)">циклы java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/cikly-v-java/" class="tag-cloud-link tag-link-478 tag-link-position-44" style="font-size: 8pt;" aria-label="циклы в java (2 элемента)">циклы в java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/chto-takoe-git/" class="tag-cloud-link tag-link-1923 tag-link-position-45" style="font-size: 8pt;" aria-label="что такое git (2 элемента)">что такое git</a></div>
+</aside><aside id="text-18" class="widget widget_text clearfix">			<div class="textwidget"><p><script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><br>
+<!-- Sidebar-top-3 --><br>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1426849340859996" data-ad-slot="1002619352" data-ad-format="auto"><iframe id="aswift_4" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./Set в Java. Hashset пример • Vertex Academy_files/saved_resource(9).html"><iframe id="google_ads_frame4" src="./Set в Java. Hashset пример • Vertex Academy_files/saved_resource(10).html"></iframe></iframe></ins><br>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+</div>
+		</aside><aside id="text-2" class="widget widget_text clearfix"><h3 class="widget-title"><span>Administrator</span></h3>			<div class="textwidget">[userlist inpage='2'  data='profile_fields' include='1']</div>
+		</aside>
+	</div>
+	
+<input type="hidden" name="cD9aiiRBSBdy" id="cD9aiiRBSBdy">
+<script type="text/javascript">
+function fKHhKpJMNWjsk() {
+	var o=document.getElementById("cD9aiiRBSBdy");
+	o.value="EUd0lGnTzAEe";
+}
+var bOzhiBftbGynA = document.getElementById("submit");
+if (bOzhiBftbGynA) {
+	var czmQ8xMdPyapH = document.getElementById("cD9aiiRBSBdy");
+	var pgVcT8XfONAmm = bOzhiBftbGynA.parentNode;
+	pgVcT8XfONAmm.appendChild(czmQ8xMdPyapH, bOzhiBftbGynA);
+	addHandler(bOzhiBftbGynA, "mousedown", fKHhKpJMNWjsk);
+	addHandler(bOzhiBftbGynA, "keypress", fKHhKpJMNWjsk);
+}
+</script>
+
+		</div><!-- .inner-wrap -->
+	</div><!-- #main -->
+   			<footer id="colophon" class="clearfix">
+			
+			<div class="footer-socket-wrapper clearfix">
+				<div class="inner-wrap">
+					<div class="footer-socket-area">
+                  <div class="footer-socket-right-section">
+   							<div class="social-links clearfix">
+		<ul>
+		<li><a href="https://www.facebook.com/vertex.academy/" target="_blank"><i class="fa fa-facebook"></i></a></li><li><a href="https://vk.com/vertex_academy" target="_blank"><i class="fa fa-vk"></i></a></li><li><a href="https://www.youtube.com/channel/UC7b-dJ56vQaMh2wr972iG6Q" target="_blank"><i class="fa fa-youtube"></i></a></li>		</ul>
+	</div><!-- .social-links -->
+	                  </div>
+                  <div class="footer-socket-left-sectoin">
+   						<div class="copyright">Copyright © 2022 <a href="https://vertex-academy.com/tutorials/ru/" title="Vertex Academy"><span>Vertex Academy</span></a>. All rights reserved.<br></div>                  </div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<a href="https://vertex-academy.com/tutorials/ru/set-v-java-hashset/#masthead" id="scroll-up" style="display: none;"><i class="fa fa-chevron-up"></i></a>
+	</div><!-- #page -->
+
+   <div class="self-teach"><a href="https://vertex-academy.com/tutorials/ru/set-v-java-hashset/#tutor">Самоучители<span>--узнать детальнее--</span></a></div>
+	<script type="text/javascript" src="./Set в Java. Hashset пример • Vertex Academy_files/regenerator-runtime.min.js.Без названия" id="regenerator-runtime-js"></script>
+<script type="text/javascript" src="./Set в Java. Hashset пример • Vertex Academy_files/wp-polyfill.min.js.Без названия" id="wp-polyfill-js"></script>
+<script type="text/javascript" id="contact-form-7-js-extra">
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"https:\/\/vertex-academy.com\/tutorials\/wp-json\/","namespace":"contact-form-7\/v1"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Set в Java. Hashset пример • Vertex Academy_files/index.js.Без названия" id="contact-form-7-js"></script>
+<script type="text/javascript" src="./Set в Java. Hashset пример • Vertex Academy_files/jquery.bxslider.min.js.Без названия" id="colormag-bxslider-js"></script>
+<script type="text/javascript" src="./Set в Java. Hashset пример • Vertex Academy_files/colormag-slider-setting.js.Без названия" id="colormag_slider-js"></script>
+<script type="text/javascript" src="./Set в Java. Hashset пример • Vertex Academy_files/navigation.js.Без названия" id="colormag-navigation-js"></script>
+<script type="text/javascript" src="./Set в Java. Hashset пример • Vertex Academy_files/jquery.sticky.js.Без названия" id="colormag-sticky-menu-js"></script>
+<script type="text/javascript" src="./Set в Java. Hashset пример • Vertex Academy_files/sticky-setting.js.Без названия" id="colormag-sticky-menu-setting-js"></script>
+<script type="text/javascript" src="./Set в Java. Hashset пример • Vertex Academy_files/jquery.fitvids.js.Без названия" id="colormag-fitvids-js"></script>
+<script type="text/javascript" src="./Set в Java. Hashset пример • Vertex Academy_files/fitvids-setting.js.Без названия" id="colormag-fitvids-setting-js"></script>
+<script type="text/javascript" src="./Set в Java. Hashset пример • Vertex Academy_files/api.js.Без названия" id="google-recaptcha-js"></script>
+<script type="text/javascript" id="wpcf7-recaptcha-js-extra">
+/* <![CDATA[ */
+var wpcf7_recaptcha = {"sitekey":"6LfS97UcAAAAALBiQr5tDprxsDxuwBEowV4dUKPD","actions":{"homepage":"homepage","contactform":"contactform"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Set в Java. Hashset пример • Vertex Academy_files/index.js(1).Без названия" id="wpcf7-recaptcha-js"></script>
+<script type="text/javascript" src="./Set в Java. Hashset пример • Vertex Academy_files/knews_subscribe.js.Без названия" id="knews_subscribe-js"></script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async="" src="./Set в Java. Hashset пример • Vertex Academy_files/js"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-‎62731553-2');
+	</script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-62731553-2', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+<div><div class="grecaptcha-badge" data-style="bottomright" style="width: 256px; height: 60px; display: block; transition: right 0.3s ease 0s; position: fixed; bottom: 14px; right: -186px; box-shadow: gray 0px 0px 5px; border-radius: 2px; overflow: hidden;"><div class="grecaptcha-logo"><iframe title="reCAPTCHA" src="./Set в Java. Hashset пример • Vertex Academy_files/anchor.html" width="256" height="60" role="presentation" name="a-5z5ypf6m4dr5" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe></div><div class="grecaptcha-error"></div><textarea id="g-recaptcha-response-100000" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div><iframe style="display: none;" src="./Set в Java. Hashset пример • Vertex Academy_files/saved_resource(11).html"></iframe></div></body></html>

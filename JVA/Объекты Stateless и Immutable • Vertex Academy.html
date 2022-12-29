@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<!-- saved from url=(0067)https://vertex-academy.com/tutorials/ru/stateless-i-immutable-java/ -->
+<html lang="ru-RU" prefix="og: http://ogp.me/ns#"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://vertex-academy.com/tutorials/xmlrpc.php">
+ <title>Объекты Stateless и Immutable • Vertex Academy</title>
+<meta name="robots" content="max-image-preview:large">
+
+<!-- This site is optimized with the Yoast SEO Premium plugin v3.1.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="Объекты stateless и immutable в Java. Так называемые неизменяемые объекты. В статье описываем зачем они нужны.">
+<meta name="robots" content="noodp">
+<link rel="canonical" href="https://vertex-academy.com/tutorials/ru/stateless-i-immutable-java/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Объекты Stateless и Immutable • Vertex Academy">
+<meta property="og:description" content="Объекты stateless и immutable в Java. Так называемые неизменяемые объекты. В статье описываем зачем они нужны.">
+<meta property="og:url" content="https://vertex-academy.com/tutorials/ru/stateless-i-immutable-java/">
+<meta property="og:site_name" content="Vertex Academy">
+<meta property="article:publisher" content="https://www.facebook.com/vertex.academy/">
+<meta property="article:section" content="Java">
+<meta property="article:published_time" content="2018-05-30T22:33:10+03:00">
+<meta property="article:modified_time" content="2018-07-18T15:42:15+03:00">
+<meta property="og:updated_time" content="2018-07-18T15:42:15+03:00">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/auto-3309967_640.jpg">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/auto-3309967_640.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/1.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/e-learning-1367416_640.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/incredible-hulk-1527199_640.png">
+<meta property="og:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/Capture-d’écran-2018-05-11-à-15.56.29.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="Объекты stateless и immutable в Java. Так называемые неизменяемые объекты. В статье описываем зачем они нужны.">
+<meta name="twitter:title" content="Объекты Stateless и Immutable • Vertex Academy">
+<meta name="twitter:image" content="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/auto-3309967_640.jpg">
+<meta property="DC.date.issued" content="2018-05-30T22:33:10+03:00">
+<!-- / Yoast SEO Premium plugin. -->
+
+<link rel="dns-prefetch" href="https://ws.sharethis.com/">
+<link rel="dns-prefetch" href="https://www.google.com/">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://maxcdn.bootstrapcdn.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Vertex Academy » Лента" href="https://vertex-academy.com/tutorials/ru/feed/">
+<script async="" src="./Объекты Stateless и Immutable • Vertex Academy_files/analytics.js.Без названия"></script><script type="text/javascript" async="" src="./Объекты Stateless и Immutable • Vertex Academy_files/recaptcha__ru.js.Без названия" crossorigin="anonymous" integrity="sha384-WCHHeiWXPyOSuQaugVRjpNMJWxOfrULCjvKrlTSUG0uYesAzPmzciQ1RewjGsnQf"></script><script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/vertex-academy.com\/tutorials\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.0.2"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode,e=(p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0),i.toDataURL());return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script><script src="./Объекты Stateless и Immutable • Vertex Academy_files/wp-emoji-release.min.js.Без названия" type="text/javascript" defer=""></script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+		<style type="text/css">
+	.wp-pagenavi{margin-left:auto !important; margin-right:auto; !important}
+	</style>
+  <link rel="stylesheet" id="crayon-css" href="./Объекты Stateless и Immutable • Vertex Academy_files/crayon.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="crayon-theme-classic-css" href="./Объекты Stateless и Immutable • Vertex Academy_files/classic.css" type="text/css" media="all">
+<link rel="stylesheet" id="crayon-font-courier-new-css" href="./Объекты Stateless и Immutable • Vertex Academy_files/courier-new.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-block-library-css" href="./Объекты Stateless и Immutable • Vertex Academy_files/style.min.css" type="text/css" media="all">
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<link rel="stylesheet" id="adsns_css-css" href="./Объекты Stateless и Immutable • Vertex Academy_files/adsns.css" type="text/css" media="all">
+<link rel="stylesheet" id="contact-form-7-css" href="./Объекты Stateless и Immutable • Vertex Academy_files/styles.css" type="text/css" media="all">
+<link rel="stylesheet" id="colormag_google_fonts-css" href="./Объекты Stateless и Immutable • Vertex Academy_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="colormag_style-css" href="./Объекты Stateless и Immutable • Vertex Academy_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="colormag-fontawesome-css" href="./Объекты Stateless и Immutable • Vertex Academy_files/font-awesome.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-pagenavi-style-css" href="./Объекты Stateless и Immutable • Vertex Academy_files/css3_orange_glossy.css" type="text/css" media="all">
+<script type="text/javascript" src="./Объекты Stateless и Immutable • Vertex Academy_files/jquery.min.js.Без названия" id="jquery-core-js"></script>
+<script type="text/javascript" src="./Объекты Stateless и Immutable • Vertex Academy_files/jquery-migrate.min.js.Без названия" id="jquery-migrate-js"></script>
+<script type="text/javascript" id="crayon_js-js-extra">
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"https:\/\/vertex-academy.com\/tutorials\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"\u041d\u0430\u0436\u043c\u0438\u0442\u0435 %s \u0434\u043b\u044f \u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f, %s \u0434\u043b\u044f \u0432\u0441\u0442\u0430\u0432\u043a\u0438","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Объекты Stateless и Immutable • Vertex Academy_files/crayon.min.js.Без названия" id="crayon_js-js"></script>
+<script type="text/javascript" src="./Объекты Stateless и Immutable • Vertex Academy_files/colormag-custom.js.Без названия" id="colormag-custom-js"></script>
+<script id="st_insights_js" type="text/javascript" src="./Объекты Stateless и Immutable • Vertex Academy_files/st_insights.js.Без названия"></script>
+<link rel="https://api.w.org/" href="https://vertex-academy.com/tutorials/wp-json/"><link rel="alternate" type="application/json" href="https://vertex-academy.com/tutorials/wp-json/wp/v2/posts/8606"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://vertex-academy.com/tutorials/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://vertex-academy.com/tutorials/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 6.0.2">
+<link rel="shortlink" href="https://vertex-academy.com/tutorials/?p=8606">
+<link rel="alternate" type="application/json+oembed" href="https://vertex-academy.com/tutorials/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fstateless-i-immutable-java%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://vertex-academy.com/tutorials/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fstateless-i-immutable-java%2F&amp;format=xml">
+
+<script type="text/javascript">
+	function addHandler(object, event, handler) {
+		if (typeof object.addEventListener != 'undefined') 
+			object.addEventListener(event, handler, false);
+		else
+			if (typeof object.attachEvent != 'undefined')
+				object.attachEvent('on' + event, handler);
+			else 
+				throw 'Incompatible browser';
+	}
+</script>
+	<style type="text/css">
+	 .wp-pagenavi
+	{
+		font-size:12px !important;
+	}
+	</style>
+	<!-- Vertex Academy Internal Styles --><style type="text/css"> .colormag-button,blockquote,button,input[type=reset],input[type=button],input[type=submit]{background-color:#f26027}#site-title a,.next a:hover,.previous a:hover,.social-links i.fa:hover,a{color:#f26027}.fa.search-top:hover{background-color:#f26027}#site-navigation{border-top:4px solid #f26027}.home-icon.front_page_on,.main-navigation a:hover,.main-navigation ul li ul li a:hover,.main-navigation ul li ul li:hover>a,.main-navigation ul li.current-menu-ancestor>a,.main-navigation ul li.current-menu-item ul li a:hover,.main-navigation ul li.current-menu-item>a,.main-navigation ul li.current_page_ancestor>a,.main-navigation ul li.current_page_item>a,.main-navigation ul li:hover>a,.main-small-navigation li a:hover,.site-header .menu-toggle:hover{background-color:#f26027}.main-small-navigation .current-menu-item>a,.main-small-navigation .current_page_item>a{background:#f26027}.promo-button-area a:hover{border:2px solid #f26027;background-color:#f26027}#content .wp-pagenavi .current,#content .wp-pagenavi a:hover,.format-link .entry-content a,.pagination span{background-color:#f26027}.pagination a span:hover{color:#f26027;border-color:#f26027}#content .comments-area a.comment-edit-link:hover,#content .comments-area a.comment-permalink:hover,#content .comments-area article header cite a:hover,.comments-area .comment-author-link a:hover{color:#f26027}.comments-area .comment-author-link span{background-color:#f26027}.comment .comment-reply-link:hover,.nav-next a,.nav-previous a{color:#f26027}#secondary .widget-title{border-bottom:2px solid #f26027}#secondary .widget-title span{background-color:#f26027}.footer-widgets-area .widget-title{border-bottom:2px solid #f26027}.footer-widgets-area .widget-title span{background-color:#f26027}.footer-widgets-area a:hover{color:#f26027}.advertisement_above_footer .widget-title{border-bottom:2px solid #f26027}.advertisement_above_footer .widget-title span{background-color:#f26027}a#scroll-up i{color:#f26027}.page-header .page-title{border-bottom:2px solid #f26027}#content .post .article-content .above-entry-meta .cat-links a,.page-header .page-title span{background-color:#f26027}#content .post .article-content .entry-title a:hover,.entry-meta .byline i,.entry-meta .cat-links i,.entry-meta a,.post .entry-title a:hover,.search .entry-title a:hover{color:#f26027}.entry-meta .post-format i{background-color:#f26027}.entry-meta .comments-link a:hover,.entry-meta .edit-link a:hover,.entry-meta .posted-on a:hover,.entry-meta .tag-links a:hover,.single #content .tags a:hover{color:#f26027}.more-link,.no-post-thumbnail{background-color:#f26027}.post-box .entry-meta .cat-links a:hover,.post-box .entry-meta .posted-on a:hover,.post.post-box .entry-title a:hover{color:#f26027}.widget_featured_slider .slide-content .above-entry-meta .cat-links a{background-color:#f26027}.widget_featured_slider .slide-content .below-entry-meta .byline a:hover,.widget_featured_slider .slide-content .below-entry-meta .comments a:hover,.widget_featured_slider .slide-content .below-entry-meta .posted-on a:hover,.widget_featured_slider .slide-content .entry-title a:hover{color:#f26027}.widget_highlighted_posts .article-content .above-entry-meta .cat-links a{background-color:#f26027}.byline a:hover,.comments a:hover,.edit-link a:hover,.posted-on a:hover,.tag-links a:hover,.widget_highlighted_posts .article-content .below-entry-meta .byline a:hover,.widget_highlighted_posts .article-content .below-entry-meta .comments a:hover,.widget_highlighted_posts .article-content .below-entry-meta .posted-on a:hover,.widget_highlighted_posts .article-content .entry-title a:hover{color:#f26027}.widget_featured_posts .article-content .above-entry-meta .cat-links a{background-color:#f26027}.widget_featured_posts .article-content .entry-title a:hover{color:#f26027}.widget_featured_posts .widget-title{border-bottom:2px solid #f26027}.widget_featured_posts .widget-title span{background-color:#f26027}.related-posts-main-title .fa,.single-related-posts .article-content .entry-title a:hover{color:#f26027}</style>
+
+<style type="text/css"></style>
+
+<style type="text/css">
+.synved-social-resolution-single {
+display: inline-block;
+}
+.synved-social-resolution-normal {
+display: inline-block;
+}
+.synved-social-resolution-hidef {
+display: none;
+}
+
+@media only screen and (min--moz-device-pixel-ratio: 2),
+only screen and (-o-min-device-pixel-ratio: 2/1),
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-device-pixel-ratio: 2),
+only screen and (min-resolution: 2dppx),
+only screen and (min-resolution: 192dpi) {
+	.synved-social-resolution-normal {
+	display: none;
+	}
+	.synved-social-resolution-hidef {
+	display: inline-block;
+	}
+}
+</style>
+<script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-1426849340859996",
+    enable_page_level_ads: false
+  });
+</script>
+
+<style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style></head>
+
+<body class="post-template-default single single-post postid-8606 single-format-standard  wide"><div id="pratikabuSTTDiv" class="pratikabusttdiv-no-print" style="bottom: 20px; right: 20px; opacity: 1; display: block;"><img id="pratikabuSTTArrowUp" style="float: right; opacity: 0.5; cursor: pointer; width: 48px; height: 48px;" class="pratikabuSTTImg pratikabuSTTRotate180" src="chrome-extension://hegiignepmecppikdlbohnnbfjdoaghj/icons/pratikabu-stt-48-1.png"><div id="pratikabuSTTDiv2" class="pratikabusttdiv-no-print" style="width: 48px; opacity: 0; display: block; margin-left: 0px;"><img id="pratikabuSTTClear" class="pratikabuSTTImg" style="opacity: 0.5; cursor: pointer;" src="chrome-extension://hegiignepmecppikdlbohnnbfjdoaghj/icons/pratikabu-stt-clear-24.png"><img id="pratikabuSTTPageUp" class="pratikabuSTTImg" style="opacity: 0.5; cursor: pointer;" src="chrome-extension://hegiignepmecppikdlbohnnbfjdoaghj/icons/pratikabu-stt-pageup-24.png"><img id="pratikabuSTTSettings" class="pratikabuSTTImg" style="opacity: 0.5; cursor: pointer;" src="chrome-extension://hegiignepmecppikdlbohnnbfjdoaghj/icons/pratikabu-stt-settings-24.png"><img id="pratikabuSTTPageDown" class="pratikabuSTTImg pratikabuSTTRotate180" style="opacity: 0.5; cursor: pointer;" src="chrome-extension://hegiignepmecppikdlbohnnbfjdoaghj/icons/pratikabu-stt-pageup-24.png"></div></div>
+<div id="page" class="hfeed site">
+      <header id="masthead" class="site-header clearfix">
+      <div id="header-text-nav-container" class="clearfix">
+                     <div class="news-bar">
+               <div class="inner-wrap clearfix">
+                  
+                  
+                  	<div class="social-links clearfix">
+		<ul>
+		<li><a href="https://www.facebook.com/vertex.academy/" target="_blank"><i class="fa fa-facebook"></i></a></li><li><a href="https://vk.com/vertex_academy" target="_blank"><i class="fa fa-vk"></i></a></li><li><a href="https://www.youtube.com/channel/UC7b-dJ56vQaMh2wr972iG6Q" target="_blank"><i class="fa fa-youtube"></i></a></li>		</ul>
+	</div><!-- .social-links -->
+	               </div>
+            </div>
+         
+         
+         <div class="inner-wrap">
+
+            <div id="header-text-nav-wrap" class="clearfix">
+               <div id="header-left-section"> 
+                                    <div id="header-text" class="screen-reader-text">
+                                             <h3 id="site-title">
+                           <a href="https://vertex-academy.com/tutorials/ru/" title="Vertex Academy" rel="home">Vertex Academy</a>
+                        </h3>
+                                                                  <p id="site-description">Tutorials</p>
+                     <!-- #site-description -->
+                  </div><!-- #header-text -->
+               </div><!-- #header-left-section -->
+               <div id="header-right-section">
+                                    <div id="header-right-sidebar" class="clearfix">
+                  
+                  </div>
+                                 </div><!-- #header-right-section -->
+
+            </div><!-- #header-text-nav-wrap -->
+
+         </div><!-- .inner-wrap -->
+
+         
+         <div id="site-navigation-sticky-wrapper" class="sticky-wrapper" style="height: 56px;"><nav id="site-navigation" class="main-navigation clearfix" role="navigation">
+            <div class="inner-wrap clearfix">
+                                    <div id="header-logo-image">
+
+                        <a href="https://vertex-academy.com/" title="Vertex Academy" rel="home"><img src="./Объекты Stateless и Immutable • Vertex Academy_files/vertex-tutorials3.png" alt="Vertex Academy"></a>
+                     </div><!-- #header-logo-image -->
+                                 <h4 class="menu-toggle"></h4>
+               <div class="menu-primary-container"><ul id="menu-menu-ru" class="menunav-menu"><li id="menu-item-1032" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-1032"><a href="https://vertex-academy.com/tutorials/ru/category/java/">Java</a>
+<ul class="sub-menu">
+	<li id="menu-item-6085" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6085"><a href="https://vertex-academy.com/tutorials/ru/java-8-uchebnik/">Java 8</a></li>
+	<li id="menu-item-1033" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1033"><a href="https://vertex-academy.com/tutorials/ru/category/java/java-start-java/">Java Start</a></li>
+	<li id="menu-item-10141" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-10141"><a href="https://vertex-academy.com/tutorials/ru/category/java/java-oop/">Java ООП</a></li>
+	<li id="menu-item-10147" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-10147"><a href="https://vertex-academy.com/tutorials/ru/category/java/java-professional-ru/">Java Professional</a></li>
+	<li id="menu-item-1034" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1034"><a href="https://vertex-academy.com/tutorials/ru/category/java/jdbc/">JDBC</a></li>
+</ul>
+</li>
+<li id="menu-item-1031" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1031"><a href="https://vertex-academy.com/tutorials/ru/category/front-end/">Front-End</a>
+<ul class="sub-menu">
+	<li id="menu-item-1883" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1883"><a href="https://vertex-academy.com/tutorials/ru/category/front-end/html/">HTML</a></li>
+	<li id="menu-item-10153" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10153"><a href="https://vertex-academy.com/tutorials/ru/category/front-end/css/">CSS</a></li>
+</ul>
+</li>
+<li id="menu-item-7701" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7701"><a href="https://vertex-academy.com/tutorials/ru/stateless-i-immutable-java/#">Linux</a>
+<ul class="sub-menu">
+	<li id="menu-item-7664" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7664"><a href="https://vertex-academy.com/tutorials/ru/category/linux/ubuntu/">Ubuntu</a></li>
+</ul>
+</li>
+<li id="menu-item-1017" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1017"><a href="https://vertex-academy.com/tutorials/ru/kontakty/">Контакты</a></li>
+<li id="menu-item-7296" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7296"><a href="https://vertex-academy.com/tutorials/ru/stateless-i-immutable-java/#">Самоучители</a>
+<ul class="sub-menu">
+	<li id="menu-item-7297" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7297"><a href="https://vertex-academy.com/tutorials/ru/samouchitel-po-java-s-nulya/">Java с нуля</a></li>
+	<li id="menu-item-7298" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7298"><a href="https://vertex-academy.com/tutorials/ru/java-8-uchebnik/">Java 8</a></li>
+	<li id="menu-item-7299" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7299"><a href="https://vertex-academy.com/tutorials/ru/java-9-uchebnik-teoriya-primery/">Java 9</a></li>
+	<li id="menu-item-7300" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7300"><a href="https://vertex-academy.com/tutorials/ru/samouchitel-po-htmlcss-s-nulya/">HTML</a></li>
+</ul>
+</li>
+</ul></div>                              
+               <div class="lang-chooser">
+                  <i class="fa fa-globe lang-ico" aria-hidden="true"></i>
+                  <aside id="polylang-8" class="widget widget_polylang clearfix"><ul>
+	<li class="lang-item lang-item-18 lang-item-en no-translation lang-item-first"><a lang="en-US" hreflang="en-US" href="https://vertex-academy.com/tutorials/en/">English</a></li>
+	<li class="lang-item lang-item-21 lang-item-ru current-lang"><a lang="ru-RU" hreflang="ru-RU" href="https://vertex-academy.com/tutorials/ru/stateless-i-immutable-java/">Русский</a></li>
+	<li class="lang-item lang-item-323 lang-item-uk no-translation"><a lang="uk" hreflang="uk" href="https://vertex-academy.com/tutorials/uk/">Українська</a></li>
+</ul>
+</aside>                 </div>
+
+                  <div class="search-form-top">
+               
+                     <form action="https://vertex-academy.com/tutorials/ru/" class="search-form searchform clearfix" method="get">
+   <div class="search-wrap">
+      <input type="text" placeholder="Поиск" class="s field" name="s">
+      <button class="search-icon" type="submit"></button>
+   </div>
+</form><!-- .searchform -->                  </div>
+              
+                           </div>
+         </nav></div>
+
+      </div><!-- #header-text-nav-container -->
+
+      
+   </header>
+         <div id="main" class="clearfix">
+      <div class="inner-wrap clearfix">
+         
+		<div id="progress" style="width: 0%; top: 56px;"></div>
+	<div id="primary">
+		<div id="content" class="clearfix">
+
+			
+				
+<article id="post-8606" class="post-8606 post type-post status-publish format-standard hentry category-java category-java-professional-ru category-java-oop">
+	
+   
+   
+   <div class="article-content clearfix">
+
+   
+   <div class="above-entry-meta"><span class="cat-links"><a href="https://vertex-academy.com/tutorials/ru/category/java/" rel="category tag">Java</a>&nbsp;<a href="https://vertex-academy.com/tutorials/ru/category/java/java-professional-ru/" rel="category tag">Java Professional</a>&nbsp;<a href="https://vertex-academy.com/tutorials/ru/category/java/java-oop/" rel="category tag">Java ООП</a>&nbsp;</span></div>
+      <header class="entry-header">
+   		<h1 class="entry-title">
+   			Объекты Stateless и Immutable   		</h1>
+   	</header>
+
+   	<div class="below-entry-meta">
+      <span class="posted-on"><a href="https://vertex-academy.com/tutorials/ru/stateless-i-immutable-java/" title="22:33" rel="bookmark"><i class="fa fa-calendar-o"></i> <time class="entry-date published" datetime="2018-05-30T22:33:10+03:00">30 мая, 2018</time><time class="updated" datetime="2018-07-18T15:42:15+03:00">18 июля, 2018</time></a></span>
+      <span class="byline"><span class="author vcard"><i class="fa fa-user"></i><a class="url fn n" href="https://vertex-academy.com/tutorials/ru/author/vertex/" title="Vertex Academy">Vertex Academy</a></span></span>
+
+      </div>
+   	<div class="entry-content clearfix">
+   		<div class="synved-social-container synved-social-container-share" style="text-align: right"><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-normal synved-social-provider-facebook nolightbox" data-provider="facebook" target="_blank" rel="nofollow" title="Share on Facebook" href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fstateless-i-immutable-java%2F&amp;t=%D0%9E%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D1%8B%20Stateless%20%D0%B8%20Immutable&amp;s=100&amp;p[url]=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fstateless-i-immutable-java%2F&amp;p[title]=%D0%9E%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D1%8B%20Stateless%20%D0%B8%20Immutable" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="Facebook" title="Share on Facebook" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Объекты Stateless и Immutable • Vertex Academy_files/facebook.png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-normal synved-social-provider-twitter nolightbox" data-provider="twitter" target="_blank" rel="nofollow" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fstateless-i-immutable-java%2F&amp;text=Check%20this%20out" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="twitter" title="Share on Twitter" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Объекты Stateless и Immutable • Vertex Academy_files/twitter.png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-normal synved-social-provider-tumblr nolightbox" data-provider="tumblr" target="_blank" rel="nofollow" title="Share on VK" href="http://vk.com/share.php?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fstateless-i-immutable-java%2F&amp;text=Check%20this%20out&amp;title%%&amp;img%%" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;"><img alt="tumblr" title="Share on VK" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Объекты Stateless и Immutable • Vertex Academy_files/tumblr.png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-hidef synved-social-provider-facebook nolightbox" data-provider="facebook" target="_blank" rel="nofollow" title="Share on Facebook" href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fstateless-i-immutable-java%2F&amp;t=%D0%9E%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D1%8B%20Stateless%20%D0%B8%20Immutable&amp;s=100&amp;p[url]=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fstateless-i-immutable-java%2F&amp;p[title]=%D0%9E%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D1%8B%20Stateless%20%D0%B8%20Immutable" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="Facebook" title="Share on Facebook" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Объекты Stateless и Immutable • Vertex Academy_files/facebook(1).png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-hidef synved-social-provider-twitter nolightbox" data-provider="twitter" target="_blank" rel="nofollow" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fstateless-i-immutable-java%2F&amp;text=Check%20this%20out" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="twitter" title="Share on Twitter" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Объекты Stateless и Immutable • Vertex Academy_files/twitter(1).png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-hidef synved-social-provider-tumblr nolightbox" data-provider="tumblr" target="_blank" rel="nofollow" title="Share on VK" href="http://vk.com/share.php?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fstateless-i-immutable-java%2F&amp;text=Check%20this%20out&amp;title%%&amp;img%%" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;"><img alt="tumblr" title="Share on VK" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Объекты Stateless и Immutable • Vertex Academy_files/tumblr(1).png"></a></div><div id="ca-pub-1426849340859996:3177001332" class="ads ads_before"><script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- In-Post Adsense -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1426849340859996" data-ad-slot="3177001332" data-ad-format="auto"><iframe id="aswift_0" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./Объекты Stateless и Immutable • Vertex Academy_files/saved_resource(1).html"><iframe id="google_ads_frame0" src="./Объекты Stateless и Immutable • Vertex Academy_files/saved_resource(2).html"></iframe></iframe></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p><em>Данная статья:</em></p>
+<ul>
+<li><em>написана командой <a href="https://vertex-academy.com/">Vertex Academy</a>. Надеемся, что она Вам будет полезна. Приятного прочтения!</em></li>
+<li>это одна из статей из нашего <a href="https://vertex-academy.com/tutorials/ru/samouchitel-po-java-s-nulya/">"Самоучителя по Java"</a></li>
+</ul>
+<hr>
+<p>Привет! Это статья о двух типах объектов в Java:</p>
+<ul>
+<li><strong>stateless</strong>&nbsp;объекты (с англ. "без состояния")</li>
+<li><strong>immutable</strong>&nbsp;объекты (с англ. "неизменяемые")</li>
+</ul>
+<p>Данные объекты используются <strong>в многопоточной среде</strong> для того, чтобы быть уверенными что эти объекты <strong>не будут изменены</strong> каким-либо другим потоком. То есть зафиксировали состояние один раз и все. Иначе нам бы пришлось думать о том как синхронизировать доступ к этим объектам из разных потоков. А это замедляет работу программы.</p>
+<h1><strong><span style="font-size: 14pt;">Что такое stateless&nbsp;объект?</span></strong></h1>
+<p><strong>Stateless </strong>объект<strong>, </strong>или<strong>&nbsp;</strong>"объект без состояния" - это объект, в котором нет изменяемых полей.&nbsp;Если проще - это объект, в котором "и менять-то нечего" <img draggable="false" role="img" class="emoji" alt="🙂" src="./Объекты Stateless и Immutable • Vertex Academy_files/1f642.svg"></p>
+<p><strong>Так что такое "состояние"?</strong></p>
+<p>Обычно каждый объект имеет какие-то изменяемые переменные внутри. Например, мы создаем объект <strong>Car</strong>, и задаем ему:</p>
+<ul>
+<li>цвет:&nbsp;<em>красный</em></li>
+<li>марка:&nbsp;<em>Феррари</em></li>
+<li>пробег:&nbsp;<em>100 км</em>:</li>
+</ul>
+<p><img class="alignnone wp-image-8610" src="./Объекты Stateless и Immutable • Vertex Academy_files/auto-3309967_640.jpg" alt="" width="491" height="311"></p>
+<p>Все эти параметры вместе - цвет, марка и пробег - и есть <em>состояние</em> объекта. Если мы, например, поменяем пробег - скажем сделаем его&nbsp;<em>10000</em>&nbsp;км - тем самым мы изменим&nbsp;<em>состояние</em>&nbsp;<strong>Car</strong>:</p>
+<p><img loading="lazy" class="alignnone wp-image-8612" src="./Объекты Stateless и Immutable • Vertex Academy_files/auto-3309967_640.png" alt="" width="493" height="312"></p>
+<p>Так, если мы поменяем любой параметр объекта - цвет, марку, или пробег - <em>состояние</em> опять изменится.</p>
+<p><img loading="lazy" class="alignnone size-full wp-image-8613" src="./Объекты Stateless и Immutable • Vertex Academy_files/1.png" alt="" width="300" height="200"></p>
+<p><strong>Объект без состояния</strong></p>
+<p>Обычно мы создаем объекты так, что они хранят много переменных. И эти переменные изменяются, меняя состояние объекта.</p>
+<p>Но это <strong>обычно</strong>.</p>
+<p>На самом деле, изменяемые части - а значит и состояние - есть не у всех объектов. На некоторые посмотришь и скажешь:</p>
+<p><img loading="lazy" class="alignnone wp-image-8616" src="./Объекты Stateless и Immutable • Vertex Academy_files/e-learning-1367416_640.png" alt="" width="568" height="392" srcset="https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/e-learning-1367416_640.png 640w, https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/e-learning-1367416_640-392x272.png 392w, https://vertex-academy.com/tutorials/wp-content/uploads/2018/05/e-learning-1367416_640-130x90.png 130w" sizes="(max-width: 568px) 100vw, 568px"></p>
+<p>Например тут:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0df2086f3289084396" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">public class MyStateless {
+    public static void HelloWorld()
+    {
+        System.out.println("Hello World!");
+    }
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0df2086f3289084396-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df2086f3289084396-2">2</div><div class="crayon-num" data-line="crayon-63ad0df2086f3289084396-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df2086f3289084396-4">4</div><div class="crayon-num" data-line="crayon-63ad0df2086f3289084396-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df2086f3289084396-6">6</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0df2086f3289084396-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">MyStateless</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df2086f3289084396-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">HelloWorld</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-63ad0df2086f3289084396-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df2086f3289084396-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-s">"Hello World!"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0df2086f3289084396-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df2086f3289084396-6"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p>Что менять? Нечего менять. А тут:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0df2086fb290482868" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">public class MyStateless {
+    private final static String line = "Hello World";
+    
+    public static void HelloWorld()
+    {
+        System.out.println(line);
+    }
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0df2086fb290482868-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df2086fb290482868-2">2</div><div class="crayon-num" data-line="crayon-63ad0df2086fb290482868-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df2086fb290482868-4">4</div><div class="crayon-num" data-line="crayon-63ad0df2086fb290482868-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df2086fb290482868-6">6</div><div class="crayon-num" data-line="crayon-63ad0df2086fb290482868-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df2086fb290482868-8">8</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0df2086fb290482868-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">MyStateless</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df2086fb290482868-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">private</span><span class="crayon-h"> </span><span class="crayon-m">final</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">String</span><span class="crayon-h"> </span><span class="crayon-i">line</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-s">"Hello World"</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0df2086fb290482868-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df2086fb290482868-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">HelloWorld</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-63ad0df2086fb290482868-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df2086fb290482868-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-i">line</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0df2086fb290482868-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df2086fb290482868-8"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p>Тоже нечего! Переменная <strong>line</strong> имеет модификатор <strong>final</strong>, поэтому ее мы поменять не сможем.</p>
+<p>Объекты таких классов и называются <strong>stateless</strong><strong>, </strong>или<strong>&nbsp;</strong>"объектами без состояния".</p>
+<h1><strong><span style="font-size: 14pt;">Что такое immutable&nbsp;объект?</span></strong></h1>
+<p><strong>Immutable</strong>&nbsp;объекты(с англ. "неизменяемый") - это объект, который <strong>не позволяет</strong> изменять свои параметры. А если Вы все-же пытаетесь что-то изменить, то получаете новый объект. Но старый останется прежним.</p>
+<p><img loading="lazy" class="alignnone wp-image-8620" src="./Объекты Stateless и Immutable • Vertex Academy_files/incredible-hulk-1527199_640.png" alt="" width="510" height="339"></p>
+<p>Давайте посмотрим на примере.</p>
+<p>Представим, что у нас есть класс <strong>Cat</strong>. У класса <strong>Cat</strong>, допустим, два параметра - порода и цвет глаз.</p>
+<p>А теперь если подумать, у одной и той же кошки не может же измениться цвет глаз? Она не может внезапно стать другой породы? Да, это будет уже другая кошка.</p>
+<p>Попробуем сделать наш объект <strong>immutable</strong>. Напишем такой код:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0df2086fd605859014" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">public final class ImmutableCat {
+    private String breed;
+    private String eyeColor;
+
+    public ImmutableCat(String breed, String eyeColor)
+    {
+        this.breed = breed;
+        this.eyeColor = eyeColor;
+        System.out.println("New cat created! It is " + this.breed + " and has " + this.eyeColor + " eyes!");
+    }
+
+    public ImmutableCat setBreed(String breed)
+    {
+        ImmutableCat c = new ImmutableCat(breed, this.eyeColor);
+        return c;
+    }
+
+    public ImmutableCat setEyeColor(String eyeColor)
+    {
+        ImmutableCat c = new ImmutableCat(this.breed, eyeColor);
+        return c;
+    }
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0df2086fd605859014-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df2086fd605859014-2">2</div><div class="crayon-num" data-line="crayon-63ad0df2086fd605859014-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df2086fd605859014-4">4</div><div class="crayon-num" data-line="crayon-63ad0df2086fd605859014-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df2086fd605859014-6">6</div><div class="crayon-num" data-line="crayon-63ad0df2086fd605859014-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df2086fd605859014-8">8</div><div class="crayon-num" data-line="crayon-63ad0df2086fd605859014-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df2086fd605859014-10">10</div><div class="crayon-num" data-line="crayon-63ad0df2086fd605859014-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df2086fd605859014-12">12</div><div class="crayon-num" data-line="crayon-63ad0df2086fd605859014-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df2086fd605859014-14">14</div><div class="crayon-num" data-line="crayon-63ad0df2086fd605859014-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df2086fd605859014-16">16</div><div class="crayon-num" data-line="crayon-63ad0df2086fd605859014-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df2086fd605859014-18">18</div><div class="crayon-num" data-line="crayon-63ad0df2086fd605859014-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df2086fd605859014-20">20</div><div class="crayon-num" data-line="crayon-63ad0df2086fd605859014-21">21</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df2086fd605859014-22">22</div><div class="crayon-num" data-line="crayon-63ad0df2086fd605859014-23">23</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0df2086fd605859014-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">final</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">ImmutableCat</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df2086fd605859014-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">private</span><span class="crayon-h"> </span><span class="crayon-t">String</span><span class="crayon-h"> </span><span class="crayon-i">breed</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0df2086fd605859014-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">private</span><span class="crayon-h"> </span><span class="crayon-t">String</span><span class="crayon-h"> </span><span class="crayon-i">eyeColor</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df2086fd605859014-4">&nbsp;</div><div class="crayon-line" id="crayon-63ad0df2086fd605859014-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-e">ImmutableCat</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-h"> </span><span class="crayon-i">breed</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-t">String</span><span class="crayon-h"> </span><span class="crayon-i">eyeColor</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df2086fd605859014-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-63ad0df2086fd605859014-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r">this</span><span class="crayon-sy">.</span><span class="crayon-i">breed</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-i">breed</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df2086fd605859014-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r">this</span><span class="crayon-sy">.</span><span class="crayon-i">eyeColor</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-i">eyeColor</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0df2086fd605859014-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">System</span><span class="crayon-sy">.</span><span class="crayon-i">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-s">"New cat created! It is "</span><span class="crayon-h"> </span>+<span class="crayon-h"> </span><span class="crayon-r">this</span><span class="crayon-sy">.</span><span class="crayon-i">breed</span><span class="crayon-h"> </span>+<span class="crayon-h"> </span><span class="crayon-s">" and has "</span><span class="crayon-h"> </span>+<span class="crayon-h"> </span><span class="crayon-r">this</span><span class="crayon-sy">.</span><span class="crayon-i">eyeColor</span><span class="crayon-h"> </span>+<span class="crayon-h"> </span><span class="crayon-s">" eyes!"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df2086fd605859014-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-63ad0df2086fd605859014-11">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df2086fd605859014-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-e">ImmutableCat </span><span class="crayon-e">setBreed</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-h"> </span><span class="crayon-i">breed</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-63ad0df2086fd605859014-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df2086fd605859014-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">ImmutableCat</span><span class="crayon-h"> </span><span class="crayon-i">c</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-e">ImmutableCat</span><span class="crayon-sy">(</span><span class="crayon-i">breed</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-r">this</span><span class="crayon-sy">.</span><span class="crayon-i">eyeColor</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0df2086fd605859014-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-i">c</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df2086fd605859014-16"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-63ad0df2086fd605859014-17">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df2086fd605859014-18"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-e">ImmutableCat </span><span class="crayon-e">setEyeColor</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-h"> </span><span class="crayon-i">eyeColor</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-63ad0df2086fd605859014-19"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df2086fd605859014-20"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-i">ImmutableCat</span><span class="crayon-h"> </span><span class="crayon-i">c</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-e">ImmutableCat</span><span class="crayon-sy">(</span><span class="crayon-r">this</span><span class="crayon-sy">.</span><span class="crayon-i">breed</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">eyeColor</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-63ad0df2086fd605859014-21"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-i">c</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df2086fd605859014-22"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-63ad0df2086fd605859014-23"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0016 seconds] -->
+<p>Как видите, тут у нас есть:</p>
+<ul>
+<li>два параметра - порода и цвет глаз;</li>
+<li>конструктор - мы задаем параметры объекта, а еще выводит в консоль сообщение про создание нового объекта;</li>
+<li>два сеттера - они возвращают новый объект с требуемыми параметрами.</li>
+</ul>
+<p>Если запустить этот код:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-63ad0df208700152816680" class="crayon-syntax crayon-theme-classic crayon-font-courier-new crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Включить/Отключить нумерацию строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Включить/Отключить подсветку кода"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Включить/Отключить перенос строк"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Показать код в новом окне"><div class="crayon-button-icon"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 18px !important; line-height: 18px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">public class Test{
+
+    public static void main(String [] args)
+    {
+        ImmutableCat first = new ImmutableCat("Bengal", "green");
+
+        ImmutableCat second = first.setBreed("Sphynx");
+    }
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-63ad0df208700152816680-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df208700152816680-2">2</div><div class="crayon-num" data-line="crayon-63ad0df208700152816680-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df208700152816680-4">4</div><div class="crayon-num" data-line="crayon-63ad0df208700152816680-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df208700152816680-6">6</div><div class="crayon-num" data-line="crayon-63ad0df208700152816680-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-63ad0df208700152816680-8">8</div><div class="crayon-num" data-line="crayon-63ad0df208700152816680-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-63ad0df208700152816680-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">Test</span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df208700152816680-2">&nbsp;</div><div class="crayon-line" id="crayon-63ad0df208700152816680-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-i">args</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df208700152816680-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-63ad0df208700152816680-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">ImmutableCat </span><span class="crayon-i">first</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-e">ImmutableCat</span><span class="crayon-sy">(</span><span class="crayon-s">"Bengal"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"green"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df208700152816680-6">&nbsp;</div><div class="crayon-line" id="crayon-63ad0df208700152816680-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">ImmutableCat </span><span class="crayon-i">second</span><span class="crayon-h"> </span>=<span class="crayon-h"> </span><span class="crayon-i">first</span><span class="crayon-sy">.</span><span class="crayon-e">setBreed</span><span class="crayon-sy">(</span><span class="crayon-s">"Sphynx"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-63ad0df208700152816680-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-63ad0df208700152816680-9"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p>Мы получим следующее:</p>
+<p><img loading="lazy" class="alignnone size-full wp-image-8626" src="./Объекты Stateless и Immutable • Vertex Academy_files/Capture-d’écran-2018-05-11-à-15.56.29.png" alt="" width="382" height="78"></p>
+<p>Как видите, когда мы "попробовали изменить" параметры объекта, нам вернулся новый объект с требуемыми параметрами.</p>
+<p><strong>В чем разница</strong></p>
+<p>Вот вроде и&nbsp;<strong>stateless </strong>объект не меняется, и <strong>immutable&nbsp;</strong>переводится как "неизменяемый". В чем же тогда отличие?</p>
+<p>Дело в том, что:</p>
+<ul>
+<li><strong>Stateless </strong>"искусственно" не меняется. Это обычный объект с "предохранителем", который не позволяет нам поменять состояние объекта.</li>
+<li><strong>Immutable&nbsp;</strong>объект не меняется "по своей природе". It was born this way! <img draggable="false" role="img" class="emoji" alt="🙂" src="./Объекты Stateless и Immutable • Vertex Academy_files/1f642.svg"> Например, если кошка была рождена сиамской, то уже и быть ей всегда сиамской. Она мне может вдруг персидской породы стать.</li>
+</ul>
+<hr>
+<p><em>Надеемся, что наша статья была Вам полезна.&nbsp; Можно записаться к нам на курсы по Java&nbsp;</em><em>на <a href="https://vertex-academy.com/">сайте</a>.</em></p>
+<div id="ca-pub-1426849340859996:3859527614" class="ads ads_after"><script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Home-top -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1426849340859996" data-ad-slot="3859527614" data-ad-format="auto"><iframe id="aswift_1" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./Объекты Stateless и Immutable • Vertex Academy_files/saved_resource(3).html"><iframe id="google_ads_frame1" src="./Объекты Stateless и Immutable • Vertex Academy_files/saved_resource(4).html"></iframe></iframe></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><div class="synved-social-container synved-social-container-share" style="text-align: right"><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-normal synved-social-provider-facebook nolightbox" data-provider="facebook" target="_blank" rel="nofollow" title="Share on Facebook" href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fstateless-i-immutable-java%2F&amp;t=%D0%9E%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D1%8B%20Stateless%20%D0%B8%20Immutable&amp;s=100&amp;p[url]=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fstateless-i-immutable-java%2F&amp;p[title]=%D0%9E%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D1%8B%20Stateless%20%D0%B8%20Immutable" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="Facebook" title="Share on Facebook" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Объекты Stateless и Immutable • Vertex Academy_files/facebook.png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-normal synved-social-provider-twitter nolightbox" data-provider="twitter" target="_blank" rel="nofollow" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fstateless-i-immutable-java%2F&amp;text=Check%20this%20out" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="twitter" title="Share on Twitter" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Объекты Stateless и Immutable • Vertex Academy_files/twitter.png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-normal synved-social-provider-tumblr nolightbox" data-provider="tumblr" target="_blank" rel="nofollow" title="Share on VK" href="http://vk.com/share.php?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fstateless-i-immutable-java%2F&amp;text=Check%20this%20out&amp;title%%&amp;img%%" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;"><img alt="tumblr" title="Share on VK" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Объекты Stateless и Immutable • Vertex Academy_files/tumblr.png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-hidef synved-social-provider-facebook nolightbox" data-provider="facebook" target="_blank" rel="nofollow" title="Share on Facebook" href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fstateless-i-immutable-java%2F&amp;t=%D0%9E%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D1%8B%20Stateless%20%D0%B8%20Immutable&amp;s=100&amp;p[url]=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fstateless-i-immutable-java%2F&amp;p[title]=%D0%9E%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D1%8B%20Stateless%20%D0%B8%20Immutable" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="Facebook" title="Share on Facebook" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Объекты Stateless и Immutable • Vertex Academy_files/facebook(1).png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-hidef synved-social-provider-twitter nolightbox" data-provider="twitter" target="_blank" rel="nofollow" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fstateless-i-immutable-java%2F&amp;text=Check%20this%20out" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="twitter" title="Share on Twitter" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Объекты Stateless и Immutable • Vertex Academy_files/twitter(1).png"></a><a class="synved-social-button synved-social-button-share synved-social-size-24 synved-social-resolution-hidef synved-social-provider-tumblr nolightbox" data-provider="tumblr" target="_blank" rel="nofollow" title="Share on VK" href="http://vk.com/share.php?url=https%3A%2F%2Fvertex-academy.com%2Ftutorials%2Fru%2Fstateless-i-immutable-java%2F&amp;text=Check%20this%20out&amp;title%%&amp;img%%" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;"><img alt="tumblr" title="Share on VK" class="synved-share-image synved-social-image synved-social-image-share" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Объекты Stateless и Immutable • Vertex Academy_files/tumblr(1).png"></a></div><br><div class="synved-social-container synved-social-container-follow" style="text-align: center"><a class="synved-social-button synved-social-button-follow synved-social-size-24 synved-social-resolution-normal synved-social-provider-facebook nolightbox" data-provider="facebook" target="_blank" rel="nofollow" title="Follow us on Facebook" href="https://www.facebook.com/vertex.academy" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="Facebook" title="Follow us on Facebook" class="synved-share-image synved-social-image synved-social-image-follow" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Объекты Stateless и Immutable • Vertex Academy_files/facebook.png"></a><a class="synved-social-button synved-social-button-follow synved-social-size-24 synved-social-resolution-normal synved-social-provider-twitter nolightbox" data-provider="twitter" target="_blank" rel="nofollow" title="Follow us on Twitter" href="https://twitter.com/vertex_academy" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="twitter" title="Follow us on Twitter" class="synved-share-image synved-social-image synved-social-image-follow" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Объекты Stateless и Immutable • Vertex Academy_files/twitter.png"></a><a class="synved-social-button synved-social-button-follow synved-social-size-24 synved-social-resolution-normal synved-social-provider-tumblr nolightbox" data-provider="tumblr" target="_blank" rel="nofollow" title="Follow Us On VK" href="https://vk.com/vertex_academy" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;"><img alt="tumblr" title="Follow Us On VK" class="synved-share-image synved-social-image synved-social-image-follow" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Объекты Stateless и Immutable • Vertex Academy_files/tumblr.png"></a><a class="synved-social-button synved-social-button-follow synved-social-size-24 synved-social-resolution-hidef synved-social-provider-facebook nolightbox" data-provider="facebook" target="_blank" rel="nofollow" title="Follow us on Facebook" href="https://www.facebook.com/vertex.academy" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="Facebook" title="Follow us on Facebook" class="synved-share-image synved-social-image synved-social-image-follow" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Объекты Stateless и Immutable • Vertex Academy_files/facebook(1).png"></a><a class="synved-social-button synved-social-button-follow synved-social-size-24 synved-social-resolution-hidef synved-social-provider-twitter nolightbox" data-provider="twitter" target="_blank" rel="nofollow" title="Follow us on Twitter" href="https://twitter.com/vertex_academy" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;margin-right:4px;"><img alt="twitter" title="Follow us on Twitter" class="synved-share-image synved-social-image synved-social-image-follow" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Объекты Stateless и Immutable • Vertex Academy_files/twitter(1).png"></a><a class="synved-social-button synved-social-button-follow synved-social-size-24 synved-social-resolution-hidef synved-social-provider-tumblr nolightbox" data-provider="tumblr" target="_blank" rel="nofollow" title="Follow Us On VK" href="https://vk.com/vertex_academy" style="font-size: 0px; width:24px;height:24px;margin:0;margin-bottom:4px;"><img alt="tumblr" title="Follow Us On VK" class="synved-share-image synved-social-image synved-social-image-follow" width="24" height="24" style="display: inline; width:24px;height:24px; margin: 0; padding: 0; border: none; box-shadow: none;" src="./Объекты Stateless и Immutable • Vertex Academy_files/tumblr(1).png"></a></div>   	</div>
+
+   </div>
+
+	</article>
+			
+		</div><!-- #content -->
+
+      
+		<ul class="default-wp-page clearfix">
+			<li class="previous"><a href="https://vertex-academy.com/tutorials/ru/chto-takoe-agile/" rel="prev"><span class="meta-nav">←</span> Что такое Agile</a></li>
+			<li class="next"><a href="https://vertex-academy.com/tutorials/ru/klyuchevoe-slovo-synchronized-java/" rel="next">Ключевое слово synchronized в Java <span class="meta-nav">→</span></a></li>
+		</ul>
+	
+      
+      
+
+
+      		 <aside id="knews_widget-3" class="widget widget_knews_widget amr_widget clearfix"><h3 class="widget-title"><span>Subscribe me</span></h3><div class="knews_add_user knewsform_container" id="knewsform_1">
+					<style type="text/css">
+					div.knews_add_user textarea.knewscomment {position:absolute; top:-3000px; left:-3000px;}
+					div.knews_add_user fieldset {border:0;}
+					div.knews_add_user fieldset.knewstermsplus {height:0 !important; overflow:hidden !important; padding:0 !important; margin:0 !important; border:0 !important}</style>
+					<form action="https://vertex-academy.com/tutorials/wp-admin/admin-ajax.php" method="post"><p>Subscribe to our newsletter we will keep you up-to-date:</p><fieldset class="name"><input type="text" name="name" value="" placeholder="Name:" title="Name:" style="display:block; margin-bottom:10px;"><input type="hidden" value="1" name="required_name"></fieldset><textarea name="knewscomment" autocomplete="off" class="knewscomment" style="width:150px; height:80px" rows="5" cols="20"></textarea><fieldset class="knewstermsplus"><input type="text" name="email" value="" placeholder=""><input type="checkbox" name="knewstermsplus" value="1" title="I agree terms and conditions."><label for="knewstermsplus">I agree terms and conditions.*</label></fieldset><fieldset class="knewsemail"><input type="text" name="knewsemail2" value="" placeholder="Email:" title="Email:" style="display:block; margin-bottom:10px;"></fieldset><input type="hidden" name="user_knews_list" value="1"><input type="hidden" name="lang_user" value="ru"><input type="hidden" name="lang_locale_user" value=""><input type="hidden" name="knewskey" value="04e3ec2be5db6c06fcab2dc26f708f4b"><fieldset class="knewsbutton"><input class="knewsbutton" type="submit" value="Send" style="display:block; margin-bottom:10px;"></fieldset>
+						<input type="hidden" name="action" value="knewsAddUser">
+					</form>
+				</div></aside>	</div><!-- #primary -->
+
+	
+<div id="secondary">
+			
+		<aside id="text-12" class="widget widget_text clearfix">			<div class="textwidget"><p><script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><br>
+<!-- 300*250 Medium Rectangle --><br>
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-1426849340859996" data-ad-slot="2629650858"><iframe id="aswift_2" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./Объекты Stateless и Immutable • Vertex Academy_files/saved_resource(5).html"><iframe id="google_ads_frame2" src="./Объекты Stateless и Immutable • Vertex Academy_files/saved_resource(6).html"></iframe></iframe></ins><br>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+</div>
+		</aside><aside id="knews_widget-4" class="widget widget_knews_widget clearfix"><h3 class="widget-title"><span>Subscribe me</span></h3><div class="knews_add_user knewsform_container" id="knewsform_2">
+					<style type="text/css">
+					div.knews_add_user textarea.knewscomment {position:absolute; top:-3000px; left:-3000px;}
+					div.knews_add_user fieldset {border:0;}
+					div.knews_add_user fieldset.knewstermsplus {height:0 !important; overflow:hidden !important; padding:0 !important; margin:0 !important; border:0 !important}</style>
+					<form action="https://vertex-academy.com/tutorials/wp-admin/admin-ajax.php" method="post"><p>Subscribe to our newsletter we will keep you up-to-date:</p><fieldset class="name"><input type="text" name="name" value="" placeholder="Name:" title="Name:" style="display:block; margin-bottom:10px;"><input type="hidden" value="1" name="required_name"></fieldset><textarea name="knewscomment" autocomplete="off" class="knewscomment" style="width:150px; height:80px" rows="5" cols="20"></textarea><fieldset class="knewstermsplus"><input type="text" name="email" value="" placeholder=""><input type="checkbox" name="knewstermsplus" value="1" title="I agree terms and conditions."><label for="knewstermsplus">I agree terms and conditions.*</label></fieldset><fieldset class="knewsemail"><input type="text" name="knewsemail2" value="" placeholder="Email:" title="Email:" style="display:block; margin-bottom:10px;"></fieldset><input type="hidden" name="user_knews_list" value="1"><input type="hidden" name="lang_user" value="ru"><input type="hidden" name="lang_locale_user" value=""><input type="hidden" name="knewskey" value="04e3ec2be5db6c06fcab2dc26f708f4b"><fieldset class="knewsbutton"><input class="knewsbutton" type="submit" value="Send" style="display:block; margin-bottom:10px;"></fieldset>
+						<input type="hidden" name="action" value="knewsAddUser">
+					</form>
+				</div></aside><aside id="text-15" class="widget widget_text clearfix">			<div class="textwidget"><p><script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><br>
+<!-- Sidebar-top-2 --><br>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1426849340859996" data-ad-slot="4878818019" data-ad-format="auto"><iframe id="aswift_3" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./Объекты Stateless и Immutable • Vertex Academy_files/saved_resource(7).html"><iframe id="google_ads_frame3" src="./Объекты Stateless и Immutable • Vertex Academy_files/saved_resource(8).html"></iframe></iframe></ins><br>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+</div>
+		</aside><aside id="tag_cloud-2" class="widget widget_tag_cloud clearfix"><h3 class="widget-title"><span>Метки</span></h3><div class="tagcloud"><a href="https://vertex-academy.com/tutorials/ru/tag/arraylist-java-primer/" class="tag-cloud-link tag-link-1387 tag-link-position-1" style="font-size: 8pt;" aria-label="arraylist java пример (2 элемента)">arraylist java пример</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/collect-ru/" class="tag-cloud-link tag-link-722 tag-link-position-2" style="font-size: 9.8064516129032pt;" aria-label="collect (3 элемента)">collect</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/completablefuture-ru/" class="tag-cloud-link tag-link-1016 tag-link-position-3" style="font-size: 8pt;" aria-label="CompletableFuture (2 элемента)">CompletableFuture</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/english-for-it/" class="tag-cloud-link tag-link-414 tag-link-position-4" style="font-size: 9.8064516129032pt;" aria-label="English for IT (3 элемента)">English for IT</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/enum-java/" class="tag-cloud-link tag-link-1653 tag-link-position-5" style="font-size: 9.8064516129032pt;" aria-label="enum java (3 элемента)">enum java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/enum-java-metody/" class="tag-cloud-link tag-link-1827 tag-link-position-6" style="font-size: 8pt;" aria-label="enum java методы (2 элемента)">enum java методы</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/filter/" class="tag-cloud-link tag-link-704 tag-link-position-7" style="font-size: 11.311827956989pt;" aria-label="filter (4 элемента)">filter</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/html5/" class="tag-cloud-link tag-link-192 tag-link-position-8" style="font-size: 11.311827956989pt;" aria-label="html5 (4 элемента)">html5</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-ru/" class="tag-cloud-link tag-link-49 tag-link-position-9" style="font-size: 22pt;" aria-label="Java (25 элементов)">Java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-8/" class="tag-cloud-link tag-link-684 tag-link-position-10" style="font-size: 20.344086021505pt;" aria-label="java 8 (19 элементов)">java 8</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java8/" class="tag-cloud-link tag-link-698 tag-link-position-11" style="font-size: 18.838709677419pt;" aria-label="Java8 (15 элементов)">Java8</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-8-completable-future-ru/" class="tag-cloud-link tag-link-1020 tag-link-position-12" style="font-size: 8pt;" aria-label="java 8 completable future (2 элемента)">java 8 completable future</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-8-date-time/" class="tag-cloud-link tag-link-1282 tag-link-position-13" style="font-size: 15.075268817204pt;" aria-label="java 8 date time (8 элементов)">java 8 date time</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-8-date-time-api/" class="tag-cloud-link tag-link-1284 tag-link-position-14" style="font-size: 15.075268817204pt;" aria-label="java 8 date time api (8 элементов)">java 8 date time api</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-8-data-i-vremya/" class="tag-cloud-link tag-link-1280 tag-link-position-15" style="font-size: 13.569892473118pt;" aria-label="java 8 дата и время (6 элементов)">java 8 дата и время</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-9/" class="tag-cloud-link tag-link-1102 tag-link-position-16" style="font-size: 12.516129032258pt;" aria-label="Java 9 (5 элементов)">Java 9</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java9/" class="tag-cloud-link tag-link-1104 tag-link-position-17" style="font-size: 9.8064516129032pt;" aria-label="java9 (3 элемента)">java9</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-9-jshell-ru/" class="tag-cloud-link tag-link-1272 tag-link-position-18" style="font-size: 8pt;" aria-label="java 9 JShell (2 элемента)">java 9 JShell</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-core/" class="tag-cloud-link tag-link-58 tag-link-position-19" style="font-size: 8pt;" aria-label="Java Core (2 элемента)">Java Core</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-project-repl-ru/" class="tag-cloud-link tag-link-1274 tag-link-position-20" style="font-size: 8pt;" aria-label="java project repl (2 элемента)">java project repl</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-reflection/" class="tag-cloud-link tag-link-1879 tag-link-position-21" style="font-size: 8pt;" aria-label="java reflection (2 элемента)">java reflection</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/java-rabota-s-datoj-i-vremenem/" class="tag-cloud-link tag-link-1403 tag-link-position-22" style="font-size: 11.311827956989pt;" aria-label="java работа с датой и временем (4 элемента)">java работа с датой и временем</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/lambda/" class="tag-cloud-link tag-link-706 tag-link-position-23" style="font-size: 9.8064516129032pt;" aria-label="lambda (3 элемента)">lambda</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/lambda-expression/" class="tag-cloud-link tag-link-688 tag-link-position-24" style="font-size: 12.516129032258pt;" aria-label="Lambda expression (5 элементов)">Lambda expression</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/map-ru/" class="tag-cloud-link tag-link-740 tag-link-position-25" style="font-size: 8pt;" aria-label="map (2 элемента)">map</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/method-reference/" class="tag-cloud-link tag-link-700 tag-link-position-26" style="font-size: 8pt;" aria-label="method reference (2 элемента)">method reference</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/oop-ru/" class="tag-cloud-link tag-link-596 tag-link-position-27" style="font-size: 9.8064516129032pt;" aria-label="OOP (3 элемента)">OOP</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/serializable-i-enum/" class="tag-cloud-link tag-link-1833 tag-link-position-28" style="font-size: 8pt;" aria-label="serializable и enum (2 элемента)">serializable и enum</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/stream/" class="tag-cloud-link tag-link-702 tag-link-position-29" style="font-size: 18.086021505376pt;" aria-label="Stream (13 элементов)">Stream</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/anglijskij-dlya-it/" class="tag-cloud-link tag-link-566 tag-link-position-30" style="font-size: 8pt;" aria-label="английский для IT (2 элемента)">английский для IT</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/vozvesti-v-stepen-java-ru/" class="tag-cloud-link tag-link-966 tag-link-position-31" style="font-size: 8pt;" aria-label="возвести в степень java (2 элемента)">возвести в степень java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/dvumernye-massivy-java/" class="tag-cloud-link tag-link-480 tag-link-position-32" style="font-size: 8pt;" aria-label="двумерные массивы java (2 элемента)">двумерные массивы java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/kak-poluchit-massiv-znachenij-enum/" class="tag-cloud-link tag-link-1835 tag-link-position-33" style="font-size: 8pt;" aria-label="как получить массив значений enum (2 элемента)">как получить массив значений enum</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/%d0%ba%d0%bb%d0%b0%d1%81%d1%81/" class="tag-cloud-link tag-link-178 tag-link-position-34" style="font-size: 8pt;" aria-label="класс (2 элемента)">класс</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/klass-math/" class="tag-cloud-link tag-link-438 tag-link-position-35" style="font-size: 8pt;" aria-label="класс Math (2 элемента)">класс Math</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/metody-strok-java/" class="tag-cloud-link tag-link-644 tag-link-position-36" style="font-size: 8pt;" aria-label="методы строк java (2 элемента)">методы строк java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/modifikator-static/" class="tag-cloud-link tag-link-674 tag-link-position-37" style="font-size: 8pt;" aria-label="модификатор static (2 элемента)">модификатор static</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/modifikator-static-java/" class="tag-cloud-link tag-link-676 tag-link-position-38" style="font-size: 8pt;" aria-label="модификатор static java (2 элемента)">модификатор static java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/modifikatory-java/" class="tag-cloud-link tag-link-514 tag-link-position-39" style="font-size: 11.311827956989pt;" aria-label="модификаторы java (4 элемента)">модификаторы java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/modifikatory-dostupa-java/" class="tag-cloud-link tag-link-518 tag-link-position-40" style="font-size: 8pt;" aria-label="модификаторы доступа java (2 элемента)">модификаторы доступа java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/rabota-so-strokami-java/" class="tag-cloud-link tag-link-634 tag-link-position-41" style="font-size: 9.8064516129032pt;" aria-label="работа со строками java (3 элемента)">работа со строками java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/stroki-v-java/" class="tag-cloud-link tag-link-642 tag-link-position-42" style="font-size: 8pt;" aria-label="строки в java (2 элемента)">строки в java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/%d1%86%d0%b8%d0%ba%d0%bb%d1%8b-java/" class="tag-cloud-link tag-link-63 tag-link-position-43" style="font-size: 11.311827956989pt;" aria-label="циклы java (4 элемента)">циклы java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/cikly-v-java/" class="tag-cloud-link tag-link-478 tag-link-position-44" style="font-size: 8pt;" aria-label="циклы в java (2 элемента)">циклы в java</a>
+<a href="https://vertex-academy.com/tutorials/ru/tag/chto-takoe-git/" class="tag-cloud-link tag-link-1923 tag-link-position-45" style="font-size: 8pt;" aria-label="что такое git (2 элемента)">что такое git</a></div>
+</aside><aside id="text-18" class="widget widget_text clearfix">			<div class="textwidget"><p><script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><br>
+<!-- Sidebar-top-3 --><br>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1426849340859996" data-ad-slot="1002619352" data-ad-format="auto"><iframe id="aswift_4" style="height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important;" src="./Объекты Stateless и Immutable • Vertex Academy_files/saved_resource(9).html"><iframe id="google_ads_frame4" src="./Объекты Stateless и Immutable • Vertex Academy_files/saved_resource(10).html"></iframe></iframe></ins><br>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+</div>
+		</aside><aside id="text-2" class="widget widget_text clearfix"><h3 class="widget-title"><span>Administrator</span></h3>			<div class="textwidget">[userlist inpage='2'  data='profile_fields' include='1']</div>
+		</aside>
+	</div>
+	
+<input type="hidden" name="cD9aiiRBSBdy" id="cD9aiiRBSBdy">
+<script type="text/javascript">
+function fTw40JlD1WiEq() {
+	var o=document.getElementById("cD9aiiRBSBdy");
+	o.value="EUd0lGnTzAEe";
+}
+var bQIEgk9XPvkYZ = document.getElementById("submit");
+if (bQIEgk9XPvkYZ) {
+	var cmbUwVaFr5Zfb = document.getElementById("cD9aiiRBSBdy");
+	var pwORtsbWAJz9k = bQIEgk9XPvkYZ.parentNode;
+	pwORtsbWAJz9k.appendChild(cmbUwVaFr5Zfb, bQIEgk9XPvkYZ);
+	addHandler(bQIEgk9XPvkYZ, "mousedown", fTw40JlD1WiEq);
+	addHandler(bQIEgk9XPvkYZ, "keypress", fTw40JlD1WiEq);
+}
+</script>
+
+		</div><!-- .inner-wrap -->
+	</div><!-- #main -->
+   			<footer id="colophon" class="clearfix">
+			
+			<div class="footer-socket-wrapper clearfix">
+				<div class="inner-wrap">
+					<div class="footer-socket-area">
+                  <div class="footer-socket-right-section">
+   							<div class="social-links clearfix">
+		<ul>
+		<li><a href="https://www.facebook.com/vertex.academy/" target="_blank"><i class="fa fa-facebook"></i></a></li><li><a href="https://vk.com/vertex_academy" target="_blank"><i class="fa fa-vk"></i></a></li><li><a href="https://www.youtube.com/channel/UC7b-dJ56vQaMh2wr972iG6Q" target="_blank"><i class="fa fa-youtube"></i></a></li>		</ul>
+	</div><!-- .social-links -->
+	                  </div>
+                  <div class="footer-socket-left-sectoin">
+   						<div class="copyright">Copyright © 2022 <a href="https://vertex-academy.com/tutorials/ru/" title="Vertex Academy"><span>Vertex Academy</span></a>. All rights reserved.<br></div>                  </div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<a href="https://vertex-academy.com/tutorials/ru/stateless-i-immutable-java/#masthead" id="scroll-up" style="display: none;"><i class="fa fa-chevron-up"></i></a>
+	</div><!-- #page -->
+
+   <div class="self-teach"><a href="https://vertex-academy.com/tutorials/ru/stateless-i-immutable-java/#tutor">Самоучители<span>--узнать детальнее--</span></a></div>
+	<script type="text/javascript" src="./Объекты Stateless и Immutable • Vertex Academy_files/regenerator-runtime.min.js.Без названия" id="regenerator-runtime-js"></script>
+<script type="text/javascript" src="./Объекты Stateless и Immutable • Vertex Academy_files/wp-polyfill.min.js.Без названия" id="wp-polyfill-js"></script>
+<script type="text/javascript" id="contact-form-7-js-extra">
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"https:\/\/vertex-academy.com\/tutorials\/wp-json\/","namespace":"contact-form-7\/v1"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Объекты Stateless и Immutable • Vertex Academy_files/index.js.Без названия" id="contact-form-7-js"></script>
+<script type="text/javascript" src="./Объекты Stateless и Immutable • Vertex Academy_files/jquery.bxslider.min.js.Без названия" id="colormag-bxslider-js"></script>
+<script type="text/javascript" src="./Объекты Stateless и Immutable • Vertex Academy_files/colormag-slider-setting.js.Без названия" id="colormag_slider-js"></script>
+<script type="text/javascript" src="./Объекты Stateless и Immutable • Vertex Academy_files/navigation.js.Без названия" id="colormag-navigation-js"></script>
+<script type="text/javascript" src="./Объекты Stateless и Immutable • Vertex Academy_files/jquery.sticky.js.Без названия" id="colormag-sticky-menu-js"></script>
+<script type="text/javascript" src="./Объекты Stateless и Immutable • Vertex Academy_files/sticky-setting.js.Без названия" id="colormag-sticky-menu-setting-js"></script>
+<script type="text/javascript" src="./Объекты Stateless и Immutable • Vertex Academy_files/jquery.fitvids.js.Без названия" id="colormag-fitvids-js"></script>
+<script type="text/javascript" src="./Объекты Stateless и Immutable • Vertex Academy_files/fitvids-setting.js.Без названия" id="colormag-fitvids-setting-js"></script>
+<script type="text/javascript" src="./Объекты Stateless и Immutable • Vertex Academy_files/api.js.Без названия" id="google-recaptcha-js"></script>
+<script type="text/javascript" id="wpcf7-recaptcha-js-extra">
+/* <![CDATA[ */
+var wpcf7_recaptcha = {"sitekey":"6LfS97UcAAAAALBiQr5tDprxsDxuwBEowV4dUKPD","actions":{"homepage":"homepage","contactform":"contactform"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Объекты Stateless и Immutable • Vertex Academy_files/index.js(1).Без названия" id="wpcf7-recaptcha-js"></script>
+<script type="text/javascript" src="./Объекты Stateless и Immutable • Vertex Academy_files/knews_subscribe.js.Без названия" id="knews_subscribe-js"></script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async="" src="./Объекты Stateless и Immutable • Vertex Academy_files/js"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-‎62731553-2');
+	</script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-62731553-2', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+<div><div class="grecaptcha-badge" data-style="bottomright" style="width: 256px; height: 60px; display: block; transition: right 0.3s ease 0s; position: fixed; bottom: 14px; right: -186px; box-shadow: gray 0px 0px 5px; border-radius: 2px; overflow: hidden;"><div class="grecaptcha-logo"><iframe title="reCAPTCHA" src="./Объекты Stateless и Immutable • Vertex Academy_files/anchor.html" width="256" height="60" role="presentation" name="a-o8v0ztt1dszt" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe></div><div class="grecaptcha-error"></div><textarea id="g-recaptcha-response-100000" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div><iframe style="display: none;" src="./Объекты Stateless и Immutable • Vertex Academy_files/saved_resource(11).html"></iframe></div></body></html>
