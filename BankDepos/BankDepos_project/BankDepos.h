@@ -33,7 +33,7 @@ public:
     void change(float money_c); // Изменение текущего вклада
     string toString(); // Конвертация в строку данных
     void fout(const string& path_out); // вывод в файл объекта
-    BankDepos fin(const string& path_in); // ввод из файла
+    void fin(const string& path_in); // ввод из файла
 };
 
 
