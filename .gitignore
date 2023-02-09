@@ -48,3 +48,16 @@ english_exam/1.jfif
 english_exam/2.jfif
 english_exam/ARZ-2023.png
 english_exam/ENGLISH_EXAM.pptx
+*.vcxproj
+*.filters
+*.user
+*.recipe
+*.log
+*.obj
+*.tlog
+SAOD1/x64/Debug/SAOD1.vcxproj.FileListAbsolute.txt
+SAOD1/x64/Debug/vc143.idb
+SAOD1/x64/Debug/SAOD1.ilk
+SAOD1/.vs/SAOD1/v17/ipch/AutoPCH/3b4a959b67ff12ed/SAOD1.ipch
+SAOD1/.vs/SAOD1/v17/Browse.VC.db
+SAOD1/.vs/SAOD1/v17/.suo
