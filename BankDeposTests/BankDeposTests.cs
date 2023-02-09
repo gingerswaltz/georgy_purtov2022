@@ -42,6 +42,16 @@ namespace BankDeposTests
             BankDepos bankDepos = new BankDepos(1,1,1111,2222);
             Assert.IsNotNull(bankDepos);
         }
+        
+        [TestMethod]
+        public void testChangeMoney()
+        {
+            BankDepos bankDepos = new BankDepos();
+            bankDepos.MoneyChange(-1);
+            Assert.IsTrue(bankDepos.getMoney() == 0);
+        }
+
     }
+
 
 }
