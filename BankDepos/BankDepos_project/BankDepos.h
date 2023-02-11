@@ -8,7 +8,8 @@
 #include <fstream>
 using namespace std;
 
-struct Date {
+struct Date 
+{
     unsigned short day = 1;
     unsigned short month = 1;
 };
