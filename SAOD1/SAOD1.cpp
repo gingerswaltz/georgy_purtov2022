@@ -12,16 +12,14 @@ class itemPricement // Класс описывающий стоимость то
 {
 private:
   string itemName = ""; // название товара
-  float itemPrice = 0.0; // его цена
+  float itemPrice = 0; // его цена
   int itemCount = 0; // его количество
 
 public:
 
     itemPricement () // конструктор без параметров
   {
-  if (itemName=="") throw exception("Name invalid");
-  if (itemPrice<=0) throw exception("Price invalid");
-  if (itemCount<=0) throw exception("Count invalid");
+  
   }
   
   void setName (string & s1) // сеттер названия
@@ -164,9 +162,9 @@ int main ()
     }
 
 /// выведем отчеты сначала в бинарный файл, затем в текстовый
-    item->binaryOut("Documents/git work/georgy_purtov2022/SAOD1/itemPricementBinary.txt");
+    item->binaryOut("itemPricementBinary.txt");
 
-    item->textOut("Documents/git work/georgy_purtov2022/SAOD1/itemPricement.txt");
+    item->textOut("itemPricement.txt");
  
 
     //  для меня (нюансы разработки на двух ОС)
