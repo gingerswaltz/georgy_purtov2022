@@ -1,4 +1,4 @@
-﻿
+
 #include <iostream> // потоковый ввод вывод в консоль
 #include <exception> // исключения
 #include <string> // строки
@@ -122,7 +122,6 @@ int main ()
   int value1 = 0;
   float value2 = 0;
   float finalprice=0.0;
-  
   
   cout << "Enter name of item\n";
   cin >> value;

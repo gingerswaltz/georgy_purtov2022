@@ -1,0 +1,15 @@
+/Users/george_purtov/Documents/git work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/bin/Debug/net6.0/ЭВМ_1
+/Users/george_purtov/Documents/git work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/bin/Debug/net6.0/ЭВМ_1.deps.json
+/Users/george_purtov/Documents/git work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/bin/Debug/net6.0/ЭВМ_1.runtimeconfig.json
+/Users/george_purtov/Documents/git work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/bin/Debug/net6.0/ЭВМ_1.dll
+/Users/george_purtov/Documents/git work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/bin/Debug/net6.0/ЭВМ_1.pdb
+/Users/george_purtov/Documents/git work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/ЭВМ_1.csproj.AssemblyReference.cache
+/Users/george_purtov/Documents/git work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/ЭВМ_1.GeneratedMSBuildEditorConfig.editorconfig
+/Users/george_purtov/Documents/git work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/ЭВМ_1.AssemblyInfoInputs.cache
+/Users/george_purtov/Documents/git work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/ЭВМ_1.AssemblyInfo.cs
+/Users/george_purtov/Documents/git work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/ЭВМ_1.csproj.CoreCompileInputs.cache
+/Users/george_purtov/Documents/git work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/ЭВМ_1.dll
+/Users/george_purtov/Documents/git work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/refint/ЭВМ_1.dll
+/Users/george_purtov/Documents/git work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/ЭВМ_1.pdb
+/Users/george_purtov/Documents/git work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/ЭВМ_1.genruntimeconfig.cache
+/Users/george_purtov/Documents/git work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/ref/ЭВМ_1.dll
