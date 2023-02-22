@@ -15,9 +15,13 @@ class MainFunc
         float value2 = 0;
         int count = 0;
         List<Point> listPoint = new List<Point>();
+        /// Создание файлового потока с созданием/открытием файла
         StreamWriter fs = new StreamWriter("../../../out.txt");
+        fs.WriteLine("Напишите программу, определяющую какая из двух точек,\nзаданных своими координатами, расположена ближе к началу координат.\nКакой случай для алгоритма является наилучшим? Нанхудшим?\nСколько сравнений требуется этому алгоритму? Результаты тестирования вывести в текстовый файл.\n");
+
         while (count<5) // делаем 5 кругов
         {
+        
             count++;
             Console.WriteLine($"Count {count} of 5\n");
             // ввод точек x1,y1
@@ -37,16 +41,9 @@ class MainFunc
 
             string str = point.calcDist(); // Расчёт + получение данных о времени выполнения работы
 
-            /// Создание файлового потока с созданием/открытием файла
-            try
-            {
-                // Записываем в текстовый файл время выполнения моей функции
-                fs.WriteLine($"Время выполнения функции, проход {count} " + str);
-            }
-            catch (Exception e) // Если файл не создался, то бросим исключение
-            {
-                Console.WriteLine("Exception: " + e.Message);
-            }
+            
+           fs.WriteLine ($"Время выполнения функции, проход {count}, точки x1, y1 {point.get_FirstPoint()}, точки x2,y2 {point.get_SecondPoint()}:  " + str);
+            
            
 
         }
