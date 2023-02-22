@@ -1,4 +1,3 @@
-using BankDeposit;
 using System;
 namespace BankDeposTests
 {
