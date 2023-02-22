@@ -13,18 +13,18 @@
 /Users/george_purtov/Documents/git work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/ЭВМ_1.pdb
 /Users/george_purtov/Documents/git work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/ЭВМ_1.genruntimeconfig.cache
 /Users/george_purtov/Documents/git work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/ref/ЭВМ_1.dll
-C:\Users\George\Desktop\git_work\georgy_purtov2022\EVM\ЭВМ_1\ЭВМ_1\obj\Debug\net6.0\ЭВМ_1.csproj.AssemblyReference.cache
-C:\Users\George\Desktop\git_work\georgy_purtov2022\EVM\ЭВМ_1\ЭВМ_1\obj\Debug\net6.0\ЭВМ_1.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\George\Desktop\git_work\georgy_purtov2022\EVM\ЭВМ_1\ЭВМ_1\obj\Debug\net6.0\ЭВМ_1.AssemblyInfoInputs.cache
-C:\Users\George\Desktop\git_work\georgy_purtov2022\EVM\ЭВМ_1\ЭВМ_1\obj\Debug\net6.0\ЭВМ_1.AssemblyInfo.cs
-C:\Users\George\Desktop\git_work\georgy_purtov2022\EVM\ЭВМ_1\ЭВМ_1\obj\Debug\net6.0\ЭВМ_1.csproj.CoreCompileInputs.cache
-C:\Users\George\Desktop\git_work\georgy_purtov2022\EVM\ЭВМ_1\ЭВМ_1\obj\Debug\net6.0\ЭВМ_1.dll
-C:\Users\George\Desktop\git_work\georgy_purtov2022\EVM\ЭВМ_1\ЭВМ_1\obj\Debug\net6.0\refint\ЭВМ_1.dll
-C:\Users\George\Desktop\git_work\georgy_purtov2022\EVM\ЭВМ_1\ЭВМ_1\obj\Debug\net6.0\ЭВМ_1.pdb
-C:\Users\George\Desktop\git_work\georgy_purtov2022\EVM\ЭВМ_1\ЭВМ_1\bin\Debug\net6.0\ЭВМ_1.exe
-C:\Users\George\Desktop\git_work\georgy_purtov2022\EVM\ЭВМ_1\ЭВМ_1\bin\Debug\net6.0\ЭВМ_1.deps.json
-C:\Users\George\Desktop\git_work\georgy_purtov2022\EVM\ЭВМ_1\ЭВМ_1\bin\Debug\net6.0\ЭВМ_1.runtimeconfig.json
-C:\Users\George\Desktop\git_work\georgy_purtov2022\EVM\ЭВМ_1\ЭВМ_1\bin\Debug\net6.0\ЭВМ_1.dll
-C:\Users\George\Desktop\git_work\georgy_purtov2022\EVM\ЭВМ_1\ЭВМ_1\bin\Debug\net6.0\ЭВМ_1.pdb
-C:\Users\George\Desktop\git_work\georgy_purtov2022\EVM\ЭВМ_1\ЭВМ_1\obj\Debug\net6.0\ЭВМ_1.genruntimeconfig.cache
-C:\Users\George\Desktop\git_work\georgy_purtov2022\EVM\ЭВМ_1\ЭВМ_1\obj\Debug\net6.0\ref\ЭВМ_1.dll
+C:/Users/George/Desktop/git_work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/ЭВМ_1.csproj.AssemblyReference.cache
+C:/Users/George/Desktop/git_work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/ЭВМ_1.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/George/Desktop/git_work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/ЭВМ_1.AssemblyInfoInputs.cache
+C:/Users/George/Desktop/git_work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/ЭВМ_1.AssemblyInfo.cs
+C:/Users/George/Desktop/git_work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/ЭВМ_1.csproj.CoreCompileInputs.cache
+C:/Users/George/Desktop/git_work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/ЭВМ_1.dll
+C:/Users/George/Desktop/git_work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/refint/ЭВМ_1.dll
+C:/Users/George/Desktop/git_work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/ЭВМ_1.pdb
+C:/Users/George/Desktop/git_work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/bin/Debug/net6.0/ЭВМ_1.exe
+C:/Users/George/Desktop/git_work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/bin/Debug/net6.0/ЭВМ_1.deps.json
+C:/Users/George/Desktop/git_work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/bin/Debug/net6.0/ЭВМ_1.runtimeconfig.json
+C:/Users/George/Desktop/git_work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/bin/Debug/net6.0/ЭВМ_1.dll
+C:/Users/George/Desktop/git_work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/bin/Debug/net6.0/ЭВМ_1.pdb
+C:/Users/George/Desktop/git_work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/ЭВМ_1.genruntimeconfig.cache
+C:/Users/George/Desktop/git_work/georgy_purtov2022/EVM/ЭВМ_1/ЭВМ_1/obj/Debug/net6.0/ref/ЭВМ_1.dll

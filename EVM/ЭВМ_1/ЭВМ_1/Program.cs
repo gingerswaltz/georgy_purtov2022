@@ -10,19 +10,20 @@ public static class  Fast
         Stopwatch stopWatch = new();
         TimeSpan ts = new TimeSpan();
         decimal sum = 0;
-       
+        bool flag = false;
        while (count <= 4)
         {
             count++;
             stopWatch.Start();
-            while (i <= iter)
+
+            for(i=0; i<=iter; i++)
             {
-                i++;
                 _a += _b;
             }
+            
             stopWatch.Stop();
             ts = stopWatch.Elapsed;
-            sum += ts.Milliseconds; 
+            sum += stopWatch.ElapsedMilliseconds+ts.Minutes+ts.Seconds;
             
         }
         
