@@ -11,8 +11,7 @@ public static class  Fast
         double time = 0;
         var sum = 0.0;
         
-        double timeDouble = 0;
-       while (count <= 4)
+        while (count <= 4)
         {
             count++;
             stopWatch.Start();
@@ -26,12 +25,12 @@ public static class  Fast
 
             time = stopWatch.ElapsedMilliseconds;
       
-            time /= 1000; // получаем в секундах
+            time /= 1000; // получаем время в секундах
             time /= iter; // получаем сколько одна итерация выполняется
             sum += time;
         }
         sum /= 4;
-        return 1/sum;
+        return 1 / sum;
     }
 }
 
