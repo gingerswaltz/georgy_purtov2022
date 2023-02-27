@@ -4,14 +4,14 @@ public static class  Fast
 {
     public static double calcFast(int _a, int _b)
     {
-        const int iter = 1000000;
+        const int iter = 10000000;
         int i = 0;
         int count = 0;
         Stopwatch stopWatch = new();
         double time = 0;
         var sum = 0.0;
         
-       while (count <= 4)
+        while (count <= 4)
         {
             count++;
             stopWatch.Start();
@@ -25,12 +25,12 @@ public static class  Fast
 
             time = stopWatch.ElapsedMilliseconds;
       
-            time /= 1000; // получаем в секундах
+            time /= 1000; // получаем время в секундах
             time /= iter; // получаем сколько одна итерация выполняется
             sum += time;
         }
         sum /= 4;
-        return 1/sum;
+        return 1 / sum;
     }
 }
 

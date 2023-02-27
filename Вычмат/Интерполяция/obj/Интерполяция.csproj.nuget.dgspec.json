@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\George\\Desktop\\git_work\\georgy_purtov2022\\EVM\\ЭВМ_1\\ЭВМ_1\\ЭВМ_1.csproj": {}
+    "C:\\Users\\George\\Desktop\\git_work\\georgy_purtov2022\\Вычмат\\Интерполяция\\Интерполяция.csproj": {}
   },
   "projects": {
-    "C:\\Users\\George\\Desktop\\git_work\\georgy_purtov2022\\EVM\\ЭВМ_1\\ЭВМ_1\\ЭВМ_1.csproj": {
+    "C:\\Users\\George\\Desktop\\git_work\\georgy_purtov2022\\Вычмат\\Интерполяция\\Интерполяция.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\George\\Desktop\\git_work\\georgy_purtov2022\\EVM\\ЭВМ_1\\ЭВМ_1\\ЭВМ_1.csproj",
-        "projectName": "ЭВМ_1",
-        "projectPath": "C:\\Users\\George\\Desktop\\git_work\\georgy_purtov2022\\EVM\\ЭВМ_1\\ЭВМ_1\\ЭВМ_1.csproj",
+        "projectUniqueName": "C:\\Users\\George\\Desktop\\git_work\\georgy_purtov2022\\Вычмат\\Интерполяция\\Интерполяция.csproj",
+        "projectName": "Интерполяция",
+        "projectPath": "C:\\Users\\George\\Desktop\\git_work\\georgy_purtov2022\\Вычмат\\Интерполяция\\Интерполяция.csproj",
         "packagesPath": "C:\\Users\\George\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\George\\Desktop\\git_work\\georgy_purtov2022\\EVM\\ЭВМ_1\\ЭВМ_1\\obj\\",
+        "outputPath": "C:\\Users\\George\\Desktop\\git_work\\georgy_purtov2022\\Вычмат\\Интерполяция\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
