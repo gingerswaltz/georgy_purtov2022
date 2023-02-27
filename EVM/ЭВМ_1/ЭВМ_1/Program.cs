@@ -4,14 +4,13 @@ public static class  Fast
 {
     public static double calcFast(int _a, int _b)
     {
-        const int iter = 10000000;
+        const int iter = 1000000;
         int i = 0;
         int count = 0;
         Stopwatch stopWatch = new();
         double time = 0;
         var sum = 0.0;
         
-        double timeDouble = 0;
        while (count <= 4)
         {
             count++;
