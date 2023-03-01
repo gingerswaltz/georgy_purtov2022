@@ -33,7 +33,7 @@
         int n = x_.Length;  
         double _newton = y_[0];
         double prod = 1;
-        int k, i, j = 0;
+        int k = 0;
 
         for (k=1; k<n; k++)
         {

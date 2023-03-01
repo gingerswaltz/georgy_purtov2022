@@ -1,15 +1,30 @@
-C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Интерполяция\bin\Debug\net6.0\Интерполяция.exe
-C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Интерполяция\bin\Debug\net6.0\Интерполяция.deps.json
-C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Интерполяция\bin\Debug\net6.0\Интерполяция.runtimeconfig.json
-C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Интерполяция\bin\Debug\net6.0\Интерполяция.dll
-C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Интерполяция\bin\Debug\net6.0\Интерполяция.pdb
-C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Интерполяция\obj\Debug\net6.0\Интерполяция.csproj.AssemblyReference.cache
-C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Интерполяция\obj\Debug\net6.0\Интерполяция.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Интерполяция\obj\Debug\net6.0\Интерполяция.AssemblyInfoInputs.cache
-C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Интерполяция\obj\Debug\net6.0\Интерполяция.AssemblyInfo.cs
-C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Интерполяция\obj\Debug\net6.0\Интерполяция.csproj.CoreCompileInputs.cache
-C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Интерполяция\obj\Debug\net6.0\Интерполяция.dll
-C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Интерполяция\obj\Debug\net6.0\refint\Интерполяция.dll
-C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Интерполяция\obj\Debug\net6.0\Интерполяция.pdb
-C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Интерполяция\obj\Debug\net6.0\Интерполяция.genruntimeconfig.cache
-C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Интерполяция\obj\Debug\net6.0\ref\Интерполяция.dll
+C:/Users/George/Desktop/git_work/georgy_purtov2022/Вычмат/Интерполяция/bin/Debug/net6.0/Интерполяция.exe
+C:/Users/George/Desktop/git_work/georgy_purtov2022/Вычмат/Интерполяция/bin/Debug/net6.0/Интерполяция.deps.json
+C:/Users/George/Desktop/git_work/georgy_purtov2022/Вычмат/Интерполяция/bin/Debug/net6.0/Интерполяция.runtimeconfig.json
+C:/Users/George/Desktop/git_work/georgy_purtov2022/Вычмат/Интерполяция/bin/Debug/net6.0/Интерполяция.dll
+C:/Users/George/Desktop/git_work/georgy_purtov2022/Вычмат/Интерполяция/bin/Debug/net6.0/Интерполяция.pdb
+C:/Users/George/Desktop/git_work/georgy_purtov2022/Вычмат/Интерполяция/obj/Debug/net6.0/Интерполяция.csproj.AssemblyReference.cache
+C:/Users/George/Desktop/git_work/georgy_purtov2022/Вычмат/Интерполяция/obj/Debug/net6.0/Интерполяция.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/George/Desktop/git_work/georgy_purtov2022/Вычмат/Интерполяция/obj/Debug/net6.0/Интерполяция.AssemblyInfoInputs.cache
+C:/Users/George/Desktop/git_work/georgy_purtov2022/Вычмат/Интерполяция/obj/Debug/net6.0/Интерполяция.AssemblyInfo.cs
+C:/Users/George/Desktop/git_work/georgy_purtov2022/Вычмат/Интерполяция/obj/Debug/net6.0/Интерполяция.csproj.CoreCompileInputs.cache
+C:/Users/George/Desktop/git_work/georgy_purtov2022/Вычмат/Интерполяция/obj/Debug/net6.0/Интерполяция.dll
+C:/Users/George/Desktop/git_work/georgy_purtov2022/Вычмат/Интерполяция/obj/Debug/net6.0/refint/Интерполяция.dll
+C:/Users/George/Desktop/git_work/georgy_purtov2022/Вычмат/Интерполяция/obj/Debug/net6.0/Интерполяция.pdb
+C:/Users/George/Desktop/git_work/georgy_purtov2022/Вычмат/Интерполяция/obj/Debug/net6.0/Интерполяция.genruntimeconfig.cache
+C:/Users/George/Desktop/git_work/georgy_purtov2022/Вычмат/Интерполяция/obj/Debug/net6.0/ref/Интерполяция.dll
+/Users/george_purtov/Documents/git work/georgy_purtov2022/Вычмат/Интерполяция/bin/Debug/net6.0/Интерполяция
+/Users/george_purtov/Documents/git work/georgy_purtov2022/Вычмат/Интерполяция/bin/Debug/net6.0/Интерполяция.deps.json
+/Users/george_purtov/Documents/git work/georgy_purtov2022/Вычмат/Интерполяция/bin/Debug/net6.0/Интерполяция.runtimeconfig.json
+/Users/george_purtov/Documents/git work/georgy_purtov2022/Вычмат/Интерполяция/bin/Debug/net6.0/Интерполяция.dll
+/Users/george_purtov/Documents/git work/georgy_purtov2022/Вычмат/Интерполяция/bin/Debug/net6.0/Интерполяция.pdb
+/Users/george_purtov/Documents/git work/georgy_purtov2022/Вычмат/Интерполяция/obj/Debug/net6.0/Интерполяция.csproj.AssemblyReference.cache
+/Users/george_purtov/Documents/git work/georgy_purtov2022/Вычмат/Интерполяция/obj/Debug/net6.0/Интерполяция.GeneratedMSBuildEditorConfig.editorconfig
+/Users/george_purtov/Documents/git work/georgy_purtov2022/Вычмат/Интерполяция/obj/Debug/net6.0/Интерполяция.AssemblyInfoInputs.cache
+/Users/george_purtov/Documents/git work/georgy_purtov2022/Вычмат/Интерполяция/obj/Debug/net6.0/Интерполяция.AssemblyInfo.cs
+/Users/george_purtov/Documents/git work/georgy_purtov2022/Вычмат/Интерполяция/obj/Debug/net6.0/Интерполяция.csproj.CoreCompileInputs.cache
+/Users/george_purtov/Documents/git work/georgy_purtov2022/Вычмат/Интерполяция/obj/Debug/net6.0/Интерполяция.dll
+/Users/george_purtov/Documents/git work/georgy_purtov2022/Вычмат/Интерполяция/obj/Debug/net6.0/refint/Интерполяция.dll
+/Users/george_purtov/Documents/git work/georgy_purtov2022/Вычмат/Интерполяция/obj/Debug/net6.0/Интерполяция.pdb
+/Users/george_purtov/Documents/git work/georgy_purtov2022/Вычмат/Интерполяция/obj/Debug/net6.0/Интерполяция.genruntimeconfig.cache
+/Users/george_purtov/Documents/git work/georgy_purtov2022/Вычмат/Интерполяция/obj/Debug/net6.0/ref/Интерполяция.dll
