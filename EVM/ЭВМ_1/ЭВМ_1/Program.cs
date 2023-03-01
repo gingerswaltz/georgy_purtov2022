@@ -30,6 +30,7 @@ public static class  Fast
             sum += time;
         }
         sum /= 4;
+        Console.WriteLine("time for 1 operation: "+time);
         return 1 / sum;
     }
 }
