@@ -1,12 +1,11 @@
 ﻿<Properties StartupConfiguration="{920B6B07-B882-400C-9C8E-B5717197230E}|Default">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.ЭВМ__1 PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workbench ActiveDocument="ЭВМ_1/Program.cs">
     <Files>
-      <File FileName="ЭВМ_1/Program.cs" Line="7" Column="33" />
+      <File FileName="ЭВМ_1/Program.cs" Line="10" Column="37" />
       <File FileName="../../../../../../../usr/local/share/dotnet/sdk/7.0.102/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" />
     </Files>
     <Pads>
@@ -25,6 +24,7 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>
