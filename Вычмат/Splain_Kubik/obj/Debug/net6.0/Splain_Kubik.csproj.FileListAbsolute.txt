@@ -28,3 +28,18 @@ C:/Users/George/Desktop/Splain_Kubik/obj/Debug/net6.0/ref/Splain_Kubik.dll
 /Users/george_purtov/Documents/git work/georgy_purtov2022/Вычмат/Splain_Kubik/obj/Debug/net6.0/Splain_Kubik.pdb
 /Users/george_purtov/Documents/git work/georgy_purtov2022/Вычмат/Splain_Kubik/obj/Debug/net6.0/Splain_Kubik.genruntimeconfig.cache
 /Users/george_purtov/Documents/git work/georgy_purtov2022/Вычмат/Splain_Kubik/obj/Debug/net6.0/ref/Splain_Kubik.dll
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Splain_Kubik\bin\Debug\net6.0\Splain_Kubik.exe
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Splain_Kubik\bin\Debug\net6.0\Splain_Kubik.deps.json
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Splain_Kubik\bin\Debug\net6.0\Splain_Kubik.runtimeconfig.json
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Splain_Kubik\bin\Debug\net6.0\Splain_Kubik.dll
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Splain_Kubik\bin\Debug\net6.0\Splain_Kubik.pdb
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Splain_Kubik\obj\Debug\net6.0\Splain_Kubik.csproj.AssemblyReference.cache
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Splain_Kubik\obj\Debug\net6.0\Splain_Kubik.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Splain_Kubik\obj\Debug\net6.0\Splain_Kubik.AssemblyInfoInputs.cache
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Splain_Kubik\obj\Debug\net6.0\Splain_Kubik.AssemblyInfo.cs
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Splain_Kubik\obj\Debug\net6.0\Splain_Kubik.csproj.CoreCompileInputs.cache
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Splain_Kubik\obj\Debug\net6.0\Splain_Kubik.dll
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Splain_Kubik\obj\Debug\net6.0\refint\Splain_Kubik.dll
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Splain_Kubik\obj\Debug\net6.0\Splain_Kubik.pdb
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Splain_Kubik\obj\Debug\net6.0\Splain_Kubik.genruntimeconfig.cache
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Вычмат\Splain_Kubik\obj\Debug\net6.0\ref\Splain_Kubik.dll
