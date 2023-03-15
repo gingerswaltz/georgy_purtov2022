@@ -1,0 +1,4 @@
+Name of item: Toys
+Item count: 50
+Price of 1 item: 100$
+Final price: 5000$
