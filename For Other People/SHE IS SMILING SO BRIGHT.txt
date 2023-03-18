@@ -31,5 +31,24 @@ Console.WriteLine(completionResult.Choices[0].Text);
 Это лишь общий пример, и реализация интеграции ChatGPT в приложение на C# может различаться в зависимости от требований и специфики вашего проекта.
 
 
+import openai
+import json
+
+openai.api_key = "ваш_api_ключ"
+
+prompt = "Какой самый популярный язык программирования?"
+model = "text-davinci-002"
+temperature = 0.5
+max_tokens = 50
+
+response = openai.Completion.create(
+    engine=model,
+    prompt=prompt,
+    temperature=temperature,
+    max_tokens=max_tokens
+)
+
+generated_text = response.choices[0].text.strip()
+print(generated_text)
 
 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
