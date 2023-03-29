@@ -8,10 +8,12 @@ class MainClass
         int n, m;
         string[] line;
         StreamWriter sw = new("out.txt");
+     
         Console.WriteLine("Input N,M");
         // Считываем данные
         line = Console.ReadLine().Split(' ');
        
+
         n = int.Parse(line[0]);
         m = int.Parse(line[1]);
         sw.WriteLine($"{n}"+$" {m}");
