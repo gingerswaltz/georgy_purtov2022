@@ -41,10 +41,20 @@ public static class Differentiation
             for (int i = 0; i < n - j; i++)
             {
                 y[i, j] = (y[i + 1, j - 1] - y[i, j - 1]);
-                string s1 = string.Format("{0:F6}", y[i, j]);
-                Console.WriteLine($"    y'x0={s1}"+'\t'+" ");
+                
             }
             
+        }
+
+        for (int j=1; j<6; j++)
+        {
+             for (int i=0; i<6; i++)
+            {
+
+                string s1 = string.Format("{0:F6}", y[i, j]);
+                Console.WriteLine($"    y'x0={s1}" + '\t' + " ");
+            }
+
         }
         Console.Write("\n");
 

@@ -13,7 +13,7 @@ public static class Integration
     public static double SolutionTrapecia() 
     
     {
-        dynamic n = 25;
+        dynamic n = 5000;
         dynamic a = 2 * Pi;
         dynamic b =3*Pi;
         dynamic h = (b - a) / n;
@@ -30,21 +30,21 @@ public static class Integration
 
     public static double SolutionSimpson()
     {
-        dynamic n = 8;
-        dynamic m = 4;
+        dynamic n = 16;
+        dynamic m = n/2;
         dynamic a = 2 * Pi;
         dynamic b = 3 * Pi;
         dynamic h = (b - a) / n;
         dynamic s1 = 0;
 
-        for (int k = 1;k < m;k++) 
+        for (int k = 1;k <= m;k++) 
         {
-            s1=s1+ f(a + (2*k-1) * h);  
+            s1= s1+ f(a + (2*k-1) * h);  
         }
         
         dynamic s2 = 0;
         
-        for (int k = 1; k<m-1; k++)
+        for (int k = 1; k<=m-1; k++)
         {
             s2=s2+f(a+2*k*h); 
         }
