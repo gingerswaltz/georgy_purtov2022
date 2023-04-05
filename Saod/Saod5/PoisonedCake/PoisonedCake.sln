@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoisonedCake", "PoisonedCake.csproj", "{AFBAD285-B18C-4635-81E3-5DCD1AF59862}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFBAD285-B18C-4635-81E3-5DCD1AF59862}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFBAD285-B18C-4635-81E3-5DCD1AF59862}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFBAD285-B18C-4635-81E3-5DCD1AF59862}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFBAD285-B18C-4635-81E3-5DCD1AF59862}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E888C85A-278D-4A4D-8C87-F7CF135F8B4D}
+	EndGlobalSection
+EndGlobal
