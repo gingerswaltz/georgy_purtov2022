@@ -17,3 +17,8 @@ SAOD1/itemPricementBinary.txt
 *.v2
 Saod/saod4/TopologicalSort/.vs/TopologicalSort/v17/.suo
 Saod/saod4/TopologicalSort/.vs/TopologicalSort/v17/.suo
+Вычмат/Koshi/.vs/Koshi/v17/.suo
+*.vsidx
+*.lock
+*.cache
+*.json
