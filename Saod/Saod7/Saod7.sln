@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saod7", "Saod7.csproj", "{08799033-4A76-4E69-8333-B1CB66647DBF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{08799033-4A76-4E69-8333-B1CB66647DBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08799033-4A76-4E69-8333-B1CB66647DBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08799033-4A76-4E69-8333-B1CB66647DBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08799033-4A76-4E69-8333-B1CB66647DBF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {408FF519-3796-45C2-BAC4-E74CADEA5B55}
+	EndGlobalSection
+EndGlobal

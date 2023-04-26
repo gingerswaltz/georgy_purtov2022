@@ -1,0 +1,2 @@
+Integer search time: 00:00:00.0008022
+Double search time: 00:00:00.0005122
