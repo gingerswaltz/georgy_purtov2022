@@ -1,0 +1,15 @@
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod\SAOD8\Queue\bin\Debug\net6.0\Queue.exe
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod\SAOD8\Queue\bin\Debug\net6.0\Queue.deps.json
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod\SAOD8\Queue\bin\Debug\net6.0\Queue.runtimeconfig.json
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod\SAOD8\Queue\bin\Debug\net6.0\Queue.dll
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod\SAOD8\Queue\bin\Debug\net6.0\Queue.pdb
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod\SAOD8\Queue\obj\Debug\net6.0\Queue.csproj.AssemblyReference.cache
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod\SAOD8\Queue\obj\Debug\net6.0\Queue.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod\SAOD8\Queue\obj\Debug\net6.0\Queue.AssemblyInfoInputs.cache
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod\SAOD8\Queue\obj\Debug\net6.0\Queue.AssemblyInfo.cs
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod\SAOD8\Queue\obj\Debug\net6.0\Queue.csproj.CoreCompileInputs.cache
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod\SAOD8\Queue\obj\Debug\net6.0\Queue.dll
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod\SAOD8\Queue\obj\Debug\net6.0\refint\Queue.dll
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod\SAOD8\Queue\obj\Debug\net6.0\Queue.pdb
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod\SAOD8\Queue\obj\Debug\net6.0\Queue.genruntimeconfig.cache
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod\SAOD8\Queue\obj\Debug\net6.0\ref\Queue.dll

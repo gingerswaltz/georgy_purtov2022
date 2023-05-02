@@ -4,7 +4,19 @@ using System.Diagnostics;
 
 public static class Search
 {
-    public static int BinarySearch<T>(T[] array, T key) where T : IComparable<T> 
+    public static int LinearSearch<T>(T[] array, T key) where T : IComparable<T>
+    {
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (array[i].Equals(key))
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+public static int BinarySearch<T>(T[] array, T key) where T : IComparable<T> 
         // название метода, где <T> - это обобщенный тип, который позволяет использовать метод с различными типами данных.
         //where T : IComparable<T> - ограничение типа, которое гарантирует, что тип T будет реализовывать интерфейс IComparable<T>, который позволяет сравнивать объекты типа T.
 
@@ -38,25 +50,22 @@ public static class MainF
     public static void Main(string[] args)
     {
         Random rand = new Random();
-        int[] intArray = new int[500];
-        double[] doubleArray = new double[500];
-        for (int i = 0; i < 500; i++)
+        int[] intArray = new int[1500];
+        for (int i = 0; i < intArray.Length; i++)
         {
             intArray[i] = rand.Next(1000);
-            doubleArray[i] = rand.NextDouble() * 1000;
         }
-               
-        Stopwatch stopwatch = new Stopwatch(); // слздаем таймер
-        stopwatch.Start(); // запускаем таймер
-        int intIndex = Search.BinarySearch(intArray, 42); // выполняем бинарный поиск по интовому массиву
-        stopwatch.Stop(); // остановили
-        TimeSpan intTime = stopwatch.Elapsed; // сняли время
-        stopwatch.Reset(); // обнулили и по новой для double массива
-        stopwatch.Start();
-        int doubleIndex = Search.BinarySearch(doubleArray, 42.0);
-        stopwatch.Stop();
-        TimeSpan doubleTime = stopwatch.Elapsed;
-        File.WriteAllText("results.txt", $"Integer search time: {intTime}\nDouble search time: {doubleTime}"); // вывод в текстовый файл
 
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.Start();
+        int intIndex = Search.BinarySearch(intArray, 750);
+        stopwatch.Stop();
+        TimeSpan intBinaryTime = stopwatch.Elapsed;
+        stopwatch.Reset();
+       stopwatch.Start();
+        int intLinearIndex = Search.LinearSearch(intArray, 750);
+        stopwatch.Stop();
+        TimeSpan intLinearTime = stopwatch.Elapsed;
+        File.WriteAllText("results.txt", $" binary search time: {intBinaryTime}\n linear search time: {intLinearTime}");
     }
 }

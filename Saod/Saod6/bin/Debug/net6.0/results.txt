@@ -1,2 +1,2 @@
-Integer search time: 00:00:00.0008022
-Double search time: 00:00:00.0005122
+ binary search time: 00:00:00.0003083
+ linear search time: 00:00:00.0000761
