@@ -11,18 +11,31 @@ public class Koshi
     public static void Euler(double x0, double y0, double h, double k)
     {
         double[] xx= new double[11] {0,1,2,3,4,5,6,7,8,9,10 };
-        double[] yy = new double[11] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        double[] yy = new double[11] { 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         for (int n = 0; n < k; n++)
         {
-            Console.Write(n +" ");
-            Console.Write(xx[n] +" ");
-            Console.Write(yy[n]+" ");
+            
             if (n<k)
             {
                 xx[n + 1] = xx[n] + h;
                 yy[n + 1] = yy[n] + h*f(xx[n], yy[n]);
             }
         }
+        for (int j = 0; j < k; j++)
+        {
+            string fstr = xx[j].ToString("F4");
+            Console.Write(String.Format("{0,3}", $"xx={fstr} "));
+        }
+
+        Console.WriteLine();
+
+        for (int j = 0; j < k; j++)
+        {
+            string fstr = yy[j].ToString("F4");
+            Console.Write(String.Format("{0,3}", $"yy={fstr} "));
+        }
+         
+
     }
 
     public static void EulerMod(double x0, double y0, double h, double k) 
@@ -33,12 +46,25 @@ public class Koshi
         yy[0] = y0;
         for (int n =0; n < k; n++)
         {
-            Console.Write(yy[n] +" ");
             if (n< k)
             {
                 xx[n+1] = xx[n] + h;
                 yy[n+1] = yy[n] + h * f(xx[n]+h/2, yy[n] + (h / 2) * f(xx[n], yy[n]));
             }
+        }
+
+        for (int j = 0; j < k; j++)
+        {
+            string fstr = xx[j].ToString("F4");
+            Console.Write(String.Format("{0,3}", $"xx={fstr} "));
+        }
+
+        Console.WriteLine();
+
+        for (int j = 0; j < k; j++)
+        {
+            string fstr = yy[j].ToString("F4");
+            Console.Write(String.Format("{0,3}", $"yy={fstr} "));
         }
 
 
@@ -52,7 +78,6 @@ public class Koshi
         yy[0] = y0;
         for (int n = 0; n < k; n++)
         {
-            Console.Write(yy[n] + " ");
               if (n< k)
             {
                 xx[n + 1] = xx[n] + h;
@@ -64,8 +89,19 @@ public class Koshi
 
             }
         }
+       
+
+        Console.WriteLine();
+
+        for (int j = 0; j < k; j++)
+        {
+            string fstr = yy[j].ToString("F4");
+            Console.Write(String.Format("{0,3}", $"yy={fstr} "));
+        }
+
+
     }
-    
+
 
     public static void Adams(double x0, double y0, double h, double k)
     {
@@ -79,7 +115,6 @@ public class Koshi
         Console.ResetColor();
         for (int n=0; n<k; n++)
         {
-            Console.Write(yy[n] + " ");
              if (n < 1)
             {
                 xx[n + 1] = xx[n] + h;
@@ -98,8 +133,14 @@ public class Koshi
                 yy[n + 1] = yy[n] + (h / 2) * c;
 
             }
-        }
+            
 
+        }
+        for (int j = 0; j < k; j++)
+        {
+            string fstr = yy[j].ToString("F4");
+            Console.Write(String.Format("{0,3}", $"yy={fstr} "));
+        }
         Console.WriteLine();
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("\tyn A2");
@@ -109,7 +150,6 @@ public class Koshi
         for (int n=0; n<k; n++)
         {
 
-            Console.Write(yy[n] + " ");
              if (n < 2)
             {
                 xx[n + 1] = xx[n] + h;
@@ -129,7 +169,19 @@ public class Koshi
                 dynamic d = 23 * a - 16 * b + 5 * c;
                 yy[n + 1] = yy[n] + (h / 12) * d;
             }
+            
+
+
+           
+
         }
+
+        for (int j = 0; j < k; j++)
+        {
+            string fstr = yy[j].ToString("F4");
+            Console.Write(String.Format("{0,3}", $"yy={fstr} "));
+        }
+
         Console.WriteLine();
         // method m=3
         Console.ForegroundColor = ConsoleColor.Red;
@@ -139,7 +191,6 @@ public class Koshi
        {
 
 
-            Console.Write(yy[n] + " ");
             if (n < 3)
             {
                 xx[n + 1] = xx[n] + h;
@@ -159,9 +210,13 @@ public class Koshi
                 yy[n + 1] = yy[n] + (h / 24) * e;
 
             }
-
+          
         }
-
+        for (int j = 0; j < k; j++)
+        {
+            string fstr = yy[j].ToString("F4");
+            Console.Write(String.Format("{0,3}", $"yy={fstr} "));
+        }
     }
     
     static void Main(string[] args) 
@@ -191,6 +246,8 @@ public class Koshi
         Console.WriteLine("\nAdams: ");
         Console.ResetColor();
         Adams(0, 1, 0.1, 10);
+        Console.WriteLine();
+
     }
 
 }

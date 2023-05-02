@@ -28,3 +28,18 @@ C:/Users/George/Desktop/git_work/georgy_purtov2022/Вычмат/Koshi/obj/Debug/
 /Users/george_purtov/Documents/git work/georgy_purtov2022/Вычмат/Koshi/obj/Debug/net6.0/Koshi.pdb
 /Users/george_purtov/Documents/git work/georgy_purtov2022/Вычмат/Koshi/obj/Debug/net6.0/Koshi.genruntimeconfig.cache
 /Users/george_purtov/Documents/git work/georgy_purtov2022/Вычмат/Koshi/obj/Debug/net6.0/ref/Koshi.dll
+C:\Users\User\Documents\GitHub\georgy_purtov2022\Вычмат\Koshi\bin\Debug\net6.0\Koshi.exe
+C:\Users\User\Documents\GitHub\georgy_purtov2022\Вычмат\Koshi\bin\Debug\net6.0\Koshi.deps.json
+C:\Users\User\Documents\GitHub\georgy_purtov2022\Вычмат\Koshi\bin\Debug\net6.0\Koshi.runtimeconfig.json
+C:\Users\User\Documents\GitHub\georgy_purtov2022\Вычмат\Koshi\bin\Debug\net6.0\Koshi.dll
+C:\Users\User\Documents\GitHub\georgy_purtov2022\Вычмат\Koshi\bin\Debug\net6.0\ref\Koshi.dll
+C:\Users\User\Documents\GitHub\georgy_purtov2022\Вычмат\Koshi\bin\Debug\net6.0\Koshi.pdb
+C:\Users\User\Documents\GitHub\georgy_purtov2022\Вычмат\Koshi\obj\Debug\net6.0\Koshi.csproj.AssemblyReference.cache
+C:\Users\User\Documents\GitHub\georgy_purtov2022\Вычмат\Koshi\obj\Debug\net6.0\Koshi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Documents\GitHub\georgy_purtov2022\Вычмат\Koshi\obj\Debug\net6.0\Koshi.AssemblyInfoInputs.cache
+C:\Users\User\Documents\GitHub\georgy_purtov2022\Вычмат\Koshi\obj\Debug\net6.0\Koshi.AssemblyInfo.cs
+C:\Users\User\Documents\GitHub\georgy_purtov2022\Вычмат\Koshi\obj\Debug\net6.0\Koshi.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\georgy_purtov2022\Вычмат\Koshi\obj\Debug\net6.0\Koshi.dll
+C:\Users\User\Documents\GitHub\georgy_purtov2022\Вычмат\Koshi\obj\Debug\net6.0\ref\Koshi.dll
+C:\Users\User\Documents\GitHub\georgy_purtov2022\Вычмат\Koshi\obj\Debug\net6.0\Koshi.pdb
+C:\Users\User\Documents\GitHub\georgy_purtov2022\Вычмат\Koshi\obj\Debug\net6.0\Koshi.genruntimeconfig.cache
