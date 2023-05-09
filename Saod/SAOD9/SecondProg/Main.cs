@@ -1,76 +1,106 @@
 ﻿using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 
-
-
-
-class MainF
+class Program
 {
-    enum DigitKind { ones, tens };
-
-    static void Distribute(int[] L, Queue<int>[] digitQueue, int n, DigitKind kind)
-    {
-        int i;
-        for (i = 0; i < n; i++)
-        {
-            if (kind == DigitKind.ones)
-                digitQueue[L[i] % 10].Enqueue(L[i]);
-            else
-                digitQueue[L[i] / 10].Enqueue(L[i]);
-        }
-    }
-
-    static void Collect(Queue<int>[] digitQueue, int[] L)
-    {
-        int i = 0, digit = 0;
-        for (digit = 0; digit < 10; digit++)
-        {
-            while (digitQueue[digit].Count > 0)
-            {
-                L[i++] = digitQueue[digit].Dequeue();
-            }
-        }
-    }
-
-    static void PrintArray(int[] L, int n)
-    {
-        int i = 0;
-        while (i < n)
-        {
-            Console.Write("{0,5}", L[i]);
-            if (++i % 10 == 0)
-                Console.WriteLine();
-        }
-        Console.WriteLine();
-    }
-
     static void Main(string[] args)
     {
-        Queue<int>[] digitQueue = new Queue<int>[10];
-        for (int i = 0; i < 10; i++)
+        int[] numbers = { 1704, 453, 75, 90, 802, 24, 2, 66 };
+        int maxDigitCount = GetMaxDigitCount(numbers); // Определяем максимальное количество цифр в числах
+        Console.WriteLine("Заданный массив: ");
+        foreach (int number in numbers)
         {
-            digitQueue[i] = new Queue<int>();
+            Console.Write(number + " ");
         }
 
-        int[] L = new int[50];
-        Random rnd = new Random();
-        for (int i = 0; i < 50; i++)
+
+        Console.WriteLine();
+        for (int i = 0; i < maxDigitCount; i++)
         {
-            L[i] = rnd.Next(100);
+            Queue<int>[] digitQueues = new Queue<int>[10];
+
+            for (int j = 0; j < 10; j++)
+            {
+                digitQueues[j] = new Queue<int>();
+            }
+
+            // Распределяем числа по корзинам согласно i-й цифре
+            for (int j = 0; j < numbers.Length; j++)
+            {
+                int digit = GetDigit(numbers[j], i);
+                digitQueues[digit].Enqueue(numbers[j]);
+            }
+
+            // Собираем числа из корзин в исходный массив
+            int index = 0;
+            for (int j = 0; j < 10; j++)
+            {
+                while (digitQueues[j].Count > 0)
+                {
+                    numbers[index++] = digitQueues[j].Dequeue();
+                }
+            }
         }
 
-        global::MainF.Distribute(L, digitQueue, 50, DigitKind.ones);
-        global::MainF.Collect(digitQueue, L);
-        global::MainF.PrintArray(L, 50);
+        Console.WriteLine("Отсортированный массив: ");
+        foreach (int number in numbers)
+        {
+            Console.Write(number + " ");
+        }
+        Console.ReadKey();
+    }
 
-        global::MainF.Distribute(L, digitQueue, 50, DigitKind.tens);
-        global::MainF.Collect(digitQueue, L);
-        global::MainF.PrintArray(L, 50);
+    // Функция для определения максимального количества цифр в числах
+    static int GetMaxDigitCount(int[] numbers)
+    {
+        int maxDigitCount = 0;
+
+        for (int i = 0; i < numbers.Length; i++)
+        {
+            int digitCount = GetDigitCount(numbers[i]);
+
+            if (digitCount > maxDigitCount)
+            {
+                maxDigitCount = digitCount;
+            }
+        }
+
+        return maxDigitCount;
+    }
+
+    // Функция для определения количества цифр в числе
+    static int GetDigitCount(int number)
+    {
+        if (number == 0)
+        {
+            return 1;
+        }
+
+        int count = 0;
+
+        while (number != 0)
+        {
+            number /= 10;
+            count++;
+        }
+
+        return count;
+    }
+
+    // Функция для получения i-й цифры числа (i начинается с нуля справа)
+    static int GetDigit(int number, int i)
+    {
+        return (number / (int)Math.Pow(10, i)) % 10;
     }
 }
+/*Инициализируем массив чисел и определяем максимальное количество цифр в числах в массиве с помощью функции GetMaxDigitCount.
 
+Запускаем цикл по количеству цифр в числах. На каждом шаге создаем массив из десяти очередей digitQueues для разделения чисел по i-й цифре.
 
+Проходим по массиву чисел и добавляем их в соответствующую очередь digitQueues в зависимости от i-й цифры числа с помощью функции GetDigit.
 
+После того, как все числа разложены в очереди digitQueues, мы собираем их в исходном порядке, извлекая их из очередей по очереди и добавляя их обратно в исходный массив чисел.
 
+Повторяем шаги 2-4 для каждой цифры в числах, начиная с последней.
+
+Выводим отсортированный массив чисел в консоль.*/
