@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include <stack>
+#include <functional>
+#include <vector>
 
 // шаблонный класс структуры бинарного Дерева
 template<typename T>
@@ -181,7 +183,20 @@ Node<T>* search(Node<T>* root, T value) {
 }
 
 
+// Функция для обхода дерева в порядке LNR и добавления элементов в вектор
+template<typename T>
+void treeToVector(Node<T>* root, std::vector<T>& result) {
+    if (root != nullptr) {
+        // Рекурсивно обходим левое поддерево
+        treeToVector(root->left, result);
 
+        // Добавляем значение текущего узла в вектор
+        result.push_back(root->data);
+
+        // Рекурсивно обходим правое поддерево
+        treeToVector(root->right, result);
+    }
+}
 
 
 // Функция для нахождения преемника узла
@@ -193,65 +208,63 @@ Node<T>* findSuccessor(Node<T>* node) {
     return node;
 }
 
-// Функция для удаления узла с использованием преемника
 template<typename T>
 Node<T>* deleteNodeWithSuccessor(Node<T>* root, T key) {
     if (root == nullptr) {
-        return root;
+        return root; // Если дерево пустое, возвращаем nullptr
     }
-    
+
     // Рекурсивно ищем узел, который нужно удалить
     if (key < root->data) {
         root->left = deleteNodeWithSuccessor(root->left, key);
-    } else if (key > root->data) {
+    }
+    else if (key > root->data) {
         root->right = deleteNodeWithSuccessor(root->right, key);
-    } else {
+    }
+    else {
         // Узел найден, выполним удаление
+
+        // У случая 1 и 2 (узел без одного или обоих детей), просто удаляем узел
         if (root->left == nullptr) {
             Node<T>* temp = root->right;
             delete root;
             return temp;
-        } else if (root->right == nullptr) {
+        }
+        else if (root->right == nullptr) {
             Node<T>* temp = root->left;
             delete root;
             return temp;
         }
-        
-        // У узла есть два ребенка, найдем преемника
+
+        // У случая 3 (узел с двумя детьми) найдем преемника
         Node<T>* successor = findSuccessor(root->right);
-        
-        // Копируем данные преемника в текущий узел
+
+        // Заменяем данные текущего узла данными преемника
         root->data = successor->data;
-        
-        // Рекурсивно удаляем преемника
+
+        // Рекурсивно удаляем преемника из правого поддерева
         root->right = deleteNodeWithSuccessor(root->right, successor->data);
     }
-    
+
     return root;
 }
 
-
-
-
+// Функция для обхода дерева и применения функции к каждому элементу
+template<typename T>
+void applyFunctionToTree(Node<T>* root, T(*func)(T)) {
+    if (root != nullptr) {
+        // Применяем функцию к текущему элементу
+        root->data = func(root->data);
+        // Рекурсивно обходим левое и правое поддеревья
+        applyFunctionToTree(root->left, func);
+        applyFunctionToTree(root->right, func);
+    }
+}
 
 // Функция для возведения числа в квадрат
 template<typename T>
 T square(T x) {
     return x * x;
-}
-
-// передать функцию в виде аргумента
-// Рекурсивная функция для применения функции квадрата к каждому элементу в дереве
-template<typename T>
-void applySquareToTree(Node<T>* root) {
-    if (root != nullptr) {
-        // Применяем функцию квадрата к значению в текущем узле
-        root->data = square(root->data);
-        
-        // Рекурсивно обходим левое и правое поддеревья
-        applySquareToTree(root->left);
-        applySquareToTree(root->right);
-    }
 }
 
 
