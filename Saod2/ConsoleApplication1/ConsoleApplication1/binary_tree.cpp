@@ -21,9 +21,9 @@ int main() {
     traversePostOrder(root);
     cout << "\nCount node: "<< countNodes(root);
     cout<<"\nDepth of tree:"<<findTreeDepth(root);
-    
+    applySquareToTree(root);
 
-    cout << "\nInserting";
+    cout << "\nInserting (with squaring of elements)";
     cout << "\n";
     insert(root, 0);
     insert(root, 5);
@@ -32,8 +32,8 @@ int main() {
 
     cout << "\nDeleting";
     cout << "\n";
-    deleteNode(root, 0);
-    deleteNode(root, 5);
+    deleteNodeWithSuccessor(root, 0);
+    deleteNodeWithSuccessor(root, 5);
     printTree(root);
     
     

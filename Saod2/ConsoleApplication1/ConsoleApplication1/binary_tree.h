@@ -62,7 +62,7 @@ void deleteNode(Node<T>* temp) {
     if (temp != nullptr) {
         deleteNode(temp->left);
         deleteNode(temp->right);
-        delete[] temp;
+        delete temp;
     }
 }
 
@@ -113,7 +113,7 @@ int findTreeDepth(Node<T>* root) {
     }
 
     // стек для хранения пар узлов дерева и их уровней в дереве
-    std::stack<std::pair<Node<T>*, int>> nodeStack;
+    std::stack<std::pair<Node<T>*, int> > nodeStack;
 
     nodeStack.push(std::make_pair(root, 1)); // Корневой узел с уровнем 1
 
@@ -179,55 +179,82 @@ Node<T>* search(Node<T>* root, T value) {
     // Иначе искать в левом поддереве
     return search(root->left, value);
 }
-template<typename T>
-Node<T>* deleteNode(Node<T>* root, T value) {
-    if (root == nullptr) {
-        return root; // Дерево пусто или значение не найдено, возвращаем nullptr
-    }
 
+
+
+
+
+// Функция для нахождения преемника узла
+template<typename T>
+Node<T>* findSuccessor(Node<T>* node) {
+    while (node->left != nullptr) {
+        node = node->left;
+    }
+    return node;
+}
+
+// Функция для удаления узла с использованием преемника
+template<typename T>
+Node<T>* deleteNodeWithSuccessor(Node<T>* root, T key) {
+    if (root == nullptr) {
+        return root;
+    }
+    
     // Рекурсивно ищем узел, который нужно удалить
-    if (value < root->data) {
-        root->left = deleteNode(root->left, value);
-    }
-    else if (value > root->data) {
-        root->right = deleteNode(root->right, value);
-    }
-    else {
-        // Узел с данным значением найден, начинаем процесс удаления
+    if (key < root->data) {
+        root->left = deleteNodeWithSuccessor(root->left, key);
+    } else if (key > root->data) {
+        root->right = deleteNodeWithSuccessor(root->right, key);
+    } else {
+        // Узел найден, выполним удаление
         if (root->left == nullptr) {
-            // Узел без левого поддерева или без детей
             Node<T>* temp = root->right;
             delete root;
             return temp;
-        }
-        else if (root->right == nullptr) {
-            // Узел без правого поддерева
+        } else if (root->right == nullptr) {
             Node<T>* temp = root->left;
             delete root;
             return temp;
         }
-
-        // Узел имеет двух потомков, найдем минимальное значение в правом поддереве (следующее по значению)
-        Node<T>* temp = minValueNode(root->right);
-
-        // Заменяем значение текущего узла на минимальное значение в правом поддереве
-        root->data = temp->data;
-
-        // Рекурсивно удаляем узел с минимальным значением в правом поддереве
-        root->right = deleteNode(root->right, temp->data);
+        
+        // У узла есть два ребенка, найдем преемника
+        Node<T>* successor = findSuccessor(root->right);
+        
+        // Копируем данные преемника в текущий узел
+        root->data = successor->data;
+        
+        // Рекурсивно удаляем преемника
+        root->right = deleteNodeWithSuccessor(root->right, successor->data);
     }
+    
     return root;
 }
 
-// Вспомогательная функция для поиска минимального значения в дереве
+
+
+
+
+// Функция для возведения числа в квадрат
 template<typename T>
-Node<T>* minValueNode(Node<T>* node) {
-    Node<T>* current = node;
-    while (current->left != nullptr) {
-        current = current->left;
-    }
-    return current;
+T square(T x) {
+    return x * x;
 }
+
+// передать функцию в виде аргумента
+// Рекурсивная функция для применения функции квадрата к каждому элементу в дереве
+template<typename T>
+void applySquareToTree(Node<T>* root) {
+    if (root != nullptr) {
+        // Применяем функцию квадрата к значению в текущем узле
+        root->data = square(root->data);
+        
+        // Рекурсивно обходим левое и правое поддеревья
+        applySquareToTree(root->left);
+        applySquareToTree(root->right);
+    }
+}
+
+
 
 ///         1
 ///        / \       
