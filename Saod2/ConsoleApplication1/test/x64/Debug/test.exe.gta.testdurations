@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GtaTestDurations xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Executable>C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\ConsoleApplication1\test\x64\Debug\test.exe</Executable>
+  <TestDurations>
+    <TestDuration Test="NodeTest.DefaultConstructor" Duration="1" />
+    <TestDuration Test="BinaryTreeTest.BalancedTree" Duration="1" />
+    <TestDuration Test="BinaryTreeTest.EmptyTree" Duration="1" />
+    <TestDuration Test="BinaryTreeTest.DegenerateTree" Duration="1" />
+    <TestDuration Test="TraversePreOrderTest.BalancedTree" Duration="2" />
+    <TestDuration Test="TraversePreOrderTest.EmptyTree" Duration="1" />
+    <TestDuration Test="TraversePreOrderTest.DegenerateTree" Duration="2" />
+    <TestDuration Test="TraverseInOrderTest.BalancedTree" Duration="1" />
+    <TestDuration Test="TraverseInOrderTest.EmptyTree" Duration="1" />
+    <TestDuration Test="TraverseInOrderTest.DegenerateTree" Duration="1" />
+    <TestDuration Test="TraversePostOrderTest.BalancedTree" Duration="1" />
+    <TestDuration Test="TraversePostOrderTest.EmptyTree" Duration="1" />
+    <TestDuration Test="TraversePostOrderTest.DegenerateTree" Duration="1" />
+    <TestDuration Test="SearchTest.BalancedTree" Duration="1" />
+    <TestDuration Test="SearchTest.EmptyTree" Duration="1" />
+    <TestDuration Test="SearchTest.DegenerateTree" Duration="1" />
+    <TestDuration Test="TreeToVectorTest.DegenerateTree" Duration="1" />
+    <TestDuration Test="DeleteNodeWithSuccessorTest.BalancedTree" Duration="1" />
+    <TestDuration Test="DeleteNodeWithSuccessorTest.EmptyTree" Duration="1" />
+    <TestDuration Test="DeleteNodeWithSuccessorTest.DegenerateTree" Duration="1" />
+    <TestDuration Test="FindTreeDepthTest.BalancedTree" Duration="1" />
+    <TestDuration Test="FindTreeDepthTest.EmptyTree" Duration="1" />
+    <TestDuration Test="FindTreeDepthTest.DegenerateTree" Duration="1" />
+    <TestDuration Test="ApplyFunctionTest.BalancedTree" Duration="1" />
+    <TestDuration Test="ApplyFunctionTest.EmptyTree" Duration="1" />
+    <TestDuration Test="ApplyFunctionTest.DegenerateTree" Duration="1" />
+  </TestDurations>
+</GtaTestDurations>

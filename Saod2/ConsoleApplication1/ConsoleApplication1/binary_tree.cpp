@@ -25,7 +25,7 @@ int main() {
     cout<<"\nDepth of tree:"<<findTreeDepth(root);
     
     treeToVector(root, elements);
-    //  applyFunctionToTree(root, square);
+    applyFunction(root, square);
    
 
     cout << "\nDeleting";
@@ -34,14 +34,9 @@ int main() {
     deleteNodeWithSuccessor(root, 15);
     printTree(root);
     
-
-
-
-
-    /*for (const int& element : elements) {
+    for (const int& element : elements) {
         std::cout << element << " ";
-    }*/
+    }
     deleteNode(root);
-
-    
+ 
 }

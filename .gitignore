@@ -28,3 +28,8 @@ Saod/Saod5/PoisonedCake/.vs/PoisonedCake/v17/.suo
 Saod/Saod6/.vs/Saod6/v17/.suo
 .DS_Store
 Saod/Saod10/LinkedList/.vs/LinkedList/v17/.suo
+*.ipch
+*.idb
+*.pdb
+*.testlog
+*.ipch

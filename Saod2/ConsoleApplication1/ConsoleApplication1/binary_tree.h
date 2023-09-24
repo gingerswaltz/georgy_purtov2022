@@ -165,6 +165,7 @@ Node<T>* insert(Node<T>* root, T value) {
 
     return root;
 }
+
 template<typename T>
 Node<T>* search(Node<T>* root, T value) {
     // Если дерево пусто или текущий узел содержит искомое значение, вернуть текущий узел
@@ -179,7 +180,11 @@ Node<T>* search(Node<T>* root, T value) {
     }
 
     // Иначе искать в левом поддереве
-    return search(root->left, value);
+    Node<T>* result = search(root->left, value);
+
+    // Если результат поиска в левом поддереве не равен nullptr, значит, значение найдено
+    // и мы его возвращаем, иначе возвращаем nullptr
+    return (result != nullptr) ? result : nullptr;
 }
 
 
@@ -251,13 +256,13 @@ Node<T>* deleteNodeWithSuccessor(Node<T>* root, T key) {
 
 // Функция для обхода дерева и применения функции к каждому элементу
 template<typename T>
-void applyFunctionToTree(Node<T>* root, T(*func)(T)) {
+void applyFunction(Node<T>* root, T(*func)(T)) {
     if (root != nullptr) {
         // Применяем функцию к текущему элементу
         root->data = func(root->data);
         // Рекурсивно обходим левое и правое поддеревья
-        applyFunctionToTree(root->left, func);
-        applyFunctionToTree(root->right, func);
+        applyFunction(root->left, func);
+        applyFunction(root->right, func);
     }
 }
 
