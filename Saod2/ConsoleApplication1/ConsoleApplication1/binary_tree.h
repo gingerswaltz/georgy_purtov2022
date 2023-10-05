@@ -3,6 +3,7 @@
 #include <stack>
 #include <functional>
 #include <vector>
+#include <queue>
 
 // шаблонный класс структуры бинарного Дерева
 template<typename T>
@@ -266,6 +267,69 @@ void applyFunction(Node<T>* root, T(*func)(T)) {
     }
 }
 
+// Breadth-First Search, алгоритм обхода дерева в ширину
+template<typename T>
+std::vector<Node<T>*> breadthFirstSearch(Node<T>* root) {
+    std::vector<Node<T>*> result;
+
+    if (root == nullptr) {
+        return result;
+    }
+
+    std::queue<Node<T>*> q;
+    q.push(root);
+
+    while (!q.empty()) {
+        Node<T>* current = q.front();
+        q.pop();
+
+        // Добавляем текущий узел в вектор 
+        result.push_back(current);
+
+        // Добавляем дочерние узлы в очередь
+        if (current->left != nullptr) {
+            q.push(current->left);
+        }
+        if (current->right != nullptr) {
+            q.push(current->right);
+        }
+    }
+
+    return result;
+}
+
+// Алгоритм копирования бинарного дерева
+template<typename T>
+Node<T>* copyTree(Node<T>* source) {
+    if (source == nullptr) {
+        return nullptr; // Если исходное дерево пусто, возвращаем nullptr
+    }
+
+    // Создаем новый узел с тем же значением
+    Node<T>* new_node= newNode(source->data);
+
+    // Рекурсивно копируем левое и правое поддеревья
+    new_node->left = copyTree(source->left);
+    new_node->right = copyTree(source->right);
+
+    return new_node;
+}
+
+
+template<typename T>
+void deleteTree(Node<T>* node) {
+    if (node == nullptr) {
+        return;
+    }
+
+    // Рекурсивно удаляем левое и правое поддерево
+    deleteTree(node->left);
+    deleteTree(node->right);
+
+    // Удаляем текущий узел
+    delete node;
+}
+
 // Функция для возведения числа в квадрат
 template<typename T>
 T square(T x) {
@@ -273,12 +337,6 @@ T square(T x) {
 }
 
 
-
-///         1
-///        / \       
-///       2   3
-///      /   / \
-///     4   9  15
 
 
 
