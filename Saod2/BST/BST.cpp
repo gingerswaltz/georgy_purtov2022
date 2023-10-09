@@ -4,54 +4,44 @@ template<typename T>
 class BinarySearchTree {
 private:
     Node<T>* root;
+    
 
-    // Приватный метод для вставки узла в BST
-    Node<T>* insertNode(Node<T>* current, T value) {
-        if (current == nullptr) {
-            return newNode(value); // Создаем новый узел, если текущий узел равен nullptr
-        }
-
-        // Рекурсивно вставляем узел в правое или левое поддерево
-        if (value > current->data) {
-            current->right = insertNode(current->right, value);
-        }
-        else {
-            current->left = insertNode(current->left, value);
-        }
-
-        return current;
-    }
-
-    // Приватный метод для поиска узла в BST
-    Node<T>* searchNode(Node<T>* current, T value) {
-        if (current == nullptr || current->data == value) {
-            return current;
-        }
-
-        if (value > current->data) {
-            return searchNode(current->right, value);
-        }
-
-        return searchNode(current->left, value);
-    }
-
+    
 public:
     BinarySearchTree() {
         root = nullptr;
     }
 
+    // Конструктор с параметром
+    BinarySearchTree(T initialValue) {
+        root = newNode(initialValue); // Создаем корневой узел с начальным значением
+    }
+
+    // Конструктор копирования
+    BinarySearchTree(const BinarySearchTree& other) {
+        // Вызываем функцию копирования дерева и присваиваем корневой узел
+        root = copyTree(other.root);
+    }
+
+
+    // конструктор с указателем на узел todo и оператор присваивания и удаление узла и перемещения
+
+    ~BinarySearchTree() {
+        // Вызываем функцию удаления дерева для освобождения памяти
+        deleteTree(root);
+    }
+
     // Метод для вставки значения в BST
     void insert(T value) {
-        root = insertNode(root, value);
+        root = ::insert(root, value);
     }
 
     // Метод для поиска значения в BST
     bool search(T value) {
-        Node<T>* result = searchNode(root, value);
+        Node<T>* result = ::search(root, value);
         return (result != nullptr);
     }
 
-    // Другие методы, такие как удаление узла и другие операции, могут быть добавлены здесь
 
     // Метод для вывода дерева
     void print() {
@@ -62,6 +52,19 @@ public:
     int depth() {
         return findTreeDepth(root);
     }
+
+    // Метод для удаления значения
+    void remove(T value) {
+        root = deleteNodeWithSuccessor(root, value);
+    }
+
+    
+    // Метод для обхода дерева в ширину и возврата узлов
+    std::vector<Node<T>*> breadthFirstSearch() {
+        return ::breadthFirstSearch(root);
+    }
+
+    
 };
 
 int main() {
@@ -72,6 +75,14 @@ int main() {
 
     bst.print(); // Вывод дерева
 
+    // Создаем копию дерева
+    BinarySearchTree<int> copiedBST(bst);
+
+    // Вывод копии дерева
+    std::cout << "\nCopied Tree:" << std::endl;
+    copiedBST.print();
+
+    // Вызов метода поиска значения
     bool found = bst.search(5);
     if (found) {
         std::cout << "Found 5 in BST." << std::endl;
@@ -79,6 +90,24 @@ int main() {
     else {
         std::cout << "5 not found in BST." << std::endl;
     }
+
+    found = bst.search(7);
+    if (found) {
+        std::cout << "Found 7 in BST." << std::endl;
+    }
+    else {
+        std::cout << "7 not found in BST." << std::endl;
+    }
+
+    // Вызываем метод breadthFirstSearch и сохраняем результат в векторе nodes
+    std::vector<Node<int>*> nodes = bst.breadthFirstSearch();
+
+    // Выводим значения узлов, обойденных в ширину
+    for (Node<int>* node : nodes) {
+        std::cout << node->data << " ";
+    }
+    std::cout << std::endl;
+
 
     return 0;
 }
