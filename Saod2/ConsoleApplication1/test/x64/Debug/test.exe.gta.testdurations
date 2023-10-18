@@ -6,9 +6,9 @@
     <TestDuration Test="BinaryTreeTest.BalancedTree" Duration="1" />
     <TestDuration Test="BinaryTreeTest.EmptyTree" Duration="1" />
     <TestDuration Test="BinaryTreeTest.DegenerateTree" Duration="1" />
-    <TestDuration Test="TraversePreOrderTest.BalancedTree" Duration="2" />
+    <TestDuration Test="TraversePreOrderTest.BalancedTree" Duration="1" />
     <TestDuration Test="TraversePreOrderTest.EmptyTree" Duration="1" />
-    <TestDuration Test="TraversePreOrderTest.DegenerateTree" Duration="2" />
+    <TestDuration Test="TraversePreOrderTest.DegenerateTree" Duration="1" />
     <TestDuration Test="TraverseInOrderTest.BalancedTree" Duration="1" />
     <TestDuration Test="TraverseInOrderTest.EmptyTree" Duration="1" />
     <TestDuration Test="TraverseInOrderTest.DegenerateTree" Duration="1" />
@@ -28,5 +28,15 @@
     <TestDuration Test="ApplyFunctionTest.BalancedTree" Duration="1" />
     <TestDuration Test="ApplyFunctionTest.EmptyTree" Duration="1" />
     <TestDuration Test="ApplyFunctionTest.DegenerateTree" Duration="1" />
+    <TestDuration Test="BinaryTreeIteratorTest.IteratorBeginAndEnd" Duration="1" />
+    <TestDuration Test="NodeIteratorTest.IteratorBeginAndEnd" Duration="1" />
+    <TestDuration Test="NodeIteratorTest.IteratorTraversal" Duration="19" />
+    <TestDuration Test="NodeIteratorTest.IteratorAccess" Duration="1" />
+    <TestDuration Test="BinaryTreeIteratorTest.IteratorDereference" Duration="1" />
+    <TestDuration Test="BinaryTreeIteratorTest.IteratorEquality" Duration="1" />
+    <TestDuration Test="BinaryTreeIteratorTest.IteratorInequality" Duration="1" />
+    <TestDuration Test="BinaryTreeIteratorTest.IteratorInvalidDereference" Duration="1" />
+    <TestDuration Test="BinaryTreeIteratorTest.IteratorPreorderTraversal" Duration="1" />
+    <TestDuration Test="BinaryTreeIteratorTest.IteratorCustomTest" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

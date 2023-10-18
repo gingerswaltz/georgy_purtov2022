@@ -4,7 +4,7 @@
 #include <functional>
 #include <vector>
 #include <queue>
-
+#include "Iterator.h"
 // шаблонный класс структуры бинарного ƒерева
 template<typename T>
 struct Node {
@@ -336,7 +336,62 @@ T square(T x) {
     return x * x;
 }
 
+template <typename T>
+class BinaryTreeIterator : public Iterator<T> {
+public:
+    BinaryTreeIterator(Node<T>* start) : current(start) {
+        if (current) {
+            initializeStack(current);
+        }
+    }
 
+    T operator*() const override {
+        if (current) {
+            return current->data;
+        }
+        else {
+            throw std::runtime_error("Dereferencing a nullptr iterator");
+        }
+    }
 
+    BinaryTreeIterator<T>& operator++() override {
+        if (nodeStack.empty()) {
+            current = nullptr;
+        }
+        else {
+            current = nodeStack.top();
+            nodeStack.pop();
+            if (current->right) {
+                initializeStack(current->right);
+            }
+        }
+        return *this;
+    }
 
+    bool operator==(const Iterator<T>& other) const override {
+        const BinaryTreeIterator<T>* otherIterator = dynamic_cast<const BinaryTreeIterator<T>*>(&other);
+        if (otherIterator) {
+            return current == otherIterator->current;
+        }
+        return false;
+    }
 
+    bool operator!=(const Iterator<T>& other) const override {
+        return !(*this == other);
+    }
+
+    explicit operator bool() const {
+        return current != nullptr;
+    }
+
+private:
+    Node<T>* current;
+    std::stack<Node<T>*> nodeStack;
+
+    void initializeStack(Node<T>* node) {
+        while (node) {
+            nodeStack.push(node);
+            node = node->left;
+        }
+    }
+};

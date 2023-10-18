@@ -7,5 +7,6 @@
     <TestDuration Test="BinarySearchTreeTest.CopyConstructorDegenerateTree" Duration="1" />
     <TestDuration Test="BinarySearchTreeTest.MoveConstructorEmptyTree" Duration="1" />
     <TestDuration Test="BinarySearchTreeTest.MoveAssignmentOperator" Duration="1" />
+    <TestDuration Test="BinarySearchTreeTest.BreadthFirstSearch" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

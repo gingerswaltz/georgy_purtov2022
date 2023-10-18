@@ -404,3 +404,65 @@ TEST(ApplyFunctionTest, DegenerateTree) {
 
     delete root;
 }
+
+
+
+TEST(BinaryTreeIteratorTest, IteratorEquality) {
+    Node<int> root;
+    root.data = 1;
+    root.left = new Node<int>();
+    root.left->data = 2;
+
+    BinaryTreeIterator<int> it1(&root);
+    BinaryTreeIterator<int> it2(&root);
+
+    // Проверка оператора равенства
+    EXPECT_EQ(it1, it2);
+
+    // Перемещаем it1 к следующему элементу
+    ++it1;
+    EXPECT_NE(it1, it2);
+}
+
+TEST(BinaryTreeIteratorTest, IteratorInequality) {
+    Node<int> root;
+    root.data = 1;
+    root.left = new Node<int>();
+    root.left->data = 2;
+
+    BinaryTreeIterator<int> it1(&root);
+    BinaryTreeIterator<int> it2(&root);
+
+    // Проверка оператора неравенства
+    EXPECT_FALSE(it1 != it2);
+
+    // Перемещаем it1 к следующему элементу
+    ++it1;
+    EXPECT_TRUE(it1 != it2);
+}
+
+
+TEST(BinaryTreeIteratorTest, IteratorCustomTest) {
+    // Создаем бинарное дерево
+    Node<int>* root = newNode(5);
+    root->left = newNode(3);
+    root->right = newNode(8);
+    root->left->left = newNode(2);
+    root->left->right = newNode(4);
+    root->right->left = newNode(7);
+    root->right->right = newNode(9);
+
+    // Создаем итератор начиная с корня
+    BinaryTreeIterator<int> it(root);
+
+    // Создаем ожидаемый порядок значений в дереве
+        std::vector<int> expected = { 5, 3, 2, 4, 8, 7, 9 };
+
+    // Проверяем, что итератор возвращает значения в правильном порядке
+    for (int value : expected) {
+        ASSERT_EQ(value, *it);
+        ++it;
+    }
+}
+
+

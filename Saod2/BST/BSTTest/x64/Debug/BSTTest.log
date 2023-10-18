@@ -1,2 +1,3 @@
-﻿  test.cpp
+﻿  pch.cpp
+  test.cpp
   BSTTest.vcxproj -> C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\x64\Debug\BSTTest.exe
