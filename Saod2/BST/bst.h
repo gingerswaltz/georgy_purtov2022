@@ -1,6 +1,7 @@
+// @author: gingerswaltz
 #pragma once
 #include "..//ConsoleApplication1/ConsoleApplication1/binary_tree.h"
-
+// класс Бинарного Дерева Поиска
 template<typename T>
 class BinarySearchTree {
 private:
@@ -39,7 +40,7 @@ public:
         root = rootNode;
     }
 
-    // Оператор перемещения
+    // Оператор присваивания перемещением
     BinarySearchTree& operator=(BinarySearchTree&& other) {
         if (this == &other) {
             return *this; // Проверка на самоприсваивание
@@ -57,6 +58,8 @@ public:
 
         return *this;
     }
+
+// оператор присваивания копирование туду
 
     ~BinarySearchTree() {
         // Вызываем функцию удаления дерева для освобождения памяти

@@ -2,7 +2,7 @@
 class BinaryTreeIterator {
 public:
     // Конструктор итератора, принимающий начальный узел
-    explicit BinaryTreeIterator(Node<T>* start) : current(start) {
+    BinaryTreeIterator(Node<T>* start) : current(start) {
         initializeStack(); // Инициализируем стек для обхода
     }
 

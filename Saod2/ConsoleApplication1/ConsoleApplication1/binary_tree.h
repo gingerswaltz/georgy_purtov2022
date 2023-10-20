@@ -339,55 +339,62 @@ T square(T x) {
 template <typename T>
 class BinaryTreeIterator : public Iterator<T> {
 public:
+    //  онструктор класса, принимает указатель на узел, с которого начнетс€ итераци€
     BinaryTreeIterator(Node<T>* start) : current(start) {
         if (current) {
-            initializeStack(current);
+            initializeStack(current); // ≈сли узел существует, инициализируем стек начальным узлом
         }
     }
 
+    // ѕерегрузка оператора "*" дл€ получени€ значени€, на которое указывает итератор
     T operator*() const override {
         if (current) {
-            return current->data;
+            return current->data; // ¬озвращаем значение текущего узла
         }
         else {
-            throw std::runtime_error("Dereferencing a nullptr iterator");
+            throw std::runtime_error("Dereferencing a nullptr iterator"); // ≈сли текущий узел - nullptr, генерируем исключение
         }
     }
 
+    // ѕерегрузка оператора "++" дл€ перемещени€ итератора к следующему узлу
     BinaryTreeIterator<T>& operator++() override {
         if (nodeStack.empty()) {
-            current = nullptr;
+            current = nullptr; // ≈сли стек пуст, устанавливаем текущий узел как nullptr
         }
         else {
-            current = nodeStack.top();
-            nodeStack.pop();
+            current = nodeStack.top(); // ѕолучаем текущий узел из вершины стека
+            nodeStack.pop(); // ”дал€ем верхний элемент из стека
             if (current->right) {
-                initializeStack(current->right);
+                initializeStack(current->right); // ≈сли у текущего узла есть правое поддерево, инициализируем стек этим поддеревом
             }
         }
         return *this;
     }
 
+    // ѕерегрузка оператора "==" дл€ сравнени€ двух итераторов
     bool operator==(const Iterator<T>& other) const override {
         const BinaryTreeIterator<T>* otherIterator = dynamic_cast<const BinaryTreeIterator<T>*>(&other);
         if (otherIterator) {
-            return current == otherIterator->current;
+            return current == otherIterator->current; // —равниваем текущие узлы двух итераторов
         }
         return false;
     }
 
+    // ѕерегрузка оператора "!=" дл€ сравнени€ двух итераторов
     bool operator!=(const Iterator<T>& other) const override {
-        return !(*this == other);
+        return !(*this == other); // »спользуем оператор "==" дл€ проверки на неравенство
     }
 
-    explicit operator bool() const {
-        return current != nullptr;
+    // ѕреобразование итератора в тип bool, чтобы проверить, указывает ли итератор на nullptr
+    operator bool() const {
+        return current != nullptr; // ¬озвращаем true, если текущий узел не €вл€етс€ nullptr
     }
 
 private:
-    Node<T>* current;
-    std::stack<Node<T>*> nodeStack;
+    Node<T>* current; // ”казатель на текущий узел, на который указывает итератор
+    std::stack<Node<T>*> nodeStack; // —тек дл€ обхода узлов
 
+    // ћетод дл€ инициализации стека, выполн€ет обход левых узлов и добавл€ет их в стек
     void initializeStack(Node<T>* node) {
         while (node) {
             nodeStack.push(node);
