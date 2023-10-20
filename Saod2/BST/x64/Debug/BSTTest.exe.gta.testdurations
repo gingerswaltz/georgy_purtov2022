@@ -8,5 +8,20 @@
     <TestDuration Test="BinarySearchTreeTest.MoveConstructorEmptyTree" Duration="1" />
     <TestDuration Test="BinarySearchTreeTest.MoveAssignmentOperator" Duration="1" />
     <TestDuration Test="BinarySearchTreeTest.BreadthFirstSearch" Duration="1" />
+    <TestDuration Test="BreadthFirstSearchTest.BalancedTree" Duration="1" />
+    <TestDuration Test="BreadthFirstSearchTest.DegenerateTree" Duration="1" />
+    <TestDuration Test="BreadthFirstSearchTest.EmptyTree" Duration="1" />
+    <TestDuration Test="CopyConstructorTest.BalancedTree" Duration="1" />
+    <TestDuration Test="CopyConstructorTest.DegenerateTree" Duration="1" />
+    <TestDuration Test="CopyConstructorTest.EmptyTree" Duration="1" />
+    <TestDuration Test="MoveConstructorTest.BalancedTree" Duration="1" />
+    <TestDuration Test="MoveConstructorTest.DegenerateTree" Duration="1" />
+    <TestDuration Test="MoveConstructorTest.EmptyTree" Duration="1" />
+    <TestDuration Test="BinarySearchTreeMoveConstructorTest.BalancedTree" Duration="1" />
+    <TestDuration Test="BinarySearchTreeMoveConstructorTest.DegenerateTree" Duration="1" />
+    <TestDuration Test="BinarySearchTreeMoveConstructorTest.EmptyTree" Duration="1" />
+    <TestDuration Test="BinarySearchTreeCopyAssignmentTest.BalancedTree" Duration="1" />
+    <TestDuration Test="BinarySearchTreeCopyAssignmentTest.DegenerateTree" Duration="1" />
+    <TestDuration Test="BinarySearchTreeCopyAssignmentTest.EmptyTree" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

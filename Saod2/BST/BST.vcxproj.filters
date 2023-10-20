@@ -23,5 +23,8 @@
     <ClInclude Include="..\ConsoleApplication1\ConsoleApplication1\binary_tree.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="bst.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

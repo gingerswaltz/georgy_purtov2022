@@ -41,7 +41,7 @@ public:
     }
 
     // Оператор присваивания перемещением
-    BinarySearchTree& operator=(BinarySearchTree&& other) {
+    BinarySearchTree& operator=(BinarySearchTree&& other) noexcept {
         if (this == &other) {
             return *this; // Проверка на самоприсваивание
         }
@@ -59,7 +59,21 @@ public:
         return *this;
     }
 
-// оператор присваивания копирование туду
+    // Оператор присваивания копированием
+    BinarySearchTree& operator=(const BinarySearchTree& other) {
+        if (this == &other) {
+            return *this; // Проверка на самоприсваивание
+        }
+
+        // Освобождаем ресурсы текущего объекта
+        deleteTree(root);
+
+        // Копируем дерево из другого объекта
+        root = copyTree(other.root);
+
+        return *this;
+    }
+
 
     ~BinarySearchTree() {
         // Вызываем функцию удаления дерева для освобождения памяти

@@ -42,3 +42,11 @@ Saod2/ConsoleApplication1/.vs/ConsoleApplication1/v17/.suo
 *.tlog
 *.tlog
 Saod2/BST/x64/Debug/BST.tlog/CL.read.1.tlog
+*.obj
+*.db-shm
+*.opendb
+*.db-wal
+*.ilk
+*.obj
+*.tlog
+*.tlog

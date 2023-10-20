@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GtaTestDurations xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Executable>C:\Users\George\Desktop\git_work\чужие репы))\SAOD\Projects\List\x64\Debug\TestLinkedList.exe</Executable>
+  <TestDurations>
+    <TestDuration Test="LinkedListTests.InsertAndToArray" Duration="1" />
+    <TestDuration Test="LinkedListTests.Search" Duration="1" />
+    <TestDuration Test="LinkedListTests.Remove" Duration="1" />
+    <TestDuration Test="LinkedListTests.ClearList" Duration="1" />
+  </TestDurations>
+</GtaTestDurations>
