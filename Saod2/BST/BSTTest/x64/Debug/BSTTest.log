@@ -1,2 +1,166 @@
 ﻿  test.cpp
-  BSTTest.vcxproj -> C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\x64\Debug\BSTTest.exe
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(6,5): error C2065: 'BinarySearchTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(6,22): error C2062: type 'int' unexpected
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(9,5): error C2065: 'tree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(9,5): error C2512: 'testing::AssertionResult': no appropriate default constructor available
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(9,5): message : 'testing::AssertionResult::AssertionResult': no appropriate default constructor available
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(299,3): message : could be 'testing::AssertionResult::AssertionResult(const T &,internal::EnableIf<!testing::internal::ImplicitlyConvertible<T,testing::AssertionResult>::value>::type *)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(9,5): message : while trying to match the argument list '()'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(9,5): error C2737: 'gtest_ar_': const object must be initialized
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(10,5): error C2065: 'tree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(10,5): error C2660: 'testing::internal::EqHelper<false>::Compare': function does not take 3 arguments
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1481,26): message : see declaration of 'testing::internal::EqHelper<false>::Compare'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1468,26): message : could be 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(10,5): message : 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)': expects 4 arguments - 3 provided
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(10,5): message : while trying to match the argument list '(const char [13], const char [2], int)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(15,5): error C2065: 'BinarySearchTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(15,22): error C2062: type 'int' unexpected
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(16,5): error C2065: 'originalTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(17,5): error C2065: 'originalTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(18,5): error C2065: 'originalTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(21,5): error C2065: 'BinarySearchTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(21,22): error C2062: type 'int' unexpected
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(24,5): error C2065: 'copiedTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(24,5): error C2512: 'testing::AssertionResult': no appropriate default constructor available
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(24,5): message : 'testing::AssertionResult::AssertionResult': no appropriate default constructor available
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(299,3): message : could be 'testing::AssertionResult::AssertionResult(const T &,internal::EnableIf<!testing::internal::ImplicitlyConvertible<T,testing::AssertionResult>::value>::type *)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(24,5): message : while trying to match the argument list '()'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(24,5): error C2737: 'gtest_ar_': const object must be initialized
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(25,5): error C2065: 'copiedTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(25,5): error C2512: 'testing::AssertionResult': no appropriate default constructor available
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(25,5): message : 'testing::AssertionResult::AssertionResult': no appropriate default constructor available
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(299,3): message : could be 'testing::AssertionResult::AssertionResult(const T &,internal::EnableIf<!testing::internal::ImplicitlyConvertible<T,testing::AssertionResult>::value>::type *)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(25,5): message : while trying to match the argument list '()'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(25,5): error C2737: 'gtest_ar_': const object must be initialized
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(26,5): error C2065: 'copiedTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(26,5): error C2512: 'testing::AssertionResult': no appropriate default constructor available
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(26,5): message : 'testing::AssertionResult::AssertionResult': no appropriate default constructor available
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(299,3): message : could be 'testing::AssertionResult::AssertionResult(const T &,internal::EnableIf<!testing::internal::ImplicitlyConvertible<T,testing::AssertionResult>::value>::type *)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(26,5): message : while trying to match the argument list '()'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(26,5): error C2737: 'gtest_ar_': const object must be initialized
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(27,5): error C2065: 'copiedTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(27,5): error C2660: 'testing::internal::EqHelper<false>::Compare': function does not take 3 arguments
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1481,26): message : see declaration of 'testing::internal::EqHelper<false>::Compare'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1468,26): message : could be 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(27,5): message : 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)': expects 4 arguments - 3 provided
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(27,5): message : while trying to match the argument list '(const char [19], const char [2], int)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(32,5): error C2065: 'BinarySearchTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(32,22): error C2062: type 'int' unexpected
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(33,5): error C2065: 'originalTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(34,5): error C2065: 'originalTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(35,5): error C2065: 'originalTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(38,5): error C2065: 'BinarySearchTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(38,22): error C2062: type 'int' unexpected
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(41,5): error C2065: 'copiedTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(41,5): error C2512: 'testing::AssertionResult': no appropriate default constructor available
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(41,5): message : 'testing::AssertionResult::AssertionResult': no appropriate default constructor available
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(299,3): message : could be 'testing::AssertionResult::AssertionResult(const T &,internal::EnableIf<!testing::internal::ImplicitlyConvertible<T,testing::AssertionResult>::value>::type *)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(41,5): message : while trying to match the argument list '()'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(41,5): error C2737: 'gtest_ar_': const object must be initialized
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(42,5): error C2065: 'copiedTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(42,5): error C2512: 'testing::AssertionResult': no appropriate default constructor available
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(42,5): message : 'testing::AssertionResult::AssertionResult': no appropriate default constructor available
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(299,3): message : could be 'testing::AssertionResult::AssertionResult(const T &,internal::EnableIf<!testing::internal::ImplicitlyConvertible<T,testing::AssertionResult>::value>::type *)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(42,5): message : while trying to match the argument list '()'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(42,5): error C2737: 'gtest_ar_': const object must be initialized
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(43,5): error C2065: 'copiedTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(43,5): error C2512: 'testing::AssertionResult': no appropriate default constructor available
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(43,5): message : 'testing::AssertionResult::AssertionResult': no appropriate default constructor available
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(299,3): message : could be 'testing::AssertionResult::AssertionResult(const T &,internal::EnableIf<!testing::internal::ImplicitlyConvertible<T,testing::AssertionResult>::value>::type *)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(43,5): message : while trying to match the argument list '()'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(43,5): error C2737: 'gtest_ar_': const object must be initialized
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(44,5): error C2065: 'copiedTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(44,5): error C2660: 'testing::internal::EqHelper<false>::Compare': function does not take 3 arguments
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1481,26): message : see declaration of 'testing::internal::EqHelper<false>::Compare'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1468,26): message : could be 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(44,5): message : 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)': expects 4 arguments - 3 provided
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(44,5): message : while trying to match the argument list '(const char [19], const char [2], int)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(49,5): error C2065: 'BinarySearchTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(49,22): error C2062: type 'int' unexpected
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(50,5): error C2065: 'originalTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(51,5): error C2065: 'originalTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(52,5): error C2065: 'originalTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(55,5): error C2065: 'BinarySearchTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(55,22): error C2062: type 'int' unexpected
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(56,5): error C2065: 'movedTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(56,27): error C2065: 'originalTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(59,5): error C2065: 'originalTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(59,5): error C2660: 'testing::internal::EqHelper<false>::Compare': function does not take 3 arguments
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1481,26): message : see declaration of 'testing::internal::EqHelper<false>::Compare'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1468,26): message : could be 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(59,5): message : 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)': expects 4 arguments - 3 provided
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(59,5): message : while trying to match the argument list '(const char [21], const char [2], int)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(60,5): error C2065: 'movedTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(60,5): error C2660: 'testing::internal::EqHelper<false>::Compare': function does not take 3 arguments
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1481,26): message : see declaration of 'testing::internal::EqHelper<false>::Compare'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1468,26): message : could be 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(60,5): message : 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)': expects 4 arguments - 3 provided
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(60,5): message : while trying to match the argument list '(const char [18], const char [2], int)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(63,5): error C2065: 'movedTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(63,5): error C2512: 'testing::AssertionResult': no appropriate default constructor available
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(63,5): message : 'testing::AssertionResult::AssertionResult': no appropriate default constructor available
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(299,3): message : could be 'testing::AssertionResult::AssertionResult(const T &,internal::EnableIf<!testing::internal::ImplicitlyConvertible<T,testing::AssertionResult>::value>::type *)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(63,5): message : while trying to match the argument list '()'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(63,5): error C2737: 'gtest_ar_': const object must be initialized
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(64,5): error C2065: 'movedTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(64,5): error C2512: 'testing::AssertionResult': no appropriate default constructor available
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(64,5): message : 'testing::AssertionResult::AssertionResult': no appropriate default constructor available
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(299,3): message : could be 'testing::AssertionResult::AssertionResult(const T &,internal::EnableIf<!testing::internal::ImplicitlyConvertible<T,testing::AssertionResult>::value>::type *)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(64,5): message : while trying to match the argument list '()'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(64,5): error C2737: 'gtest_ar_': const object must be initialized
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(65,5): error C2065: 'movedTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(65,5): error C2512: 'testing::AssertionResult': no appropriate default constructor available
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(65,5): message : 'testing::AssertionResult::AssertionResult': no appropriate default constructor available
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(299,3): message : could be 'testing::AssertionResult::AssertionResult(const T &,internal::EnableIf<!testing::internal::ImplicitlyConvertible<T,testing::AssertionResult>::value>::type *)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(65,5): message : while trying to match the argument list '()'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(65,5): error C2737: 'gtest_ar_': const object must be initialized
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(69,5): error C2065: 'BinarySearchTree': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(69,22): error C2062: type 'int' unexpected
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(70,5): error C2065: 'bst': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(71,5): error C2065: 'bst': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(72,5): error C2065: 'bst': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(73,5): error C2065: 'bst': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(74,5): error C2065: 'bst': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(75,5): error C2065: 'bst': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(76,5): error C2065: 'bst': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(78,17): error C2065: 'Node': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(78,22): error C2062: type 'int' unexpected
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(78,27): error C2059: syntax error: '>'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(80,5): error C2065: 'result': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(80,5): error C2660: 'testing::internal::EqHelper<false>::Compare': function does not take 3 arguments
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1481,26): message : see declaration of 'testing::internal::EqHelper<false>::Compare'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1468,26): message : could be 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(80,5): message : 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)': expects 4 arguments - 3 provided
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(80,5): message : while trying to match the argument list '(const char [14], const char [2], int)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(81,5): error C2065: 'result': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(81,5): error C2660: 'testing::internal::EqHelper<false>::Compare': function does not take 3 arguments
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1481,26): message : see declaration of 'testing::internal::EqHelper<false>::Compare'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1468,26): message : could be 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(81,5): message : 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)': expects 4 arguments - 3 provided
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(81,5): message : while trying to match the argument list '(const char [16], const char [3], int)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(82,5): error C2065: 'result': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(82,5): error C2660: 'testing::internal::EqHelper<false>::Compare': function does not take 3 arguments
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1481,26): message : see declaration of 'testing::internal::EqHelper<false>::Compare'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1468,26): message : could be 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(82,5): message : 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)': expects 4 arguments - 3 provided
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(82,5): message : while trying to match the argument list '(const char [16], const char [2], int)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(83,5): error C2065: 'result': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(83,5): error C2660: 'testing::internal::EqHelper<false>::Compare': function does not take 3 arguments
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1481,26): message : see declaration of 'testing::internal::EqHelper<false>::Compare'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1468,26): message : could be 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(83,5): message : 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)': expects 4 arguments - 3 provided
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(83,5): message : while trying to match the argument list '(const char [16], const char [3], int)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(84,5): error C2065: 'result': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(84,5): error C2660: 'testing::internal::EqHelper<false>::Compare': function does not take 3 arguments
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1481,26): message : see declaration of 'testing::internal::EqHelper<false>::Compare'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1468,26): message : could be 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(84,5): message : 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)': expects 4 arguments - 3 provided
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(84,5): message : while trying to match the argument list '(const char [16], const char [2], int)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(85,5): error C2065: 'result': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(85,5): error C2660: 'testing::internal::EqHelper<false>::Compare': function does not take 3 arguments
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1481,26): message : see declaration of 'testing::internal::EqHelper<false>::Compare'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\gtest.h(1468,26): message : could be 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(85,5): message : 'testing::AssertionResult testing::internal::EqHelper<false>::Compare(const char *,const char *,const T1 &,const T2 &)': expects 4 arguments - 3 provided
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(85,5): message : while trying to match the argument list '(const char [16], const char [2], int)'
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(86,5): error C2065: 'result': undeclared identifier
+C:\Users\George\Desktop\git_work\georgy_purtov2022\Saod2\BST\BSTTest\test.cpp(86,5): fatal  error C1003: error count exceeds 100; stopping compilation

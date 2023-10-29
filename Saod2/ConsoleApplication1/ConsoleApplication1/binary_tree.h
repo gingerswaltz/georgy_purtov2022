@@ -1,404 +1,211 @@
 #pragma once
-#include <iostream>
+#include <cassert>
 #include <stack>
+#include <stdexcept>
 #include <functional>
-#include <vector>
+#include <iostream>
 #include <queue>
-#include "Iterator.h"
-// шаблонный класс структуры бинарного Дерева
-template<typename T>
-struct Node {
-    T data;
-     Node* left;
-     Node* right;
+// Класс узла бинарного дерева
+class TreeNode {
+public:
+    int data;          // Значение узла
+    TreeNode* left;    // Указатель на левого потомка
+    TreeNode* right;   // Указатель на правого потомка
 
-    Node() {
-        left = nullptr;
-        right = nullptr;
-    }
-
+    // Конструктор для создания узла с заданным значением
+    TreeNode(int val) : data(val), left(nullptr), right(nullptr) {}
 };
 
-// шаблонный конструктор узла дерева
-template<typename T>
- Node<T>* newNode(T data) {
-    Node<T>* node = new Node<T>;
-    node->data = data;
-    node->left = nullptr;
-    node->right = nullptr;
-    return node;
-}
-
-// вывод дерева в порядке главный узел, левая ветка, правая ветка
-template<typename T>
-void traversePreOrder(Node<T>* temp) {
-    if (temp != nullptr) {
-        std::cout << " " << temp->data;
-        traversePreOrder(temp->left);
-        traversePreOrder(temp->right);
-    }
-}
-
-// вывод дерева в порядке левая ветка, главный узел, правая ветка
-template<typename T>
-void traverseInOrder(Node<T>* temp) {
-    if (temp != nullptr) {
-        traverseInOrder(temp->left);
-        std::cout << " " << temp->data;
-        traverseInOrder(temp->right);
-    }
-}
-
-// вывод дерева в порядке левая ветка, правая ветка, главный узел
-template<typename T>
-void traversePostOrder(Node<T>* temp) {
-    if (temp != nullptr) {
-        traversePostOrder(temp->left);
-        traversePostOrder(temp->right);
-        std::cout << " " << temp->data;
-    }
-}
-
-// удаление узла дерева
-template<typename T>
-void deleteNode(Node<T>* temp) {
-    if (temp != nullptr) {
-        deleteNode(temp->left);
-        deleteNode(temp->right);
-        delete temp;
-    }
-}
-
-
-template<typename T>
-int countNodes(Node<T>* root) {
-    if (root == nullptr) {
-        // Если дерево пусто (корень равен nullptr), возвращаем 0.
-        return 0;
-    }
-    else {
-        // Иначе, рекурсивно считаем количество узлов в левом и правом поддеревьях,
-        // а затем добавляем 1 для текущего узла (корня).
-        return 1 + countNodes(root->left) + countNodes(root->right);
-    }
-}
-
-
-// вывод дерева в виде дерева, обход по LNR
-template<typename T>
-void printTree(Node<T>* root, int level = 0) {
-    if (root == nullptr) {
-        return;
-    }
-
-    // Рекурсивно обходим левое поддерево
-    printTree(root->left, level + 1);
-
-    // Выводим отступ в зависимости от уровня узла
-    for (int i = 0; i < level; ++i) {
-        std::cout << "    ";
-    }
-
-    // Выводим значение узла
-    std::cout << root->data << std::endl;
-
-    // Рекурсивно обходим правое поддерево
-    printTree(root->right, level + 1);
-}
-
-
-
-// итеративный алгоритм поиска глубины при помощи стека
-template<typename T>
-int findTreeDepth(Node<T>* root) {
-    if (root == nullptr) {
-        return 0; // Для пустого дерева глубина равна 0
-    }
-
-    // стек для хранения пар узлов дерева и их уровней в дереве
-    std::stack<std::pair<Node<T>*, int> > nodeStack;
-
-    nodeStack.push(std::make_pair(root, 1)); // Корневой узел с уровнем 1
-
-    int maxDepth = 0;
-    
-    // пока стэк не пуст
-    while (!nodeStack.empty()) {
-        // текущий узел - первый в стэке
-        Node<T>* currentNode = nodeStack.top().first;
-        // второй элемент стека (второй узел) - текущая глубина
-        int currentDepth = nodeStack.top().second;
-        // после обработки удалим этот элемент из стэка
-        nodeStack.pop();
-
-        // Обновляем максимальную глубину, если текущая глубина больше
-        if (currentDepth > maxDepth) {
-            maxDepth = currentDepth;
-        }
-        // Проверяем поддеревья и обновляем глубину
-        if (currentNode->left) {
-            nodeStack.push(std::make_pair(currentNode->left, currentDepth + 1));
+// Класс бинарного дерева
+class BinaryTree {
+private:
+    TreeNode* root;  // Указатель на корневой узел
+    // Вспомогательный метод для создания глубокой копии дерева
+    TreeNode* copyTree(TreeNode* node) {
+        if (node == nullptr) {
+            return nullptr;
         }
 
-        if (currentNode->right) {
-            nodeStack.push(std::make_pair(currentNode->right, currentDepth + 1));
-        }
+        TreeNode* newNode = new TreeNode(node->data);
+        newNode->left = copyTree(node->left);
+        newNode->right = copyTree(node->right);
+        return newNode;
     }
 
-    return maxDepth;
-}
-
-template<typename T>
-Node<T>* insert(Node<T>* root, T value) {
-    // Если дерево пусто, создаем новый узел и делаем его корневым
-    if (root == nullptr) {
-        return newNode(value);
-    }
-
-    // Рекурсивно вставляем значение в правое поддерево, если оно больше текущего узла
-    if (value > root->data) {
-        root->right = insert(root->right, value);
-    }
-    // Или в левое поддерево, если оно меньше или равно текущему узлу
-    else {
-        root->left = insert(root->left, value);
-    }
-
-    return root;
-}
-
-template<typename T>
-Node<T>* search(Node<T>* root, T value) {
-    // Если дерево пусто или текущий узел содержит искомое значение, вернуть текущий узел
-    if (root == nullptr || root->data == value) {
-        return root;
-    }
-
-    // Если искомое значение больше значения текущего узла,
-    // рекурсивно искать в правом поддереве
-    if (value > root->data) {
-        return search(root->right, value);
-    }
-
-    // Иначе искать в левом поддереве
-    Node<T>* result = search(root->left, value);
-
-    // Если результат поиска в левом поддереве не равен nullptr, значит, значение найдено
-    // и мы его возвращаем, иначе возвращаем nullptr
-    return (result != nullptr) ? result : nullptr;
-}
-
-
-// Функция для обхода дерева в порядке LNR и добавления элементов в вектор
-template<typename T>
-void treeToVector(Node<T>* root, std::vector<T>& result) {
-    if (root != nullptr) {
-        // Рекурсивно обходим левое поддерево
-        treeToVector(root->left, result);
-
-        // Добавляем значение текущего узла в вектор
-        result.push_back(root->data);
-
-        // Рекурсивно обходим правое поддерево
-        treeToVector(root->right, result);
-    }
-}
-
-
-// Функция для нахождения преемника узла
-template<typename T>
-Node<T>* findSuccessor(Node<T>* node) {
-    while (node->left != nullptr) {
-        node = node->left;
-    }
-    return node;
-}
-
-template<typename T>
-Node<T>* deleteNodeWithSuccessor(Node<T>* root, T key) {
-    if (root == nullptr) {
-        return root; // Если дерево пустое, возвращаем nullptr
-    }
-
-    // Рекурсивно ищем узел, который нужно удалить
-    if (key < root->data) {
-        root->left = deleteNodeWithSuccessor(root->left, key);
-    }
-    else if (key > root->data) {
-        root->right = deleteNodeWithSuccessor(root->right, key);
-    }
-    else {
-        // Узел найден, выполним удаление
-
-        // У случая 1 и 2 (узел без одного или обоих детей), просто удаляем узел
-        if (root->left == nullptr) {
-            Node<T>* temp = root->right;
-            delete root;
-            return temp;
-        }
-        else if (root->right == nullptr) {
-            Node<T>* temp = root->left;
-            delete root;
-            return temp;
+    // Вспомогательный метод для вычисления глубины дерева
+    int calculateDepth(TreeNode* node) {
+        if (node == nullptr) {
+            return 0;
         }
 
-        // У случая 3 (узел с двумя детьми) найдем преемника
-        Node<T>* successor = findSuccessor(root->right);
+        int leftDepth = calculateDepth(node->left);
+        int rightDepth = calculateDepth(node->right);
 
-        // Заменяем данные текущего узла данными преемника
-        root->data = successor->data;
-
-        // Рекурсивно удаляем преемника из правого поддерева
-        root->right = deleteNodeWithSuccessor(root->right, successor->data);
+        return std::max(leftDepth, rightDepth) + 1;
     }
-
-    return root;
-}
-
-// Функция для обхода дерева и применения функции к каждому элементу
-template<typename T>
-void applyFunction(Node<T>* root, T(*func)(T)) {
-    if (root != nullptr) {
-        // Применяем функцию к текущему элементу
-        root->data = func(root->data);
-        // Рекурсивно обходим левое и правое поддеревья
-        applyFunction(root->left, func);
-        applyFunction(root->right, func);
-    }
-}
-
-// Breadth-First Search, алгоритм обхода дерева в ширину
-template<typename T>
-std::vector<Node<T>*> breadthFirstSearch(Node<T>* root) {
-    std::vector<Node<T>*> result;
-
-    if (root == nullptr) {
-        return result;
-    }
-
-    std::queue<Node<T>*> q;
-    q.push(root);
-
-    while (!q.empty()) {
-        Node<T>* current = q.front();
-        q.pop();
-
-        // Добавляем текущий узел в вектор 
-        result.push_back(current);
-
-        // Добавляем дочерние узлы в очередь
-        if (current->left != nullptr) {
-            q.push(current->left);
-        }
-        if (current->right != nullptr) {
-            q.push(current->right);
-        }
-    }
-
-    return result;
-}
-
-// Алгоритм копирования бинарного дерева
-template<typename T>
-Node<T>* copyTree(Node<T>* source) {
-    if (source == nullptr) {
-        return nullptr; // Если исходное дерево пусто, возвращаем nullptr
-    }
-
-    // Создаем новый узел с тем же значением
-    Node<T>* new_node= newNode(source->data);
-
-    // Рекурсивно копируем левое и правое поддеревья
-    new_node->left = copyTree(source->left);
-    new_node->right = copyTree(source->right);
-
-    return new_node;
-}
-
-
-template<typename T>
-void deleteTree(Node<T>* node) {
-    if (node == nullptr) {
-        return;
-    }
-
-    // Рекурсивно удаляем левое и правое поддерево
-    deleteTree(node->left);
-    deleteTree(node->right);
-
-    // Удаляем текущий узел
-    delete node;
-}
-
-// Функция для возведения числа в квадрат
-template<typename T>
-T square(T x) {
-    return x * x;
-}
-
-template <typename T>
-class BinaryTreeIterator : public Iterator<T> {
 public:
-    // Конструктор класса, принимает указатель на узел, с которого начнется итерация
-    BinaryTreeIterator(Node<T>* start) : current(start) {
-        if (current) {
-            initializeStack(current); // Если узел существует, инициализируем стек начальным узлом
-        }
+    // Конструктор по умолчанию инициализирует корневой узел как nullptr
+    BinaryTree() : root(nullptr) {}
+
+    // Функция для вставки значения в дерево
+    void insert(int value) {
+        root = insertRec(root, value);
     }
 
-    // Перегрузка оператора "*" для получения значения, на которое указывает итератор
-    T operator*() const override {
-        if (current) {
-            return current->data; // Возвращаем значение текущего узла
+    // Рекурсивная функция для вставки значения
+    TreeNode* insertRec(TreeNode* node, int value) {
+        // Если дерево пустое, создаем новый узел и возвращаем его
+        if (node == nullptr) {
+            return new TreeNode(value);
         }
-        else {
-            throw std::runtime_error("Dereferencing a nullptr iterator"); // Если текущий узел - nullptr, генерируем исключение
+
+        // Иначе рекурсивно идем влево или вправо, в зависимости от значения
+        if (value < node->data) {
+            node->left = insertRec(node->left, value);
         }
+        else if (value > node->data) {
+            node->right = insertRec(node->right, value);
+        }
+
+        return node;
+    }
+     // Метод для создания глубокой копии дерева
+    BinaryTree CopyTree() {
+        BinaryTree newTree;
+        newTree.root = copyTree(root);
+        return newTree;
     }
 
-    // Перегрузка оператора "++" для перемещения итератора к следующему узлу
-    BinaryTreeIterator<T>& operator++() override {
-        if (nodeStack.empty()) {
-            current = nullptr; // Если стек пуст, устанавливаем текущий узел как nullptr
+    // Метод для вычисления глубины дерева (максимальной глубины)
+    int depth() {
+        return calculateDepth(root);
+    }
+
+    // Метод для обхода дерева в ширину
+    void BreadthFirstSearch(std::function<void(int)> callback) {
+        if (root == nullptr) {
+            return;
         }
-        else {
-            current = nodeStack.top(); // Получаем текущий узел из вершины стека
-            nodeStack.pop(); // Удаляем верхний элемент из стека
-            if (current->right) {
-                initializeStack(current->right); // Если у текущего узла есть правое поддерево, инициализируем стек этим поддеревом
+
+        std::queue<TreeNode*> q;
+        q.push(root);
+
+        while (!q.empty()) {
+            TreeNode* current = q.front();
+            q.pop();
+
+            callback(current->data);
+
+            if (current->left != nullptr) {
+                q.push(current->left);
+            }
+
+            if (current->right != nullptr) {
+                q.push(current->right);
             }
         }
-        return *this;
     }
 
-    // Перегрузка оператора "==" для сравнения двух итераторов
-    bool operator==(const Iterator<T>& other) const override {
-        const BinaryTreeIterator<T>* otherIterator = dynamic_cast<const BinaryTreeIterator<T>*>(&other);
-        if (otherIterator) {
-            return current == otherIterator->current; // Сравниваем текущие узлы двух итераторов
+    // Функция для поиска значения в дереве
+    bool search(int value) {
+        return searchRec(root, value);
+    }
+
+    // Рекурсивная функция для поиска значения
+    bool searchRec(TreeNode* node, int value) {
+        // Если дерево пустое или мы нашли значение, возвращаем true
+        if (node == nullptr || node->data == value) {
+            return node != nullptr;
         }
-        return false;
-    }
 
-    // Перегрузка оператора "!=" для сравнения двух итераторов
-    bool operator!=(const Iterator<T>& other) const override {
-        return !(*this == other); // Используем оператор "==" для проверки на неравенство
-    }
-
-    // Преобразование итератора в тип bool, чтобы проверить, указывает ли итератор на nullptr
-    operator bool() const {
-        return current != nullptr; // Возвращаем true, если текущий узел не является nullptr
-    }
-
-private:
-    Node<T>* current; // Указатель на текущий узел, на который указывает итератор
-    std::stack<Node<T>*> nodeStack; // Стек для обхода узлов
-
-    // Метод для инициализации стека, выполняет обход левых узлов и добавляет их в стек
-    void initializeStack(Node<T>* node) {
-        while (node) {
-            nodeStack.push(node);
-            node = node->left;
+        // Рекурсивно идем влево или вправо, в зависимости от значения
+        if (value < node->data) {
+            return searchRec(node->left, value);
+        }
+        else {
+            return searchRec(node->right, value);
         }
     }
+
+
+    // Класс итератора
+    class Iterator {
+    private:
+        std::stack<TreeNode*> stack;
+
+    public:
+        Iterator(TreeNode* root) {
+            // Инициализируем итератор, помещая все узлы до самого левого в стек
+            while (root != nullptr) {
+                stack.push(root);
+                root = root->left;
+            }
+        }
+
+        int next() {
+            // Если стек пуст, значит все элементы уже обойдены
+            if (stack.empty()) {
+                throw std::runtime_error("Итератор завершил обход");
+            }
+
+            // Получаем значение текущего узла
+            TreeNode* current = stack.top();
+            int value = current->data;
+
+            // Переходим к правому потомку
+            stack.pop();
+            if (current->right != nullptr) {
+                current = current->right;
+                while (current != nullptr) {
+                    stack.push(current);
+                    current = current->left;
+                }
+            }
+
+            return value;
+        }
+
+        bool hasNext() const {
+            return !stack.empty();
+        }
+    };
+
+    // Метод, возвращающий итератор
+    Iterator iterator() {
+        return Iterator(root);
+    }
+
+
+    // Обход LNR (in-order) с использованием итератора
+    void traverseLNR(std::function<void(int)> callback) {
+        Iterator it = iterator();
+        while (it.hasNext()) {
+            callback(it.next());
+        }
+    }
+
+    // Обход RNL (reverse in-order) с использованием итератора
+    void traverseRNL(std::function<void(int)> callback) {
+        std::stack<int> values;
+        Iterator it = iterator();
+        while (it.hasNext()) {
+            values.push(it.next());
+        }
+        while (!values.empty()) {
+            callback(values.top());
+            values.pop();
+        }
+    }
+    
+    void traverseNLR(TreeNode* node) {
+        if (node == nullptr) {
+            return;
+        }
+        // Действие (например, вывод значения на экран)
+        std::cout << node->data << " ";
+        traverseNLR(node->left);
+        traverseNLR(node->right);
+    }
+
 };
+
