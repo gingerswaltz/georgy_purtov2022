@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-    Node<int>* root = newNode<int>(1);
+    TreeNode<int>* root = TreeNode<int>(1);
     root->left = newNode(2);
     root->right = newNode(3);
     root->right->left = newNode(9);

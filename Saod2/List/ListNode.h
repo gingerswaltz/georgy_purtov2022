@@ -1,26 +1,26 @@
-/// @author gingerswaltz
+п»ї/// @author gingerswaltz
 #pragma once
 
-/// шаблонный класс узел односвязного списка
+/// С€Р°Р±Р»РѕРЅРЅС‹Р№ РєР»Р°СЃСЃ СѓР·РµР» РѕРґРЅРѕСЃРІСЏР·РЅРѕРіРѕ СЃРїРёСЃРєР°
 template <class T>
 class ListNode
 {
 private:
-	T data;			   /// данные узла
-	ListNode<T>* prev; /// указатель на предыдущий узел
-	ListNode<T>* next; /// указатель на следующий узел
+	T data;			   /// РґР°РЅРЅС‹Рµ СѓР·Р»Р°
+	ListNode<T>* prev; /// СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїСЂРµРґС‹РґСѓС‰РёР№ СѓР·РµР»
+	ListNode<T>* next; /// СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃР»РµРґСѓСЋС‰РёР№ СѓР·РµР»
 public:
-	/// Конструктор без параметров
+	/// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Р±РµР· РїР°СЂР°РјРµС‚СЂРѕРІ
 	ListNode() : next(nullptr), prev(nullptr) {}
 
-	/// Конструктор с параметром "данные"
+	/// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂРѕРј "РґР°РЅРЅС‹Рµ"
 	ListNode(const T& data_) : data(data_), next(nullptr), prev(nullptr) {}
 
-	/// Установить Next
+	/// РЈСЃС‚Р°РЅРѕРІРёС‚СЊ Next
 	void SetNext(ListNode<T>* newNext) {
 		next = newNext;
 	}
-	/// Установить Prev
+	/// РЈСЃС‚Р°РЅРѕРІРёС‚СЊ Prev
 	void SetPrev(ListNode<T>* newPrev) {
 		prev = newPrev;
 	}

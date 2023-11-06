@@ -57,17 +57,34 @@ int main() {
     std::cout << std::endl;
 
     TestConstructor();
+    TestConstructor2();
+    TestConstructor3();
     TestInsert();
+    TestInsert2();
     TestExtractMax();
+    TestExtractMax2();
+    TestExtractMax3();
     TestSize();
+    TestSize2();
+    TestSize3();
     TestIsEmpty();
+    TestIsEmpty2();
+    TestIsEmpty3();
     TestFind();
+    TestFind2();
+    TestFind3();
     TestRemove();
+    TestRemove2();
+    TestRemove3();
     TestClear();
+    TestClear2();
+    TestClear3();
     TestHeapSort();
-
-
-
+    TestHeapSort2();
+    TestHeapSort3();
+    TestConstructorFromExternalArray();
+    TestConstructorFromExternalArray2();
+    std::cout<<"all test passed";
 
     return 0;
 }
