@@ -2,7 +2,7 @@
 #include "LinkedList.h"
 #include <iostream>
 using namespace std;
-
+// todo: empty list, 1 elem
 void testLinkedListIterator() {
     LinkedList<int> list1;
     list1.InsertAtTail(1);

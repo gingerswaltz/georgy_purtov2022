@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cassert>
 #include "Heap.h"
-
+// todo: 1 elem, empty
 void TestConstructor() {
     Heap<int> heap(10);
 

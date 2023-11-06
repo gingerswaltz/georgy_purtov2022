@@ -1,4 +1,4 @@
-﻿#include "bst.h"
+﻿// author: gingerswaltz
 #include "../ConsoleApplication1/ConsoleApplication1/binary_tree.h"
 
 void testTraverseIterator() {
@@ -13,7 +13,7 @@ void testTraverseIterator() {
     // Тест обхода LNR (in-order)
     int lnr_expected[] = { 20, 30, 40, 50, 70 };
     int lnr_index = 0;
-    tree.traverseLNR([&](int value) {
+    tree.traverseLNR( [&](int value) {
         assert(value == lnr_expected[lnr_index]);
         lnr_index++;
         });
@@ -53,7 +53,7 @@ void testBinaryTree() {
     std::cout << "Iterator test passed\n";
 }
 
-
+// деревья - пустые вырожденные и 1 эл
 int main() {
     testBinaryTree();
     testTraverseIterator();

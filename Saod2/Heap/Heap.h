@@ -1,7 +1,7 @@
 //@author: gingerswaltz
 #pragma once
 
-
+// todo: lобавление памяти при вставке если не хватило. конструктор с принятием массива извне(перестройка по принципу кучи)
 template <typename T>
 class Heap
 {
@@ -142,7 +142,6 @@ public:
         for (int i = 0; i < heapSize; i++) {
             if (heapArray[i] == item) {
                 // Найден элемент, удаляем его из кучи.
-                // Здесь можно применить различные стратегии удаления, например, заменить элемент последним и выполнить HeapifyUp/HeapifyDown.
                 // В данном случае, мы просто заменяем элемент последним и уменьшаем размер кучи.
                 heapArray[i] = heapArray[heapSize - 1];
                 heapSize--;
@@ -155,15 +154,15 @@ public:
 
     // Метод для очистки кучи
     void Clear() {
-        delete[] heapArray; // Удаляем существующий массив элементов
-        heapArray = new T[arraySize]; // Создаем новый пустой массив
+     // delete[] heapArray; // Удаляем существующий массив элементов
+      //   heapArray = new T[arraySize]; // Создаем новый пустой массив
         heapSize = 0; // Сбрасываем размер кучи
     }
 
    
 
 };
-
+// todo: to func
 template <typename T>
 class HeapSort {
 public:
