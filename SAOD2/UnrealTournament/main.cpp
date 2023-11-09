@@ -7,8 +7,7 @@ void testSortEmptyArray() {
   vector<int> array;
   vector<int> copy = array;
   
-  TournamentSort sorter(array);  
-  sorter.sort();
+  tournamentSort(array);  
 
   assert(array == copy);
 }
@@ -19,8 +18,7 @@ void testSortSingleElement() {
   vector<int> array = {value};
   vector<int> copy = array;
 
-  TournamentSort sorter(array);
-  sorter.sort();
+  tournamentSort(array);
   
   assert(array == copy);
   assert(array[0] == value);
@@ -31,8 +29,8 @@ void testReverseSort() {
   vector<int> array = {5, 3, 1};
   vector<int> expected = {1, 3, 5};
   
-  TournamentSort sorter(array);
-  sorter.sort();
+  tournamentSort(array);
+  
 
   assert(array == expected);  
 }
@@ -42,9 +40,8 @@ void testCorrectSort() {
   vector<int> array = {5, 1, 4, 3, 2};
   vector<int> expected = {1, 2, 3, 4, 5};
 
-  TournamentSort sorter(array);
-  sorter.sort();
-
+  tournamentSort(array);
+ 
   assert(array == expected);
 }
 
