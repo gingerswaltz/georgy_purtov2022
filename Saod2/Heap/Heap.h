@@ -65,29 +65,69 @@ private:
 
 
 public:
+    
     // Конструктор класса куча
     Heap(int capacity) : heapSize(0), arraySize(capacity) {
         heapArray = new T[arraySize];
     }
     
-    // 5th rule
+    // Копирующий конструктор
+    // нужен для корректной обработки копирования (например, при копировании одного объекта в другой корректно обрабатывалась их память)
+    Heap(const Heap& other) : heapSize(other.heapSize), arraySize(other.arraySize) {
+        heapArray = new T[arraySize];
+        memcpy(heapArray, other.heapArray, sizeof(T) * heapSize);
+    }
+
+    // Перемещающий конструктор
+    Heap(Heap&& other) noexcept : heapSize(other.heapSize), arraySize(other.arraySize), heapArray(other.heapArray) {
+        other.heapArray = nullptr;
+        other.heapSize = 0;
+        other.arraySize = 0;
+    }
+
+    // Копирующее присваивание
+    Heap& operator=(const Heap& other) {
+        if (this != &other) {
+            delete[] heapArray;
+
+            heapSize = other.heapSize;
+            arraySize = other.arraySize;
+            heapArray = new T[arraySize];
+            memcpy(heapArray, other.heapArray, sizeof(T) * heapSize);
+        }
+        return *this;
+    }
+
+    // Перемещающее присваивание
+    Heap& operator=(Heap&& other) noexcept {
+        if (this != &other) {
+            delete[] heapArray;
+
+            heapArray = other.heapArray;
+            heapSize = other.heapSize;
+            arraySize = other.arraySize;
+
+            other.heapArray = nullptr;
+            other.heapSize = 0;
+            other.arraySize = 0;
+        }
+        return *this;
+    }
     
     // Конструктор, принимающий массив и перестраивающий его по принципу кучи
     Heap(const T* array, int size) : arraySize(size), heapSize(size) {
-    heapArray = new T[arraySize]; // Создаем массив для хранения элементов кучи.
+        heapArray = new T[arraySize]; // Создаем массив для хранения элементов кучи.
 
-    // memcpy todo
-    // Копируем элементы из внешнего массива в нашу кучу.
-    for (int i = 0; i < size; i++) {
-        heapArray[i] = array[i];
+        // Используем memcpy для копирования элементов из внешнего массива в кучу
+        memcpy(heapArray, array, sizeof(T) * size);
+
+        // Начинаем преобразование массива в кучу снизу вверх (HeapifyDown).
+        // Начинаем с последнего элемента и перемещаемся к корню.
+        for (int i = (size - 1) / 2; i >= 0; i--) {
+            HeapifyDown(i);
+        }
     }
 
-    // Начинаем преобразование массива в кучу снизу вверх (HeapifyDown).
-    // Начинаем с последнего элемента и перемещаемся к корню.
-    for (int i = (size - 1) / 2; i >= 0; i--) {
-        HeapifyDown(i);
-    }
-}
     // Деструктор класса куча
     ~Heap() {
         delete[] heapArray;
@@ -102,15 +142,10 @@ void Insert(const T& item) {
         // и обеспечивает амортизированную сложность O(1) для операции вставки.
         arraySize *= 2;
         T* newHeapArray = new T[arraySize];
-        // Создаем новый массив с увеличенным размером и копируем в него существующие элементы.
-        // 
-        // for (int i = 0; i < heapSize; i++) {
-        //     newHeapArray[i] = heapArray[i];
-        // }
+        
         auto n=sizeof(heapArray[1]);
 
         memcpy(newHeapArray, heapArray, n*heapSize);
-        // memcpy
 
         // Удаляем старый массив и обновляем указатель на новый массив.
         delete[] heapArray;

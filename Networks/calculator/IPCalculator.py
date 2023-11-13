@@ -249,3 +249,21 @@ def split_network_by_hosts(ip, prefix, hosts_per_subnet):
 
   if len(subnets) > 0:
     print(f"Невозможно разбить на /{prefix} подсети по {hosts_per_subnet} хостов")
+
+def validate_ip(ip):
+    try: 
+      ipaddress.ip_address(ip)
+      return True
+    except ValueError:
+      return False
+
+def validate_netmask(netmask):
+    try:
+      netmask = int(netmask) 
+    except ValueError:
+      return False
+  
+    if not 0 < netmask <= 32:
+      return False
+    
+    return True

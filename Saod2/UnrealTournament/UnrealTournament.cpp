@@ -1,3 +1,4 @@
+//@author: gingerswaltz
 #include <cassert>
 #include <algorithm>
 #include "TournamentSort.h"
@@ -29,6 +30,8 @@ void testReverseSort() {
     vector<int> array = { 5, 3, 1 };
     vector<int> expected = { 1, 3, 5 };
 
+
+    
     tournamentSort(array);
 
 
@@ -62,7 +65,6 @@ int main() {
     testSortSingleElement();
     testReverseSort();
     testCorrectSort();
-
     printTestResult(testsPassed);
 
     return 0;

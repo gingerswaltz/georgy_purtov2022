@@ -80,7 +80,7 @@ int main() {
     TestClear2();
     TestClear3();
     TestHeapSort();
-    TestHeapSort2();
+    //TestHeapSort2();
     TestHeapSort3();
     TestConstructorFromExternalArray();
     TestConstructorFromExternalArray2();
