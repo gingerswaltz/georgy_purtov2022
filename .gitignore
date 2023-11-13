@@ -86,3 +86,6 @@ __pycache__/
 *.mo
 iot/.vscode/launch.json
 .DS_Store
+*.gch
+*.plist
+SAOD2/AVL/AVL.dSYM/Contents/Resources/DWARF/AVL

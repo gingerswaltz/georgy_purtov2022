@@ -1,10 +1,10 @@
-﻿//author:gingerswaltz
+﻿// author:gingerswaltz
 #include <iostream>
-#include "AVL_Tree.h" 
-
+#include "AVL_tree.h"
 
 // Функция для тестирования балансировки дерева
-void testBalance() {
+void testBalance()
+{
     AVLTree<int> tree;
     tree.insert(10);
     tree.insert(20);
@@ -15,8 +15,8 @@ void testBalance() {
     std::cout << "[OK] Тест балансировки пройден." << std::endl;
 }
 
-
-void testInsertAndBalance() {
+void testInsertAndBalance()
+{
     AVLTree<int> tree;
 
     // Вставляем элементы
@@ -25,15 +25,14 @@ void testInsertAndBalance() {
     tree.insert(40);
     tree.insert(10); // Эта вставка должна вызвать балансировку
 
-    
     // Проверка баланса дерева
     assert(tree.isBalanced());
-
 
     std::cout << "[OK] Тест вставки и балансировки пройден." << std::endl;
 }
 
-void testDeleteAndBalance() {
+void testDeleteAndBalance()
+{
     AVLTree<int> tree;
 
     // Вставляем элементы
@@ -49,14 +48,12 @@ void testDeleteAndBalance() {
     assert(!tree.search(20));
     assert(tree.isBalanced());
 
-
     std::cout << "[OK] Тест удаления и балансировки пройден." << std::endl;
 }
 
-
-//todo: вырожденные и 1эл
-int main() {
-    
+// todo: вырожденные и 1эл
+int main()
+{
 
     testBalance();
     testInsertAndBalance();
