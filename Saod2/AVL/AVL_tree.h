@@ -1,6 +1,6 @@
 //@author: gingerswaltz
 #include "BinaryTree.h"
-
+// Класс узла AVL дерева
 template <class T>
 class AVLNode : public TreeNode<T>
 {
@@ -36,12 +36,16 @@ public:
     }
 };
 
+/// todo: doc, метод который обходит дерево и возвращает массив, и проверить его на свойство бинарного дерева
+// Класс AVL дерева
 template <class T>
 class AVLTree
 {
 private:
+    // корень дерева
     AVLNode<T> *root;
 
+    // Метод правого поворота
     AVLNode<T> *rightRotate(AVLNode<T> *y)
     {
         // Получаем левого потомка узла y как узел x.
@@ -62,6 +66,7 @@ private:
         return x;
     }
 
+    // Метод левого поворота
     AVLNode<T> *leftRotate(AVLNode<T> *x)
     {
         // Получаем правого потомка узла x как узел y.
@@ -82,6 +87,7 @@ private:
         return y;
     }
 
+    // Метод балансировки
     AVLNode<T> *balanceNode(AVLNode<T> *node)
     {
         if (node == nullptr)
@@ -123,6 +129,7 @@ private:
         return node;
     }
 
+    // Метод вставки
     AVLNode<T> *insertNode(AVLNode<T> *node, const T &key)
     {
         // Обычная вставка BST
@@ -146,8 +153,6 @@ private:
         // Балансировка узла
         return balanceNode(node);
     }
-
-    
 
     // Рекурсивная функция для проверки баланса каждого узла
     bool isBalanced(AVLNode<T> *node)
@@ -179,34 +184,40 @@ private:
     }
 
 public:
+    // Конструктор
     AVLTree() : root(nullptr) {}
 
+    // Публичный интерфейс вставки
     void insert(const T &key)
     {
         root = insertNode(root, key);
     }
 
+    // Публичный интерфейс удаления элемента
     void remove(const T &key)
-{
-    // Приводим root к типу AVLNode<T>* для вызова deleteNode
-    AVLNode<T>* newRoot = dynamic_cast<AVLNode<T>*>(deleteNode(root, key));
-    
-    // newRoot не является nullptr после приведения типов
-    if (newRoot != nullptr) {
-        root = newRoot;
+    {
+        // Приводим root к типу AVLNode<T>* для вызова deleteNode
+        AVLNode<T> *newRoot = dynamic_cast<AVLNode<T> *>(deleteNode(root, key));
+
+        // newRoot не является nullptr после приведения типов
+        if (newRoot != nullptr)
+        {
+            root = newRoot;
+        }
+
+        // balanceNode, даже если newRoot равен nullptr,
+        // так как балансировка может потребоваться в любом случае.
+        root = this->balanceNode(root);
     }
 
-    // balanceNode, даже если newRoot равен nullptr, 
-    // так как балансировка может потребоваться в любом случае.
-    root = this->balanceNode(root);
-}
 
-
+    // Публичный интерфейс поиска
     bool search(const T &data)
     {
         return Search(root, data);
     }
 
+    // Публичный интерфейс вывода дерева
     void printTree()
     {
         PrintTree(root, 0);
@@ -218,13 +229,22 @@ public:
         return root;
     }
 
+    // Публичный интерфейс для отладочной функции
     bool isBalanced()
     {
         return isBalanced(root);
     }
 
+    // Публичный интерфейс для обхода в глубину
     void BreadthFirstSearch()
     {
         BFS(root);
+    }
+
+   int addToArr(T arr[], int size) {
+        if (this->root == nullptr || arr == nullptr || size <= 0) {
+            return 0; // Возвращаем 0, если дерево пусто или массив недействителен.
+        }
+        return AddArr(this->root, arr, 0);
     }
 };
