@@ -1,88 +1,50 @@
+// @author: gingerswaltz
 #include <iostream>
 #include <map>
 #include <list>
 #include <utility>
+#include <vector>
+#include <queue>
+#include <unordered_map>
+#include <limits>
+#include <fstream>
+#include <sstream>
 
+// Класс графа
+template <typename T>
 class Graph
 {
 private:
     // Вес ребра представлен парой вершин (vertex1, vertex2)
-    std::map<std::pair<int, int>, int> edgeWeights;
-    
-    // todo : шаблонность (чтобы еще принимало например A B и т.д.)
+    std::map<std::pair<T, T>, int> edgeWeights;
 
     // Список смежности, где ключ - вершина, а значение - список смежных вершин
-    std::map<int, std::list<int>> adjacencyList;
+    std::map<T, std::list<T>> adjacencyList;
 
 public:
-    // Конструктор по умолчанию
-    Graph() = default;
-
-    // Конструктор копирования
-    Graph(const Graph &other)
-        : adjacencyList(other.adjacencyList), edgeWeights(other.edgeWeights) {}
-
-    // Оператор копирования
-    Graph &operator=(const Graph &other)
-    {
-        if (this != &other)
-        {
-            adjacencyList = other.adjacencyList;
-            edgeWeights = other.edgeWeights;
-        }
-        return *this;
-    }
-
-    // Деструктор
-    ~Graph()
-    {
-        // Так как используются стандартные контейнеры, особой обработки не требуется
-    }
-
-    // Конструктор перемещения
-    Graph(Graph &&other) noexcept
-        : adjacencyList(std::move(other.adjacencyList)), edgeWeights(std::move(other.edgeWeights)) {}
-
-    // Оператор перемещения
-    Graph &operator=(Graph &&other) noexcept
-    {
-        if (this != &other)
-        {
-            adjacencyList = std::move(other.adjacencyList);
-            edgeWeights = std::move(other.edgeWeights);
-        }
-        return *this;
-    }
-
     // Добавление вершины в граф
-    void InsertVertex(int vertex)
+    void InsertVertex(const T &vertex)
     {
-        // Если вершина уже есть в графе, не добавляем ее
         if (adjacencyList.find(vertex) == adjacencyList.end())
         {
-            adjacencyList[vertex] = std::list<int>();
+            adjacencyList[vertex] = std::list<T>();
         }
     }
 
-
-    // добавить изменение веса ребра
-    void InsertEdge(int vertex1, int vertex2, int weight)
+    // Добавление ребра и его веса
+    void InsertEdge(const T &vertex1, const T &vertex2, int weight)
     {
-        // Проверяем, существуют ли обе вершины в графе
         if (adjacencyList.find(vertex1) != adjacencyList.end() && adjacencyList.find(vertex2) != adjacencyList.end())
         {
-            // Добавляем vertex2 в список смежности vertex1 и наоборот
             adjacencyList[vertex1].push_back(vertex2);
             adjacencyList[vertex2].push_back(vertex1);
-
-            // Устанавливаем вес ребра в обоих направлениях
             edgeWeights[std::make_pair(vertex1, vertex2)] = weight;
             edgeWeights[std::make_pair(vertex2, vertex1)] = weight;
         }
     }
 
     // Удаление вершины и всех инцидентных ей ребер
-    void DeleteVertex(int vertex)
+    void DeleteVertex(const T &vertex)
     {
         // Удаляем все ребра, инцидентные вершине
         for (auto adjVertex : adjacencyList[vertex])
@@ -97,7 +59,7 @@ public:
     }
 
     // Удаление ребра между двумя вершинами
-    void DeleteEdge(int vertex1, int vertex2)
+    void DeleteEdge(const T &vertex1, const T &vertex2)
     {
         // Удаляем vertex2 из списка смежных вершин для vertex1.
         // Это означает, что ребро больше не соединяет vertex1 и vertex2.
@@ -116,22 +78,111 @@ public:
     }
 
     // Получение списка смежных вершин
-    std::list<int> GetNeighbors(int vertex)
+    std::list<T> GetNeighbors(const T &vertex)
     {
         return adjacencyList[vertex];
     }
 
-    // Получение веса ребра
-    int GetWeight(int vertex1, int vertex2)
+    const int *GetWeight(const T &vertex1, const T &vertex2)
     {
-        if (edgeWeights.find(std::make_pair(vertex1, vertex2)) != edgeWeights.end())
+        auto it = edgeWeights.find(std::make_pair(vertex1, vertex2));
+        if (it != edgeWeights.end())
         {
-            return edgeWeights[std::make_pair(vertex1, vertex2)];
+            return &(it->second);
         }
         else
         {
-            return -1; // Возвращаем -1, если ребра нет 
-            // тодо: поменять на другое значение, не -1
+            return nullptr; // Возвращаем nullptr, если ребра нет
         }
+    }
+
+    // Изменение веса ребра или добавление нового ребра с заданным весом
+    void SetEdgeWeight(const T &vertex1, const T &vertex2, int newWeight)
+    {
+        // Добавляем вершины в граф, если они еще не существуют
+        InsertVertex(vertex1);
+        InsertVertex(vertex2);
+
+        // Обновляем вес ребра в обоих направлениях
+        edgeWeights[std::make_pair(vertex1, vertex2)] = newWeight;
+        edgeWeights[std::make_pair(vertex2, vertex1)] = newWeight;
+    }
+
+    // Алгоритм Дейкстры для нахождения кратчайшего пути от start до всех других вершин
+    std::unordered_map<T, int> Dijkstra(const T &start)
+    {
+        // Инициализация расстояний до всех вершин бесконечно большими значениями
+        std::unordered_map<T, int> distances;
+        for (const auto &pair : adjacencyList)
+        {
+            distances[pair.first] = std::numeric_limits<int>::max();
+        }
+
+        // Использование приоритетной очереди для выбора следующей вершины с минимальным расстоянием
+        std::priority_queue<std::pair<int, T>, std::vector<std::pair<int, T>>, std::greater<std::pair<int, T>>> pq;
+        pq.push(std::make_pair(0, start)); // Начальная вершина с расстоянием 0
+        distances[start] = 0;
+
+        while (!pq.empty())
+        {
+            T vertex = pq.top().second; // Текущая вершина с минимальным расстоянием
+            int dist = pq.top().first;
+            pq.pop();
+
+            // Пропускаем обработку, если найдено более короткое расстояние
+            if (dist > distances[vertex])
+                continue;
+
+            // Перебор всех соседних вершин
+            for (const auto &neighbor : adjacencyList[vertex])
+            {
+                int nextDist = dist + *GetWeight(vertex, neighbor);
+                // Если найден более короткий путь к соседу, обновляем его расстояние
+                if (nextDist < distances[neighbor])
+                {
+                    distances[neighbor] = nextDist;
+                    pq.push(std::make_pair(nextDist, neighbor)); // Добавляем соседа в очередь для дальнейшей обработки
+                }
+            }
+        }
+
+        return distances; // Возвращаем карту расстояний от начальной вершины до всех остальных
+    }
+
+    // Функция для загрузки графа из файла
+    void LoadGraphFromFile(const std::string &filename)
+    {
+        std::ifstream file(filename);
+        // Проверяем, открылся ли файл
+        if (!file.is_open())
+        {
+            std::cerr << "Не удалось открыть файл: " << filename << std::endl;
+            return;
+        }
+
+        T vertex1, vertex2; // Переменные для хранения вершин
+        int weight;         // Переменная для хранения веса ребра
+        std::string line;
+
+        // Чтение файла построчно
+        while (std::getline(file, line))
+        {
+            std::istringstream iss(line);
+            // Извлекаем из строки две вершины и вес ребра
+            if (!(iss >> vertex1 >> vertex2 >> weight))
+            {
+                // В случае ошибки чтения строки, выводим сообщение и продолжаем с следующей строки
+                std::cerr << "Ошибка чтения строки: " << line << std::endl;
+                continue;
+            }
+
+            // Добавляем вершины и ребро в граф
+            InsertVertex(vertex1);
+            InsertVertex(vertex2);
+            InsertEdge(vertex1, vertex2, weight);
+        }
+
+        // Закрываем файл после чтения
+        file.close();
     }
 };

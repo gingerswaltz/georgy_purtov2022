@@ -89,3 +89,7 @@ iot/.vscode/launch.json
 *.gch
 *.plist
 SAOD2/AVL/AVL.dSYM/Contents/Resources/DWARF/AVL
+*.ilk
+*.obj
+*.pdb
+*.pdb
