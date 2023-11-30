@@ -69,7 +69,7 @@ void testEmptyGraphOperations()
 
     // Тест на добавление ребра в пустой граф
     g.InsertEdge(1, 2, 10);          // Попытка добавить ребро в пустой граф
-    assert(g.GetWeight(1, 2) == -1); // Убеждаемся, что ребро не добавлено
+    assert(g.GetWeight(1, 2) == -1); // Убеждаемся, что ребро не добавлено. Функция возвращает -1 как знак 
     std::cout << "[OK] 0 vertex test passed" << std::endl;
 }
 
