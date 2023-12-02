@@ -9,6 +9,7 @@
 #include <limits>
 #include <fstream>
 #include <sstream>
+#include <set>
 
 // Класс графа
 template <typename T>
@@ -21,6 +22,31 @@ private:
     // Список смежности, где ключ - вершина, а значение - список смежных вершин
     std::map<T, std::list<T>> adjacencyList;
 
+    // Вспомогательный метод для рекурсивного обхода в глубину
+    void DFSUtil(const T &vertex, std::set<T> &visited, std::vector<T> &result) const
+    {
+        // Проверяем, была ли вершина уже посещена
+        if (visited.find(vertex) != visited.end())
+        {
+            return; // Если вершина уже посещена, прекращаем обработку
+        }
+
+        // Отмечаем текущую вершину как посещенную
+        visited.insert(vertex);
+        // Добавляем текущую вершину в список результатов
+        result.push_back(vertex);
+
+        // Перебираем всех соседей текущей вершины
+        for (const auto &neighbor : adjacencyList.at(vertex))
+        {
+            // Если соседняя вершина еще не была посещена, рекурсивно вызываем DFSUtil для нее
+            if (visited.find(neighbor) == visited.end())
+            {
+                DFSUtil(neighbor, visited, result);
+            }
+        }
+    }
+
 public:
     // Добавление вершины в граф
     void InsertVertex(const T &vertex)
@@ -29,6 +55,60 @@ public:
         {
             adjacencyList[vertex] = std::list<T>();
         }
+    }
+
+    // Метод для обхода в глубину, начиная с заданной вершины
+    std::vector<T> DFS(const T &startVertex) const
+    {
+        std::set<T> visited;   // Создаем множество для отслеживания посещенных вершин
+        std::vector<T> result; // Вектор для хранения порядка обхода вершин
+
+        // Вызываем вспомогательный рекурсивный метод DFSUtil
+        // Передаем ему начальную вершину, множество посещенных вершин и вектор результата
+        DFSUtil(startVertex, visited, result);
+
+        // Возвращаем вектор с порядком обхода вершин после завершения обхода
+        return result;
+    }
+
+    // Метод для обхода графа в ширину (Breadth-First Search, BFS).
+    std::vector<T> BFS(const T &startVertex) const
+    {
+        std::set<T> visited;   // Множество для отслеживания посещенных вершин
+        std::queue<T> queue;   // Очередь для управления порядком обхода вершин
+        std::vector<T> result; // Вектор для хранения порядка обхода вершин
+
+        // Добавляем начальную вершину в очередь и отмечаем её как посещенную
+        queue.push(startVertex);
+
+        // Продолжаем пока в очереди есть элементы
+        while (!queue.empty())
+        {
+            T vertex = queue.front(); // Получаем вершину из начала очереди
+            queue.pop();              // Удаляем эту вершину из очереди
+
+            // Проверяем, была ли вершина уже посещена
+            if (visited.find(vertex) != visited.end())
+            {
+                continue; // Если посещена, пропускаем остальные действия и переходим к следующей итерации
+            }
+
+            // Отмечаем вершину как посещенную и добавляем ее в результат
+            visited.insert(vertex);
+            result.push_back(vertex);
+
+            // Добавляем все не посещенные соседние вершины в очередь
+            for (const auto &neighbor : adjacencyList.at(vertex))
+            {
+                if (visited.find(neighbor) == visited.end())
+                {
+                    queue.push(neighbor);
+                }
+            }
+        }
+
+        // Возвращаем вектор с порядком обхода вершин
+        return result;
     }
 
     // Добавление ребра и его веса
@@ -184,5 +264,35 @@ public:
 
         // Закрываем файл после чтения
         file.close();
+    }
+
+
+    void saveToFile(const std::string &filename) const
+    {
+        std::ofstream outFile(filename);
+        if (!outFile.is_open())
+        {
+            std::cerr << "Не удалось открыть файл для записи: " << filename << std::endl;
+            return;
+        }
+
+        std::set<std::pair<T, T>> recordedEdges; // Для отслеживания уже записанных рёбер
+
+        for (const auto &edgeWeightPair : edgeWeights)
+        {
+            const auto &edge = edgeWeightPair.first;
+            const int weight = edgeWeightPair.second;
+
+            // Проверяем, было ли ребро уже записано
+            if (recordedEdges.find(std::make_pair(edge.second, edge.first)) != recordedEdges.end())
+            {
+                continue; // Если ребро уже записано, пропускаем его
+            }
+
+            outFile << edge.first << " " << edge.second << " " << weight << std::endl;
+            recordedEdges.insert(edge); // Добавляем ребро в записанные
+        }
+
+        outFile.close();
     }
 };

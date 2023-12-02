@@ -138,6 +138,86 @@ void testLoadGraphFromFile()
 
     std::cout << "[OK] Load graph from file test passed" << std::endl;
 }
+
+void testDFS()
+{
+    Graph<int> g;
+    g.InsertVertex(1);
+    g.InsertVertex(2);
+    g.InsertVertex(3);
+    g.InsertVertex(4);
+
+    g.InsertEdge(1, 2, 1);
+    g.InsertEdge(2, 3, 1);
+    g.InsertEdge(3, 4, 1);
+    g.InsertEdge(4, 1, 1);
+
+    auto dfsResult = g.DFS(1);
+
+    // Предположим, что ожидаемый порядок DFS обхода: 1, 2, 3, 4
+    std::vector<int> expectedDFSOrder = {1, 2, 3, 4};
+    assert(dfsResult == expectedDFSOrder);
+
+    std::cout << "[OK] DFS test passed" << std::endl;
+}
+
+void testBFS()
+{
+    Graph<int> g;
+    g.InsertVertex(1);
+    g.InsertVertex(2);
+    g.InsertVertex(3);
+    g.InsertVertex(4);
+
+    g.InsertEdge(1, 2, 1);
+    g.InsertEdge(1, 3, 1);
+    g.InsertEdge(2, 4, 1);
+    g.InsertEdge(3, 4, 1);
+
+    auto bfsResult = g.BFS(1);
+
+    // Предположим, что ожидаемый порядок BFS обхода: 1, 2, 3, 4
+    std::vector<int> expectedBFSOrder = {1, 2, 3, 4};
+    assert(bfsResult == expectedBFSOrder);
+
+    std::cout << "[OK] BFS test passed" << std::endl;
+}
+
+void testSaveToFile()
+{
+    Graph<int> g;
+    // Заполнение графа вершинами и рёбрами
+    g.InsertVertex(1);
+    g.InsertVertex(2);
+    g.InsertVertex(3);
+    g.InsertEdge(1, 2, 10);
+    g.InsertEdge(2, 3, 20);
+    g.InsertEdge(1, 3, 30);
+
+    const std::string filename = "graph_out.txt";
+    g.saveToFile(filename);
+
+    // Открытие файла и проверка его содержимого
+    std::ifstream inFile(filename);
+    assert(inFile.is_open()); // Убедитесь, что файл успешно открылся
+
+    std::string line;
+    std::stringstream fileContent;
+
+    while (std::getline(inFile, line))
+    {
+        fileContent << line << "\n";
+    }
+
+    inFile.close();
+
+    // Проверка содержимого файла на соответствие ожидаемому
+    const std::string expectedContent = "1 2 10\n1 3 30\n2 3 20\n";
+    assert(fileContent.str() == expectedContent);
+
+    std::cout << "[OK] Save to file test passed" << std::endl;
+}
+
 int main()
 {
     testSingleVertexOperations();
@@ -146,5 +226,8 @@ int main()
     testSetEdgeWeight();
     testDijkstra();
     testLoadGraphFromFile();
+    testSaveToFile();
+    testBFS();
+    testDFS();
     return 0;
 }
