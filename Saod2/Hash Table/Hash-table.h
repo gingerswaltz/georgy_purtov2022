@@ -62,7 +62,6 @@ public:
         unsigned long hashValue = hashFunction(key);
         int bucketIndex = hashValue % numBuckets; // Вычисление индекса блоков
         buckets[bucketIndex].remove(key);         // Удаление элемента из блока
-        size--;
         elementCount--;
     }
 
@@ -108,16 +107,17 @@ public:
     }
 
     // Геттр общего количества слотов (buckets) в хэш-таблице
-    int getSize() const
+    int getSlots() const
     {
         return numBuckets;
     }
 
     // Геттер количества элементов
-    void getSize()
+    int getSize()
     {
         return elementCount;
     }
+    
 };
 
 unsigned long SimpleHashFunction(int key)
