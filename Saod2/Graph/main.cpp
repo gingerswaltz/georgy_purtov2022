@@ -161,6 +161,7 @@ void testDFS()
     std::cout << "[OK] DFS test passed" << std::endl;
 }
 
+// todo : граф с циклом
 void testBFS()
 {
     Graph<int> g;
