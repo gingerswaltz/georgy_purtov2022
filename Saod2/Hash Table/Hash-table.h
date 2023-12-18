@@ -11,87 +11,120 @@ class HashTable
 private:
     int numBuckets; // Число блоков
 
-    vector <LinkedList<T>> buckets; // Хэш-таблица - вектор связанных списков
+    vector<LinkedList<T>> buckets; // Хэш-таблица - вектор связанных списков
 
     unsigned long (*hashFunction)(T key); // Указатель на хэш-функцию
 
-public:
+    int elementCount; // Текущее количество элементов в хэш-таблице
 
-    // Конструктор класса HashTable
+public:
+    /**
+     * Конструктор для создания хэш-таблицы.
+     *
+     * @param nbuckets Количество блоков (buckets) в хэш-таблице. Это число определяет
+     *                 размер хэш-таблицы и влияет на эффективность хеширования
+     *                 и разрешения коллизий.
+     * @param hashf Указатель на функцию, которая будет использоваться для генерации
+     *              хэш-значений из ключей. Эта функция должна быть эффективной и
+     *              обеспечивать равномерное распределение хэш-значений.
+     *
+     * Инициализирует хэш-таблицу с заданным числом блоков и функцией хеширования.
+     * Таблица изначально не содержит элементов (elementCount инициализируется как 0).
+     * Размер вектора buckets устанавливается равным nbuckets, что определяет
+     * количество слотов в хэш-таблице.
+     */
     HashTable<T>(int nbuckets, unsigned long (*hashf)(T key))
-        : numBuckets(nbuckets), hashFunction(hashf) {
-        buckets.resize(numBuckets); // Инициализация вектора блока
+        : numBuckets(nbuckets), hashFunction(hashf), elementCount(0)
+    {
+        buckets.resize(numBuckets);
     }
 
     // Вставка элемента в хэш-таблицу
-    void Insert(const T& key) {
+    void Insert(const T &key)
+    {
         unsigned long hashValue = hashFunction(key);
         int bucketIndex = hashValue % numBuckets; // Вычисление индекса блоков
-        buckets[bucketIndex].insert(key); // Вставка элемента в блок
+        buckets[bucketIndex].insert(key);         // Вставка элемента в блок
+        elementCount++;                           // Увеличиваем счетчик элементов
     }
 
     // Поиск элемента в хэш-таблице
-    bool Find(const T& key) {
+    bool Find(const T &key)
+    {
         unsigned long hashValue = hashFunction(key);
         int bucketIndex = hashValue % numBuckets; // Вычисление индекса блоков
-        return buckets[bucketIndex].search(key); // Поиск элемента в блоке
+        return buckets[bucketIndex].search(key);  // Поиск элемента в блоке
     }
 
     // Удаление элемента из хэш-таблицы
-    void Delete(const T& key) {
+    void Delete(const T &key)
+    {
         unsigned long hashValue = hashFunction(key);
         int bucketIndex = hashValue % numBuckets; // Вычисление индекса блоков
-        buckets[bucketIndex].remove(key); // Удаление элемента из блока
+        buckets[bucketIndex].remove(key);         // Удаление элемента из блока
+        size--;
+        elementCount--;
     }
 
     // Очистка всех блоков хэш-таблицы
-    void ClearList() {
-        for (int i = 0; i < numBuckets; ++i) {
+    void ClearList()
+    {
+        for (int i = 0; i < numBuckets; ++i)
+        {
             buckets[i].clear();
         }
+        elementCount = 0;
     }
 
     // Обновление значения ключа в хэш-таблице
-    void Update(const T& oldKey, const T& newKey) {
+    void Update(const T &oldKey, const T &newKey)
+    {
         unsigned long oldHashValue = hashFunction(oldKey);
         int oldBucketIndex = oldHashValue % numBuckets; // Вычисление индекса старого блока
 
         unsigned long newHashValue = hashFunction(newKey);
         int newBucketIndex = newHashValue % numBuckets; // Вычисление индекса нового блока
 
-        if (oldBucketIndex == newBucketIndex) {
+        if (oldBucketIndex == newBucketIndex)
+        {
             buckets[oldBucketIndex].update(oldKey, newKey); // Обновление значения ключа в одном блоке
         }
-        else {
+        else
+        {
             buckets[oldBucketIndex].remove(oldKey); // Удаление старого ключа из старого блока
             buckets[newBucketIndex].insert(newKey); // Вставка нового ключа в новый блок
         }
     }
 
     // Вывод хэш-таблицы
-    void PrintTable() {
-        for (int i = 0; i < numBuckets; ++i) {
+    void PrintTable()
+    {
+        for (int i = 0; i < numBuckets; ++i)
+        {
             cout << "Блок " << i << ": ";
             buckets[i].print();
             cout << endl;
         }
     }
 
+    // Геттр общего количества слотов (buckets) в хэш-таблице
+    int getSize() const
+    {
+        return numBuckets;
+    }
 
-
-
+    // Геттер количества элементов
+    void getSize()
+    {
+        return elementCount;
+    }
 };
 
-// Хэш - функция IntHashFunction использует простое число(например, 31) 
-// в качестве коэффициента для преобразования целочисленного ключа в уникальное значение.
-// Она основана на операции взятия остатка от деления целого числа на это простое число.
+unsigned long SimpleHashFunction(int key)
+{
+    key *= key;
 
-unsigned long SimpleHashFunction(int key) {
-    // Простое число, рекомендуемое для хэширования
-    const unsigned int prime = 31;
-
-    // Хэширование с помощью деления на простое число и взятия остатка
-    // static_cast используется для преобразования 
-    // типа int в unsigned long для корректной работы с хэшированием
-    return static_cast<unsigned long>(key) % prime;
+    // Сдвиг вправо используется для получения "средней" части бинарного представления квадрата ключа.
+    key >>= 11;
+    return static_cast<unsigned int>(key) % 1024;
 }

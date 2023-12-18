@@ -219,6 +219,54 @@ void testSaveToFile()
     std::cout << "[OK] Save to file test passed" << std::endl;
 }
 
+
+void testDFSCycle()
+{
+    Graph<int> g;
+    g.InsertVertex(1);
+    g.InsertVertex(2);
+    g.InsertVertex(3);
+    g.InsertVertex(4);
+
+    g.InsertEdge(1, 2, 1);
+    g.InsertEdge(2, 3, 1);
+    g.InsertEdge(3, 4, 1);
+    g.InsertEdge(4, 2, 1); // Добавление ребра, создающего цикл
+    // 1 -> 2 -> 3 -> 4
+//      ^         |
+//      |_________|
+//
+    auto dfsResult = g.DFS(1);
+
+    // В данном случае, порядок: 1, 2, 3, 4
+    std::vector<int> expectedDFSOrder = {1, 2, 3, 4};
+    assert(dfsResult == expectedDFSOrder);
+
+    std::cout << "[OK] DFS with cycle test passed" << std::endl;
+}
+
+void testBFSCycle()
+{
+    Graph<int> g;
+    g.InsertVertex(1);
+    g.InsertVertex(2);
+    g.InsertVertex(3);
+    g.InsertVertex(4);
+
+    g.InsertEdge(1, 2, 1);
+    g.InsertEdge(2, 3, 1);
+    g.InsertEdge(3, 4, 1);
+    g.InsertEdge(4, 2, 1); // Добавление ребра, создающего цикл
+
+    auto bfsResult = g.BFS(1);
+
+    // В данном случае, порядок: 1, 2, 3, 4
+    std::vector<int> expectedBFSOrder = {1, 2, 3, 4};
+    assert(bfsResult == expectedBFSOrder);
+
+    std::cout << "[OK] BFS with cycle test passed" << std::endl;
+}
+
 int main()
 {
     testSingleVertexOperations();
@@ -230,5 +278,7 @@ int main()
     testSaveToFile();
     testBFS();
     testDFS();
+    testBFSCycle();
+    testDFSCycle();
     return 0;
 }

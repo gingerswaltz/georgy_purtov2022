@@ -5,7 +5,8 @@
 #include <cassert>
 #include <set>
 
-void testHashTableInsert() {
+void testHashTableInsert()
+{
     // Создаем экземпляр хэш-таблицы
     HashTable<int> hashTable1(5, SimpleHashFunction);
 
@@ -31,7 +32,8 @@ void testHashTableInsert() {
     cout << "[OK] Тест вставки и поиска пройден" << endl;
 }
 
-void testHashTableDelete() {
+void testHashTableDelete()
+{
     // Создаем экземпляр хэш-таблицы
     HashTable<int> hashTable(5, SimpleHashFunction);
 
@@ -52,7 +54,8 @@ void testHashTableDelete() {
     cout << "[OK] Тест удаления пройден" << endl;
 }
 
-void testHashTableClearList() {
+void testHashTableClearList()
+{
     // Создаем экземпляр хэш-таблицы
     HashTable<int> hashTable(5, SimpleHashFunction);
 
@@ -72,7 +75,8 @@ void testHashTableClearList() {
     cout << "[OK] Тест очистки пройден" << endl;
 }
 
-void testHashTableUpdate() {
+void testHashTableUpdate()
+{
     // Создаем экземпляр хэш-таблицы
     HashTable<int> hashTable(5, SimpleHashFunction);
 
@@ -89,8 +93,8 @@ void testHashTableUpdate() {
     cout << "[OK] Тест обновления пройден" << endl;
 }
 
-
-void TestSearch() {
+void TestSearch()
+{
     // Создаем экземпляр хэш-таблицы
     HashTable<int> table(10, SimpleHashFunction); // Пример с типом int и хэш-функцией SimpleHashFunction
 
@@ -100,15 +104,16 @@ void TestSearch() {
     table.Insert(25);
 
     // Проверяем операцию поиска
-    assert(table.Find(5) == true);  // Проверяем, есть ли элемент 5 в таблице
-    assert(table.Find(15) == true); // Проверяем, есть ли элемент 15 в таблице
-    assert(table.Find(25) == true); // Проверяем, есть ли элемент 25 в таблице
+    assert(table.Find(5) == true);   // Проверяем, есть ли элемент 5 в таблице
+    assert(table.Find(15) == true);  // Проверяем, есть ли элемент 15 в таблице
+    assert(table.Find(25) == true);  // Проверяем, есть ли элемент 25 в таблице
     assert(table.Find(10) == false); // Проверяем отсутствующий элемент 10 в таблице
 
     std::cout << "[OK] Тест поиска пройден" << std::endl;
 }
 
-void testEmptyHashTable() {
+void testEmptyHashTable()
+{
     // Создаем пустую хэш-таблицу
     HashTable<int> emptyTable(5, SimpleHashFunction);
 
@@ -137,7 +142,8 @@ void testEmptyHashTable() {
     cout << "[OK] Тест работы с пустой таблицей пройден" << endl;
 }
 
-void testDeleteNonExistingKeys() {
+void testDeleteNonExistingKeys()
+{
     // Создаем хэш-таблицу
     HashTable<int> table(5, SimpleHashFunction);
 
@@ -158,7 +164,8 @@ void testDeleteNonExistingKeys() {
     cout << "[OK] Тест на удаление несуществующих ключей пройден" << endl;
 }
 
-void testEmptyHashTable2() {
+void testEmptyHashTable2()
+{
     // Создаем пустую хэш-таблицу с размером 1
     HashTable<int> emptyTable(1, SimpleHashFunction);
 
@@ -187,11 +194,8 @@ void testEmptyHashTable2() {
     cout << "[OK] Тест на граничный случай (пустая таблица) пройден" << endl;
 }
 
-
-
-
-
-int main() {
+int main()
+{
     testHashTableInsert();
     testHashTableDelete();
     testHashTableClearList();
