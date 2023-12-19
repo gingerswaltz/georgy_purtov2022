@@ -49,11 +49,21 @@ public:
     }
 
     // Поиск элемента в хэш-таблице
-    bool Find(const T &key)
-    {
+    bool Find(const T& key) const {
         unsigned long hashValue = hashFunction(key);
-        int bucketIndex = hashValue % numBuckets; // Вычисление индекса блоков
-        return buckets[bucketIndex].search(key);  // Поиск элемента в блоке
+        int bucketIndex = hashValue % numBuckets;
+        return buckets[bucketIndex].search(key);
+    }
+
+    // Метод для получения индекса блока
+    int getBucketIndex(const T& key) const {
+        unsigned long hashValue = hashFunction(key); // Вычисляем хэш-значение для ключа
+        return hashValue % numBuckets;               // Возвращаем индекс блока
+    }
+
+    // Метод для получения доступа к блокам
+    vector<LinkedList<T>>& getBuckets() {
+        return buckets;
     }
 
     // Удаление элемента из хэш-таблицы
@@ -113,7 +123,7 @@ public:
     }
 
     // Геттер количества элементов
-    int getSize()
+    int getSize() const
     {
         return elementCount;
     }
