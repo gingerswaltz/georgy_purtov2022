@@ -1,50 +1,110 @@
+//@author: gingerswaltz
 #include <iostream>
 #include <string>
 #include "Dictionary.h"
+#include <cassert>
 
-int main() {
-    // Создание экземпляра словаря с ключами типа std::string и значениями типа int
-    Dictionary<std::string, int> myDictionary;
+int TestInsert()
+{
+    Dictionary<int, std::string> dict;
 
-    // Вставка элементов
-    myDictionary.insert("apple", 5);
-    myDictionary.insert("banana", 8);
-    myDictionary.insert("cherry", 3);
+    // Тест 1: Вставка элементов
+    dict.insert(1, "One");
+    dict.insert(2, "Two");
+    dict.insert(3, "Three");
+    dict.insert(4, "Four");
 
-    // Поиск элемента
-    int value;
-    if (myDictionary.search("banana", value)) {
-        std::cout << "Значение 'banana': " << value << std::endl;
-    } else {
-        std::cout << "'banana' не найден" << std::endl;
-    }
+    // Проверяем размер словаря
+    assert(dict.getSize() == 4);
 
-    // Удаление элемента
-    myDictionary.remove("apple");
+    // Тест 2: Попытка вставки существующего ключа (должна проигнорироваться)
+    dict.insert(2, "NewTwo");
 
-    // Поиск удаленного элемента
-    if (myDictionary.search("apple", value)) {
-        std::cout << "Значение 'apple': " << value << std::endl;
-    } else {
-        std::cout << "'apple' не найден" << std::endl;
-    }
+    // Проверяем, что значение не изменилось
+    std::string value;
+    assert(dict.search(2, value));
+    assert(value == "Two");
 
+    // Тест 3: Проверка вставки и удаления
+    dict.insert(5, "Five");
+    dict.remove(4);
 
-    // Создаем экземпляр словаря
-    Dictionary<std::string, int> myDictionary1;
+    // Проверяем размер и отсутствие удаленного ключа
+    assert(dict.getSize() == 4);
+    assert(!dict.search(4, value));
 
-    // Добавляем несколько элементов
-    myDictionary1.insert("apple", 1);
-    myDictionary1.insert("banana", 2);
-    myDictionary1.insert("cherry", 3);
-   // assert(myDictionary1.getSize()==3);
-    // Печатаем содержимое словаря
-    std::cout << "Содержимое словаря:" << std::endl;
-    myDictionary1.print();
-   
+    // Тест 4: Поиск элемента
+    assert(dict.search(3, value));
+    assert(value == "Three");
+
+    std::cout << "[OK] Insert tests passed" << std::endl;
+
     return 0;
+}
 
+int DeleteTest()
+{
+    Dictionary<int, std::string> dict;
 
+    // Вставляем элементы для тестирования
+    dict.insert(1, "One");
+    dict.insert(2, "Two");
+    dict.insert(3, "Three");
+    dict.insert(4, "Four");
 
+    // Тест 1: Поиск существующего ключа
+    std::string value;
+    assert(dict.search(2, value));
+    assert(value == "Two");
 
+    // Тест 2: Поиск несуществующего ключа
+    assert(!dict.search(5, value));
+
+    // Тест 3: Поиск существующего ключа с пустым значением
+    assert(dict.search(4, value));
+    assert(value == "Four");
+
+    std::cout << "[OK] Delete tests passed" << std::endl;
+
+    return 0;
+}
+
+int TestFind()
+{
+    Dictionary<int, std::string> dict;
+
+    // Вставляем элементы для тестирования
+    dict.insert(1, "One");
+    dict.insert(2, "Two");
+    dict.insert(3, "Three");
+    dict.insert(4, "Four");
+
+    // Тест 1: Успешное удаление существующего ключа
+    dict.remove(2);
+
+    // Проверяем, что ключ больше не существует
+    std::string value;
+    assert(!dict.search(2, value));
+
+    // Проверяем размер словаря после удаления
+    assert(dict.getSize() == 3);
+
+    // Тест 2: Попытка удаления несуществующего ключа
+    dict.remove(5);
+
+    // Проверяем, что размер словаря остался неизменным
+    assert(dict.getSize() == 3);
+
+    std::cout << "[OK] Find tests passed" << std::endl;
+
+    return 0;
+}
+
+int main()
+{
+    TestInsert();
+    DeleteTest();
+    TestFind();
+
+    return 0;
 }
