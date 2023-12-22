@@ -64,8 +64,7 @@ private:
         return getValueRecursive(tree.getRoot(), key); // начинаем поиск с корня
     }
 
-
-    // todo: документация к исключениям 
+    // todo: документация к исключениям
     // Рекурсивная функция для обхода дерева и поиска значения
     Value getValueRecursive(TreeNode<KeyValuePair> *node, const Key &key)
     {
@@ -86,6 +85,34 @@ private:
             return node->data.value; // Найденный ключ, возвращаем значение
         }
     }
+#include <vector>
+
+Key getKeyByValue(const Value &value) {
+    std::vector<Key> keys; // Хранение всех найденных ключей
+    getKeyByValueRecursive(tree.getRoot(), value, keys);
+    
+    if (keys.empty()) {
+        throw std::runtime_error("Value not found");
+    }
+
+    // Возвращаем первый найденный ключ (можно выбрать другую логику)
+    return keys[0];
+}
+
+void getKeyByValueRecursive(TreeNode<KeyValuePair> *node, const Value &value, std::vector<Key> &keys) {
+    if (node == nullptr) {
+        return;
+    }
+
+    if (value == node->data.value) {
+        keys.push_back(node->data.key); // Сохраняем найденный ключ
+    }
+
+    // Рекурсивный поиск в обеих подветвях
+    getKeyByValueRecursive(node->left, value, keys);
+    getKeyByValueRecursive(node->right, value, keys);
+}
+
 
     void printInOrder(TreeNode<KeyValuePair> *node) const
     {
@@ -122,8 +149,6 @@ public:
         }
     }
 
-
-    // поиск по ключу, не зная значения
     // Поиск значения по ключу
     bool search(const Key &key, Value &value)
     {
@@ -135,6 +160,21 @@ public:
             return true;
         }
         return false;
+    }
+
+    // Поиск значения по значению
+    bool searchByValue(const Value &value, Key &key)
+    {
+        try
+        {
+            // Попытаемся получить ключ по значению
+            key = getKeyByValue(value);
+            return true;
+        }
+        catch (const std::runtime_error &)
+        {
+            return false;
+        }
     }
 
     // Метод печати словаря

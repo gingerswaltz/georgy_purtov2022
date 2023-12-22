@@ -42,7 +42,6 @@ int TestInsert()
     return 0;
 }
 
-// поиск всех элементов
 int TestFind()
 {
     Dictionary<int, std::string> dict;
@@ -55,8 +54,14 @@ int TestFind()
 
     // Тест 1: Поиск существующего ключа
     std::string value;
+    assert(dict.search(1, value));
+    assert(value == "One");
     assert(dict.search(2, value));
     assert(value == "Two");
+    assert(dict.search(3, value));
+    assert(value == "Three");
+    assert(dict.search(4, value));
+    assert(value == "Four");
 
     // Тест 2: Поиск несуществующего ключа
     assert(!dict.search(5, value));
@@ -70,8 +75,37 @@ int TestFind()
     return 0;
 }
 
+int TestFindKey()
+{
+    Dictionary<int, std::string> dict;
+    // Тест 4: Поиск по значению
+    // Вставляем элементы для тестирования
+    dict.insert(1, "One");
+    dict.insert(2, "Two");
+    dict.insert(3, "Three");
+    dict.insert(4, "Four");
 
-//todo удаление из пустого словаря, удалить все элементы
+    int key;
+    assert(dict.searchByValue("One", key));
+    assert(key == 1);
+
+    assert(dict.searchByValue("Two", key));
+    assert(key == 2);
+
+    assert(dict.searchByValue("Three", key));
+    assert(key == 3);
+            
+
+    assert(dict.searchByValue("Four", key));
+    assert(key == 4);
+
+    assert(!dict.searchByValue("Five", key)); // Проверяем несуществующее значение
+    std::cout << "[OK] Find key passed" << std::endl;
+
+    return 0;
+}
+
+// todo удаление из пустого словаря, удалить все элементы
 int DeleteTest()
 {
     Dictionary<int, std::string> dict;
@@ -102,12 +136,34 @@ int DeleteTest()
 
     return 0;
 }
- // todo  в целом пустой словарь
+
+
+int TestEmptyDictionary() {
+    Dictionary<int, std::string> dict;
+
+    // Тест 1: Поиск в пустом словаре
+    std::string value;
+    assert(!dict.search(2, value));
+
+    // Тест 2: Удаление из пустого словаря
+    dict.remove(5); // Не должно вызывать ошибки, так как словарь пуст
+
+    // Тест 3:  поиск в пустом словаре
+    assert(!dict.search(4, value)); // Поиск значения
+
+
+
+    std::cout << "[OK] Empty Dictionary tests passed" << std::endl;
+
+    return 0;
+}
+
 int main()
 {
     TestInsert();
     DeleteTest();
     TestFind();
-
+    TestFindKey();
+    TestEmptyDictionary();
     return 0;
 }
