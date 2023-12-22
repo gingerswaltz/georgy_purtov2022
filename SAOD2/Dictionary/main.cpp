@@ -42,7 +42,8 @@ int TestInsert()
     return 0;
 }
 
-int DeleteTest()
+// поиск всех элементов
+int TestFind()
 {
     Dictionary<int, std::string> dict;
 
@@ -64,12 +65,14 @@ int DeleteTest()
     assert(dict.search(4, value));
     assert(value == "Four");
 
-    std::cout << "[OK] Delete tests passed" << std::endl;
+    std::cout << "[OK] Find tests passed" << std::endl;
 
     return 0;
 }
 
-int TestFind()
+
+//todo удаление из пустого словаря, удалить все элементы
+int DeleteTest()
 {
     Dictionary<int, std::string> dict;
 
@@ -99,7 +102,7 @@ int TestFind()
 
     return 0;
 }
-
+ // todo  в целом пустой словарь
 int main()
 {
     TestInsert();

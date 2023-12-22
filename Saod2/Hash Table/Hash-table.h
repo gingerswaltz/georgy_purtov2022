@@ -136,5 +136,5 @@ unsigned long SimpleHashFunction(int key)
 
     // Сдвиг вправо используется для получения "средней" части бинарного представления квадрата ключа.
     key >>= 11;
-    return static_cast<unsigned int>(key) % 1024;
+    return static_cast<unsigned int>(key);
 }

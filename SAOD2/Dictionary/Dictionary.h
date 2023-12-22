@@ -64,6 +64,8 @@ private:
         return getValueRecursive(tree.getRoot(), key); // начинаем поиск с корня
     }
 
+
+    // todo: документация к исключениям 
     // Рекурсивная функция для обхода дерева и поиска значения
     Value getValueRecursive(TreeNode<KeyValuePair> *node, const Key &key)
     {
@@ -120,6 +122,8 @@ public:
         }
     }
 
+
+    // поиск по ключу, не зная значения
     // Поиск значения по ключу
     bool search(const Key &key, Value &value)
     {
