@@ -78,7 +78,7 @@ int TestFind()
 int TestFindKey()
 {
     Dictionary<int, std::string> dict;
-    // Тест 4: Поиск по значению
+    
     // Вставляем элементы для тестирования
     dict.insert(1, "One");
     dict.insert(2, "Two");
@@ -105,7 +105,6 @@ int TestFindKey()
     return 0;
 }
 
-// todo удаление из пустого словаря, удалить все элементы
 int DeleteTest()
 {
     Dictionary<int, std::string> dict;
@@ -132,7 +131,7 @@ int DeleteTest()
     // Проверяем, что размер словаря остался неизменным
     assert(dict.getSize() == 3);
 
-    std::cout << "[OK] Find tests passed" << std::endl;
+    std::cout << "[OK] Delete tests passed" << std::endl;
 
     return 0;
 }

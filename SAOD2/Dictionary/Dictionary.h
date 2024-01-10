@@ -1,5 +1,6 @@
 //@author: gingerswaltz
 #include <iostream>
+#include <vector>
 #include "../AVL/AVL_tree.h"
 
 // Шаблонный класс словаря на основе AVL дерева
@@ -64,55 +65,69 @@ private:
         return getValueRecursive(tree.getRoot(), key); // начинаем поиск с корня
     }
 
-    // todo: документация к исключениям
-    // Рекурсивная функция для обхода дерева и поиска значения
+    // Рекурсивно ищет значение по ключу в бинарном дереве.
+    // Возвращает значение, связанное с ключом, если ключ найден.
+    // В противном случае выбрасывает исключение.
     Value getValueRecursive(TreeNode<KeyValuePair> *node, const Key &key)
     {
+        // Проверка на пустой узел, если такой случай - выбрасываем исключение
         if (node == nullptr)
         {
             throw std::runtime_error("Key not found");
         }
+
+        // Если ключ меньше ключа в текущем узле, идем влево
         if (key < node->data.key)
         {
             return getValueRecursive(node->left, key);
         }
+        // Если ключ больше ключа в текущем узле, идем вправо
         else if (key > node->data.key)
         {
             return getValueRecursive(node->right, key);
         }
+        // Если ключ соответствует ключу в текущем узле, возвращаем связанное значение
         else
         {
             return node->data.value; // Найденный ключ, возвращаем значение
         }
     }
-#include <vector>
 
-Key getKeyByValue(const Value &value) {
-    std::vector<Key> keys; // Хранение всех найденных ключей
-    getKeyByValueRecursive(tree.getRoot(), value, keys);
-    
-    if (keys.empty()) {
-        throw std::runtime_error("Value not found");
+    // Возвращает ключ, связанный с заданным значением в структуре данных бинарного дерева.
+    // Если значение не найдено, выбрасывается исключение.
+    Key getKeyByValue(const Value &value)
+    {
+        std::vector<Key> keys; // Хранение всех найденных ключей
+        getKeyByValueRecursive(tree.getRoot(), value, keys);
+
+        if (keys.empty())
+        {
+            throw std::runtime_error("Value not found");
+        }
+
+        // Возвращаем первый найденный ключ (можно выбрать другую логику)
+        return keys[0];
     }
 
-    // Возвращаем первый найденный ключ (можно выбрать другую логику)
-    return keys[0];
-}
+    // Рекурсивно ищет ключ(и) по заданному значению в бинарном дереве.
+    // Найденные ключи сохраняются в векторе keys.
+    void getKeyByValueRecursive(TreeNode<KeyValuePair> *node, const Value &value, std::vector<Key> &keys)
+    {
+        if (node == nullptr)
+        {
+            return;
+        }
 
-void getKeyByValueRecursive(TreeNode<KeyValuePair> *node, const Value &value, std::vector<Key> &keys) {
-    if (node == nullptr) {
-        return;
+        // Если значение в текущем узле совпадает с заданным значением, сохраняем ключ
+        if (value == node->data.value)
+        {
+            keys.push_back(node->data.key); // Сохраняем найденный ключ
+        }
+
+        // Рекурсивный поиск в обеих подветвях
+        getKeyByValueRecursive(node->left, value, keys);
+        getKeyByValueRecursive(node->right, value, keys);
     }
-
-    if (value == node->data.value) {
-        keys.push_back(node->data.key); // Сохраняем найденный ключ
-    }
-
-    // Рекурсивный поиск в обеих подветвях
-    getKeyByValueRecursive(node->left, value, keys);
-    getKeyByValueRecursive(node->right, value, keys);
-}
-
 
     void printInOrder(TreeNode<KeyValuePair> *node) const
     {
@@ -150,25 +165,27 @@ public:
     }
 
     // Поиск значения по ключу
+    // получаем значение из поиска в переменной value
     bool search(const Key &key, Value &value)
     {
         KeyValuePair kvp(key, Value()); // Создаем временный объект для поиска
 
         if (tree.search(kvp))
         {
-            value = getValue(key); // Предположим, что у нас есть функция getValue
+            value = getValue(key); 
             return true;
         }
         return false;
     }
 
     // Поиск значения по значению
+    // получаем значение из поиска в переменной key
     bool searchByValue(const Value &value, Key &key)
     {
         try
         {
             // Попытаемся получить ключ по значению
-            key = getKeyByValue(value);
+            key = getKeyByValue(value); 
             return true;
         }
         catch (const std::runtime_error &)
@@ -184,8 +201,12 @@ public:
         std::cout << std::endl;
     }
 
+    // Геттер размера
     size_t getSize() const
     {
         return size; // Возвращаем текущий размер словаря
     }
+
+
+    
 };
