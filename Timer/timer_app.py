@@ -2,15 +2,16 @@ import threading
 from pynput import keyboard
 from plyer import notification
 import winsound
+import sys
 
 timer = None
 timer_seconds = 0
-alt_pressed = False  # нажатие альта
+alt_pressed = False  # флаг нажатия альт-клавиши
 
 def set_timer(minutes):
-    global timer, timer_seconds  # Добавьте эту строку
+    global timer, timer_seconds
     if timer and timer.is_alive():
-        timer.cancel()  # Останавливаем текущий таймер, если он активен
+        timer.cancel()
 
     timer_seconds = minutes * 60
 
@@ -34,7 +35,7 @@ def set_timer(minutes):
 def stop_timer():
     global timer
     if timer and timer.is_alive():
-        timer.cancel()  # Останавливаем текущий таймер, если он активен
+        timer.cancel()
 
 def show_notification(title, message):
     notification.notify(
@@ -44,28 +45,25 @@ def show_notification(title, message):
     )
 
 def on_press(key):
-    global alt_pressed  # Объявляем использование глобальной переменной
+    global alt_pressed
     try:
         if key == keyboard.Key.alt_l:  # Проверяем нажатие левой alt
             alt_pressed = True
-        else:
-            key_char = key.char
-            if alt_pressed and key_char in '12345789':
-                minutes = int(key_char)
-                set_timer(minutes)
-            elif alt_pressed and key_char == '0':
-                stop_timer()
+        elif alt_pressed and key.char in '12345789':
+            minutes = int(key.char)
+            set_timer(minutes)
+        elif alt_pressed and key.char == '0':
+            stop_timer()
     except AttributeError:
         pass
 
 
 def on_release(key):
-    global alt_pressed  # Объявляем использование глобальной переменной
-    if key == keyboard.Key.alt_l and keyboard.Controller().alt_pressed and key.char == '0':
-        stop_timer()
-        show_notification('Таймер остановлен', 'Активный таймер был остановлен')
-        alt_pressed = False  # Сбрасываем флаг при отпускании клавиши
-
+    global alt_pressed
+    if key == keyboard.Key.alt_l:  # Сбрасываем флаг при отпускании клавиши
+        alt_pressed = False
+    if key == keyboard.Key.esc and alt_pressed:  # Завершаем программу при нажатии Alt + esc
+        sys.exit()
 
 def main():
     with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
