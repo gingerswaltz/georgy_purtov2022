@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw Rectangles and Lines</title>
+    <style>
+        #canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <script>
+        // Получаем ссылку на холст и контекст рисования
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Переменные для хранения состояния рисования
+        let isDrawingRect = false;
+        let isDrawingLine = false;
+        let startPoint = {};
+        let endPoint = {};
+        let rectangle = {};
+        let x1, y1, x2, y2;
+
+        // Обработчик события нажатия кнопки мыши
+        canvas.addEventListener('mousedown', (e) => {
+            if (!isDrawingRect && !isDrawingLine) {
+                isDrawingRect = true;
+                startPoint = {
+                    x: e.offsetX,
+                    y: e.offsetY
+                };
+                x1 = e.offsetX;
+                y1 = e.offsetY;
+            }
+        });
+
+        // Обработчик события перемещения мыши
+        canvas.addEventListener('mousemove', (e) => {
+            if (isDrawingRect && !isDrawingLine) {
+                let currentPoint = {
+                    x: e.offsetX,
+                    y: e.offsetY
+                };
+                let x = Math.min(startPoint.x, currentPoint.x);
+                let y = Math.min(startPoint.y, currentPoint.y);
+                let width = Math.abs(startPoint.x - currentPoint.x);
+                let height = Math.abs(startPoint.y - currentPoint.y);
+                rectangle = {
+                    x: x,
+                    y: y,
+                    width: width,
+                    height: height
+                };
+                draw(); // Перерисовываем холст
+            }
+        });
+
+        // Обработчик события отпускания кнопки мыши
+        canvas.addEventListener('mouseup', (e) => {
+            if (isDrawingRect) {
+                isDrawingRect = false;
+                isDrawingLine = true;
+                x2 = e.offsetX;
+                y2 = e.offsetY;
+                startPoint = {};
+            }
+        });
+
+        // Обработчик события клика мыши
+        canvas.addEventListener('click', (e) => {
+            if (isDrawingLine) {
+                if (Object.keys(startPoint).length === 0) {
+                    startPoint = {
+                        x: e.offsetX,
+                        y: e.offsetY
+                    };
+                } else {
+                    endPoint = {
+                        x: e.offsetX,
+                        y: e.offsetY
+                    };
+
+                    // Определяем границы прямоугольника
+                    let left = Math.min(x1, x2);
+                    let top = Math.min(y1, y2);
+                    let right = Math.max(x1, x2);
+                    let bottom = Math.max(y1, y2);
+
+                    // Находим точки пересечения линии с границами прямоугольника
+                    let start = findEnds(startPoint, endPoint, left, top, right, bottom);
+                    let end = findEnds(endPoint, startPoint, left, top, right, bottom);
+
+                    // Рисуем только сегмент линии, находящийся внутри прямоугольника
+                    if (start && end) {
+                        ctx.beginPath();
+                        ctx.moveTo(start.x, start.y);
+                        ctx.lineTo(end.x, end.y);
+                        ctx.strokeStyle = 'black';
+                        ctx.stroke();
+                    }
+
+                    startPoint = {};
+                    endPoint = {};
+                }
+            }
+        });
+
+        // Метод для нахождения точки пересечения линии с границами прямоугольника
+        function findEnds(lineStart, lineEnd, rectLeft, rectTop, rectRight, rectBottom) {
+            // Используем алгоритм Брезенхэма для отрисовки линии
+            let dx = Math.abs(lineEnd.x - lineStart.x);
+            let dy = Math.abs(lineEnd.y - lineStart.y);
+            let sx = (lineStart.x < lineEnd.x) ? 1 : -1;
+            let sy = (lineStart.y < lineEnd.y) ? 1 : -1;
+            let err = dx - dy;
+
+            let x = lineStart.x;
+            let y = lineStart.y;
+
+            while (true) {
+                // Проверяем, находится ли точка внутри прямоугольника
+                if (x >= rectLeft && x <= rectRight && y >= rectTop && y <= rectBottom) {
+                    return { x: x, y: y };
+                }
+
+                // Прекращаем цикл, если достигли конечной точки линии
+                if (x === lineEnd.x && y === lineEnd.y) {
+                    break;
+                }
+
+                let e2 = 2 * err;
+                if (e2 > -dy) {
+                    err -= dy;
+                    x += sx;
+                }
+                if (e2 < dx) {
+                    err += dx;
+                    y += sy;
+                }
+            }
+            return null;
+        }
+
+        // Метод для отрисовки прямоугольников и текущего состояния холста
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (Object.keys(rectangle).length !== 0) {
+                ctx.strokeStyle = 'green';
+                ctx.strokeRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+            }
+        }
+    </script>
+</body>
+</html>
