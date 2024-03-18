@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    canvas {
+      border: 1px solid #000;
+      margin: 10px;
+    }
+  </style>
+  <title>Графическое приложение</title>
+</head>
+
+<body>
+
+  <label for="startPoint">Начальная точка (x1, y1): </label>
+  <input type="text" id="startPoint" placeholder="Введите x1 и y1">
+
+  <label for="endPoint">Конечная точка (x2, y2): </label>
+  <input type="text" id="endPoint" placeholder="Введите x2 и y2">
+
+  <button onclick="drawBresenham()">Нарисовать по Брезенхему</button>
+  <button onclick="drawDDA()">Нарисовать по ЦДА</button>
+
+  <div>
+    <canvas id="bresenhamCanvas" width="300" height="300"></canvas>
+    <canvas id="ddaCanvas" width="300" height="300"></canvas>
+  </div>
+
+  <script>
+    function drawBresenham() {
+      // Получение координат начальной и конечной точек из полей ввода и преобразование их в числа
+      const startPoint = document.getElementById('startPoint').value.split(',').map(Number);
+      const endPoint = document.getElementById('endPoint').value.split(',').map(Number);
+
+      // Получение элемента canvas и контекста рисования
+      const canvas = document.getElementById('bresenhamCanvas');
+      const ctx = canvas.getContext('2d');
+
+      // Очистка холста
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Начальные координаты
+      let x1 = startPoint[0];
+      let y1 = startPoint[1];
+
+      // Конечные координаты
+      let x2 = endPoint[0];
+      let y2 = endPoint[1];
+
+      // Разность между координатами по осям X и Y
+      const dx = Math.abs(x2 - x1);
+      const dy = Math.abs(y2 - y1);
+
+      // Направление движения по осям X и Y
+      const sx = (x1 < x2) ? 1 : -1;
+      const sy = (y1 < y2) ? 1 : -1;
+
+      // Ошибка (расстояние до следующего пикселя)
+      let err = dx - dy;
+
+      // Цикл отрисовки линии
+      while (true) {
+        // Рисуем текущий пиксель
+        ctx.fillRect(x1, y1, 1, 1);
+
+        // Если достигнута конечная точка, выходим из цикла
+        if ((x1 === x2) && (y1 === y2)) break;
+
+        // Вычисление ошибки для следующего пикселя
+        const e2 = 2 * err;
+
+        // Проверка на пересечение горизонтальной линии
+        if (e2 > -dy) {
+          err -= dy;
+          x1 += sx; // Переходим к следующему пикселю по оси X
+        }
+
+        // Проверка на пересечение вертикальной линии
+        if (e2 < dx) {
+          err += dx;
+          y1 += sy; // Переходим к следующему пикселю по оси Y
+        }
+      }
+    }
+
+function drawDDA() {
+    // Получение координат начальной и конечной точек из полей ввода и преобразование их в числа
+    const startPoint = document.getElementById('startPoint').value.split(',').map(Number);
+    const endPoint = document.getElementById('endPoint').value.split(',').map(Number);
+    
+    // Получение элемента canvas и контекста рисования
+    const canvas = document.getElementById('ddaCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Очистка холста
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Начальные координаты
+    let x1 = startPoint[0];
+    let y1 = startPoint[1];
+
+    // Конечные координаты
+    let x2 = endPoint[0];
+    let y2 = endPoint[1];
+
+    // Разность между координатами по осям X и Y
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+
+    // Определение количества шагов
+    const steps = Math.max(Math.abs(dx), Math.abs(dy));
+
+    // Вычисление приращений по осям X и Y
+    const xIncrement = dx / steps;
+    const yIncrement = dy / steps;
+
+    // Цикл для отрисовки линии методом ЦДА
+    for (let i = 0; i <= steps; i++) {
+        // Рисуем пиксель на округленных координатах
+        ctx.fillRect(Math.round(x1), Math.round(y1), 1, 1);
+        
+        // Обновляем координаты для следующего шага
+        x1 += xIncrement;
+        y1 += yIncrement;
+    }
+}
+
+  </script>
+
+</body>
+
+</html>

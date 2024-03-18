@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    canvas {
+      border: 1px solid #000;
+      margin: 10px;
+    }
+  </style>
+  <title>Рисование круга по алгоритму Брезенхема</title>
+</head>
+<body>
+
+  <!-- Поле ввода для радиуса круга -->
+  <label for="radius">Радиус круга: </label>
+  <input type="number" id="radius" placeholder="Введите радиус круга" min="1" max="150">
+
+  <!-- Кнопка для рисования круга -->
+  <button onclick="drawCircle()">Нарисовать круг</button>
+
+  <!-- Холст для отображения круга -->
+  <canvas id="circleCanvas" width="300" height="300"></canvas>
+
+  <script>
+    function drawCircle() {
+      // Получение значения радиуса из поля ввода
+      const radius = parseInt(document.getElementById('radius').value);
+
+      // Получение холста и контекста рисования
+      const canvas = document.getElementById('circleCanvas');
+      const ctx = canvas.getContext('2d');
+
+      // Очистка холста
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Инициализация координат центра круга
+      let x = canvas.width / 2;
+      let y = canvas.height / 2;
+
+      // Начальные значения координат точки на окружности
+      let x0 = radius;
+      let y0 = 0;
+
+      // Инициализация ошибки
+      let err = 0;
+
+      // Основной цикл по алгоритму Брезенхема для отрисовки круга
+      while (x0 >= y0) {
+        // Отрисовка точек симметрично относительно всех осей
+        ctx.fillRect(x + x0, y + y0, 1, 1);
+        ctx.fillRect(x - x0, y + y0, 1, 1);
+        ctx.fillRect(x + x0, y - y0, 1, 1);
+        ctx.fillRect(x - x0, y - y0, 1, 1);
+        ctx.fillRect(x + y0, y + x0, 1, 1);
+        ctx.fillRect(x - y0, y + x0, 1, 1);
+        ctx.fillRect(x + y0, y - x0, 1, 1);
+        ctx.fillRect(x - y0, y - x0, 1, 1);
+
+        // Обновление координат
+        y0++;
+        err += 1 + 2 * y0;
+        if (2 * (err - x0) + 1 > 0) {
+          x0--;
+          err += 1 - 2 * x0;
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>
