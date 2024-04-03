@@ -212,55 +212,116 @@ class Grammar:
 
 
 
+def enum_to_string(s):
+    state_to_string = {
+        'H': "H",
+        'N': "N",
+        'P': "P",
+        'S': "S",
+        'ER': "ER"
+    }
+    return state_to_string[s]
+
+def enum_to_string_2(s):
+    state_to_string = {
+        'H_': "H",
+        'A_': "A",
+        'B_': "B",
+        'S_': "S",
+        'ER_': "ER"
+    }
+    return state_to_string[s]
+
 def Analizator(text):
     class State:
-        H = 0
-        N = 1
-        S = 2
-        ER = 3
+        H = 'H'
+        N = 'N'
+        P = 'P'
+        S = 'S'
+        ER = 'ER'
 
-    StateToString = {State.H: "H",
-                     State.N: "N",
-                     State.S: "S",
-                     State.ER: "ER"}
-
-    # Function to convert a State enum value to its string representation
-    def enum_to_string(s):
-        return StateToString[s]
-
-    b = 0
-    c = 0
     now = State.H
     count = 0
     res = ""
     while count < len(text):
         if now == State.H:
-            c = text[count]
             if text[count] == '0' or text[count] == '1':
                 now = State.N
-                b = int(c)
-                if count + 1 < len(text):
-                    c = text[count + 1]
-            elif text[count] == '|':
-                now = State.S
             else:
-                now = State.H
-                if count + 1 < len(text):
-                    c = text[count + 1]
+                now = State.ER
         elif now == State.N:
             if text[count] == '0' or text[count] == '1':
                 now = State.N
-                b = 2 * b + int(c)
-                if count + 1 < len(text):
-                    c = text[count + 1]
+            elif text[count] == '.':
+                now = State.P
             else:
-                now = State.H
-                if count + 1 < len(text):
-                    c = text[count + 1]
-                print(b, end=' ')
+                now = State.ER
+        elif now == State.P:
+            if text[count] == '0' or text[count] == '1':
+                now = State.S
+            else:
+                now = State.ER
+        elif now == State.S:
+            if text[count] == '0' or text[count] == '1':
+                now = State.S
+            else:
+                now = State.ER
+
         res += enum_to_string(now)
+        res += ""
         count += 1
-    print("\nЦепочка состояний:", res)
+
+    print("Цепочка состояний:", res)
+
+    if now == State.S:
+        print("Цепочка", text, "принадлежит данному языку\n")
+    else:
+        print("Цепочка", text, "не принадлежит данному языку\n")
+
+def Analizator_2(text):
+    class State_2:
+        H_ = 'H_'
+        A_ = 'A_'
+        B_ = 'B_'
+        S_ = 'S_'
+        ER_ = 'ER_'
+
+    now = State_2.H_
+    count = 0
+    res = ""
+    while count < len(text):
+        if now == State_2.H_:
+            if text[count] == '0' or text[count] == '1':
+                now = State_2.A_
+            else:
+                now = State_2.ER_
+        elif now == State_2.A_:
+            if text[count] == '0' or text[count] == '1':
+                now = State_2.A_
+            elif text[count] == '|':
+                now = State_2.S_
+            elif text[count] in ['+', '-']:
+                now = State_2.B_
+            else:
+                now = State_2.ER_
+        elif now == State_2.B_:
+            if text[count] == '0' or text[count] == '1':
+                now = State_2.A_
+            else:
+                now = State_2.ER_
+        elif now == State_2.S_:
+            now = State_2.ER_
+
+        res += enum_to_string_2(now)
+        res += ""
+        count += 1
+
+    print("Цепочка состояний:", res)
+
+    if now == State_2.S_:
+        print("Цепочка", text, "принадлежит данному языку\n")
+    else:
+        print("Цепочка", text, "не принадлежит данному языку\n")
 
 
 # Lab 2
@@ -272,9 +333,10 @@ Analizator("100")
 print("Данная грамматика порождает язык L = { 0^n 1^m . | n, m >= 0 }\n")
 
 print("Задание 2")
-Analizator("1011|")
-Analizator("10+011|")
-Analizator("1-101+1|3")
+Analizator_2("1011|")
+Analizator_2("10+011|")
+Analizator_2("1-101+1|3")
+
 print("Грамматика: G: ({ 0, 1, +, - , | }, { A, B, S }, P, S)")
 
 dict = {
