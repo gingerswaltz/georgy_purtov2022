@@ -1,51 +1,101 @@
 class FSM:
-    def __init__(self, initial):
-        self.INITIAL = initial
-        self.CURRENT = initial
-        self.STATES = {}
+    def __init__(self, initial_state):
+        self.initial_state = initial_state
+        self.current_state = initial_state
+        self.states = {}
 
-    def set_initial_state(self, initial):
-        self.INITIAL = initial
+    def set_initial_state(self, initial_state):
+        self.initial_state = initial_state
+        self.current_state = initial_state
 
-    def set_current_state(self, current):
-        self.CURRENT = current
+    def add_state(self, state, transitions):
+        self.states[state] = transitions
 
-    def get_current_state(self):
-        return self.CURRENT
+    def process(self, symbol):
+        if self.current_state not in self.states:
+            raise Exception("Invalid current state")
 
-    def reset(self):
-        self.CURRENT = self.INITIAL
+        transitions = self.states[self.current_state]
+        if symbol in transitions:
+            action = transitions[symbol].get("action")
+            if action:
+                action()
 
-    def add_state(self, state, symbol, next_state, action):
-        if state not in self.STATES:
-            self.STATES[state] = {}
-        self.STATES[state][symbol] = {'NEXT': next_state, 'ACTION': action}
+            next_state = transitions[symbol].get("next")
+            if next_state:
+                self.current_state = next_state
+        elif "*" in transitions:
+            default_action = transitions["*"].get("action")
+            if default_action:
+                default_action()
 
-    def remove_state(self, state, symbol=None):
-        if symbol:
-            del self.STATES[state][symbol]
+            default_next_state = transitions["*"].get("next")
+            if default_next_state:
+                self.current_state = default_next_state
         else:
-            del self.STATES[state]
+            raise Exception("Unrecognized symbol")
+
+
+class ChatBot(FSM):
+    def __init__(self):
+        super().__init__("INIT")
+        self.session = {}
+        self.login = ""
+
+        self.add_state("INIT", {
+            "*": {"action": self.do_introduce, "next": "INIT"},
+            "LOGIN": {"action": self.do_login, "next": "SESSION"},
+            "EXIT": {"action": self.do_quit, "next": "INIT"}
+        })
+
+        self.add_state("SESSION", {
+            "SAY": {"action": self.do_say, "next": "SESSION"},
+            "*": {"next": "SESSION"},
+            "MEMORIZE": {"next": "STORE"},
+            "EXIT": {"next": "INIT"}
+        })
+
+        self.add_state("STORE", {
+            "*": {"action": self.do_remember, "next": "STORE"},
+            "EXIT": {"next": "SESSION"}
+        })
 
     def normalize(self, symbol):
-        return {'SYMBOL': symbol}
+        if symbol.strip():
+            parts = symbol.split(" ", 1)
+            return parts[0].upper(), parts[1] if len(parts) > 1 else ""
+        return "*", ""
 
-    def process(self, raw_symbol):
-        state = self.STATES[self.CURRENT]
-        raw_symbol = self.normalize(raw_symbol)
-        symbol = raw_symbol['SYMBOL']
+    def do_introduce(self):
+        print("Please introduce yourself first!")
 
-        print("Current state {}, got symbol {}".format(self.CURRENT, symbol))
-        if symbol not in state and '*' in state:
-            print("Unrecognized symbol {}, using *".format(symbol))
-            symbol = "*"
+    def do_login(self):
+        self.login = input("Enter your name: ")
+        print("Welcome, " + self.login)
+        self.session.setdefault(self.login, [])
 
-        # Do some action
-        if callable(state[symbol]['ACTION']):
-            state[symbol]['ACTION'](self, raw_symbol)
-
-        # Switch state
-        if symbol in state and 'NEXT' in state[symbol]:
-            self.CURRENT = state[symbol]['NEXT']
+    def do_say(self):
+        data = self.session.get(self.login)
+        if data:
+            print(data)
         else:
-            raise Exception("Don't know how to handle symbol {}".format(raw_symbol['SYMBOL']))
+            print("No record")
+
+    def do_remember(self):
+        message = input("Enter your message: ")
+        self.session.setdefault(self.login, []).append(message)
+
+    def do_quit(self):
+        print("Bye bye!")
+        exit()
+
+
+if __name__ == "__main__":
+    bot = ChatBot()
+    while True:
+        user_input = input().strip()
+        if not user_input:
+            continue
+
+        symbol, data = bot.normalize(user_input)
+        bot.process(symbol)
