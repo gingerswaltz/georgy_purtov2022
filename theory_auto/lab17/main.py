@@ -326,13 +326,29 @@ def Analizator_2(text):
 
 # Lab 2
 print("Задание 1")
+print("states: H-0, N-1, P-2, P-3, Er - 4")
+
 Analizator("11.010")
 Analizator("0.1")
 Analizator("01.")
 Analizator("100")
 print("Данная грамматика порождает язык L = { 0^n 1^m . | n, m >= 0 }\n")
+dict = {
+    Rule("S", "S0"),
+    Rule("S", "S1"),
+    Rule("A", "P0"),
+    Rule("S", "P1"),
+    Rule("P", "N."),
+    Rule("N", "0"),
+    Rule("N", "1"),
+    Rule("N", "N0"),
+    Rule("N", "N1"),
+};
+print_rules(dict)
+
 
 print("Задание 2")
+print("states: H-0, N-1, P-2, P-3, Er - 4")
 Analizator_2("1011|")
 Analizator_2("10+011|")
 Analizator_2("1-101+1|3")
@@ -349,130 +365,131 @@ dict = {
     Rule("A", "B1"),
     Rule("B", "A+"),
     Rule("B", "A-"),
-};
+}
+
 print_rules(dict)
 print("Данная грамматика порождает язык L = { 0^n, 1^m, +^k, -^t , | | n, m > 0, k, t >= 0 }\n")
 
 # Lab 1
 #Задание 7
-print("Задание 7\n")
-dict1 = [
-    Rule("S", "A.A"),
-    Rule("A", "B"),
-    Rule("A", "BA"),
-    Rule("B", "0"),
-    Rule("B", "1")
-]
-print_rules(dict1)
+# print("Задание 7\n")
+# dict1 = [
+#     Rule("S", "A.A"),
+#     Rule("A", "B"),
+#     Rule("A", "BA"),
+#     Rule("B", "0"),
+#     Rule("B", "1")
+# ]
+# print_rules(dict1)
 
-fl12 = FormalLanguage(dict1)
-print("Цепочка:", fl12.translate("S"))
+# fl12 = FormalLanguage(dict1)
+# print("Цепочка:", fl12.translate("S"))
 
-dict2 = [
-    Rule("S", "0.A"),
-    Rule("A", "0A"),
-    Rule("A", "1")
-]
-print_rules(dict2)
-fl13 = FormalLanguage(dict2)
-print("Цепочка:", fl13.translate("S"))
+# dict2 = [
+#     Rule("S", "0.A"),
+#     Rule("A", "0A"),
+#     Rule("A", "1")
+# ]
+# print_rules(dict2)
+# fl13 = FormalLanguage(dict2)
+# print("Цепочка:", fl13.translate("S"))
 
-print("Результат эквивалентности:", equivalence(fl12, fl13))
+# print("Результат эквивалентности:", equivalence(fl12, fl13))
 
-# Задание 9
-print("\nЗадание 9\n")
-dict3 = [
-    Rule("S", "aSbS"),
-    Rule("S", "bSaS"),
-    Rule("S", "E")
-]
-print_rules(dict3)
-fl14 = FormalLanguage(dict3)
-print("Цепочка:", fl14.translate("S"))
+# # Задание 9
+# print("\nЗадание 9\n")
+# dict3 = [
+#     Rule("S", "aSbS"),
+#     Rule("S", "bSaS"),
+#     Rule("S", "E")
+# ]
+# print_rules(dict3)
+# fl14 = FormalLanguage(dict3)
+# print("Цепочка:", fl14.translate("S"))
 
-gr = Grammar(["S"], ["a", "b", "E"], dict3)
-print(gr.make_tree("aEbaEbE"))
+# gr = Grammar(["S"], ["a", "b", "E"], dict3)
+# print(gr.make_tree("aEbaEbE"))
 
-# Задание 11 (а)
-print("\nЗадание 11 (а)\n")
-dict4 = [
-    Rule("S", "0S"),
-    Rule("S", "0B"),
-    Rule("B", "1B"),
-    Rule("B", "1C"),
-    Rule("C", "1C"),
-    Rule("C", "_|_")
-]
-print_rules(dict4)
-print("Язык: L = { 0^n 1^m _|_ | n, m > 0}")
+# # Задание 11 (а)
+# print("\nЗадание 11 (а)\n")
+# dict4 = [
+#     Rule("S", "0S"),
+#     Rule("S", "0B"),
+#     Rule("B", "1B"),
+#     Rule("B", "1C"),
+#     Rule("C", "1C"),
+#     Rule("C", "_|_")
+# ]
+# print_rules(dict4)
+# print("Язык: L = { 0^n 1^m _|_ | n, m > 0}")
 
-dict5 = [
-    Rule("S", "A_|_"),
-    Rule("A", "A1"),
-    Rule("A", "B1"),
-    Rule("B", "C1"),
-    Rule("B", "CB1"),
-    Rule("C", "0")
-]
-print_rules(dict5)
-print("Язык: L = { 0^n 1^m _|_ | n, m > 0}")
+# dict5 = [
+#     Rule("S", "A_|_"),
+#     Rule("A", "A1"),
+#     Rule("A", "B1"),
+#     Rule("B", "C1"),
+#     Rule("B", "CB1"),
+#     Rule("C", "0")
+# ]
+# print_rules(dict5)
+# print("Язык: L = { 0^n 1^m _|_ | n, m > 0}")
 
-# Задание 11 (б)
-print("\nЗадание 11 (б)\n")
-dict6 = [
-    Rule("S", "aA"),
-    Rule("S", "aB"),
-    Rule("S", "bA"),
-    Rule("A", "bS"),
-    Rule("B", "aS"),
-    Rule("B", "bB"),
-    Rule("B", "_|_")
-]
-print_rules(dict6)
-print("Язык: L = { a^n b^m _|_ | n, m > 0}")
+# # Задание 11 (б)
+# print("\nЗадание 11 (б)\n")
+# dict6 = [
+#     Rule("S", "aA"),
+#     Rule("S", "aB"),
+#     Rule("S", "bA"),
+#     Rule("A", "bS"),
+#     Rule("B", "aS"),
+#     Rule("B", "bB"),
+#     Rule("B", "_|_")
+# ]
+# print_rules(dict6)
+# print("Язык: L = { a^n b^m _|_ | n, m > 0}")
 
-dict7 = [
-    Rule("S", "A_|_"),
-    Rule("A", "ABb"),
-    Rule("A", "Bb"),
-    Rule("A", "Aa"),
-    Rule("B", "a"),
-    Rule("B", "b")
-]
-print_rules(dict7)
-print("Язык: L = { a^n b^m _|_ | n, m > 0}")
+# dict7 = [
+#     Rule("S", "A_|_"),
+#     Rule("A", "ABb"),
+#     Rule("A", "Bb"),
+#     Rule("A", "Aa"),
+#     Rule("B", "a"),
+#     Rule("B", "b")
+# ]
+# print_rules(dict7)
+# print("Язык: L = { a^n b^m _|_ | n, m > 0}")
 
-# Задание 12
-print("\nЗадание 12\n")
-dict8 = [
-    Rule("S", "S1"),
-    Rule("S", "A0"),
-    Rule("A", "A1"),
-    Rule("A", "0"),
-]
-print_rules(dict8)
-print("Язык: L = { 0 (1)^n 0 (1)^m  | n, m >= 0 }")
+# # Задание 12
+# print("\nЗадание 12\n")
+# dict8 = [
+#     Rule("S", "S1"),
+#     Rule("S", "A0"),
+#     Rule("A", "A1"),
+#     Rule("A", "0"),
+# ]
+# print_rules(dict8)
+# print("Язык: L = { 0 (1)^n 0 (1)^m  | n, m >= 0 }")
 
-dict9 = [
-    Rule("S", "A1"),
-    Rule("S", "B0"),
-    Rule("S", "E1"),
-    Rule("A", "S1"),
-    Rule("B", "C1"),
-    Rule("B", "D1"),
-    Rule("C", "0"),
-    Rule("D", "B1"),
-    Rule("E", "E0"),
-    Rule("E", "1"),
-]
-print_rules(dict9)
-print("Язык: L = { 0^n 1^m | n, m >= 0 }")
+# dict9 = [
+#     Rule("S", "A1"),
+#     Rule("S", "B0"),
+#     Rule("S", "E1"),
+#     Rule("A", "S1"),
+#     Rule("B", "C1"),
+#     Rule("B", "D1"),
+#     Rule("C", "0"),
+#     Rule("D", "B1"),
+#     Rule("E", "E0"),
+#     Rule("E", "1"),
+# ]
+# print_rules(dict9)
+# print("Язык: L = { 0^n 1^m | n, m >= 0 }")
 
-dict10 = [
-    Rule("S", "S1"),
-    Rule("S", "A0"),
-    Rule("A", "A1"),
-    Rule("A", "0"),
-]
-print_rules(dict10)
-print("Язык: L = { 0 (1)^n 0 (1)^m  | n, m >= 0 }")
+# dict10 = [
+#     Rule("S", "S1"),
+#     Rule("S", "A0"),
+#     Rule("A", "A1"),
+#     Rule("A", "0"),
+# ]
+# print_rules(dict10)
+# print("Язык: L = { 0 (1)^n 0 (1)^m  | n, m >= 0 }")
