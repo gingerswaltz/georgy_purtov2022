@@ -1,3 +1,6 @@
+import tkinter as tk
+from tkinter import messagebox
+
 class FSM:
     def __init__(self, initial_state):
         self.initial_state = initial_state
@@ -35,12 +38,12 @@ class FSM:
         else:
             raise Exception("Unrecognized symbol")
 
-
 class ChatBot(FSM):
     def __init__(self):
         super().__init__("INIT")
         self.session = {}
         self.login = ""
+        self.output = ""
 
         self.add_state("INIT", {
             "*": {"action": self.do_introduce, "next": "INIT"},
@@ -51,7 +54,7 @@ class ChatBot(FSM):
         self.add_state("SESSION", {
             "SAY": {"action": self.do_say, "next": "SESSION"},
             "*": {"next": "SESSION"},
-            "MEMORIZE": {"next": "STORE"},
+            "MEMORIZE": {"action": self.do_remember, "next": "STORE"},
             "EXIT": {"next": "INIT"}
         })
 
@@ -67,35 +70,67 @@ class ChatBot(FSM):
         return "*", ""
 
     def do_introduce(self):
-        print("Please introduce yourself first!")
+        self.output = "Please introduce yourself first!"
 
-    def do_login(self):
-        self.login = input("Enter your name: ")
-        print("Welcome, " + self.login)
+    def do_login(self, user_input):
+        self.login = user_input.strip()
+        self.output = "Welcome, " + self.login
         self.session.setdefault(self.login, [])
 
     def do_say(self):
-        data = self.session.get(self.login)
-        if data:
-            print(data)
+        messages = self.session.get(self.login, [])
+        if messages:
+            self.output = "\n".join(messages)
         else:
-            print("No record")
+            self.output = "No record"
 
-    def do_remember(self):
-        message = input("Enter your message: ")
+    def do_remember(self, user_input):
+        message = user_input.strip()
         self.session.setdefault(self.login, []).append(message)
 
     def do_quit(self):
-        print("Bye bye!")
-        exit()
+        self.output = "Bye bye!"
+        app.destroy()
 
+class ChatBotGUI:
+    def __init__(self, master):
+        self.master = master
+        self.master.title("ChatBot")
+
+        self.bot = ChatBot()
+
+        self.initialize_ui()
+
+    def initialize_ui(self):
+        self.label = tk.Label(self.master, text="Enter command:")
+        self.label.pack()
+
+        self.entry = tk.Entry(self.master)
+        self.entry.pack()
+
+        self.button = tk.Button(self.master, text="Send", command=self.send_command)
+        self.button.pack()
+
+        self.output_text = tk.Text(self.master, height=10, width=50)
+        self.output_text.pack()
+
+    def send_command(self):
+        user_input = self.entry.get().strip()
+        symbol, data = self.bot.normalize(user_input)
+        try:
+            if symbol in ["LOGIN", "MEMORIZE"]:
+                getattr(self.bot, f"do_{symbol.lower()}")(user_input)
+            else:
+                self.bot.process(symbol)
+            self.update_output()
+        except Exception as e:
+            messagebox.showerror("Error", str(e))
+
+    def update_output(self):
+        self.output_text.delete(1.0, tk.END)
+        self.output_text.insert(tk.END, self.bot.output)
 
 if __name__ == "__main__":
-    bot = ChatBot()
-    while True:
-        user_input = input().strip()
-        if not user_input:
-            continue
-
-        symbol, data = bot.normalize(user_input)
-        bot.process(symbol)
+    root = tk.Tk()
+    app = ChatBotGUI(root)
+    root.mainloop()

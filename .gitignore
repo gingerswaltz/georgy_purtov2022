@@ -93,3 +93,4 @@ SAOD2/AVL/AVL.dSYM/Contents/Resources/DWARF/AVL
 *.obj
 *.pdb
 *.pdb
+/CompGraph/lab 4/venv
