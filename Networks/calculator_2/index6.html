@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IPv6 Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f5f5f5;
+      }
+
+      .calculator {
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .input-group {
+        margin-bottom: 10px;
+      }
+
+      .input-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .input-group input {
+        width: 200px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      .btn {
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+
+      .btn:hover {
+        background-color: #45a049;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calculator">
+      <h2>IPv6 Calculator</h2>
+      <div class="input-group">
+        <label for="ipAddress">IPv6 Address:</label>
+        <input
+          type="text"
+          id="ipAddress"
+          placeholder="Enter IP Address"
+          value="2a02:6b8:a::a"
+        />
+      </div>
+      <div class="input-group">
+        <label for="subnetMask">Subnet Mask:</label>
+        <input
+          type="text"
+          id="subnetMask"
+          placeholder="Enter Subnet Mask"
+          value="24"
+        />
+      </div>
+      <button class="btn" onclick="calculate()">Calculate</button>
+      <div id="results"></div>
+    </div>
+
+    <script>
+      // Метод для проверки валидности IP адреса
+      function isValidIpAddress(ipAddress) {
+        // Паттерн для валидации IPv6 адреса
+        const ipv6Pattern = /^([0-9a-fA-F]{0,4}:){2,7}[0-9a-fA-F]{0,4}$/;
+
+        // Проверка соответствия адреса паттерну
+        return ipv6Pattern.test(ipAddress);
+      }
+
+      function isValidSubnetMask(subnetMask) {
+        // Проверяем, что переданное значение является числом
+        const maskNumber = parseInt(subnetMask, 10);
+
+        // Проверяем, удалось ли преобразование
+        if (isNaN(maskNumber)) {
+          return false;
+        }
+
+        // Проверяем, что переданное значение находится в допустимом диапазоне
+        return maskNumber >= 0 && maskNumber <= 128;
+      }
+
+      function printError(ipState, subnetState) {
+        let resultsHtml;
+        if (!ipState && !subnetState) {
+          resultsHtml = "Please, check IP address and subnet mask";
+        } else if (!ipState) {
+          resultsHtml = "Please, check IP address";
+        } else if (!subnetState) {
+          resultsHtml = "Please, check subnet mask";
+        }
+
+        document.getElementById("results").innerHTML = resultsHtml;
+      }
+
+      function convertDecimalMaskToHex(decimalMask) {
+        // Пытаемся преобразовать значение в число
+        decimalMask = parseInt(decimalMask, 10);
+        // Проверяем, что переданное значение является числом
+        if (typeof decimalMask !== "number") {
+          throw new Error("Маска подсети должна быть числом.");
+        }
+
+        // Проверяем, что переданное значение находится в допустимом диапазоне
+        if (decimalMask < 0 || decimalMask > 128) {
+          throw new Error("Недопустимое значение маски подсети.");
+        }
+
+        // Вычисляем количество полных групп и остаточные биты в последней группе
+        const fullGroups = Math.floor(decimalMask / 16);
+        const remainderBits = decimalMask % 16;
+
+        // Генерируем шестнадцатеричное представление для каждой группы
+        const hexGroups = [];
+        for (let i = 0; i < fullGroups; i++) {
+          hexGroups.push("ffff");
+        }
+        if (remainderBits > 0) {
+          const remainderHex = (Math.pow(2, remainderBits) - 1)
+            .toString(16)
+            .padStart(4, "0");
+          hexGroups.push(remainderHex);
+        }
+        // Заполняем оставшиеся группы нулями
+        while (hexGroups.length < 8) {
+          hexGroups.push("0000");
+        }
+
+        // Склеиваем шестнадцатеричные группы с двоеточием
+        const hexMask = hexGroups.join(":");
+
+        return hexMask;
+      }
+    </script>
+    <script src="Calculator6Class.js"></script>
+    <script>
+      function calculate() {
+        const ipAddress = document.getElementById("ipAddress").value;
+        const subnetMask = document.getElementById("subnetMask").value;
+
+        if (isValidIpAddress(ipAddress) && isValidSubnetMask(subnetMask)) {
+          subMask = convertDecimalMaskToHex(subnetMask);
+          const calculator = new IPv6Calculator(ipAddress, subMask);
+          let resultsHtml = "<h3>Results:</h3>";
+          resultsHtml += "<table>";
+          resultsHtml += "<tr><th>Данные</th><th>Bывод</th></tr>";
+
+          resultsHtml +=
+            "<tr><td>Сжатая запись IPv6 адреса:  " +
+            "</td><td>" +
+            calculator.getCompressedIPv6();
+          +"</td></tr>";
+          resultsHtml +=
+            "<tr><td>Полная запись IPv6 адреса:  " +
+            "</td><td>" +
+            calculator.getFullIPv6();
+          +"</td></tr>";
+          resultsHtml +=
+            "<tr><td>Сетевая маска (биты):  " +
+            "</td><td>" +
+            calculator.getSubnetMaskBits();
+          +"</td></tr>";
+          resultsHtml +=
+            "<tr><td>Сетевая полная маска:  " +
+            "</td><td>" +
+            calculator.getFullSubnetMask();
+          +"</td></tr>";
+          resultsHtml +=
+            "<tr><td>Идентификатор адреса (с маской):  " +
+            "</td><td>" +
+            calculator.getAddressIdentifier();
+          +"</td></tr>";
+          resultsHtml +=
+            "<tr><td>Префикс подсети (с маской):  " +
+            "</td><td>" +
+            calculator.getSubnetPrefix();
+          +"</td></tr>";
+          resultsHtml +=
+            "<tr><td>Тип адреса:  " +
+            "</td><td>" +
+            calculator.getAddressType();
+          +"</td></tr>";
+          resultsHtml +=
+            "<tr><td>Начало диапазона:  " +
+            "</td><td>" +
+            calculator.getRangeStart();
+          +"</td></tr>";
+          resultsHtml +=
+            "<tr><td>Конец диапазона:  " +
+            "</td><td>" +
+            calculator.getRangeEnd();
+          +"</td></tr>";
+          
+
+          resultsHtml += "</table>";
+
+          document.getElementById("results").innerHTML = resultsHtml;
+        } else {
+          printError(
+            isValidIpAddress(ipAddress),
+            isValidSubnetMask(subnetMask)
+          );
+        }
+      }
+    </script>
+  </body>
+</html>

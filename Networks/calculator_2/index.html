@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IP Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f5f5f5;
+      }
+
+      .calculator {
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .input-group {
+        margin-bottom: 10px;
+      }
+
+      .input-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .input-group input {
+        width: 200px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      .btn {
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+
+      .btn:hover {
+        background-color: #45a049;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calculator">
+      <h2>IP Calculator</h2>
+      <div class="input-group">
+        <label for="ipAddress">IP Address:</label>
+        <input
+          type="text"
+          id="ipAddress"
+          placeholder="Enter IP Address"
+          value="192.168.2.5"
+        />
+      </div>
+      <div class="input-group">
+        <label for="subnetMask">Subnet Mask:</label>
+        <input
+          type="text"
+          id="subnetMask"
+          placeholder="Enter Subnet Mask"
+          value="255.255.255.0"
+        />
+      </div>
+      <button class="btn" onclick="calculate()">Calculate</button>
+      <div id="results"></div>
+    </div>
+
+    <script>
+      // Метод для проверки валидности IP адреса
+      function isValidIpAddress(ipAddress) {
+        // Регулярное выражение для проверки валидности IPv4 адреса
+        const ipv4Regex =
+          /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+
+        // Проверка соответствия IP адреса регулярному выражению
+        return ipv4Regex.test(ipAddress);
+      }
+      function isValidSubnetMask(subnetMask) {
+        // Разделение маски подсети на октеты
+        const octets = subnetMask.split(".");
+
+        // Проверка наличия четырех октетов
+        if (octets.length !== 4) {
+          return false;
+        }
+
+        // Проверка допустимости каждого октета
+        for (const octet of octets) {
+          // Проверка, является ли октет допустимым числом от 0 до 255
+          if (!/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(octet)) {
+            return false;
+          }
+        }
+
+        // Преобразование маски подсети в бинарное представление
+        const binaryMask = octets
+          .map((octet) => parseInt(octet).toString(2))
+          .join("");
+
+        // Проверка наличия последовательности единиц, за которыми следует последовательность нулей
+        if (!/^1+0+$/.test(binaryMask)) {
+          return false;
+        }
+
+        return true;
+      }
+
+      function printError(ipState, subnetState) {
+        let resultsHtml;
+        if (!ipState && !subnetState) {
+          resultsHtml = "Please, check IP address and subnet mask";
+        } else if (!ipState) {
+          resultsHtml = "Please, check IP address";
+        } else if (!subnetState) {
+          resultsHtml = "Please, check subnet mask";
+        }
+
+        document.getElementById("results").innerHTML = resultsHtml;
+      }
+    </script>
+    <script src="CalculatorClass.js"></script>
+    <script>
+      function calculate() {
+        const ipAddress = document.getElementById("ipAddress").value;
+        const subnetMask = document.getElementById("subnetMask").value;
+
+        if (isValidIpAddress(ipAddress) && isValidSubnetMask(subnetMask)) {
+          const calculator = new IpCalculator(ipAddress, subnetMask);
+
+          let resultsHtml = "<h3>Results:</h3>";
+          resultsHtml += "<table>";
+          resultsHtml += "<tr><th>Result</th><th>Binary Result</th></tr>";
+          resultsHtml +=
+            "<tr><td>Network Address: " +
+            calculator.calculateNetworkAddress() +
+            "</td><td>" +
+            calculator.ipToBinary() +
+            "</td></tr>";
+          resultsHtml +=
+            "<tr><td>Broadcast Address: " +
+            calculator.calculateBroadcastAddress() +
+            "</td><td>" +
+            calculator.subnetMaskToBinary() +
+            "</td></tr>";
+          resultsHtml +=
+            "<tr><td>Min Hosts: " +
+            calculator.calculateMinimumHost() +
+            "</td></tr>";
+          resultsHtml +=
+            "<tr><td>Max Hosts: " +
+            calculator.calculateMaximumHost() +
+            "</td></tr>";
+          resultsHtml +=
+            "<tr><td>Available Hosts: " +
+            calculator.calculateAvailableHosts() +
+            "</td></tr>";
+          resultsHtml +=
+            "<tr><td>IP Class: " + calculator.determineIpClass() + "</td></tr>";
+
+          resultsHtml += "</table>";
+
+          document.getElementById("results").innerHTML = resultsHtml;
+        } else {
+          printError(
+            isValidIpAddress(ipAddress),
+            isValidSubnetMask(subnetMask)
+          );
+        }
+      }
+    </script>
+  </body>
+</html>
