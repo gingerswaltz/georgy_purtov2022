@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IP Calculator</title>
     <style>
-    
       table {
         width: 100%;
         border-collapse: collapse;
@@ -116,6 +115,30 @@
       .toggle-label input[type="checkbox"]:checked + span:before {
         transform: translateX(30px);
       }
+      .subnet-info {
+        margin-top: 20px;
+      }
+
+      .subnet-info table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+
+      .subnet-info th,
+      .subnet-info td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+
+      .subnet-info th {
+        background-color: #f2f2f2;
+      }
+
+      .subnet-info h3 {
+        margin-top: 0;
+      }
     </style>
   </head>
   <body>
@@ -148,6 +171,9 @@
       </div>
       <button class="btn" id="calcBtn" onclick="calculate()">Calculate</button>
       <div id="results"></div>
+      <div class="subnet-info">
+        <!-- Таблица подсетей будет добавлена сюда -->
+      </div>
     </div>
     <script>
       // Метод для проверки валидности IP адреса
@@ -205,9 +231,9 @@
       function toggleFunction() {
         const toggleBtn = document.getElementById("toggleBtn");
         const calcBtn = document.getElementById("calcBtn");
-        const result = document.getElementById('results');
+        const result = document.getElementById("results");
         const toggleLabel = document.querySelector('label[for="toggleBtn"]');
-        result.innerHTML = '';
+        result.innerHTML = "";
 
         if (toggleBtn.checked) {
           calcBtn.innerHTML = "Aggregate";
@@ -269,7 +295,61 @@
           );
         }
       }
-      
+      function aggregate() {
+    const ipAddress = document.getElementById("ipAddress").value;
+    const subnetMask = document.getElementById("subnetMask").value;
+    if (isValidIpAddress(ipAddress) && isValidSubnetMask(subnetMask)) {
+        const calculator = new IpCalculator(ipAddress, subnetMask);
+        const subnets = calculator.calculateSubnets(3);
+        let subnetTable = document.querySelector(".subnet-info table");
+
+        // Если элемент .subnet-info не существует, создаем его
+        if (!subnetTable) {
+            subnetTable = document.createElement("table");
+            subnetTable.innerHTML = `
+                <tr>
+                    <th>Подсеть</th>
+                    <th>Сетевой адрес</th>
+                    <th>Широковещательный адрес</th>
+                    <th>Маска подсети</th>
+                    <th>Длина префикса</th>
+                </tr>`;
+            document.querySelector(".subnet-info").appendChild(subnetTable);
+        } else {
+            // Очистка содержимого таблицы перед добавлением новых данных
+            const result = document.getElementById("results");
+            result.innerHTML = "";
+            subnetTable.innerHTML = "";
+            subnetTable.innerHTML = `
+                <tr>
+                    <th>Подсеть</th>
+                    <th>Сетевой адрес</th>
+                    <th>Широковещательный адрес</th>
+                    <th>Маска подсети</th>
+                    <th>Длина префикса</th>
+                </tr>`;
+        }
+
+        // Вставляем строки с информацией о подсетях
+        subnets.forEach((subnet, index) => {
+            const rowHtml = `
+                <tr>
+                    <td>Подсеть ${index + 1}</td>
+                    <td>${subnet.networkAddress}</td>
+                    <td>${subnet.broadcastAddress}</td>
+                    <td>${subnet.subnetMask}</td>
+                    <td>${subnet.prefixLength}</td>
+                </tr>`;
+            subnetTable.insertAdjacentHTML("beforeend", rowHtml);
+        });
+    } else {
+      printError(
+            isValidIpAddress(ipAddress),
+            isValidSubnetMask(subnetMask)
+          );
+    }
+}
+
     </script>
   </body>
 </html>
