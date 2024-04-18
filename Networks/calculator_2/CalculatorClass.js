@@ -154,18 +154,17 @@ class IpCalculator {
   calculateVLSM() {
     // Разбиваем доступные хосты на подсети
     let remainingHosts = this.calculateAvailableHosts() + 2; // +2 для сетевого и широковещательного адреса
-    let currentAddress = this.calculateNetworkAddress()
-      .split(".")
-      .map((part) => parseInt(part));
+    let currentAddress = this.calculateNetworkAddress().split(".").map(part => parseInt(part));
 
     this.subnets.forEach((subnet, index) => {
       const subnetHosts = subnet.hosts + 2; // +2 для сетевого и широковещательного адреса
+      // Проверяем, не превышает ли количество хостов в данной подсети оставшееся количество доступных хостов
+      if (subnetHosts > remainingHosts) {
+        throw new Error(`Недостаточно хостов для подсети '${subnet.name}'`);
+      }
+
       const subnetMask = 32 - Math.ceil(Math.log2(subnetHosts));
-      const subnetMaskBinary = "1"
-        .repeat(subnetMask)
-        .padEnd(32, "0")
-        .match(/.{1,8}/g)
-        .map((bin) => parseInt(bin, 2));
+      const subnetMaskBinary = "1".repeat(subnetMask).padEnd(32, "0").match(/.{1,8}/g).map(bin => parseInt(bin, 2));
 
       // Рассчитываем диапазон подсети
       const subnetStart = currentAddress.slice();
@@ -179,7 +178,7 @@ class IpCalculator {
       broadcastAddress[3] += 1;
 
       // Рассчитываем обратную маску
-      const wildcard = subnetMaskBinary.map((part) => 255 - part).join(".");
+      const wildcard = subnetMaskBinary.map(part => 255 - part).join(".");
 
       // Добавляем информацию о подсети
       this.subnets[index].networkAddress = currentAddress.join(".");
@@ -194,4 +193,5 @@ class IpCalculator {
       remainingHosts -= subnetHosts;
     });
   }
+
 }

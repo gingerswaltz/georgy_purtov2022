@@ -1,355 +1,365 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IP Calculator</title>
-    <style>
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-      }
 
-      th,
-      td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IP Calculator</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
 
-      th {
-        background-color: #f2f2f2;
-      }
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
 
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        position: relative; /* Добавляем это свойство, чтобы правильно позиционировать переключатель */
-        height: 100vh;
-        background-color: #f5f5f5;
-      }
+    th {
+      background-color: #f2f2f2;
+    }
 
-      .calculator {
-        background-color: #fff;
-        border-radius: 8px;
-        padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        position: relative; /* Добавляем это свойство, чтобы переключатель правильно позиционировался относительно этого контейнера */
-      }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      /* Добавляем это свойство, чтобы правильно позиционировать переключатель */
+      height: 100vh;
+      background-color: #f5f5f5;
+    }
 
-      .input-group {
-        margin-bottom: 10px;
-      }
+    .calculator {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      position: relative;
+      /* Добавляем это свойство, чтобы переключатель правильно позиционировался относительно этого контейнера */
+    }
 
-      .input-group label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-      }
+    .input-group {
+      margin-bottom: 10px;
+    }
 
-      .input-group input {
-        width: 200px;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 16px;
-      }
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
 
-      .btn {
-        background-color: #4caf50;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        padding: 10px 20px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s;
-      }
+    .input-group input {
+      width: 200px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
 
-      .btn:hover {
-        background-color: #45a049;
-      }
+    .btn {
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
 
-      .toggle-label {
-        position: absolute;
-        top: 20px; /* Отступ от верхнего края */
-        right: 20px; /* Отступ от правого края */
-        display: flex;
-        align-items: center;
-      }
+    .btn:hover {
+      background-color: #45a049;
+    }
 
-      .toggle-label input[type="checkbox"] {
-        display: none;
-      }
+    .toggle-label {
+      position: absolute;
+      top: 20px;
+      /* Отступ от верхнего края */
+      right: 20px;
+      /* Отступ от правого края */
+      display: flex;
+      align-items: center;
+    }
 
-      .toggle-label span {
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 30px;
-        background-color: #ccc;
-        border-radius: 15px;
-        transition: background-color 0.3s;
-        cursor: pointer;
-      }
+    .toggle-label input[type="checkbox"] {
+      display: none;
+    }
 
-      .toggle-label span:before {
-        content: "";
-        position: absolute;
-        width: 26px;
-        height: 26px;
-        border-radius: 50%;
-        background-color: white;
-        top: 2px;
-        left: 2px;
-        transition: transform 0.3s;
-      }
+    .toggle-label span {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 30px;
+      background-color: #ccc;
+      border-radius: 15px;
+      transition: background-color 0.3s;
+      cursor: pointer;
+    }
 
-      .toggle-label input[type="checkbox"]:checked + span {
-        background-color: #4caf50;
-      }
+    .toggle-label span:before {
+      content: "";
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background-color: white;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.3s;
+    }
 
-      .toggle-label input[type="checkbox"]:checked + span:before {
-        transform: translateX(30px);
-      }
-      .subnet-info {
-        margin-top: 20px;
-      }
+    .toggle-label input[type="checkbox"]:checked+span {
+      background-color: #4caf50;
+    }
 
-      .subnet-info table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 10px;
-      }
+    .toggle-label input[type="checkbox"]:checked+span:before {
+      transform: translateX(30px);
+    }
 
-      .subnet-info th,
-      .subnet-info td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-      }
+    .subnet-info {
+      margin-top: 20px;
+    }
 
-      .subnet-info th {
-        background-color: #f2f2f2;
-      }
+    .subnet-info table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
 
-      .subnet-info h3 {
-        margin-top: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="calculator">
-      <h2>IP Calculator</h2>
-      <div class="input-group">
-        <label for="ipAddress">IP Address:</label>
-        <input
-          type="text"
-          id="ipAddress"
-          placeholder="Enter IP Address"
-          value="192.168.2.5"
-        />
-      </div>
-      <div class="input-group">
-        <label for="subnetMask">Subnet Mask:</label>
-        <input
-          type="text"
-          id="subnetMask"
-          placeholder="Enter Subnet Mask"
-          value="255.255.255.0"
-        />
-      </div>
-      <div class="toggle-label">
-        <label>
-          <input type="checkbox" id="toggleBtn" onclick="toggleFunction()" />
-          <span></span>
-        </label>
-        <label for="toggleBtn">Calculate</label>
-      </div>
-      <button class="btn" id="calcBtn" onclick="calculate()">Calculate</button>
-      <div id="results"></div>
-      <div class="subnet-info">
-        <!-- Таблица подсетей будет добавлена сюда -->
-      </div>
+    .subnet-info th,
+    .subnet-info td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .subnet-info th {
+      background-color: #f2f2f2;
+    }
+
+    .subnet-info h3 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="calculator">
+    <h2 id="mainHeader">IPv4 Calculator</h2>
+    <div class="input-group">
+      <label for="ipAddress">IP Address:</label>
+      <input type="text" id="ipAddress" placeholder="Enter IP Address" value="192.168.2.5" />
     </div>
-    <script>
-      // Метод для проверки валидности IP адреса
-      function isValidIpAddress(ipAddress) {
-        // Регулярное выражение для проверки валидности IPv4 адреса
-        const ipv4Regex =
-          /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+    <div class="input-group">
+      <label for="subnetMask">Subnet Mask:</label>
+      <input type="text" id="subnetMask" placeholder="Enter Subnet Mask" value="255.255.255.0" />
+    </div>
+    <div class="toggle-label">
+      <label>
+        <input type="checkbox" id="toggleBtn" onclick="toggleFunction()" />
+        <span></span>
+      </label>
+      <label for="toggleBtn">Calculate</label>
+    </div>
+    <button class="btn" id="calcBtn" onclick="calculate()">Calculate</button>
+    <div id="results"></div>
+    <div class="subnet-info">
+      <!-- Таблица подсетей будет добавлена сюда -->
+    </div>
+  </div>
+  <script>
+    // Метод для проверки валидности IP адреса
+    function isValidIpAddress(ipAddress) {
+      // Регулярное выражение для проверки валидности IPv4 адреса
+      const ipv4Regex =
+        /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 
-        // Проверка соответствия IP адреса регулярному выражению
-        return ipv4Regex.test(ipAddress);
-      }
-      function isValidSubnetMask(subnetMask) {
-        // Разделение маски подсети на октеты
-        const octets = subnetMask.split(".");
+      // Проверка соответствия IP адреса регулярному выражению
+      return ipv4Regex.test(ipAddress);
+    }
+    function isValidSubnetMask(subnetMask) {
+      // Разделение маски подсети на октеты
+      const octets = subnetMask.split(".");
 
-        // Проверка наличия четырех октетов
-        if (octets.length !== 4) {
-          return false;
-        }
-
-        // Проверка допустимости каждого октета
-        for (const octet of octets) {
-          // Проверка, является ли октет допустимым числом от 0 до 255
-          if (!/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(octet)) {
-            return false;
-          }
-        }
-
-        // Преобразование маски подсети в бинарное представление
-        const binaryMask = octets
-          .map((octet) => parseInt(octet).toString(2))
-          .join("");
-
-        // Проверка наличия последовательности единиц, за которыми следует последовательность нулей
-        if (!/^1+0+$/.test(binaryMask)) {
-          return false;
-        }
-
-        return true;
+      // Проверка наличия четырех октетов
+      if (octets.length !== 4) {
+        return false;
       }
 
-      function printError(ipState, subnetState) {
-        let resultsHtml;
-        if (!ipState && !subnetState) {
-          resultsHtml = "Please, check IP address and subnet mask";
-        } else if (!ipState) {
-          resultsHtml = "Please, check IP address";
-        } else if (!subnetState) {
-          resultsHtml = "Please, check subnet mask";
+      // Проверка допустимости каждого октета
+      for (const octet of octets) {
+        // Проверка, является ли октет допустимым числом от 0 до 255
+        if (!/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(octet)) {
+          return false;
         }
+      }
+
+      // Преобразование маски подсети в бинарное представление
+      const binaryMask = octets
+        .map((octet) => parseInt(octet).toString(2))
+        .join("");
+
+      // Проверка наличия последовательности единиц, за которыми следует последовательность нулей
+      if (!/^1+0+$/.test(binaryMask)) {
+        return false;
+      }
+
+      return true;
+    }
+
+    function printError(ipState, subnetState) {
+      let resultsHtml;
+      if (!ipState && !subnetState) {
+        resultsHtml = "Please, check IP address and subnet mask";
+      } else if (!ipState) {
+        resultsHtml = "Please, check IP address";
+      } else if (!subnetState) {
+        resultsHtml = "Please, check subnet mask";
+      }
+
+      document.getElementById("results").innerHTML = resultsHtml;
+    }
+
+    function toggleFunction() {
+      const toggleBtn = document.getElementById("toggleBtn");
+      const calcBtn = document.getElementById("calcBtn");
+      const result = document.getElementById("results");
+      const toggleLabel = document.querySelector('label[for="toggleBtn"]');
+      const mainHeader = document.getElementById('mainHeader');
+      result.innerHTML = "";
+
+      if (toggleBtn.checked) {
+        calcBtn.innerHTML = "Aggregate";
+        mainHeader.innerHTML = "IPv4 Aggregator";
+        calcBtn.setAttribute("onclick", "aggregate()");
+        toggleLabel.textContent = "Aggregate";
+      } else {
+        mainHeader.innerHTML = "IPv4 Calculator";
+        calcBtn.innerHTML = "Calculate";
+        calcBtn.setAttribute("onclick", "calculate()");
+        toggleLabel.textContent = "Calculate";
+      }
+    }
+  </script>
+  <script src="CalculatorClass.js"></script>
+  <script>
+    function calculate() {
+      const ipAddress = document.getElementById("ipAddress").value;
+      const subnetMask = document.getElementById("subnetMask").value;
+
+      if (isValidIpAddress(ipAddress) && isValidSubnetMask(subnetMask)) {
+        const calculator = new IpCalculator(ipAddress, subnetMask);
+
+        let resultsHtml = "<h3>Results:</h3>";
+        resultsHtml += "<table>";
+        resultsHtml += "<tr><th>Result</th><th>Binary Result</th></tr>";
+        resultsHtml +=
+          "<tr><td>Network Address: " +
+          calculator.calculateNetworkAddress() +
+          "</td><td>" +
+          calculator.ipToBinary() +
+          "</td></tr>";
+        resultsHtml +=
+          "<tr><td>Broadcast Address: " +
+          calculator.calculateBroadcastAddress() +
+          "</td><td>" +
+          calculator.subnetMaskToBinary() +
+          "</td></tr>";
+        resultsHtml +=
+          "<tr><td>Min Hosts: " +
+          calculator.calculateMinimumHost() +
+          "</td></tr>";
+        resultsHtml +=
+          "<tr><td>Max Hosts: " +
+          calculator.calculateMaximumHost() +
+          "</td></tr>";
+        resultsHtml +=
+          "<tr><td>Available Hosts: " +
+          calculator.calculateAvailableHosts() +
+          "</td></tr>";
+        resultsHtml +=
+          "<tr><td>IP Class: " + calculator.determineIpClass() + "</td></tr>";
+
+        resultsHtml += "</table>";
 
         document.getElementById("results").innerHTML = resultsHtml;
+      } else {
+        printError(
+          isValidIpAddress(ipAddress),
+          isValidSubnetMask(subnetMask)
+        );
       }
-
-      function toggleFunction() {
-        const toggleBtn = document.getElementById("toggleBtn");
-        const calcBtn = document.getElementById("calcBtn");
-        const result = document.getElementById("results");
-        const toggleLabel = document.querySelector('label[for="toggleBtn"]');
-        result.innerHTML = "";
-
-        if (toggleBtn.checked) {
-          calcBtn.innerHTML = "Aggregate";
-          calcBtn.setAttribute("onclick", "aggregate()");
-          toggleLabel.textContent = "Aggregate";
-        } else {
-          calcBtn.innerHTML = "Calculate";
-          calcBtn.setAttribute("onclick", "calculate()");
-          toggleLabel.textContent = "Calculate";
-        }
-      }
-    </script>
-    <script src="CalculatorClass.js"></script>
-    <script>
-      function calculate() {
-        const ipAddress = document.getElementById("ipAddress").value;
-        const subnetMask = document.getElementById("subnetMask").value;
-
-        if (isValidIpAddress(ipAddress) && isValidSubnetMask(subnetMask)) {
-          const calculator = new IpCalculator(ipAddress, subnetMask);
-
-          let resultsHtml = "<h3>Results:</h3>";
-          resultsHtml += "<table>";
-          resultsHtml += "<tr><th>Result</th><th>Binary Result</th></tr>";
-          resultsHtml +=
-            "<tr><td>Network Address: " +
-            calculator.calculateNetworkAddress() +
-            "</td><td>" +
-            calculator.ipToBinary() +
-            "</td></tr>";
-          resultsHtml +=
-            "<tr><td>Broadcast Address: " +
-            calculator.calculateBroadcastAddress() +
-            "</td><td>" +
-            calculator.subnetMaskToBinary() +
-            "</td></tr>";
-          resultsHtml +=
-            "<tr><td>Min Hosts: " +
-            calculator.calculateMinimumHost() +
-            "</td></tr>";
-          resultsHtml +=
-            "<tr><td>Max Hosts: " +
-            calculator.calculateMaximumHost() +
-            "</td></tr>";
-          resultsHtml +=
-            "<tr><td>Available Hosts: " +
-            calculator.calculateAvailableHosts() +
-            "</td></tr>";
-          resultsHtml +=
-            "<tr><td>IP Class: " + calculator.determineIpClass() + "</td></tr>";
-
-          resultsHtml += "</table>";
-
-          document.getElementById("results").innerHTML = resultsHtml;
-        } else {
-          printError(
-            isValidIpAddress(ipAddress),
-            isValidSubnetMask(subnetMask)
-          );
-        }
-      }
-      function aggregate() {
+    }
+    function aggregate() {
     const ipAddress = document.getElementById("ipAddress").value;
     const subnetMask = document.getElementById("subnetMask").value;
     if (isValidIpAddress(ipAddress) && isValidSubnetMask(subnetMask)) {
-        const calculator = new IpCalculator(ipAddress, subnetMask);
-        const subnets = calculator.calculateSubnets(3);
-        let subnetTable = document.querySelector(".subnet-info table");
+    const calculator = new IpCalculator(ipAddress, subnetMask);
+    let continueAddingSubnets = true; // Флаг для определения продолжения ввода
 
-        // Если элемент .subnet-info не существует, создаем его
-        if (!subnetTable) {
-            subnetTable = document.createElement("table");
-            subnetTable.innerHTML = `
-                <tr>
-                    <th>Подсеть</th>
-                    <th>Сетевой адрес</th>
-                    <th>Широковещательный адрес</th>
-                    <th>Маска подсети</th>
-                    <th>Длина префикса</th>
-                </tr>`;
-            document.querySelector(".subnet-info").appendChild(subnetTable);
-        } else {
-            // Очистка содержимого таблицы перед добавлением новых данных
-            const result = document.getElementById("results");
-            result.innerHTML = "";
-            subnetTable.innerHTML = "";
-            subnetTable.innerHTML = `
-                <tr>
-                    <th>Подсеть</th>
-                    <th>Сетевой адрес</th>
-                    <th>Широковещательный адрес</th>
-                    <th>Маска подсети</th>
-                    <th>Длина префикса</th>
-                </tr>`;
+    while (continueAddingSubnets) {
+        // Запрашиваем информацию о подсетях с помощью диалогового окна
+        const subnetName = prompt("Enter subnet name (or click 'Cancel' to stop):");
+
+        // Проверяем, был ли введен текст
+        if (subnetName === null) {
+            // Пользователь нажал "Отмена", прекращаем цикл
+            continueAddingSubnets = false;
+            break;
         }
 
-        // Вставляем строки с информацией о подсетях
-        subnets.forEach((subnet, index) => {
-            const rowHtml = `
-                <tr>
-                    <td>Подсеть ${index + 1}</td>
-                    <td>${subnet.networkAddress}</td>
-                    <td>${subnet.broadcastAddress}</td>
-                    <td>${subnet.subnetMask}</td>
-                    <td>${subnet.prefixLength}</td>
-                </tr>`;
-            subnetTable.insertAdjacentHTML("beforeend", rowHtml);
-        });
-    } else {
-      printError(
-            isValidIpAddress(ipAddress),
-            isValidSubnetMask(subnetMask)
-          );
+        // Продолжаем запрос данных о подсети
+        const subnetHosts = parseInt(prompt("Enter number of hosts for subnet '" + subnetName + "':"));
+
+        // Проверяем, был ли введен текст
+        if (subnetHosts === null || isNaN(subnetHosts)) {
+            // Пользователь отменил ввод или ввел некорректные данные, просим повторить ввод
+            alert("Invalid input. Please enter a valid number of hosts.");
+            continue;
+        }
+
+        // Добавляем подсеть, если введены данные
+        calculator.addSubnet(subnetName, subnetHosts);
     }
+    let subnetHtml = "<h3>Subnets Information:</h3>";
+
+    // Продолжаем с остальной частью функции как обычно
+    calculator.calculateVLSM();
+
+    subnetHtml += "<table>";
+    subnetHtml += "<tr><th>Name</th><th>Hosts</th><th>Network Address</th><th>Subnet Mask</th><th>Usable Range</th><th>Broadcast Address</th><th>Wildcard Mask</th></tr>";
+
+    calculator.subnets.forEach(subnet => {
+        subnetHtml += "<tr>";
+        subnetHtml += "<td>" + subnet.name + "</td>";
+        subnetHtml += "<td>" + subnet.hosts + "</td>";
+        subnetHtml += "<td>" + subnet.networkAddress + "</td>";
+        subnetHtml += "<td>" + subnet.subnetMask + "</td>";
+        subnetHtml += "<td>" + subnet.usableRange + "</td>";
+        subnetHtml += "<td>" + subnet.broadcast + "</td>";
+        subnetHtml += "<td>" + subnet.wildcard + "</td>";
+        subnetHtml += "</tr>";
+    });
+
+    subnetHtml += "</table>";
+
+    document.getElementById("results").innerHTML = subnetHtml;
+    } else {
+        printError(
+          isValidIpAddress(ipAddress),
+          isValidSubnetMask(subnetMask)
+        );
+      }
 }
 
-    </script>
-  </body>
+
+
+  </script>
+</body>
+
 </html>
