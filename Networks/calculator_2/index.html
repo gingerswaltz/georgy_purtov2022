@@ -139,6 +139,11 @@
       .subnet-info h3 {
         margin-top: 0;
       }
+      #hostsCountInput,
+      #subnetsCountInput,
+      #subnetsPerHostInput {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -173,6 +178,35 @@
       <div id="results"></div>
       <div class="subnet-info">
         <!-- Таблица подсетей будет добавлена сюда -->
+      </div>
+      <div class="input-group" id="hostsCountInput">
+        <div class="input-group" id="subnetsCountInput">
+          <label for="subnetsCount">Number of Subnets:</label>
+          <input
+            type="number"
+            id="subnetsCount"
+            placeholder="Enter number of subnets"
+            min="1"
+            value="1"
+          />
+        </div>
+        <div class="input-group" onclick="addSubnetsPerHostInput()">
+          <label for="hostsCount">Number of Hosts:</label>
+          <input
+            type="number"
+            id="hostsCount"
+            placeholder="Enter number of hosts"
+            min="1"
+            value="1"
+          />
+        </div>
+        <div class="input-group" id="subnetsPerHostInputs">
+          <!-- Динамически добавляемые поля ввода будут добавлены сюда -->
+        </div>
+        <!-- Добавлен вызов функции для динамического удаления полей ввода -->
+        <div class="input-group" onclick="removeLastSubnetsPerHostInput()">
+          <button>Remove Last Subnets Per Host</button>
+        </div>
       </div>
     </div>
     <script>
@@ -233,16 +267,59 @@
         const calcBtn = document.getElementById("calcBtn");
         const result = document.getElementById("results");
         const toggleLabel = document.querySelector('label[for="toggleBtn"]');
+        const hostsCountInput = document.getElementById("hostsCountInput");
+        const subnetsCountInput = document.getElementById("subnetsCountInput");
+        const subnetsPerHostInput = document.getElementById(
+          "subnetsPerHostInput"
+        );
         result.innerHTML = "";
 
         if (toggleBtn.checked) {
           calcBtn.innerHTML = "Aggregate";
           calcBtn.setAttribute("onclick", "aggregate()");
           toggleLabel.textContent = "Aggregate";
+          hostsCountInput.style.display = "block";
+          subnetsCountInput.style.display = "block";
+          subnetsPerHostInput.style.display = "block";
         } else {
           calcBtn.innerHTML = "Calculate";
           calcBtn.setAttribute("onclick", "calculate()");
           toggleLabel.textContent = "Calculate";
+          hostsCountInput.style.display = "none";
+          subnetsCountInput.style.display = "none";
+          subnetsPerHostInput.style.display = "none";
+        }
+      }
+
+      // Функция для добавления поля ввода количества подсетей на хост
+      function addSubnetsPerHostInput() {
+        const container = document.getElementById("subnetsPerHostInputs");
+        const inputCount =
+          container.querySelectorAll("input[type='number']").length + 1;
+
+        const div = document.createElement("div");
+        div.classList.add("input-group");
+        div.innerHTML = `
+          <label for="subnetsPerHost${inputCount}">Subnets per Host ${inputCount}:</label>
+          <input
+            type="number"
+            id="subnetsPerHost${inputCount}"
+            placeholder="Enter subnets per host"
+            min="1"
+            value="1"
+          />
+        `;
+
+        container.appendChild(div);
+      }
+
+      // Функция для удаления последнего поля ввода количества подсетей на хост
+      function removeLastSubnetsPerHostInput() {
+        const container = document.getElementById("subnetsPerHostInputs");
+        const inputs = container.querySelectorAll("input[type='number']");
+
+        if (inputs.length > 1) {
+          container.removeChild(inputs[inputs.length - 1].parentNode);
         }
       }
     </script>
@@ -296,60 +373,61 @@
         }
       }
       function aggregate() {
-    const ipAddress = document.getElementById("ipAddress").value;
-    const subnetMask = document.getElementById("subnetMask").value;
-    if (isValidIpAddress(ipAddress) && isValidSubnetMask(subnetMask)) {
-        const calculator = new IpCalculator(ipAddress, subnetMask);
-        const subnets = calculator.calculateSubnets(3);
-        let subnetTable = document.querySelector(".subnet-info table");
+        const ipAddress = document.getElementById("ipAddress").value;
+        const subnetMask = document.getElementById("subnetMask").value;
+        const hostsCount = parseInt(
+          document.getElementById("hostsCount").value
+        );
+        const subnetsCountInput = parseInt(
+          document.getElementById("subnetsCount").value
+        );
+        const subnetsPerHost = parseInt(
+          document.getElementById("subnetsPerHost").value
+        );
+        const subnetsCount = parseInt(subnetsCountInput.value);
 
-        // Если элемент .subnet-info не существует, создаем его
-        if (!subnetTable) {
-            subnetTable = document.createElement("table");
-            subnetTable.innerHTML = `
-                <tr>
-                    <th>Подсеть</th>
-                    <th>Сетевой адрес</th>
-                    <th>Широковещательный адрес</th>
-                    <th>Маска подсети</th>
-                    <th>Длина префикса</th>
-                </tr>`;
-            document.querySelector(".subnet-info").appendChild(subnetTable);
-        } else {
-            // Очистка содержимого таблицы перед добавлением новых данных
-            const result = document.getElementById("results");
-            result.innerHTML = "";
-            subnetTable.innerHTML = "";
-            subnetTable.innerHTML = `
-                <tr>
-                    <th>Подсеть</th>
-                    <th>Сетевой адрес</th>
-                    <th>Широковещательный адрес</th>
-                    <th>Маска подсети</th>
-                    <th>Длина префикса</th>
-                </tr>`;
+        const totalSubnets = hostsCount * subnetsPerHost;
+
+        // Проверка на превышение общего числа подсетей
+        if (totalSubnets > subnetsCount) {
+          alert("Total number of subnets exceeds the limit.");
+          return;
         }
 
-        // Вставляем строки с информацией о подсетях
-        subnets.forEach((subnet, index) => {
-            const rowHtml = `
-                <tr>
-                    <td>Подсеть ${index + 1}</td>
-                    <td>${subnet.networkAddress}</td>
-                    <td>${subnet.broadcastAddress}</td>
-                    <td>${subnet.subnetMask}</td>
-                    <td>${subnet.prefixLength}</td>
-                </tr>`;
-            subnetTable.insertAdjacentHTML("beforeend", rowHtml);
-        });
-    } else {
-      printError(
-            isValidIpAddress(ipAddress),
-            isValidSubnetMask(subnetMask)
-          );
-    }
-}
+        const calculator = new IpCalculator(ipAddress, subnetMask);
 
+        // Добавляем информацию о подсетях
+        for (let i = 1; i <= totalSubnets; i++) {
+          const hostName = "Host" + i;
+          calculator.addSubnet(hostName, subnetsPerHost);
+        }
+
+        // Выполняем расчеты VLSM
+        calculator.calculateVLSM();
+
+        // Подготавливаем HTML для вывода информации о подсетях
+        let subnetHtml = "<h3>Subnets Information:</h3>";
+        subnetHtml += "<table>";
+        subnetHtml +=
+          "<tr><th>Name</th><th>Hosts</th><th>Network Address</th><th>Subnet Mask</th><th>Usable Range</th><th>Broadcast Address</th><th>Wildcard Mask</th></tr>";
+
+        calculator.subnets.forEach((subnet) => {
+          subnetHtml += "<tr>";
+          subnetHtml += "<td>" + subnet.name + "</td>";
+          subnetHtml += "<td>" + subnet.hosts + "</td>";
+          subnetHtml += "<td>" + subnet.networkAddress + "</td>";
+          subnetHtml += "<td>" + subnet.subnetMask + "</td>";
+          subnetHtml += "<td>" + subnet.usableRange + "</td>";
+          subnetHtml += "<td>" + subnet.broadcast + "</td>";
+          subnetHtml += "<td>" + subnet.wildcard + "</td>";
+          subnetHtml += "</tr>";
+        });
+
+        subnetHtml += "</table>";
+
+        // Выводим информацию о подсетях в элемент results
+        document.getElementById("results").innerHTML = subnetHtml;
+      }
     </script>
   </body>
 </html>
