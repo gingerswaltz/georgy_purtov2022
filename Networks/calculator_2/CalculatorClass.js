@@ -2,6 +2,7 @@ class IpCalculator {
   constructor(ipAddress, subnetMask) {
     this.ipAddress = ipAddress;
     this.subnetMask = subnetMask;
+    this.subnets = []; // Добавляем массив для хранения информации о подсетях
   }
 
   // Метод для конвертации IP адреса в двоичную форму
@@ -144,72 +145,53 @@ class IpCalculator {
     return maxHost;
   }
 
-
-   // Метод для расчета подсетей
-   calculateSubnets(numSubnets) {
-    // Разделение маски подсети на отдельные части
-    const subnetParts = this.subnetMask.split(".").map((part) => parseInt(part));
-
-    // Вычисление числа единиц в обратной маске подсети
-    const numOnes = subnetParts.reduce((total, part) => {
-      const binaryPart = parseInt(part).toString(2);
-      return total + binaryPart.split("1").length - 1;
-    }, 0);
-
-    // Расчет числа доступных подсетей
-    const availableSubnets = Math.pow(2, numSubnets);
-
-    // Вычисление новой длины префикса подсети
-    const newPrefixLength = numOnes + numSubnets;
-
-    // Вычисление размера каждой подсети
-    const subnetSize = Math.pow(2, 32 - newPrefixLength);
-
-    // Вычисление сетевых адресов для каждой подсети
-    const subnets = [];
-    let networkAddress = this.calculateNetworkAddress();
-    for (let i = 0; i < availableSubnets; i++) {
-      subnets.push({
-        networkAddress: networkAddress,
-        broadcastAddress: this.calculatesubBroadcastAddress(networkAddress, newPrefixLength),
-        subnetMask: this.subnetMask,
-        prefixLength: newPrefixLength
-      });
-
-      // Переход к следующему сетевому адресу
-      networkAddress = this.incrementIpAddress(networkAddress, subnetSize);
-    }
-
-    return subnets;
+  // Добавляем метод для добавления информации о подсети
+  addSubnet(name, hosts) {
+    this.subnets.push({ name, hosts });
   }
 
-  // Метод для увеличения IP адреса на заданное количество хостов
-  incrementIpAddress(ipAddress, numHosts) {
-    const ipParts = ipAddress.split(".").map((part) => parseInt(part));
-    let increment = numHosts;
-    for (let i = ipParts.length - 1; i >= 0 && increment > 0; i--) {
-      ipParts[i] += increment;
-      increment = Math.floor(ipParts[i] / 256);
-      ipParts[i] %= 256;
-    }
-    return ipParts.join(".");
-  }
+  // Метод для расчета подсетей по VLSM
+  calculateVLSM() {
+    // Разбиваем доступные хосты на подсети
+    let remainingHosts = this.calculateAvailableHosts() + 2; // +2 для сетевого и широковещательного адреса
+    let currentAddress = this.calculateNetworkAddress()
+      .split(".")
+      .map((part) => parseInt(part));
 
-  // Метод для вычисления широковещательного адреса заданной подсети
-  calculatesubBroadcastAddress(networkAddress, prefixLength) {
-    // Разделение сетевого адреса на отдельные части
-    const networkParts = networkAddress.split(".").map((part) => parseInt(part));
+    this.subnets.forEach((subnet, index) => {
+      const subnetHosts = subnet.hosts + 2; // +2 для сетевого и широковещательного адреса
+      const subnetMask = 32 - Math.ceil(Math.log2(subnetHosts));
+      const subnetMaskBinary = "1"
+        .repeat(subnetMask)
+        .padEnd(32, "0")
+        .match(/.{1,8}/g)
+        .map((bin) => parseInt(bin, 2));
 
-    // Вычисление широковещательного адреса
-    const broadcastParts = [];
-    for (let i = 0; i < 4; i++) {
-      broadcastParts.push(networkParts[i] | (255 >> (32 - prefixLength)));
-    }
+      // Рассчитываем диапазон подсети
+      const subnetStart = currentAddress.slice();
+      subnetStart[3] += 1;
+      const subnetEnd = currentAddress.slice();
+      subnetEnd[3] += Math.pow(2, 8 - (subnetMask % 8)) - 2;
+      const usableRange = `${subnetStart.join(".")} - ${subnetEnd.join(".")}`;
 
-    // Преобразование массива чисел в строку IP адреса
-    const broadcastAddress = broadcastParts.join(".");
+      // Рассчитываем широковещательный адрес
+      const broadcastAddress = subnetEnd.slice();
+      broadcastAddress[3] += 1;
 
-    return broadcastAddress;
+      // Рассчитываем обратную маску
+      const wildcard = subnetMaskBinary.map((part) => 255 - part).join(".");
+
+      // Добавляем информацию о подсети
+      this.subnets[index].networkAddress = currentAddress.join(".");
+      this.subnets[index].subnetMask = subnetMaskBinary.join(".");
+      this.subnets[index].usableRange = usableRange;
+      this.subnets[index].broadcast = broadcastAddress.join("."); // Добавляем broadcast адрес
+      this.subnets[index].wildcard = wildcard;
+
+      // Обновляем текущий адрес для следующей подсети
+      currentAddress[3] = broadcastAddress[3] + 1;
+
+      remainingHosts -= subnetHosts;
+    });
   }
 }
-
