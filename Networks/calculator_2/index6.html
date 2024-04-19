@@ -5,13 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IPv6 Calculator</title>
     <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
       body {
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        position: relative;
+        /* Добавляем это свойство, чтобы правильно позиционировать переключатель */
         height: 100vh;
         background-color: #f5f5f5;
       }
@@ -22,6 +38,8 @@
         padding: 20px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         text-align: center;
+        position: relative;
+        /* Добавляем это свойство, чтобы переключатель правильно позиционировался относительно этого контейнера */
       }
 
       .input-group {
@@ -57,27 +75,80 @@
         background-color: #45a049;
       }
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
+      .toggle-label {
+        position: absolute;
+        top: 20px;
+        /* Отступ от верхнего края */
+        right: 20px;
+        /* Отступ от правого края */
+        display: flex;
+        align-items: center;
+      }
+
+      .toggle-label input[type="checkbox"] {
+        display: none;
+      }
+
+      .toggle-label span {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 30px;
+        background-color: #ccc;
+        border-radius: 15px;
+        transition: background-color 0.3s;
+        cursor: pointer;
+      }
+
+      .toggle-label span:before {
+        content: "";
+        position: absolute;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background-color: white;
+        top: 2px;
+        left: 2px;
+        transition: transform 0.3s;
+      }
+
+      .toggle-label input[type="checkbox"]:checked + span {
+        background-color: #4caf50;
+      }
+
+      .toggle-label input[type="checkbox"]:checked + span:before {
+        transform: translateX(30px);
+      }
+
+      .subnet-info {
         margin-top: 20px;
       }
 
-      th,
-      td {
+      .subnet-info table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+
+      .subnet-info th,
+      .subnet-info td {
         border: 1px solid #ddd;
         padding: 8px;
         text-align: left;
       }
 
-      th {
+      .subnet-info th {
         background-color: #f2f2f2;
+      }
+
+      .subnet-info h3 {
+        margin-top: 0;
       }
     </style>
   </head>
   <body>
     <div class="calculator">
-      <h2>IPv6 Calculator</h2>
+      <h2 id="mainHeader">IPv6 Calculator</h2>
       <div class="input-group">
         <label for="ipAddress">IPv6 Address:</label>
         <input
@@ -96,11 +167,38 @@
           value="24"
         />
       </div>
-      <button class="btn" onclick="calculate()">Calculate</button>
+      <button class="btn" id="calcBtn" onclick="calculate()">Calculate</button>
       <div id="results"></div>
+      <div class="toggle-label">
+        <label>
+          <input type="checkbox" id="toggleBtn" onclick="toggleFunction()" />
+          <span></span>
+        </label>
+        <label for="toggleBtn">Calculate</label>
+      </div>
     </div>
 
     <script>
+      function toggleFunction() {
+        const toggleBtn = document.getElementById("toggleBtn");
+        const calcBtn = document.getElementById("calcBtn");
+        const result = document.getElementById("results");
+        const toggleLabel = document.querySelector('label[for="toggleBtn"]');
+        const mainHeader = document.getElementById("mainHeader");
+        result.innerHTML = "";
+
+        if (toggleBtn.checked) {
+          calcBtn.innerHTML = "Aggregate";
+          mainHeader.innerHTML = "IPv6 Aggregator";
+          calcBtn.setAttribute("onclick", "aggregate()");
+          toggleLabel.textContent = "Aggregate";
+        } else {
+          mainHeader.innerHTML = "IPv6 Calculator";
+          calcBtn.innerHTML = "Calculate";
+          calcBtn.setAttribute("onclick", "calculate()");
+          toggleLabel.textContent = "Calculate";
+        }
+      }
       // Метод для проверки валидности IP адреса
       function isValidIpAddress(ipAddress) {
         // Паттерн для валидации IPv6 адреса
@@ -219,9 +317,7 @@
             calculator.getSubnetPrefix();
           +"</td></tr>";
           resultsHtml +=
-            "<tr><td>Тип адреса:  " +
-            "</td><td>" +
-            calculator.getAddressType();
+            "<tr><td>Тип адреса:  " + "</td><td>" + calculator.getAddressType();
           +"</td></tr>";
           resultsHtml +=
             "<tr><td>Начало диапазона:  " +
@@ -233,11 +329,37 @@
             "</td><td>" +
             calculator.getRangeEnd();
           +"</td></tr>";
-          
 
           resultsHtml += "</table>";
 
           document.getElementById("results").innerHTML = resultsHtml;
+        } else {
+          printError(
+            isValidIpAddress(ipAddress),
+            isValidSubnetMask(subnetMask)
+          );
+        }
+      }
+
+      function aggregate() {
+        const ipAddress = document.getElementById("ipAddress").value;
+        const subnetMask = document.getElementById("subnetMask").value;
+
+        if (isValidIpAddress(ipAddress) && isValidSubnetMask(subnetMask)) {
+          subMask = convertDecimalMaskToHex(subnetMask);
+          const calculator = new IPv6Calculator(ipAddress, subMask);
+          // Запрашиваем информацию о подсетях с помощью диалогового окна
+          const subnetCount = prompt("Enter subnet count:");
+          // Проверяем, был ли введен текст
+          if (subnetCount === null || isNaN(subnetCount)) {
+            // Пользователь отменил ввод или ввел некорректные данные, просим повторить ввод
+            alert("Invalid input. Please enter a valid number of subnets.");
+          } else {
+            const subnets = calculator.calculateVLSM(subnetCount); // Рассчитываем подсети
+
+
+            document.getElementById("results").innerHTML = subnets;
+          }
         } else {
           printError(
             isValidIpAddress(ipAddress),
