@@ -20,6 +20,14 @@
             max-width: 100%;
             height: auto;
         }
+        .filter-buttons {
+            margin-top: 20px;
+        }
+        .filter-buttons button {
+            margin: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -38,9 +46,13 @@
         <label for="blue-range">Синий:</label>
         <input type="range" id="blue-range" min="0" max="255" value="0">
     </div>
+    <div class="filter-buttons">
+        <button id="sepia-btn">Сепия</button>
+        <button id="reset-btn">Сбросить</button>
+    </div>
 
     <script>
-        let originalImage; // Переменная для хранения оригинального изображения
+        let originalImage;
 
         document.getElementById('image-upload').addEventListener('change', function(event) {
             const file = event.target.files[0];
@@ -62,6 +74,20 @@
             });
         });
 
+        document.getElementById('sepia-btn').addEventListener('click', function() {
+            document.getElementById('red-range').value = 120;
+            document.getElementById('green-range').value = 100;
+            document.getElementById('blue-range').value = 40;
+            applyFilters();
+        });
+
+        document.getElementById('reset-btn').addEventListener('click', function() {
+            document.getElementById('red-range').value = 0;
+            document.getElementById('green-range').value = 0;
+            document.getElementById('blue-range').value = 0;
+            applyFilters();
+        });
+
         function applyFilters() {
             const img = document.getElementById('uploaded-image');
             const redValue = document.getElementById('red-range').value;
@@ -74,7 +100,6 @@
             canvas.width = img.width;
             canvas.height = img.height;
 
-            // Используем оригинальное изображение для восстановления
             ctx.drawImage(originalImage, 0, 0);
 
             const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
