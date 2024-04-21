@@ -1,98 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Convolution Filter Example</title>
-  </head>
-  <body>
-    <input type="file" accept="image/*" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Processing Example</title>
+</head>
+<body>
+    <input type="file" accept="image/*">
+    <canvas id="outputCanvas" style="display: none;"></canvas>
+    <div id="filterButtons">
+        <button id="blurButton">Blur</button>
+        <button id="edgeDetectionButton">Edge Detection</button>
+        <button id="sharpenButton">Sharpen</button>
+    </div>
+    <script src="ImageProcessor.js"></script>
     <script>
-      class ConvolutionFilter {
-        constructor(kernel) {
-          this.kernel = kernel;
-        }
+        // Получаем ссылку на элемент <input type="file">
+        const fileInput = document.querySelector('input[type="file"]');
+        const imageProcessor = new ImageProcessor();
 
-        apply(imageData) {
-          const width = imageData.width;
-          const height = imageData.height;
-          const data = imageData.data;
-          const outputData = new Uint8ClampedArray(data.length);
+        // Обработчик события изменения файла
+        fileInput.addEventListener('change', async (event) => {
+            const file = event.target.files[0];
+            const img = new Image();
+            img.src = URL.createObjectURL(file);
 
-          const kernelSize = Math.sqrt(this.kernel.length);
-          const halfKernelSize = Math.floor(kernelSize / 2);
+            img.onload = async () => {
+                const canvas = document.getElementById('outputCanvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0);
 
-          for (let y = 0; y < height; y++) {
-            for (let x = 0; x < width; x++) {
-              let sumR = 0,
-                sumG = 0,
-                sumB = 0;
-              for (let ky = 0; ky < kernelSize; ky++) {
-                for (let kx = 0; kx < kernelSize; kx++) {
-                  const imgX = x + kx - halfKernelSize;
-                  const imgY = y + ky - halfKernelSize;
-                  if (imgX >= 0 && imgX < width && imgY >= 0 && imgY < height) {
-                    const offset = (imgY * width + imgX) * 4;
-                    const weight = this.kernel[ky * kernelSize + kx];
-                    sumR += data[offset] * weight;
-                    sumG += data[offset + 1] * weight;
-                    sumB += data[offset + 2] * weight;
-                  }
-                }
-              }
-              const offset = (y * width + x) * 4;
-              outputData[offset] = sumR;
-              outputData[offset + 1] = sumG;
-              outputData[offset + 2] = sumB;
-              outputData[offset + 3] = data[offset + 3]; // Alpha channel
-            }
-          }
+                // Отображаем canvas, чтобы изображение было видно
+                canvas.style.display = 'block';
 
-          return new ImageData(outputData, width, height);
-        }
-      }
+                const imageData = ctx.getImageData(0, 0, img.width, img.height);
 
-      // Пример использования:
+                // Обработчики событий для кнопок
+                document.getElementById('blurButton').addEventListener('click', () => {
+                    const filteredImageData = imageProcessor.applyFilter('blur', imageData);
+                    ctx.putImageData(filteredImageData, 0, 0);
+                });
 
-      // Создание экземпляра класса с заданным ядром (например, размытие)
-      const blurKernel = [
-        1 / 9,
-        1 / 9,
-        1 / 9,
-        1 / 9,
-        1 / 9,
-        1 / 9,
-        1 / 9,
-        1 / 9,
-        1 / 9,
-      ];
-      const blurFilter = new ConvolutionFilter(blurKernel);
+                document.getElementById('edgeDetectionButton').addEventListener('click', () => {
+                    const filteredImageData = imageProcessor.applyFilter('edgeDetection', imageData);
+                    ctx.putImageData(filteredImageData, 0, 0);
+                });
 
-      // Получение ссылки на элемент <input type="file"> для загрузки изображения
-      const fileInput = document.querySelector('input[type="file"]');
-
-      // Обработчик события изменения файла
-      fileInput.addEventListener("change", async (event) => {
-        const file = event.target.files[0];
-        const img = new Image();
-        img.src = URL.createObjectURL(file);
-
-        img.onload = async () => {
-          const canvas = document.createElement("canvas");
-          const ctx = canvas.getContext("2d");
-          canvas.width = img.width;
-          canvas.height = img.height;
-          ctx.drawImage(img, 0, 0);
-
-          const imageData = ctx.getImageData(0, 0, img.width, img.height);
-          const filteredImageData = blurFilter.apply(imageData); // Применяем фильтр
-
-          ctx.putImageData(filteredImageData, 0, 0);
-
-          // Отображаем обработанное изображение на странице
-          document.body.appendChild(canvas);
-        };
-      });
+                document.getElementById('sharpenButton').addEventListener('click', () => {
+                    const filteredImageData = imageProcessor.applyFilter('sharpen', imageData);
+                    ctx.putImageData(filteredImageData, 0, 0);
+                });
+            };
+        });
     </script>
-  </body>
+</body>
 </html>
