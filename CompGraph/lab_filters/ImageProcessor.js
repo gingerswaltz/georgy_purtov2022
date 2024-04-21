@@ -1,45 +1,52 @@
+// Класс ConvolutionFilter для применения свертки к изображению с помощью заданного ядра
+
 class ConvolutionFilter {
     constructor(kernel) {
-        this.kernel = kernel;
+        this.kernel = kernel; // Сохраняем переданное ядро свертки
+        this.kernelSize = Math.sqrt(kernel.length); // Определяем размер ядра, вычисляя квадратный корень из длины массива
+        this.halfKernelSize = Math.floor(this.kernelSize / 2); // Определяем половину размера ядра, округляя результат деления размера ядра на 2 вниз
     }
 
     apply(imageData) {
-        const width = imageData.width;
-        const height = imageData.height;
-        const data = imageData.data;
-        const outputData = new Uint8ClampedArray(data.length);
+        const width = imageData.width; // Ширина изображения
+        const height = imageData.height; // Высота изображения
+        const data = imageData.data; // Пиксельные данные изображения
+        const outputData = new Uint8ClampedArray(data.length); // Создаем новый массив для хранения выходных данных
 
-        const kernelSize = Math.sqrt(this.kernel.length);
-        const halfKernelSize = Math.floor(kernelSize / 2);
-
+        // Проходим по каждому пикселю изображения
         for (let y = 0; y < height; y++) {
             for (let x = 0; x < width; x++) {
-                let sumR = 0, sumG = 0, sumB = 0;
-                for (let ky = 0; ky < kernelSize; ky++) {
-                    for (let kx = 0; kx < kernelSize; kx++) {
-                        const imgX = x + kx - halfKernelSize;
-                        const imgY = y + ky - halfKernelSize;
+                let sumR = 0, sumG = 0, sumB = 0; // Инициализируем суммы каналов R, G, B
+
+                // Проходим по каждому элементу ядра свертки
+                for (let ky = 0; ky < this.kernelSize; ky++) {
+                    for (let kx = 0; kx < this.kernelSize; kx++) {
+                        const imgX = x + kx - this.halfKernelSize; // Вычисляем координату X для пикселя изображения
+                        const imgY = y + ky - this.halfKernelSize; // Вычисляем координату Y для пикселя изображения
+
+                        // Проверяем, находится ли пиксель внутри границ изображения
                         if (imgX >= 0 && imgX < width && imgY >= 0 && imgY < height) {
-                            const offset = (imgY * width + imgX) * 4;
-                            const weight = this.kernel[ky * kernelSize + kx];
-                            sumR += data[offset] * weight;
-                            sumG += data[offset + 1] * weight;
-                            sumB += data[offset + 2] * weight;
+                            const offset = (imgY * width + imgX) * 4; // Вычисляем смещение для получения данных о пикселе изображения
+                            const weight = this.kernel[ky * this.kernelSize + kx]; // Получаем вес из ядра свертки
+                            sumR += data[offset] * weight; // Суммируем значения канала R с учетом веса
+                            sumG += data[offset + 1] * weight; // Суммируем значения канала G с учетом веса
+                            sumB += data[offset + 2] * weight; // Суммируем значения канала B с учетом веса
                         }
                     }
                 }
-                const offset = (y * width + x) * 4;
-                outputData[offset] = Math.min(255, Math.max(0, sumR));
-                outputData[offset + 1] = Math.min(255, Math.max(0, sumG));
-                outputData[offset + 2] = Math.min(255, Math.max(0, sumB));
-                outputData[offset + 3] = data[offset + 3]; // Alpha channel
+
+                const offset = (y * width + x) * 4; // Вычисляем смещение для получения данных о текущем пикселе
+                outputData[offset] = sumR; // Устанавливаем значение канала R в выходных данных
+                outputData[offset + 1] = sumG; // Устанавливаем значение канала G в выходных данных
+                outputData[offset + 2] = sumB; // Устанавливаем значение канала B в выходных данных
+                outputData[offset + 3] = data[offset + 3]; // Устанавливаем значение канала Alpha (прозрачности) в выходных данных
             }
         }
 
-        return new ImageData(outputData, width, height);
+        return new ImageData(outputData, width, height); // Возвращаем новый объект ImageData с выходными данными
     }
-
 }
+
 
 // Создаем класс для обработки изображений
 class ImageProcessor {

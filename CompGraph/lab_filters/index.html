@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Processing Example</title>
+    <title>ОБработка изображений</title>
 </head>
 <body>
     <input type="file" accept="image/*">
     <canvas id="outputCanvas" style="display: none;"></canvas>
     <div id="filterButtons">
-        <button id="blurButton">Blur</button>
-        <button id="edgeDetectionButton">Edge Detection</button>
-        <button id="sharpenButton">Sharpen</button>
+        <button id="blurButton">Блюр</button>
+        <button id="edgeDetectionButton">Обнаружение краев</button>
+        <button id="sharpenButton">Резкость</button>
     </div>
     <div id="customFilters">
-        <h3>Custom Filters</h3>
-        <label for="customFilterInput">Enter custom filter coefficients (comma-separated):</label>
-        <input type="text" id="customFilterInput">
-        <button id="applyCustomFilterButton">Apply Custom Filter</button>
+        <h3>Кастомные фильтры</h3>
+        <label for="customFilterInput">Введите коэффициенты через запятую:</label>
+        <textarea id="customFilterInput" rows="5" cols="30" value="1/16, 1/8, 1/16, 1/8,
+        1/8, 1/4, 1/8, 1/4,
+        1/16, 1/8, 1/16, 1/8,
+        1/8, 1/4, 1/8, 1/4"></textarea> 
+        <button id="applyCustomFilterButton">Применить</button>
     </div>
     <script src="ImageProcessor.js"></script>
     <script>
