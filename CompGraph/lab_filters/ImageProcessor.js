@@ -29,15 +29,16 @@ class ConvolutionFilter {
                     }
                 }
                 const offset = (y * width + x) * 4;
-                outputData[offset] = sumR;
-                outputData[offset + 1] = sumG;
-                outputData[offset + 2] = sumB;
+                outputData[offset] = Math.min(255, Math.max(0, sumR));
+                outputData[offset + 1] = Math.min(255, Math.max(0, sumG));
+                outputData[offset + 2] = Math.min(255, Math.max(0, sumB));
                 outputData[offset + 3] = data[offset + 3]; // Alpha channel
             }
         }
 
         return new ImageData(outputData, width, height);
     }
+
 }
 
 // Создаем класс для обработки изображений
@@ -45,9 +46,9 @@ class ImageProcessor {
     constructor() {
         this.filters = {
             blur: [
-                1/9, 1/9, 1/9,
-                1/9, 1/9, 1/9,
-                1/9, 1/9, 1/9
+                1 / 9, 1 / 9, 1 / 9,
+                1 / 9, 1 / 9, 1 / 9,
+                1 / 9, 1 / 9, 1 / 9
             ],
             edgeDetection: [
                 -1, -1, -1,
@@ -67,5 +68,21 @@ class ImageProcessor {
         const filter = new ConvolutionFilter(this.filters[filterName]);
         return filter.apply(imageData);
     }
+    applyCustomFilter(coefficients, imageData) {
+        // Преобразуем каждое значение в число
+        const parsedCoefficients = coefficients.map(Number);
+
+        // Проверяем, нужна ли нормализация коэффициентов
+        const sum = parsedCoefficients.reduce((acc, curr) => acc + curr, 0);
+        const needNormalization = Math.abs(sum - 1) > Number.EPSILON;
+
+        // Нормализуем коэффициенты, если это необходимо
+        const normalizedCoefficients = needNormalization ? parsedCoefficients.map(coef => coef / sum) : parsedCoefficients;
+
+        // Применяем фильтр с нормализованными или исходными коэффициентами
+        const filter = new ConvolutionFilter(normalizedCoefficients);
+        return filter.apply(imageData);
+    }
+
 }
 

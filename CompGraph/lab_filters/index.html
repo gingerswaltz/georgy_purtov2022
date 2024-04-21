@@ -13,6 +13,12 @@
         <button id="edgeDetectionButton">Edge Detection</button>
         <button id="sharpenButton">Sharpen</button>
     </div>
+    <div id="customFilters">
+        <h3>Custom Filters</h3>
+        <label for="customFilterInput">Enter custom filter coefficients (comma-separated):</label>
+        <input type="text" id="customFilterInput">
+        <button id="applyCustomFilterButton">Apply Custom Filter</button>
+    </div>
     <script src="ImageProcessor.js"></script>
     <script>
         // Получаем ссылку на элемент <input type="file">
@@ -50,6 +56,14 @@
 
                 document.getElementById('sharpenButton').addEventListener('click', () => {
                     const filteredImageData = imageProcessor.applyFilter('sharpen', imageData);
+                    ctx.putImageData(filteredImageData, 0, 0);
+                });
+
+                // Обработчик события для применения пользовательского фильтра
+                document.getElementById('applyCustomFilterButton').addEventListener('click', () => {
+                    const customFilterInput = document.getElementById('customFilterInput').value;
+                    const customFilterCoefficients = customFilterInput.split(',').map(parseFloat);
+                    const filteredImageData = imageProcessor.applyCustomFilter(customFilterCoefficients, imageData);
                     ctx.putImageData(filteredImageData, 0, 0);
                 });
             };
