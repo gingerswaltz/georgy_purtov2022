@@ -1,120 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Изменение цвета изображения</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        #image-container {
-            margin: 20px auto;
-        }
-        input[type="range"] {
-            width: 80%;
-            margin: 10px auto;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-        .filter-buttons {
-            margin-top: 20px;
-        }
-        .filter-buttons button {
-            margin: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-    <h1>Изменение цвета изображения</h1>
-    <input type="file" id="image-upload" accept="image/*">
-    <div id="image-container">
-        <img id="uploaded-image" src="#" alt="Uploaded Image">
-    </div>
-    <div>
-        <label for="red-range">Красный:</label>
-        <input type="range" id="red-range" min="0" max="255" value="0">
-        <br>
-        <label for="green-range">Зеленый:</label>
-        <input type="range" id="green-range" min="0" max="255" value="0">
-        <br>
-        <label for="blue-range">Синий:</label>
-        <input type="range" id="blue-range" min="0" max="255" value="0">
-    </div>
-    <div class="filter-buttons">
-        <button id="sepia-btn">Сепия</button>
-        <button id="reset-btn">Сбросить</button>
-    </div>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Convolution Filter Example</title>
+  </head>
+  <body>
+    <input type="file" accept="image/*" />
     <script>
-        let originalImage;
-
-        document.getElementById('image-upload').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            const reader = new FileReader();
-
-            reader.onload = function(e) {
-                const img = document.getElementById('uploaded-image');
-                img.src = e.target.result;
-                originalImage = new Image();
-                originalImage.src = e.target.result;
-            }
-
-            reader.readAsDataURL(file);
-        });
-
-        document.querySelectorAll('input[type="range"]').forEach(function(input) {
-            input.addEventListener('input', function() {
-                applyFilters();
-            });
-        });
-
-        document.getElementById('sepia-btn').addEventListener('click', function() {
-            document.getElementById('red-range').value = 120;
-            document.getElementById('green-range').value = 100;
-            document.getElementById('blue-range').value = 40;
-            applyFilters();
-        });
-
-        document.getElementById('reset-btn').addEventListener('click', function() {
-            document.getElementById('red-range').value = 0;
-            document.getElementById('green-range').value = 0;
-            document.getElementById('blue-range').value = 0;
-            applyFilters();
-        });
-
-        function applyFilters() {
-            const img = document.getElementById('uploaded-image');
-            const redValue = document.getElementById('red-range').value;
-            const greenValue = document.getElementById('green-range').value;
-            const blueValue = document.getElementById('blue-range').value;
-
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-
-            canvas.width = img.width;
-            canvas.height = img.height;
-
-            ctx.drawImage(originalImage, 0, 0);
-
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            const data = imageData.data;
-
-            for (let i = 0; i < data.length; i += 4) {
-                data[i] += parseInt(redValue);
-                data[i + 1] += parseInt(greenValue);
-                data[i + 2] += parseInt(blueValue);
-            }
-
-            ctx.putImageData(imageData, 0, 0);
-
-            img.src = canvas.toDataURL();
+      class ConvolutionFilter {
+        constructor(kernel) {
+          this.kernel = kernel;
         }
+
+        apply(imageData) {
+          const width = imageData.width;
+          const height = imageData.height;
+          const data = imageData.data;
+          const outputData = new Uint8ClampedArray(data.length);
+
+          const kernelSize = Math.sqrt(this.kernel.length);
+          const halfKernelSize = Math.floor(kernelSize / 2);
+
+          for (let y = 0; y < height; y++) {
+            for (let x = 0; x < width; x++) {
+              let sumR = 0,
+                sumG = 0,
+                sumB = 0;
+              for (let ky = 0; ky < kernelSize; ky++) {
+                for (let kx = 0; kx < kernelSize; kx++) {
+                  const imgX = x + kx - halfKernelSize;
+                  const imgY = y + ky - halfKernelSize;
+                  if (imgX >= 0 && imgX < width && imgY >= 0 && imgY < height) {
+                    const offset = (imgY * width + imgX) * 4;
+                    const weight = this.kernel[ky * kernelSize + kx];
+                    sumR += data[offset] * weight;
+                    sumG += data[offset + 1] * weight;
+                    sumB += data[offset + 2] * weight;
+                  }
+                }
+              }
+              const offset = (y * width + x) * 4;
+              outputData[offset] = sumR;
+              outputData[offset + 1] = sumG;
+              outputData[offset + 2] = sumB;
+              outputData[offset + 3] = data[offset + 3]; // Alpha channel
+            }
+          }
+
+          return new ImageData(outputData, width, height);
+        }
+      }
+
+      // Пример использования:
+
+      // Создание экземпляра класса с заданным ядром (например, размытие)
+      const blurKernel = [
+        1 / 9,
+        1 / 9,
+        1 / 9,
+        1 / 9,
+        1 / 9,
+        1 / 9,
+        1 / 9,
+        1 / 9,
+        1 / 9,
+      ];
+      const blurFilter = new ConvolutionFilter(blurKernel);
+
+      // Получение ссылки на элемент <input type="file"> для загрузки изображения
+      const fileInput = document.querySelector('input[type="file"]');
+
+      // Обработчик события изменения файла
+      fileInput.addEventListener("change", async (event) => {
+        const file = event.target.files[0];
+        const img = new Image();
+        img.src = URL.createObjectURL(file);
+
+        img.onload = async () => {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+
+          const imageData = ctx.getImageData(0, 0, img.width, img.height);
+          const filteredImageData = blurFilter.apply(imageData); // Применяем фильтр
+
+          ctx.putImageData(filteredImageData, 0, 0);
+
+          // Отображаем обработанное изображение на странице
+          document.body.appendChild(canvas);
+        };
+      });
     </script>
-</body>
+  </body>
 </html>
