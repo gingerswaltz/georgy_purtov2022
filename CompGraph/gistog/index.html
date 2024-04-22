@@ -230,17 +230,16 @@ function applyHistogramToPhoto(histogramData) {
   var numPixels = pixels.length / 4;
   var cumulativeHistogram = calculateCumulativeHistogram(histogramData);
 
-  // Применяем гистограммное выравнивание к каждому каналу цвета
-  for (var i = 0; i < pixels.length; i += 4) {
-    var red = pixels[i];
-    var green = pixels[i + 1];
-    var blue = pixels[i + 2];
+  // Применяем гистограммное выравнивание только к красному каналу
+for (var i = 0; i < pixels.length; i += 4) {
+  var red = pixels[i];
+  var green = pixels[i + 1];
+  var blue = pixels[i + 2];
 
-    // Применяем гистограммное выравнивание к каждому каналу цвета
-    pixels[i] = (cumulativeHistogram[red] / numPixels) * 255;
-    pixels[i + 1] = (cumulativeHistogram[green] / numPixels) * 255;
-    pixels[i + 2] = (cumulativeHistogram[blue] / numPixels) * 255;
-  }
+  // Применяем гистограммное выравнивание только к красному каналу
+  pixels[i] = (cumulativeHistogram[red] / numPixels) * 255;
+  // Оставляем зеленый и синий каналы без изменений
+}
 
   photoCtx.putImageData(imageData, 0, 0);
 
