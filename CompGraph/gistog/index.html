@@ -1,191 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>График</title>
-    <style>
-      canvas {
-        border: 1px solid #000;
-        margin-top: 20px; /* Добавляем отступ сверху для второго холста */
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>График</title>
+  <style>
+    canvas {
+      border: 1px solid #000;
+      margin-top: 20px;
+      /* Добавляем отступ сверху для второго холста */
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="chartCanvas" width="600" height="400"></canvas>
+  <canvas id="photoCanvas" width="1920" height="1080"></canvas>
+  <!-- Второй холст для копии фото -->
+  <input type="file" id="imageInput" accept="image/*" />
+  <script>
+    var chartCanvas = document.getElementById("chartCanvas");
+    var chartCtx = chartCanvas.getContext("2d");
+    var photoCanvas = document.getElementById("photoCanvas");
+    var photoCtx = photoCanvas.getContext("2d");
+    var isDrawing = false;
+    var data = [];
+    var barWidth;
+    var curvePoints = [];
+
+    function drawChart(data) {
+      chartCtx.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
+      var maxValue = Math.max.apply(null, data);
+      for (var i = 0; i <= 10; i++) {
+        var y =
+          chartCanvas.height - 50 - (i / 10) * (chartCanvas.height - 100);
+        chartCtx.beginPath();
+        chartCtx.moveTo(45, y);
+        chartCtx.lineTo(50, y);
+        chartCtx.stroke();
+        chartCtx.fillText(((maxValue * i) / 10).toFixed(0), 20, y);
       }
-    </style>
-  </head>
-  <body>
-    <canvas id="chartCanvas" width="600" height="400"></canvas>
-    <canvas id="photoCanvas" width="1920" height="1080"></canvas>
-    <!-- Второй холст для копии фото -->
-    <input type="file" id="imageInput" accept="image/*" />
-    <script>
-      var chartCanvas = document.getElementById("chartCanvas");
-      var chartCtx = chartCanvas.getContext("2d");
-      var photoCanvas = document.getElementById("photoCanvas");
-      var photoCtx = photoCanvas.getContext("2d");
-
-      var data = [];
-      var barWidth;
-      var curvePoints = [];
-
-      function drawChart(data) {
-        chartCtx.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
-        var maxValue = Math.max.apply(null, data);
-        for (var i = 0; i <= 10; i++) {
-          var y =
-            chartCanvas.height - 50 - (i / 10) * (chartCanvas.height - 100);
-          chartCtx.beginPath();
-          chartCtx.moveTo(45, y);
-          chartCtx.lineTo(50, y);
-          chartCtx.stroke();
-          chartCtx.fillText(((maxValue * i) / 10).toFixed(0), 20, y);
-        }
-        barWidth = (chartCanvas.width - 100) / data.length;
-        for (var i = 0; i < data.length; i++) {
-          var barHeight = (data[i] / maxValue) * (chartCanvas.height - 100);
-          var x = 50 + i * (barWidth + 2);
-          var y = chartCanvas.height - 50 - barHeight;
-          chartCtx.fillStyle = "#0095DD";
-          chartCtx.fillRect(x, y, barWidth, barHeight);
-        }
+      barWidth = (chartCanvas.width - 100) / data.length;
+      for (var i = 0; i < data.length; i++) {
+        var barHeight = (data[i] / maxValue) * (chartCanvas.height - 100);
+        var x = 50 + i * (barWidth + 2);
+        var y = chartCanvas.height - 50 - barHeight;
+        chartCtx.fillStyle = "#0095DD";
+        chartCtx.fillRect(x, y, barWidth, barHeight);
       }
+    }
+    // Функция для логгирования событий
+    function logMouseEvent(eventType, event) {
+      //console.log("Событие:", eventType, "Координаты:", event.clientX, event.clientY);
+    }
+    // Обновляем данные графика и применяем изменения к фотографии
+    function updateChartData(newData, event) {
+      console.assert(data != newData);
+      data = newData;
+      console.log("Данные графика обновлены:", newData);
+      // console.log("Событие:", event);
+      drawChart(newData);
+      // Применяем новую гистограмму к фотографии
+      applyHistogramToPhoto(newData);
+    }
 
-      // Обновляем данные графика и применяем изменения к фотографии
-      function updateChartData(newData) {
-        data = newData;
-        //console.log("Данные графика обновлены:", newData);
-        drawChart(newData);
-        // Применяем новую гистограмму к фотографии
-        applyHistogramToPhoto(newData);
-      }
 
-      var isDrawing = false;
 
-      chartCanvas.addEventListener("mousedown", function (event) {
-        isDrawing = true;
+    // Обработчик события mousedown
+    chartCanvas.addEventListener("mousedown", function (event) {
+      isDrawing = true;
+      curvePoints.push({
+        x: event.clientX - chartCanvas.offsetLeft,
+        y: event.clientY - chartCanvas.offsetTop,
+      });
+      logMouseEvent("mousedown", event);
+    });
+
+
+    // Обработчик события mousemove
+    chartCanvas.addEventListener("mousemove", function (event) {
+      if (isDrawing == true) {
         curvePoints.push({
           x: event.clientX - chartCanvas.offsetLeft,
           y: event.clientY - chartCanvas.offsetTop,
         });
-      });
-
-      chartCanvas.addEventListener("mousemove", function (event) {
-        if (isDrawing) {
-          curvePoints.push({
-            x: event.clientX - chartCanvas.offsetLeft,
-            y: event.clientY - chartCanvas.offsetTop,
-          });
-          drawSegment(
-            curvePoints[curvePoints.length - 2],
-            curvePoints[curvePoints.length - 1]
-          );
-        }
-      });
-
-      function drawSegment(startPoint, endPoint) {
+        drawSegment(
+          curvePoints[curvePoints.length - 2],
+          curvePoints[curvePoints.length - 1]
+        );
+      }
+      logMouseEvent("mousemove", event);
+    });
+    function drawSegment(startPoint, endPoint) {
+      if (curvePoints.length >= 2) { // Проверяем, что есть хотя бы две точки
+        chartCtx.strokeStyle = "#0095DD"; // Устанавливаем цвет только здесь
         chartCtx.beginPath();
         chartCtx.moveTo(startPoint.x, startPoint.y);
         chartCtx.lineTo(endPoint.x, endPoint.y);
         chartCtx.stroke();
       }
-      chartCanvas.addEventListener("mouseup", function (event) {
+    }
+
+    // Обработчик события mouseup
+    chartCanvas.addEventListener("mouseup", function (event) {
+      isDrawing = false;
+      updateChartData(getUpdatedData(curvePoints));
+      curvePoints = [];
+      applyHistogramToPhoto(data);
+      logMouseEvent("mouseup", event);
+    });
+
+    // Обработчик события mouseout
+    chartCanvas.addEventListener("mouseout", function (event) {
+      if (isDrawing) {
+        // Проверяем, начиналась ли отрисовка линии
         isDrawing = false;
-        // Просто добавляем новые точки к массиву curvePoints
-        // и отрисовываем всю кривую
         updateChartData(getUpdatedData(curvePoints));
+        curvePoints = [];
         applyHistogramToPhoto(data);
-        curvePoints = [];
-      });
-
-      chartCanvas.addEventListener("mouseout", function (event) {
-        isDrawing = false;
-        updateChartData(getUpdatedData(curvePoints));
-        curvePoints = [];
-      });
-
-      function drawCurve(points) {
-        chartCtx.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
-        drawChart(data);
-        chartCtx.beginPath();
-        chartCtx.moveTo(points[0].x, points[0].y);
-        for (var i = 1; i < points.length; i++) {
-          chartCtx.lineTo(points[i].x, points[i].y);
-        }
-        chartCtx.stroke();
+        logMouseEvent("mouseout", event);
       }
+    });
 
-      function getUpdatedData(points) {
-        var newData = data.slice();
-        var maxValue = Math.max.apply(null, data);
-        for (var i = 0; i < points.length; i++) {
-          var columnIndex = Math.floor((points[i].x - 50) / (barWidth + 2));
-          var changeValue = Math.round(
-            (chartCanvas.height - 50 - points[i].y) /
-              ((chartCanvas.height - 100) / maxValue)
-          );
-          if (changeValue < 0) changeValue = 0;
-          if (changeValue > maxValue) changeValue = maxValue;
-          newData[columnIndex] = changeValue;
-        }
-        return newData;
+
+    function drawCurve(points) {
+      chartCtx.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
+      drawChart(data);
+      chartCtx.beginPath();
+      chartCtx.moveTo(points[0].x, points[0].y);
+      for (var i = 1; i < points.length; i++) {
+        chartCtx.lineTo(points[i].x, points[i].y);
       }
+      chartCtx.stroke();
+    }
 
-      document
-        .getElementById("imageInput")
-        .addEventListener("change", function (event) {
-          const file = event.target.files[0];
-          if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-              const image = new Image();
-              image.src = e.target.result;
-              image.onload = function () {
-                var canvas = document.createElement("canvas");
-                var ctx = canvas.getContext("2d");
-                canvas.width = image.width;
-                canvas.height = image.height;
-                ctx.drawImage(image, 0, 0);
-                var pixelData = ctx.getImageData(
-                  0,
-                  0,
-                  canvas.width,
-                  canvas.height
-                ).data;
-                var histogramData = calculateHistogram(pixelData);
-                console.log("Гистограмма цветов:", histogramData);
-                updateChartData(histogramData);
-                photoCtx.drawImage(image, 0, 0); // Отображаем копию фото на втором холсте
-              };
-            };
-            reader.readAsDataURL(file);
-          }
-        });
-
-      function calculateHistogram(pixelData) {
-        const histogram = new Array(256).fill(0);
-        for (let i = 0; i < pixelData.length; i += 4) {
-          const red = pixelData[i];
-          histogram[red]++;
-        }
-        return histogram;
-      }
-
-      // Применяем новую гистограмму к фотографии
-      function applyHistogramToPhoto(histogramData) {
-        var imageData = photoCtx.getImageData(
-          0,
-          0,
-          photoCanvas.width,
-          photoCanvas.height
+    function getUpdatedData(points) {
+      var newData = data.slice();
+      var maxValue = Math.max.apply(null, data);
+      for (var i = 0; i < points.length; i++) {
+        var columnIndex = Math.floor((points[i].x - 50) / (barWidth + 2));
+        var changeValue = Math.round(
+          (chartCanvas.height - 50 - points[i].y) /
+          ((chartCanvas.height - 100) / maxValue)
         );
-        var pixels = imageData.data;
-        var maxPixelValue = Math.max.apply(null, histogramData);
-        for (var i = 0; i < pixels.length; i += 4) {
-          var red = pixels[i];
-          var index = Math.round((red / 255) * 255);
-          var newRed = (histogramData[index] / maxPixelValue) * 255;
-          pixels[i] = newRed;
-        }
-        photoCtx.putImageData(imageData, 0, 0);
+        if (changeValue < 0) changeValue = 0;
+        if (changeValue > maxValue) changeValue = maxValue;
+        newData[columnIndex] = changeValue;
       }
-    </script>
-  </body>
+      return newData;
+    }
+
+    document
+      .getElementById("imageInput")
+      .addEventListener("change", function (event) {
+        const file = event.target.files[0];
+        if (file) { // Проверяем, что файл выбран
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const image = new Image();
+            image.src = e.target.result;
+            image.onload = function () {
+              var canvas = document.createElement("canvas");
+              var ctx = canvas.getContext("2d");
+              canvas.width = image.width;
+              canvas.height = image.height;
+              ctx.drawImage(image, 0, 0);
+              var pixelData = ctx.getImageData(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+              ).data;
+              var histogramData = calculateHistogram(pixelData);
+              console.log("Гистограмма цветов:", histogramData);
+              updateChartData(histogramData, "change event"); // Добавляем логгирование события
+              photoCtx.drawImage(image, 0, 0); // Отображаем копию фото на втором холсте
+            };
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+
+    function calculateHistogram(pixelData) {
+      const histogram = new Array(256).fill(0);
+      for (let i = 0; i < pixelData.length; i += 4) {
+        const red = pixelData[i];
+        histogram[red]++;
+      }
+      return histogram;
+    }
+// Применяем новую гистограмму к фотографии
+function applyHistogramToPhoto(histogramData) {
+  console.log('Данные гистограммы перед применением:', histogramData); // Логгирование данных до применения
+
+  var imageData = photoCtx.getImageData(
+    0,
+    0,
+    photoCanvas.width,
+    photoCanvas.height
+  );
+  var pixels = imageData.data;
+  var maxPixelValue = Math.max.apply(null, histogramData);
+  for (var i = 0; i < pixels.length; i += 4) {
+    var red = pixels[i];
+    var index = Math.round((red / 255) * 255);
+    var newRed = (histogramData[index] / maxPixelValue) * 255;
+    pixels[i] = newRed;
+  }
+  photoCtx.putImageData(imageData, 0, 0);
+
+  // Получаем данные гистограммы после применения
+  var updatedHistogramData = calculateHistogram(photoCtx.getImageData(0, 0, photoCanvas.width, photoCanvas.height).data);
+  console.log('Данные гистограммы после применения:', updatedHistogramData);
+}
+
+  </script>
+</body>
+
 </html>
