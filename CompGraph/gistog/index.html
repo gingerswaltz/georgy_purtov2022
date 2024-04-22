@@ -17,7 +17,8 @@
       var canvas = document.getElementById("chartCanvas");
       var ctx = canvas.getContext("2d");
       var data; // Переменная data теперь определена в глобальной области видимости
-      var barWidth = 10; // Ширина столбца на графике
+      var barWidth; // Ширина столбца на графике
+      var curvePoints = []; // Точки для рисования кривой
 
       // Функция для отрисовки гистограммы
       function drawChart(data) {
@@ -41,6 +42,7 @@
           ctx.fillText(((maxValue * i) / 10).toFixed(0), 20, y);
         }
 
+        barWidth = (canvas.width - 100) / data.length; // Рассчитываем ширину столбца на основе количества элементов
         for (var i = 0; i < data.length; i++) {
           var barHeight = (data[i] / maxValue) * (canvas.height - 100); // Масштабируем высоту столбца
           var x = 50 + i * (barWidth + 2); // Учитываем ширину столбца и небольшой отступ
@@ -57,70 +59,67 @@
         drawChart(newData);
       }
 
-      // Добавляем обработчики событий для рисования линии на графике
+      // Добавляем обработчики событий для рисования кривой на графике
       var isDrawing = false;
-      var startX, startY;
 
       canvas.addEventListener("mousedown", function (event) {
         isDrawing = true;
-        startX = event.clientX - canvas.offsetLeft;
-        startY = event.clientY - canvas.offsetTop;
+        curvePoints.push({
+          x: event.clientX - canvas.offsetLeft,
+          y: event.clientY - canvas.offsetTop
+        });
       });
 
       canvas.addEventListener("mousemove", function (event) {
         if (isDrawing) {
-          var mouseX = event.clientX - canvas.offsetLeft;
-          var mouseY = event.clientY - canvas.offsetTop;
-
-          var columnIndex = Math.floor((mouseX - 50) / (barWidth + 2)); // Учитываем ширину столбца и небольшой отступ
-
-          var distanceX = Math.abs(mouseX - startX);
-          var distanceY = Math.abs(mouseY - startY);
-          var distance = Math.sqrt(
-            distanceX * distanceX + distanceY * distanceY
-          );
-
-          var changeValue = Math.round(distance / 10); // Определяем изменение значения в зависимости от расстояния
-
-          if (changeValue === 0) {
-            changeValue = 1; // Минимальное изменение
-          }
-
-          var newData = data.slice(); // Создаем локальную копию массива data
-
-          if (
-            mouseY <
-            canvas.height -
-              (newData[columnIndex] / Math.max.apply(null, newData)) *
-                (canvas.height - 100)
-          ) {
-            newData[columnIndex] += changeValue;
-          } else if (newData[columnIndex] >= changeValue) {
-            newData[columnIndex] -= changeValue;
-          }
-
-          drawChart(newData);
-
-          startX = mouseX;
-          startY = mouseY;
+          curvePoints.push({
+            x: event.clientX - canvas.offsetLeft,
+            y: event.clientY - canvas.offsetTop
+          });
+          drawCurve(curvePoints);
         }
       });
 
       canvas.addEventListener("mouseup", function (event) {
-        if (isDrawing) {
-          isDrawing = false;
-          data = newData; // Обновляем исходные данные
-          updateChartData(data);
-        }
+        isDrawing = false;
+        updateChartData(getUpdatedData(curvePoints));
+        curvePoints = [];
       });
 
       canvas.addEventListener("mouseout", function (event) {
-        if (isDrawing) {
-          isDrawing = false;
-          data = newData; // Обновляем исходные данные
-          updateChartData(data);
-        }
+        isDrawing = false;
+        updateChartData(getUpdatedData(curvePoints));
+        curvePoints = [];
       });
+
+      // Функция для рисования кривой по заданным точкам
+      function drawCurve(points) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawChart(data); // Перерисовываем диаграмму
+
+        ctx.beginPath();
+        ctx.moveTo(points[0].x, points[0].y);
+        for (var i = 1; i < points.length; i++) {
+          ctx.lineTo(points[i].x, points[i].y);
+        }
+        ctx.stroke();
+      }
+
+      // Функция для обновления данных диаграммы на основе кривой
+      function getUpdatedData(points) {
+        var newData = data.slice();
+        var maxValue = Math.max.apply(null, data);
+        for (var i = 0; i < points.length; i++) {
+          var columnIndex = Math.floor((points[i].x - 50) / (barWidth + 2));
+          var changeValue = Math.round(
+            (canvas.height - 50 - points[i].y) / ((canvas.height - 100) / maxValue)
+          );
+          if (changeValue < 0) changeValue = 0;
+          if (changeValue > maxValue) changeValue = maxValue;
+          newData[columnIndex] = changeValue;
+        }
+        return newData;
+      }
 
       // Обработчик события для загрузки изображения
       document
@@ -148,7 +147,7 @@
                 ).data;
                 histogramData = calculateHistogram(pixelData);
                 console.log("Гистограмма цветов:", histogramData);
-
+                
                 // Обновляем график
                 updateChartData(histogramData);
               };
