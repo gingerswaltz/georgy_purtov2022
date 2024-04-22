@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>График</title>
-<style>
-    canvas {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>График</title>
+    <style>
+      canvas {
         border: 1px solid #000;
-    }
-</style>
-</head>
-<body>
-<canvas id="chartCanvas" width="600" height="400"></canvas>
-<script>
-    var canvas = document.getElementById('chartCanvas');
-    var ctx = canvas.getContext('2d');
-    var data = [20, 40, 60, 80, 100]; // Исходные данные массива
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="chartCanvas" width="600" height="400"></canvas>
+    <input type="file" id="imageInput" accept="image/*" />
+    <script>
+      var canvas = document.getElementById("chartCanvas");
+      var ctx = canvas.getContext("2d");
+      var data; // Переменная data теперь определена в глобальной области видимости
+      var barWidth = 10; // Ширина столбца на графике
 
-    // Функция для отрисовки гистограммы
-    function drawChart(data) {
+      // Функция для отрисовки гистограммы
+      function drawChart(data) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // Оси координат
@@ -31,88 +33,140 @@
         // Отметки данных по оси Y
         var maxValue = Math.max.apply(null, data);
         for (var i = 0; i <= 10; i++) {
-            var y = canvas.height - 50 - (i / 10) * (canvas.height - 100);
-            ctx.beginPath();
-            ctx.moveTo(45, y);
-            ctx.lineTo(50, y);
-            ctx.stroke();
-            ctx.fillText((maxValue * i / 10).toFixed(0), 20, y);
+          var y = canvas.height - 50 - (i / 10) * (canvas.height - 100);
+          ctx.beginPath();
+          ctx.moveTo(45, y);
+          ctx.lineTo(50, y);
+          ctx.stroke();
+          ctx.fillText(((maxValue * i) / 10).toFixed(0), 20, y);
         }
-
-        var barWidth = (canvas.width - 50) / data.length;
 
         for (var i = 0; i < data.length; i++) {
-            var barHeight = (data[i] / maxValue) * (canvas.height - 100); // Масштабируем высоту столбца
-            var x = 50 + i * barWidth;
-            var y = canvas.height - 50 - barHeight;
-            ctx.fillStyle = '#0095DD';
-            ctx.fillRect(x, y, barWidth, barHeight);
+          var barHeight = (data[i] / maxValue) * (canvas.height - 100); // Масштабируем высоту столбца
+          var x = 50 + i * (barWidth + 2); // Учитываем ширину столбца и небольшой отступ
+          var y = canvas.height - 50 - barHeight;
+          ctx.fillStyle = "#0095DD";
+          ctx.fillRect(x, y, barWidth, barHeight);
         }
-    }
+      }
 
-    // Инициализация графика с данными
-    drawChart(data);
-
-    // Функция для обновления данных графика
-    function updateChartData(newData) {
+      // Функция для обновления данных графика
+      function updateChartData(newData) {
         data = newData;
-        console.log('Данные графика обновлены:', newData);
+        console.log("Данные графика обновлены:", newData);
         drawChart(newData);
-    }
+      }
 
-    // Добавляем обработчики событий для рисования линии на графике
-    var isDrawing = false;
-    var startX, startY;
+      // Добавляем обработчики событий для рисования линии на графике
+      var isDrawing = false;
+      var startX, startY;
 
-    canvas.addEventListener('mousedown', function(event) {
+      canvas.addEventListener("mousedown", function (event) {
         isDrawing = true;
         startX = event.clientX - canvas.offsetLeft;
         startY = event.clientY - canvas.offsetTop;
-    });
+      });
 
-    canvas.addEventListener('mousemove', function(event) {
+      canvas.addEventListener("mousemove", function (event) {
         if (isDrawing) {
-            var mouseX = event.clientX - canvas.offsetLeft;
-            var mouseY = event.clientY - canvas.offsetTop;
+          var mouseX = event.clientX - canvas.offsetLeft;
+          var mouseY = event.clientY - canvas.offsetTop;
 
-            var column = Math.floor((mouseX - 50) / ((canvas.width - 50) / data.length));
+          var columnIndex = Math.floor((mouseX - 50) / (barWidth + 2)); // Учитываем ширину столбца и небольшой отступ
 
-            var distanceX = Math.abs(mouseX - startX);
-            var distanceY = Math.abs(mouseY - startY);
-            var distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+          var distanceX = Math.abs(mouseX - startX);
+          var distanceY = Math.abs(mouseY - startY);
+          var distance = Math.sqrt(
+            distanceX * distanceX + distanceY * distanceY
+          );
 
-            var changeValue = Math.round(distance / 10); // Определяем изменение значения в зависимости от расстояния
+          var changeValue = Math.round(distance / 10); // Определяем изменение значения в зависимости от расстояния
 
-            if (changeValue === 0) {
-                changeValue = 1; // Минимальное изменение
-            }
+          if (changeValue === 0) {
+            changeValue = 1; // Минимальное изменение
+          }
 
-            if (mouseY < canvas.height - (data[column] / Math.max.apply(null, data)) * (canvas.height - 100)) {
-                data[column] += changeValue;
-            } else if (data[column] >= changeValue) {
-                data[column] -= changeValue;
-            }
+          var newData = data.slice(); // Создаем локальную копию массива data
 
-            drawChart(data);
+          if (
+            mouseY <
+            canvas.height -
+              (newData[columnIndex] / Math.max.apply(null, newData)) *
+                (canvas.height - 100)
+          ) {
+            newData[columnIndex] += changeValue;
+          } else if (newData[columnIndex] >= changeValue) {
+            newData[columnIndex] -= changeValue;
+          }
 
-            startX = mouseX;
-            startY = mouseY;
+          drawChart(newData);
+
+          startX = mouseX;
+          startY = mouseY;
         }
-    });
+      });
 
-    canvas.addEventListener('mouseup', function(event) {
+      canvas.addEventListener("mouseup", function (event) {
         if (isDrawing) {
-            isDrawing = false;
-            updateChartData(data);
+          isDrawing = false;
+          data = newData; // Обновляем исходные данные
+          updateChartData(data);
         }
-    });
+      });
 
-    canvas.addEventListener('mouseout', function(event) {
+      canvas.addEventListener("mouseout", function (event) {
         if (isDrawing) {
-            isDrawing = false;
-            updateChartData(data);
+          isDrawing = false;
+          data = newData; // Обновляем исходные данные
+          updateChartData(data);
         }
-    });
-</script>
-</body>
+      });
+
+      // Обработчик события для загрузки изображения
+      document
+        .getElementById("imageInput")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              const image = new Image();
+              image.src = e.target.result;
+              image.onload = function () {
+                // Рисуем изображение на canvas
+                const canvas = document.createElement("canvas");
+                const context = canvas.getContext("2d");
+                canvas.width = image.width;
+                canvas.height = image.height;
+                context.drawImage(image, 0, 0);
+                const pixelData = context.getImageData(
+                  0,
+                  0,
+                  canvas.width,
+                  canvas.height
+                ).data;
+                histogramData = calculateHistogram(pixelData);
+                console.log("Гистограмма цветов:", histogramData);
+
+                // Обновляем график
+                updateChartData(histogramData);
+              };
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+
+      function calculateHistogram(pixelData) {
+        const histogram = new Array(256).fill(0);
+
+        for (let i = 0; i < pixelData.length; i += 4) {
+          const red = pixelData[i];
+          histogram[red]++;
+        }
+
+        return histogram;
+      }
+    </script>
+  </body>
 </html>
