@@ -24,7 +24,7 @@
     var chartCtx = chartCanvas.getContext("2d");
     var photoCanvas = document.getElementById("photoCanvas");
     var photoCtx = photoCanvas.getContext("2d");
-    var isDrawing = false;
+
     var data = [];
     var barWidth;
     var curvePoints = [];
@@ -56,15 +56,14 @@
     }
     // Обновляем данные графика и применяем изменения к фотографии
     function updateChartData(newData, event) {
-      console.assert(data != newData);
       data = newData;
       console.log("Данные графика обновлены:", newData);
       // console.log("Событие:", event);
       drawChart(newData);
       // Применяем новую гистограмму к фотографии
-      applyHistogramToPhoto(newData);
     }
 
+    var isDrawing = false;
 
 
     // Обработчик события mousedown
@@ -103,26 +102,17 @@
     }
 
     // Обработчик события mouseup
-    chartCanvas.addEventListener("mouseup", function (event) {
-      isDrawing = false;
-      updateChartData(getUpdatedData(curvePoints));
-      curvePoints = [];
-      applyHistogramToPhoto(data);
-      logMouseEvent("mouseup", event);
-    });
-
-    // Обработчик события mouseout
-    chartCanvas.addEventListener("mouseout", function (event) {
-      if (isDrawing) {
-        // Проверяем, начиналась ли отрисовка линии
-        isDrawing = false;
-        updateChartData(getUpdatedData(curvePoints));
-        curvePoints = [];
-        applyHistogramToPhoto(data);
-        logMouseEvent("mouseout", event);
-      }
-    });
-
+chartCanvas.addEventListener("mouseup", function (event) {
+  if (isDrawing) {
+    // Проверяем, начиналась ли отрисовка линии
+    isDrawing = false;
+    var newData = getUpdatedData(curvePoints);
+    updateChartData(newData);
+    curvePoints = [];
+    applyHistogramToPhoto(newData); // Применяем изменения к фотографии с использованием новых данных
+    logMouseEvent("mouseup", event);
+  }
+});
 
     function drawCurve(points) {
       chartCtx.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
@@ -136,8 +126,11 @@
     }
 
     function getUpdatedData(points) {
+      //console.log("Начало обновления данных графика");
+
       var newData = data.slice();
       var maxValue = Math.max.apply(null, data);
+
       for (var i = 0; i < points.length; i++) {
         var columnIndex = Math.floor((points[i].x - 50) / (barWidth + 2));
         var changeValue = Math.round(
@@ -146,10 +139,20 @@
         );
         if (changeValue < 0) changeValue = 0;
         if (changeValue > maxValue) changeValue = maxValue;
+
         newData[columnIndex] = changeValue;
       }
+
+      //console.log("Завершение обновления данных графика:", newData);
+
+      //if (JSON.stringify(data) === JSON.stringify(newData)) {
+      //  console.error("Ошибка: входящие данные равны исходным после обновления");
+      //}
+
       return newData;
     }
+
+
 
     document
       .getElementById("imageInput")
@@ -191,9 +194,31 @@
       }
       return histogram;
     }
+
+  // Переменная для хранения предыдущих данных гистограммы
+var previousHistogramData = null;
+
 // Применяем новую гистограмму к фотографии
 function applyHistogramToPhoto(histogramData) {
   console.log('Данные гистограммы перед применением:', histogramData); // Логгирование данных до применения
+
+  // Проверяем, есть ли предыдущие данные
+  if (previousHistogramData !== null) {
+    // Сравниваем предыдущие данные с текущими
+    var equal = true;
+    for (var i = 0; i < histogramData.length; i++) {
+      if (previousHistogramData[i] !== histogramData[i]) {
+        equal = false;
+        break;
+      }
+    }
+    if (equal) {
+      console.error('Предыдущие данные гистограммы равны текущим данным');
+    }
+  }
+
+  // Сохраняем текущие данные в качестве предыдущих
+  previousHistogramData = histogramData.slice(); // Создаем копию массива
 
   var imageData = photoCtx.getImageData(
     0,
@@ -202,19 +227,39 @@ function applyHistogramToPhoto(histogramData) {
     photoCanvas.height
   );
   var pixels = imageData.data;
-  var maxPixelValue = Math.max.apply(null, histogramData);
+  var numPixels = pixels.length / 4;
+  var cumulativeHistogram = calculateCumulativeHistogram(histogramData);
+
+  // Применяем гистограммное выравнивание к каждому каналу цвета
   for (var i = 0; i < pixels.length; i += 4) {
     var red = pixels[i];
-    var index = Math.round((red / 255) * 255);
-    var newRed = (histogramData[index] / maxPixelValue) * 255;
-    pixels[i] = newRed;
+    var green = pixels[i + 1];
+    var blue = pixels[i + 2];
+
+    // Применяем гистограммное выравнивание к каждому каналу цвета
+    pixels[i] = (cumulativeHistogram[red] / numPixels) * 255;
+    pixels[i + 1] = (cumulativeHistogram[green] / numPixels) * 255;
+    pixels[i + 2] = (cumulativeHistogram[blue] / numPixels) * 255;
   }
+
   photoCtx.putImageData(imageData, 0, 0);
 
   // Получаем данные гистограммы после применения
   var updatedHistogramData = calculateHistogram(photoCtx.getImageData(0, 0, photoCanvas.width, photoCanvas.height).data);
   console.log('Данные гистограммы после применения:', updatedHistogramData);
 }
+
+
+function calculateCumulativeHistogram(histogram) {
+  var cumulativeHistogram = [];
+  var sum = 0;
+  for (var i = 0; i < histogram.length; i++) {
+    sum += histogram[i];
+    cumulativeHistogram.push(sum);
+  }
+  return cumulativeHistogram;
+}
+
 
   </script>
 </body>
