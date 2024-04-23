@@ -2,14 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.67" />
     <title>График</title>
     <style>
-      canvas {
-        border: 1px solid #000;
-        margin-top: 20px;
-        /* Добавляем отступ сверху для второго холста */
-      }
       body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -43,25 +38,59 @@
       }
 
       #originalCopyCanvas,
-      #photoCanvas {
+      #photoCanvas,
+      .copy-chart-canvas {
         border: 1px solid #000;
       }
+
+      .copy-chart-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .copy-chart-canvas {
+        margin-top: 20px;
+      }
+     
     </style>
   </head>
   <body>
     <canvas id="chartCanvas" width="600" height="400"></canvas>
     <canvas id="gChartCanvas" width="600" height="400"></canvas>
     <canvas id="bChartCanvas" width="600" height="400"></canvas>
-    <div>
+    <input type="file" id="imageInput" accept="image/*"/>
+
+
+    <canvas id="photoCanvas"></canvas>
+    <div class="container">
       <!-- Второй холст для копии фото -->
       <canvas id="originalCopyCanvas"></canvas>
-
+      <!-- Копии графиков цветов -->
+      <div class="copy-chart-container">
+        <canvas
+          class="copy-chart-canvas"
+          id="copyChartCanvasRed"
+          width="600"
+          height="400"
+        ></canvas>
+        <canvas
+          class="copy-chart-canvas"
+          id="copyChartCanvasGreen"
+          width="600"
+          height="400"
+        ></canvas>
+        <canvas
+          class="copy-chart-canvas"
+          id="copyChartCanvasBlue"
+          width="600"
+          height="400"
+        ></canvas>
+      </div>
       <!-- Добавляем холст для зеленого цвета -->
-      <canvas id="photoCanvas"></canvas>
     </div>
+    
 
-    <!-- Второй холст для копии фото -->
-    <input type="file" id="imageInput" accept="image/*" />
     <script>
       var originalCopyCanvas = document.getElementById("originalCopyCanvas"); // Получаем второй холст для копии фото
       var originalCopyCtx = originalCopyCanvas.getContext("2d"); // Получаем контекст второго холста для копии фото
@@ -81,6 +110,13 @@
       var redCurvePoints = [];
       var blueCurvePoints = [];
       var greenCurvePoints = []; // Добавляем массив точек для зеленого цвета
+      // copies
+      var cpchartCanvas = document.getElementById("copyChartCanvasRed");
+      var cpchartCtx = cpchartCanvas.getContext("2d");
+      var cpbChartCanvas = document.getElementById("copyChartCanvasBlue");
+      var cpbChartCtx = cpbChartCanvas.getContext("2d");
+      var cpgChartCanvas = document.getElementById("copyChartCanvasGreen"); // Получаем холст для зеленого цвета
+      var cpgChartCtx = cpgChartCanvas.getContext("2d"); // Получаем контекст холста для зеленого цвета
 
       // Функция отрисовки графика
       function drawChart(data, color, context) {
@@ -309,6 +345,10 @@
                     "Ошибка: Данные гистограммы одинаковые после вычисления."
                   );
                 }
+                updateChartData(redHistogramData, "red", cpchartCtx);
+                updateChartData(greenHistogramData, "green", cpgChartCtx);
+                updateChartData(blueHistogramData, "blue", cpbChartCtx);
+
                 updateChartData(redHistogramData, "red", chartCtx);
                 updateChartData(greenHistogramData, "green", gChartCtx);
                 updateChartData(blueHistogramData, "blue", bChartCtx);
