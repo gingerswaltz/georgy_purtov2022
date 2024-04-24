@@ -249,6 +249,7 @@ function drawFigureWithTexture(canvas, textureImage) {
   const texturePattern = context.createPattern(textureImage, 'repeat'); // Создание паттерна текстуры
   if (texturePattern) {
     context.fillStyle = texturePattern;
+    context.strokeStyle = 'white'; // Установка цвета обводки
 
     for (const face of pyramid.faces) { // Используем pyramid.faces напрямую, так как метод не находится внутри класса Pyramid
       context.beginPath();
@@ -265,10 +266,33 @@ function drawFigureWithTexture(canvas, textureImage) {
       }
       context.closePath();
       context.fill();
+      context.stroke(); // Отрисовка обводки
+    }
+
+    // Отрисовка ребер пирамиды
+    context.strokeStyle = 'white'; // Цвет обводки ребер
+    context.lineWidth = 1; // Толщина линий
+
+    for (const face of pyramid.faces) {
+      context.beginPath();
+      for (let j = 0; j < face.length; j++) {
+        const vertex = face[j];
+        const x = vertex.x;
+        const y = vertex.y;
+
+        if (j === 0) {
+          context.moveTo(x, y);
+        } else {
+          context.lineTo(x, y);
+        }
+      }
+      context.closePath();
       context.stroke();
     }
   }
 }
+
+
 
 
 // Обработчик изменения состояния чекбоксов.
