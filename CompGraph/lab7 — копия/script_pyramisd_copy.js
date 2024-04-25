@@ -184,7 +184,7 @@ let pyramid = null; // Инициализация переменной для х
 let t0 = null; // Инициализация переменной для хранения точки t0.
 
 /// Функция для создания пирамиды.
-function createPyramid() {
+function createPyramid(texture1) {
   const baseVertexCountInput = document.getElementById('cubeSizeInput'); // Получение ссылки на элемент ввода.
   const baseVertexCount = parseInt(baseVertexCountInput.value); // Получение количества вершин основания.
   const height = 100; // Задание высоты пирамиды.
@@ -201,7 +201,7 @@ function createPyramid() {
     t0 = new Point(pyramidCenterX, pyramidCenterY, pyramidCenterZ); // Инициализация точки t0
     repaint(); // Перерисовка
   };
-  texture.src = "image.png"; // Загрузка изображения
+  texture.src = texture1;
 }
 
 
@@ -270,7 +270,7 @@ function drawFigureWithTexture(canvas, textureImage) {
     }
 
     // Отрисовка ребер пирамиды
-    context.strokeStyle = 'white'; // Цвет обводки ребер
+    context.strokeStyle = 'black'; // Цвет обводки ребер
     context.lineWidth = 1; // Толщина линий
 
     for (const face of pyramid.faces) {
