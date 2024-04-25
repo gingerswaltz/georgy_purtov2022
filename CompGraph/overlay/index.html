@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Overlay</title>
+    <style>
+      #canvasMain {
+        display: inline-block; /* Изменено на inline-block */
+        vertical-align: top;
+        margin: auto;
+        border: 1px solid black;
+      }
+      .canvas-container {
+        display: inline-block;
+        vertical-align: top;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="file" id="fileInput1" accept="image/*" />
+    <input type="file" id="fileInput2" accept="image/*" />
+    <button id="overlayButton">Overlay Images</button>
+    <div class="canvas-container">
+        <canvas id="canvas1" width="400" height="400"></canvas>
+        <canvas id="canvas2" width="400" height="400"></canvas>
+      </div>
+    <canvas id="canvasMain" width="400" height="400"></canvas>
+    
+
+    <script>
+      const canvas = document.getElementById("canvasMain");
+      const ctx = canvas.getContext("2d");
+
+      // Функция для наложения двух изображений друг на друга
+      function overlayImages(image1, image2) {
+        // Убедимся, что размеры canvas соответствуют размерам изображений
+        canvas.width = Math.max(image1.width, image2.width);
+        canvas.height = Math.max(image1.height, image2.height);
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Получим изображения в виде ImageData
+        const imageData1 = getImageData(image1);
+        const imageData2 = getImageData(image2);
+
+        // Наложение изображений друг на друга
+        const blendedImageData = blendImages(imageData1, imageData2);
+        ctx.putImageData(blendedImageData, 0, 0);
+      }
+
+      // Функция для получения ImageData из изображения
+      function getImageData(image) {
+        const canvasTemp = document.createElement("canvas");
+        const ctxTemp = canvasTemp.getContext("2d");
+
+        canvasTemp.width = image.width;
+        canvasTemp.height = image.height;
+        ctxTemp.drawImage(image, 0, 0);
+        return ctxTemp.getImageData(0, 0, image.width, image.height);
+      }
+
+      // Функция для наложения двух ImageData друг на друга
+      // не использует альфа-канал для этих вычислений, 
+      // поскольку каждый пиксель наложенного изображения просто является средним значением цветовых каналов из двух изображений.
+      function blendImages(imageData1, imageData2) {
+        const blendedData = ctx.createImageData(
+          imageData1.width,
+          imageData1.height
+        );
+        for (let i = 0; i < blendedData.data.length; i += 4) {
+          // Для каждого пикселя вычисляем средние значения цветовых каналов
+          blendedData.data[i] = (imageData1.data[i] + imageData2.data[i]) / 2; // Red
+          blendedData.data[i + 1] =
+            (imageData1.data[i + 1] + imageData2.data[i + 1]) / 2; // Green
+          blendedData.data[i + 2] =
+            (imageData1.data[i + 2] + imageData2.data[i + 2]) / 2; // Blue
+          blendedData.data[i + 3] = 255; // Определяем альфа-канал (полная непрозрачность)
+        }
+        return blendedData;
+      }
+
+      // Обработка нажатия кнопки
+      document
+        .getElementById("overlayButton")
+        .addEventListener("click", function () {
+          const fileInput1 = document.getElementById("fileInput1");
+          const fileInput2 = document.getElementById("fileInput2");
+
+          // Проверка, что оба изображения выбраны
+          if (!fileInput1.files[0] || !fileInput2.files[0]) {
+            alert("Please select two images.");
+            return;
+          }
+
+          const fileReader1 = new FileReader();
+          const fileReader2 = new FileReader();
+
+          fileReader1.onload = function (event) {
+            const img1 = new Image();
+            img1.onload = function () {
+              fileReader2.onload = function (event2) {
+                const img2 = new Image();
+                img2.onload = function () {
+                  overlayImages(img1, img2);
+                };
+                img2.src = event2.target.result;
+              };
+              fileReader2.readAsDataURL(fileInput2.files[0]);
+            };
+            img1.src = event.target.result;
+          };
+
+          fileReader1.readAsDataURL(fileInput1.files[0]);
+        });
+      document
+        .getElementById("fileInput1")
+        .addEventListener("change", function () {
+          const fileInput1 = this;
+          const canvas1 = document.getElementById("canvas1");
+
+          if (!fileInput1.files[0]) {
+            return;
+          }
+
+          const fileReader1 = new FileReader();
+
+          fileReader1.onload = function (event) {
+            const img1 = new Image();
+            img1.onload = function () {
+              const ctx1 = canvas1.getContext("2d");
+              canvas1.width = img1.width;
+              canvas1.height = img1.height;
+              ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+              ctx1.drawImage(img1, 0, 0);
+            };
+            img1.src = event.target.result;
+          };
+
+          fileReader1.readAsDataURL(fileInput1.files[0]);
+        });
+
+      document
+        .getElementById("fileInput2")
+        .addEventListener("change", function () {
+          const fileInput2 = this;
+          const canvas2 = document.getElementById("canvas2");
+
+          if (!fileInput2.files[0]) {
+            return;
+          }
+
+          const fileReader2 = new FileReader();
+
+          fileReader2.onload = function (event) {
+            const img2 = new Image();
+            img2.onload = function () {
+              const ctx2 = canvas2.getContext("2d");
+              canvas2.width = img2.width;
+              canvas2.height = img2.height;
+              ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+              ctx2.drawImage(img2, 0, 0);
+            };
+            img2.src = event.target.result;
+          };
+
+          fileReader2.readAsDataURL(fileInput2.files[0]);
+        });
+    </script>
+  </body>
+</html>
