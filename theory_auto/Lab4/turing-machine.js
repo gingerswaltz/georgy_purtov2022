@@ -9,7 +9,6 @@ class TuringMachine {
     this.carry = false; // Флаг для переноса
   }
 
-  // Метод для выполнения одного шага машины Тьюринга
   step() {
     if (!this.isRunning) return;
 
@@ -60,17 +59,29 @@ class TuringMachine {
             this.tape[this.head] = "1";
             this.carry = false;
           } else {
+            // Проверяем, если последний символ перед головкой - это "1", удаляем его
+            if (this.tape[this.head - 1] === "1") {
+              this.tape.pop();
+            }
             this.tape[this.head] = "1";
           }
           this.state = "q1";
         }
+        break;
+      case "q_accept":
+        this.isRunning = false;
+        if (this.tape[this.tape.length - 1] === "1") {
+            this.tape.pop(); // Удаляем последнюю лишнюю единицу
+        }
+
         break;
     }
 
     if (this.state === "q_accept" || this.state === "q_reject") {
       this.isRunning = false;
     }
-  }
+}
+
 
   // Метод для перемещения головки вправо
   moveHeadRight() {
@@ -125,6 +136,8 @@ const turingMachine = new TuringMachine();
 // Функция для выполнения одного шага машины Тьюринга
 function stepTuringMachine() {
   if (turingMachine.isRunning) {
+    updateInterface(); // Обновляем интерфейс перед выполнением шага
+
     const stepsBefore = turingMachine.getSteps().length; // Сохраняем количество шагов до выполнения текущего шага
     turingMachine.stepRun(); // Выполняем один шаг
     const stepsAfter = turingMachine.getSteps().length; // Получаем количество шагов после выполнения текущего шага
@@ -135,6 +148,7 @@ function stepTuringMachine() {
     }
   }
 }
+
 // Модифицированная функция для установки конфигурации ленты
 function setTape() {
   const inputTapeElement = document.getElementById("input-tape");
@@ -205,5 +219,8 @@ function updateInterface() {
     stepInfoElement.textContent = ""; // Очищаем информацию о шаге, если шагов нет
   }
 
-  
+  // Если достигнуто конечное состояние и последняя ячейка лишняя, удаляем её
+  if (turingMachine.state === "q_accept" && tape[tape.length - 1] === "1") {
+    tapeElement.lastChild.remove();
+  }
 }
