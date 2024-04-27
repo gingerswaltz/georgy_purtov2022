@@ -232,6 +232,17 @@ def enum_to_string_2(s):
     }
     return state_to_string[s]
 
+def enum_to_string_3(s):
+    state_to_string = {
+        'H_': "H",
+        'A_': "A",
+        'B_': "B",
+        'S_': "S",
+        'ER_': "ER"
+    }
+    return state_to_string[s]
+
+
 def Analizator(text):
     class State:
         H = 'H'
