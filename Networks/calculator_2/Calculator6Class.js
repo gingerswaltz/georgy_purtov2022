@@ -19,16 +19,42 @@ class IPv6Calculator {
     return compressedIPv6;
   }
 
-  // Метод для просмотра полной записи IPv6
   getFullIPv6() {
     // Разбиваем IPv6 адрес на группы по два символа
     const groups = this.ip.split(":");
 
-    // Дополняем каждую группу нулями до четырех символов
-    const fullGroups = groups.map((group) => {
-      const paddedGroup = ("0000" + group).slice(-4);
-      return paddedGroup.toUpperCase(); // Преобразуем в верхний регистр
-    });
+    // Создаем массив для хранения полных групп адреса
+    const fullGroups = [];
+
+    // Переменная для отслеживания количества пустых групп
+    let emptyGroupIndex = -1;
+
+    // Проходим по каждой группе адреса
+    for (let i = 0; i < groups.length; i++) {
+      // Если текущая группа пустая
+      if (groups[i] === "") {
+        // Запоминаем индекс пустой группы
+        emptyGroupIndex = i;
+        // Пропускаем текущую итерацию цикла
+        continue;
+      }
+
+      // Дополняем группу нулями до четырех символов
+      const paddedGroup = ("0000" + groups[i]).slice(-4);
+
+      // Преобразуем в верхний регистр и добавляем в массив полных групп
+      fullGroups.push(paddedGroup.toUpperCase());
+    }
+
+    // Вставляем недостающие нули в пустую группу, если она есть
+    if (emptyGroupIndex !== -1) {
+      // Вставляем недостающие нули перед индексом пустой группы
+      fullGroups.splice(
+        emptyGroupIndex,
+        0,
+        ...Array(8 - fullGroups.length).fill("0000")
+      );
+    }
 
     // Склеиваем группы с двоеточием
     const fullIPv6 = fullGroups.join(":");
@@ -119,35 +145,6 @@ class IPv6Calculator {
     return subnetPrefix;
   }
 
-  // Методы для просмотра типа адреса
-  getAddressType() {
-    // Проверяем, является ли адрес Loopback Address
-    if (this.ip === "::1") {
-      return "Loopback Address";
-    }
-    const globalPrefix = "2000";
-    const localPrefixes = ["fe80", "fc00"];
-    const multicastPrefix = "ff00";
-
-    // Разбиваем IPv6 адрес на группы по два символа
-    const groups = this.ip.split(":");
-
-    // Проверяем префикс для определения типа адреса
-    const firstGroup = parseInt(groups[0], 16);
-    if (
-      firstGroup >= parseInt(globalPrefix, 16) &&
-      firstGroup < parseInt(globalPrefix, 16) + 0x2000
-    ) {
-      return "Глобальный";
-    } else if (localPrefixes.includes(groups[0])) {
-      return "Локальный";
-    } else if (groups[0].startsWith(multicastPrefix)) {
-      return "Многоадресный";
-    } else {
-      return "Неопределенный";
-    }
-  }
-
   getRangeStart() {
     // Разбиваем IPv6 адрес на группы по два символа
     const groups = this.ip.split(":");
@@ -177,6 +174,32 @@ class IPv6Calculator {
 
     // Склеиваем группы с двоеточием и возвращаем начало диапазона
     return startGroups.join(":");
+  }
+
+  getAddressType() {
+    const ipv6 = this.ip.toLowerCase(); // Приводим адрес к нижнему регистру для унификации
+    const compressedIPv6 = this.getCompressedIPv6().toLowerCase(); // Получаем сжатую запись IPv6 адреса
+
+    // Проверяем типы адресов
+    if (ipv6 === "::1" || compressedIPv6 === "::1") {
+      return "Loopback";
+    } else if (ipv6.startsWith("ff") || compressedIPv6.startsWith("ff")) {
+      return "Multicast";
+    } else if (ipv6.includes(":")) {
+      if (ipv6.startsWith("fe80:") || compressedIPv6.startsWith("fe80:")) {
+        return "Link-local";
+      } else if (ipv6.startsWith("fc") || compressedIPv6.startsWith("fc")) {
+        return "Unique Local";
+      } else if (ipv6.startsWith("fd") || compressedIPv6.startsWith("fd")) {
+        return "Unique Local";
+      } else {
+        return "Global";
+      }
+    } else if (ipv6 === "::" || compressedIPv6 === "::") {
+      return "Unspecified";
+    } else {
+      return "Unicast";
+    }
   }
 
   getRangeEnd() {
@@ -209,7 +232,7 @@ class IPv6Calculator {
     // Склеиваем группы с двоеточием и возвращаем конец диапазона
     return endGroups.join(":");
   }
-  
+
   calculateVLSM(subnets) {
     // Проверяем, является ли подсеть входным параметром в формате числа или строкой
     const numSubnets = isNaN(subnets) ? parseInt(subnets) : subnets;
@@ -221,17 +244,15 @@ class IPv6Calculator {
 
     // Получаем информацию об исходной подсети
     const originalPrefix = this.getSubnetPrefix();
-    const originalPrefixBits = parseInt(originalPrefix.split('/')[1]);
+    const originalPrefixBits = parseInt(originalPrefix.split("/")[1]);
 
     // Рассчитываем новый префикс подсети для каждой новой подсети
     let newPrefixBits = originalPrefixBits + Math.log2(numSubnets);
     newPrefixBits = Math.ceil(newPrefixBits); // Округляем до ближайшего целого числа
 
     if (newPrefixBits > 128) {
-        return "Ошибка: Невозможно разделить подсеть на запрошенное количество подсетей.";
+      return "Ошибка: Невозможно разделить подсеть на запрошенное количество подсетей.";
     }
-
-    const newPrefix = originalPrefix.split('/')[0] + '/' + newPrefixBits;
 
     // Рассчитываем количество /64 подсетей в каждой новой подсети
     const subnetsCount = Math.pow(2, 128 - newPrefixBits);
@@ -239,29 +260,28 @@ class IPv6Calculator {
     // Генерируем новые подсети
     const newSubnets = [];
     const baseAddressParts = this.ip.split(":");
-    const baseAddressNum = parseInt(baseAddressParts[baseAddressParts.length - 1], 16);
+    const baseAddressNum = parseInt(
+      baseAddressParts[baseAddressParts.length - 1],
+      16
+    );
     for (let i = 0; i < numSubnets; i++) {
-        const newAddressNum = baseAddressNum + i * subnetsCount;
-        const newAddress = baseAddressParts.slice(0, baseAddressParts.length - 1).join(":") + ":" + newAddressNum.toString(16);
-        const subnet = newAddress + '/' + newPrefixBits;
-        newSubnets.push(subnet);
+      const newAddressNum = baseAddressNum + i * subnetsCount;
+      const newAddress =
+        baseAddressParts.slice(0, baseAddressParts.length - 1).join(":") +
+        ":" +
+        newAddressNum.toString(16);
+      const subnet = newAddress + "/" + newPrefixBits;
+      newSubnets.push(subnet);
     }
 
     // Генерируем HTML-код таблицы с результатами
     let output = "<table>";
     output += "<tr><th>New Subnets</th><th>Subnet</th></tr>";
     newSubnets.forEach((subnet, index) => {
-        output += `<tr><td>Subnet ${index + 1}</td><td>${subnet}</td></tr>`;
+      output += `<tr><td>Subnet ${index + 1}</td><td>${subnet}</td></tr>`;
     });
     output += "</table>";
 
     return output;
-
-    return output;
-}
-
-
-
-
-
+  }
 }
