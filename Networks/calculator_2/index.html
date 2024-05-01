@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IP Calculator</title>
+    <title>IPv4 Calculator</title>
     <style>
       table {
         width: 100%;
@@ -60,6 +60,14 @@
         font-size: 16px;
       }
 
+      .input-group #input1 {
+        width: 350px;
+        height: 350px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+      }
       .btn {
         background-color: #4caf50;
         color: #fff;
@@ -181,6 +189,21 @@
         <!-- Таблица подсетей будет добавлена сюда -->
       </div>
     </div>
+    <div class="input-group">
+      <label for="ipAddresses"
+        >Адреса для деагрегации (разделение через запятую):</label
+      >
+      <textarea id="input1" rows="5" placeholder="Enter IP Addresses">
+192.168.2.5,
+192.168.2.6,
+192.168.2.7</textarea
+      >
+    </div>
+    <p id="resultText"></p>
+    <!-- Динамический элемент для отображения результатов -->
+
+    <button class="btn" onclick="summarizeAndLog()">Calculate</button>
+
     <script>
       // Метод для проверки валидности IP адреса
       function isValidIpAddress(ipAddress) {
@@ -285,6 +308,26 @@
           calcBtn.innerHTML = "Calculate";
           calcBtn.setAttribute("onclick", "calculate()");
           toggleLabel.textContent = "Calculate";
+        }
+      }
+
+      function addRangeToInput(range) {
+        const input = document.getElementById("input1");
+        input.value = "";
+        // Разбиваем введенную строку на два IP-адреса
+        const [start, end] = range.split(" - ");
+
+        // Получаем числовые значения октетов начального и конечного IP-адресов
+        const startOctets = start.split(".").map(Number);
+        const endOctets = end.split(".").map(Number);
+
+        // Проходимся по диапазону и формируем IP-адреса
+        for (let i = startOctets[3]; i <= endOctets[3]; i++) {
+          // Формируем текущий IP-адрес в формате "192.168.2.i"
+          const currentIP = `${startOctets[0]}.${startOctets[1]}.${startOctets[2]}.${i}`;
+
+          // Добавляем текущий IP-адрес в поле ввода
+          input.value += (input.value ? ", " : "") + currentIP;
         }
       }
 
@@ -410,7 +453,7 @@
 
             subnetHtml += "<table>";
             subnetHtml +=
-              "<tr><th>Name</th><th>Hosts</th><th>Network Address</th><th>Subnet Mask</th><th>Usable Range</th><th>Broadcast Address</th><th>Wildcard Mask</th></tr>";
+              "<tr><th>Имя хоста</th><th>Hosts</th><th>Network Address</th><th>Subnet Mask</th><th>Usable Range</th><th>Broadcast Address</th><th>Wildcard Mask</th></tr>";
 
             calculator.subnets.forEach((subnet) => {
               subnetHtml += "<tr>";
@@ -418,7 +461,14 @@
               subnetHtml += "<td>" + subnet.hosts + "</td>";
               subnetHtml += "<td>" + subnet.networkAddress + "</td>";
               subnetHtml += "<td>" + subnet.subnetMask + "</td>";
-              subnetHtml += "<td>" + subnet.usableRange + "</td>";
+              subnetHtml += "<td>";
+              subnetHtml +=
+                '<button title="Нажмите для деагрегации сети" onclick=\'addRangeToInput("' +
+                subnet.usableRange +
+                "\")'>" +
+                subnet.usableRange +
+                "</button>";
+              subnetHtml += "</td>";
               subnetHtml += "<td>" + subnet.broadcast + "</td>";
               subnetHtml += "<td>" + subnet.wildcard + "</td>";
               subnetHtml += "</tr>";
@@ -436,6 +486,21 @@
             isValidSubnetMask(subnetMask)
           );
         }
+      }
+      // Добавляем функцию для вызова summarizeRoutes(ipAddresses) и вывода результатов в консоль
+      function summarizeAndLog() {
+        const ipAddressesInput = document.getElementById("input1");
+        const ipAddresses = ipAddressesInput.value
+          .split(",")
+          .map((ip) => ip.trim()); // Разбиваем введенные IP-адреса по запятой и удаляем лишние пробелы
+
+        // Вызываем метод summarizeRoutes
+        const summarizedRoute = IpCalculator.summarizeRoutes(ipAddresses);
+
+        const TextElement = document.getElementById("resultText");
+        // Выводим результат в консоль
+        TextElement.textContent =
+          "Суммированный (деагрегированный) маршрут : " + summarizedRoute;
       }
     </script>
   </body>

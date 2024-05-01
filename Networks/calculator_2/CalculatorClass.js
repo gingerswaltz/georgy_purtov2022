@@ -203,4 +203,63 @@ class IpCalculator {
       remainingHosts -= subnetHosts;
     });
   }
+
+  // Метод для суммаризации нескольких IP адресов
+  static summarizeRoutes(ipAddresses) {
+    // Проверка на пустой массив IP адресов
+    if (ipAddresses.length === 0) {
+      return null;
+    }
+
+    // Разбиваем каждый IP адрес на октеты
+    const ipPartsArray = ipAddresses.map((ip) =>
+      ip.split(".").map((part) => parseInt(part))
+    );
+
+    // Инициализируем переменные для минимального и максимального адреса
+    let minAddress = ipPartsArray[0].slice();
+    let maxAddress = ipPartsArray[0].slice();
+
+    // Находим минимальный и максимальный адреса
+    ipPartsArray.forEach((ipParts) => {
+      for (let i = 0; i < 4; i++) {
+        if (ipParts[i] < minAddress[i]) {
+          minAddress[i] = ipParts[i];
+        }
+        if (ipParts[i] > maxAddress[i]) {
+          maxAddress[i] = ipParts[i];
+        }
+      }
+    });
+
+    // Определяем биты маски подсети, используя двоичное представление минимального и максимального адресов
+    let subnetMask = 0;
+    for (let i = 0; i < 4; i++) {
+      let bits = 7;
+      while (
+        ((minAddress[i] >> bits) & 1) === ((maxAddress[i] >> bits) & 1) &&
+        bits >= 0
+      ) {
+        bits--;
+        subnetMask++;
+      }
+    }
+
+    // Преобразуем количество бит маски в формат "x.x.x.x"
+    const subnetMaskBinary = "1"
+      .repeat(subnetMask)
+      .padEnd(32, "0")
+      .match(/.{1,8}/g)
+      .map((bin) => parseInt(bin, 2));
+
+    // Формируем суммаризированный маршрут
+    const summarizedRoute =
+      minAddress
+        .map((part, index) => part & subnetMaskBinary[index])
+        .join(".") +
+      "/" +
+      subnetMask;
+
+    return summarizedRoute;
+  }
 }
