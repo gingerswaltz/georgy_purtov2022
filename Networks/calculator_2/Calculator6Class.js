@@ -233,55 +233,37 @@ class IPv6Calculator {
     return endGroups.join(":");
   }
 
-  calculateVLSM(subnets) {
-    // Проверяем, является ли подсеть входным параметром в формате числа или строкой
-    const numSubnets = isNaN(subnets) ? parseInt(subnets) : subnets;
+  calculateVLSM(subnetMaskLength) {
+    const ipGroups = this.ip.split(":"); // Разбиваем IPv6 адрес на группы
+    const ipPrefix = ipGroups.slice(0, 8 - subnetMaskLength / 4).join(":"); // Получаем префикс IP адреса
 
-    // Проверяем, является ли numSubnets числом
-    if (isNaN(numSubnets)) {
-      return "Ошибка: Количество подсетей должно быть числом.";
+    const subnetsCount = 2 ** (subnetMaskLength - 32); // Исправление здесь
+    const subnets = [];
+
+    for (let i = 0; i < subnetsCount; i++) {
+      // Генерируем номер подсети в формате шестнадцатеричного числа
+      const subnetNumberHex = (i * 2 ** (64 - subnetMaskLength)).toString(16);
+
+      // Дополняем номер подсети нулями до 4 символов
+      const paddedSubnetNumberHex = subnetNumberHex.padStart(
+        subnetMaskLength / 4,
+        "0"
+      );
+
+      // Собираем подсеть
+      const subnet =
+        ipPrefix + ":" + paddedSubnetNumberHex + "::/" + subnetMaskLength;
+      subnets.push(subnet);
     }
 
-    // Получаем информацию об исходной подсети
-    const originalPrefix = this.getSubnetPrefix();
-    const originalPrefixBits = parseInt(originalPrefix.split("/")[1]);
-
-    // Рассчитываем новый префикс подсети для каждой новой подсети
-    let newPrefixBits = originalPrefixBits + Math.log2(numSubnets);
-    newPrefixBits = Math.ceil(newPrefixBits); // Округляем до ближайшего целого числа
-
-    if (newPrefixBits > 128) {
-      return "Ошибка: Невозможно разделить подсеть на запрошенное количество подсетей.";
-    }
-
-    // Рассчитываем количество /64 подсетей в каждой новой подсети
-    const subnetsCount = Math.pow(2, 128 - newPrefixBits);
-
-    // Генерируем новые подсети
-    const newSubnets = [];
-    const baseAddressParts = this.ip.split(":");
-    const baseAddressNum = parseInt(
-      baseAddressParts[baseAddressParts.length - 1],
-      16
+    // Выводим результат
+    console.log(
+      `Subnetting ${
+        this.ip
+      }/${32} into /${subnetMaskLength}s gives ${subnetsCount} subnets, all of which have ${
+        2 ** (64 - subnetMaskLength)
+      } /64s.`
     );
-    for (let i = 0; i < numSubnets; i++) {
-      const newAddressNum = baseAddressNum + i * subnetsCount;
-      const newAddress =
-        baseAddressParts.slice(0, baseAddressParts.length - 1).join(":") +
-        ":" +
-        newAddressNum.toString(16);
-      const subnet = newAddress + "/" + newPrefixBits;
-      newSubnets.push(subnet);
-    }
-
-    // Генерируем HTML-код таблицы с результатами
-    let output = "<table>";
-    output += "<tr><th>New Subnets</th><th>Subnet</th></tr>";
-    newSubnets.forEach((subnet, index) => {
-      output += `<tr><td>Subnet ${index + 1}</td><td>${subnet}</td></tr>`;
-    });
-    output += "</table>";
-
-    return output;
+    subnets.forEach((subnet) => console.log(subnet)); // Выводим каждую подсеть
   }
 }
