@@ -349,9 +349,14 @@
           subMask = convertDecimalMaskToHex(subnetMask);
           const calculator = new IPv6Calculator(ipAddress, subMask);
           // Запрашиваем информацию о подсетях с помощью диалогового окна
-          const subnetCount = prompt("Enter subnet count:");
+          const subnetCount = subnetMask;
           // Проверяем, был ли введен текст
-          if (subnetCount === null || isNaN(subnetCount)) {
+          if (
+            subnetCount === null ||
+            (isNaN(subnetCount) &&
+              subnetCount > 128 &&
+              subnetCount <= subnetMask)
+          ) {
             // Пользователь отменил ввод или ввел некорректные данные, просим повторить ввод
             alert("Invalid input. Please enter a valid number of subnets.");
           } else {

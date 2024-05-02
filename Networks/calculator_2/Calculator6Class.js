@@ -234,8 +234,7 @@ class IPv6Calculator {
   }
 
   calculateVLSM(subnetMaskLength) {
-    const ipGroups = this.ip.split(":"); // Разбиваем IPv6 адрес на группы
-    const ipPrefix = ipGroups.slice(0, 8 - subnetMaskLength / 4).join(":"); // Получаем префикс IP адреса
+    const ipPrefix = this.getCompressedIPv6(); // Получаем сжатую запись IP префикса IP адреса
 
     const subnetsCount = 2 ** (subnetMaskLength - 32); // Исправление здесь
     const subnets = [];
@@ -244,26 +243,27 @@ class IPv6Calculator {
       // Генерируем номер подсети в формате шестнадцатеричного числа
       const subnetNumberHex = (i * 2 ** (64 - subnetMaskLength)).toString(16);
 
-      // Дополняем номер подсети нулями до 4 символов
-      const paddedSubnetNumberHex = subnetNumberHex.padStart(
-        subnetMaskLength / 4,
-        "0"
+      // Дополняем номер подсети нулями до 8 символов (IPv6 имеет 8 групп)
+      const paddedSubnetNumberHex = subnetNumberHex.padStart(8, "0");
+
+      // Убираем лишние нули
+      const trimmedSubnetNumberHex = paddedSubnetNumberHex.replace(
+        /(^|:)0+/,
+        "$1"
       );
 
       // Собираем подсеть
-      const subnet =
-        ipPrefix + ":" + paddedSubnetNumberHex + "::/" + subnetMaskLength;
+      const subnet = ipPrefix + trimmedSubnetNumberHex + "/" + subnetMaskLength;
       subnets.push(subnet);
     }
 
-    // Выводим результат
-    console.log(
-      `Subnetting ${
-        this.ip
-      }/${32} into /${subnetMaskLength}s gives ${subnetsCount} subnets, all of which have ${
-        2 ** (64 - subnetMaskLength)
-      } /64s.`
+    // Создаем строку с результатами
+    let resultString = "<table><tr><th>Subnet</th></tr>";
+    subnets.forEach(
+      (subnet) => (resultString += "<tr><td>" + subnet + "</td></tr>")
     );
-    subnets.forEach((subnet) => console.log(subnet)); // Выводим каждую подсеть
+    resultString += "</table>";
+
+    return resultString;
   }
 }
