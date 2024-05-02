@@ -177,7 +177,17 @@
         <label for="toggleBtn">Calculate</label>
       </div>
     </div>
-
+    <div class="input-group">
+      <label for="ipAddresses"
+        >Адреса для деагрегации (разделение через запятую):</label
+      >
+      <textarea id="input1" rows="5" placeholder="Enter IP Addresses">
+192.168.2.5,
+192.168.2.6,
+192.168.2.7</textarea
+      >
+    </div>
+    <p id="resultText"></p>
     <script>
       function toggleFunction() {
         const toggleBtn = document.getElementById("toggleBtn");
@@ -370,6 +380,21 @@
             isValidSubnetMask(subnetMask)
           );
         }
+      }
+      // Добавляем функцию для вызова summarizeRoutes(ipAddresses) и вывода результатов в консоль
+      function summarizeAndLog() {
+        const ipAddressesInput = document.getElementById("input1");
+        const ipAddresses = ipAddressesInput.value
+          .split(",")
+          .map((ip) => ip.trim()); // Разбиваем введенные IP-адреса по запятой и удаляем лишние пробелы
+
+        // Вызываем метод summarizeRoutes
+        const summarizedRoute = IpCalculator.summarizeRoutes(ipAddresses);
+
+        const TextElement = document.getElementById("resultText");
+        // Выводим результат в консоль
+        TextElement.textContent =
+          "Суммированный (деагрегированный) маршрут : " + summarizedRoute;
       }
     </script>
   </body>
