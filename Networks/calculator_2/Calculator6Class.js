@@ -266,4 +266,144 @@ class IPv6Calculator {
 
     return resultString;
   }
+
+  static summarizeIPv6Routes(routes) {
+    // Функция для преобразования шестнадцатеричного числа в двоичную строку
+    const hexToBinary = (hex) =>
+      parseInt(hex, 16).toString(2).padStart(16, "0");
+
+    // Функция для нахождения общего префикса двух IPv6-адресов
+    const findCommonPrefix = (address1, address2) => {
+      const blocks1 = address1.split(":");
+      const blocks2 = address2.split(":");
+      let commonPrefix = "";
+
+      for (let i = 0; i < Math.min(blocks1.length, blocks2.length); i++) {
+        const binaryBlock1 = hexToBinary(blocks1[i]);
+        const binaryBlock2 = hexToBinary(blocks2[i]);
+
+        const minBinaryLength = Math.min(
+          binaryBlock1.length,
+          binaryBlock2.length
+        );
+
+        for (let j = 0; j < minBinaryLength; j++) {
+          if (binaryBlock1[j] === binaryBlock2[j]) {
+            commonPrefix += binaryBlock1[j];
+          } else {
+            break;
+          }
+        }
+
+        // Если найдено несовпадение битов, прерываем цикл
+        if (commonPrefix.length !== (i + 1) * 16) {
+          break;
+        }
+      }
+
+      return commonPrefix;
+    };
+
+    // Находим общий префикс всех адресов
+    let commonPrefix = routes.reduce((prefix, route) => {
+      const routePrefix = route.split("/")[0];
+      if (!prefix) return routePrefix;
+      return findCommonPrefix(prefix, routePrefix);
+    }, "");
+
+    console.log("Common Prefix (binary):", commonPrefix);
+
+    // Находим самую короткую маску префикса
+    const shortestPrefixLength = Math.max(
+      ...routes.map((route) => parseInt(route.split("/")[1]))
+    );
+
+    console.log("Shortest Prefix Length:", shortestPrefixLength);
+    // Учитываем маску префикса
+    const maskLength = shortestPrefixLength;
+    const maskLengthBlocks = Math.floor(maskLength / 16);
+    const maskLengthBits = maskLength % 16;
+    const maskedCommonPrefix =
+      commonPrefix.slice(0, maskLengthBlocks * 16) + "0".repeat(maskLengthBits);
+
+    console.log("Masked Common Prefix (binary):", maskedCommonPrefix);
+
+    // Переводим общий префикс обратно в шестнадцатеричную форму
+    let summarizedRoute = "";
+    for (let i = 0; i < maskedCommonPrefix.length; i += 16) {
+      const hexBlock = parseInt(
+        maskedCommonPrefix.slice(i, i + 16),
+        2
+      ).toString(16);
+      summarizedRoute += hexBlock + ":";
+    }
+    summarizedRoute = summarizedRoute.slice(0, -1); // Убираем лишний двоеточий
+
+    console.log("Summarized Route (hexadecimal):", summarizedRoute);
+
+    // Учитываем маску итогового результата
+    summarizedRoute += `/${shortestPrefixLength}`;
+
+    console.log("Summarized Route with prefix length:", summarizedRoute);
+
+    return summarizedRoute;
+  }
+}
+
+function summarizeIPv6Prefixes(prefixes) {
+  // Если в массиве менее двух префиксов, нет необходимости выполнять суммирование
+  if (prefixes.length < 2) {
+    return prefixes;
+  }
+
+  // Функция для суммирования двух префиксов
+  function summarize(prefix1, prefix2) {
+    const parts1 = prefix1.split(":");
+    const parts2 = prefix2.split(":");
+    let commonBlocks = 0;
+    for (let i = 0; i < 3; i++) {
+      if (parts1[i] !== parts2[i]) {
+        break;
+      }
+      commonBlocks++;
+    }
+    const lastBlock1 = parseInt(parts1[3], 16).toString(2).padStart(16, "0");
+    const lastBlock2 = parseInt(parts2[3], 16).toString(2).padStart(16, "0");
+    let matchingBits = 0;
+    for (let i = 0; i < 16; i++) {
+      if (lastBlock1[i] !== lastBlock2[i]) {
+        break;
+      }
+      matchingBits++;
+    }
+    const summarizedBlock = lastBlock1.substr(0, matchingBits).padEnd(16, "0");
+    const summarizedHex = parseInt(summarizedBlock, 2)
+      .toString(16)
+      .toUpperCase();
+    const summarizedPrefix =
+      parts1.slice(0, commonBlocks).join(":") +
+      ":" +
+      summarizedHex +
+      "::/" +
+      (commonBlocks * 16 + matchingBits);
+    return summarizedPrefix;
+  }
+
+  // Суммируем каждую пару префиксов в массиве
+  let summarizedPrefixes = [...prefixes];
+  for (let i = 0; i < summarizedPrefixes.length; i++) {
+    for (let j = i + 1; j < summarizedPrefixes.length; j++) {
+      const summarized = summarize(
+        summarizedPrefixes[i],
+        summarizedPrefixes[j]
+      );
+      // Заменяем первый префикс в паре на суммарный результат, а второй удаляем из массива
+      summarizedPrefixes[i] = summarized;
+      summarizedPrefixes.splice(j, 1);
+      // После удаления элемента из массива, нужно уменьшить счетчик j на 1
+      j--;
+    }
+  }
+
+  return summarizedPrefixes;
 }
