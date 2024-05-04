@@ -191,12 +191,12 @@
     </div>
     <div class="input-group">
       <label for="ipAddresses"
-        >Адреса для деагрегации (разделение через запятую):</label
+        >Адреса для деагрегации (разделение через новую строку):</label
       >
       <textarea id="input1" rows="5" placeholder="Enter IP Addresses">
-192.168.2.5,
-192.168.2.6,
-192.168.2.7</textarea
+192.168.2.5/24,
+192.168.2.6/24,
+192.168.2.7/24</textarea
       >
     </div>
     <p id="resultText"></p>
@@ -490,15 +490,28 @@
       // Добавляем функцию для вызова summarizeRoutes(ipAddresses) и вывода результатов в консоль
       function summarizeAndLog() {
         const ipAddressesInput = document.getElementById("input1");
-        const ipAddresses = ipAddressesInput.value
-          .split(",")
-          .map((ip) => ip.trim()); // Разбиваем введенные IP-адреса по запятой и удаляем лишние пробелы
+        const ipAddressesText = ipAddressesInput.value.trim(); // Получаем текст из textarea и удаляем лишние пробелы в начале и в конце
 
-        // Вызываем метод summarizeRoutes
-        const summarizedRoute = IpCalculator.summarizeRoutes(ipAddresses);
+        // Разбиваем текст на строки
+        const lines = ipAddressesText.split("\n");
+
+        // Создаем массив для хранения IP-адресов и масок подсетей
+        const ipAddresses = [];
+
+        // Проходимся по каждой строке
+        for (const line of lines) {
+          // Разделяем строку на IP-адрес и маску подсети
+          const [ip, mask] = line.split("/").map((item) => item.trim());
+
+          // Добавляем IP-адрес и маску подсети в массив объектов
+          ipAddresses.push(ip + "/" + mask);
+        }
+
+        // Вызываем метод calculateSupernet, передавая массив строк с IP-адресами и масками подсетей
+        const summarizedRoute = calculateSupernet(ipAddresses);
 
         const TextElement = document.getElementById("resultText");
-        // Выводим результат в консоль
+        // Выводим результат
         TextElement.textContent =
           "Суммированный (деагрегированный) маршрут : " + summarizedRoute;
       }

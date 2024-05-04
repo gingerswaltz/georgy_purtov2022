@@ -203,63 +203,53 @@ class IpCalculator {
       remainingHosts -= subnetHosts;
     });
   }
+}
 
-  // Метод для суммаризации нескольких IP адресов
-  static summarizeRoutes(ipAddresses) {
-    // Проверка на пустой массив IP адресов
-    if (ipAddresses.length === 0) {
-      return null;
-    }
-
-    // Разбиваем каждый IP адрес на октеты
-    const ipPartsArray = ipAddresses.map((ip) =>
-      ip.split(".").map((part) => parseInt(part))
-    );
-
-    // Инициализируем переменные для минимального и максимального адреса
-    let minAddress = ipPartsArray[0].slice();
-    let maxAddress = ipPartsArray[0].slice();
-
-    // Находим минимальный и максимальный адреса
-    ipPartsArray.forEach((ipParts) => {
-      for (let i = 0; i < 4; i++) {
-        if (ipParts[i] < minAddress[i]) {
-          minAddress[i] = ipParts[i];
-        }
-        if (ipParts[i] > maxAddress[i]) {
-          maxAddress[i] = ipParts[i];
-        }
-      }
-    });
-
-    // Определяем биты маски подсети, используя двоичное представление минимального и максимального адресов
-    let subnetMask = 0;
-    for (let i = 0; i < 4; i++) {
-      let bits = 7;
-      while (
-        ((minAddress[i] >> bits) & 1) === ((maxAddress[i] >> bits) & 1) &&
-        bits >= 0
-      ) {
-        bits--;
-        subnetMask++;
-      }
-    }
-
-    // Преобразуем количество бит маски в формат "x.x.x.x"
-    const subnetMaskBinary = "1"
-      .repeat(subnetMask)
-      .padEnd(32, "0")
-      .match(/.{1,8}/g)
-      .map((bin) => parseInt(bin, 2));
-
-    // Формируем суммаризированный маршрут
-    const summarizedRoute =
-      minAddress
-        .map((part, index) => part & subnetMaskBinary[index])
-        .join(".") +
-      "/" +
-      subnetMask;
-
-    return summarizedRoute;
+function calculateSupernet(networks) {
+  // Проверка, что networks является массивом и содержит хотя бы одну сеть
+  if (!Array.isArray(networks) || networks.length === 0) {
+    throw new Error("Входные данные должны быть массивом сетей");
   }
+
+  // Создаем массив для хранения всех масок подсетей
+  const subnetMasks = [];
+
+  // Преобразуем каждую сеть из формата "IP/маска" в объект {ip: 'IP', mask: маска}
+  for (const network of networks) {
+    const [ip, mask] = network.split("/");
+    subnetMasks.push({ ip, mask: parseInt(mask) });
+  }
+
+  // Сортируем массив сетей по IP адресу, чтобы найти сеть с наименьшим адресом
+  subnetMasks.sort((a, b) => {
+    const ipA = a.ip.split(".").map(Number);
+    const ipB = b.ip.split(".").map(Number);
+    for (let i = 0; i < 4; i++) {
+      if (ipA[i] !== ipB[i]) {
+        return ipA[i] - ipB[i];
+      }
+    }
+    return 0;
+  });
+
+  // Находим наименьшую маску подсети
+  const smallestMask = subnetMasks[0].mask;
+
+  // Находим максимальное количество адресов в сети
+  let maxAddresses = 0;
+  for (const subnet of subnetMasks) {
+    const addresses = Math.pow(2, 32 - subnet.mask);
+    if (addresses > maxAddresses) {
+      maxAddresses = addresses;
+    }
+  }
+
+  // Находим необходимую маску подсети для объединения сетей
+  let supernetMask = 32 - Math.ceil(Math.log2(maxAddresses * networks.length));
+
+  // Строим суперсеть
+  const supernetIP = subnetMasks[0].ip.split(".").map(Number);
+  const supernet = `${supernetIP.join(".")}/${supernetMask}`;
+
+  return supernet;
 }
