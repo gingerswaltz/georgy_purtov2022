@@ -233,10 +233,22 @@ class IPv6Calculator {
     return endGroups.join(":");
   }
 
-  calculateVLSM(subnetMaskLength) {
-    const ipPrefix = this.getCompressedIPv6(); // Получаем сжатую запись IP префикса IP адреса
+  calculateVLSM(newSubnetMask) {
+    // Получаем сжатую запись IP префикса IP адреса
+    const ipPrefix = this.getCompressedIPv6();
 
-    const subnetsCount = 2 ** (subnetMaskLength - 32); // Исправление здесь
+    // Получаем длину новой маски подсети в битах
+    const subnetMaskLength = newSubnetMask;
+    console.log(subnetMaskLength);
+    // Получаем текущую длину маски подсети в битах
+    const currentSubnetMaskLength = this.getSubnetMaskBits();
+
+    // Вычисляем количество бит, добавленных или удаленных в новой маске по сравнению с текущей
+    const difference = subnetMaskLength - currentSubnetMaskLength;
+
+    // Вычисляем количество новых подсетей, которые будут созданы на основе новой маски
+    const subnetsCount = 2 ** difference;
+
     const subnets = [];
 
     for (let i = 0; i < subnetsCount; i++) {
@@ -244,13 +256,10 @@ class IPv6Calculator {
       const subnetNumberHex = (i * 2 ** (64 - subnetMaskLength)).toString(16);
 
       // Дополняем номер подсети нулями до 8 символов (IPv6 имеет 8 групп)
-      const paddedSubnetNumberHex = subnetNumberHex.padStart(8, "0");
+      const paddedSubnetNumberHex = subnetNumberHex; //.padStart(8, "0");
 
       // Убираем лишние нули
-      const trimmedSubnetNumberHex = paddedSubnetNumberHex.replace(
-        /(^|:)0+/,
-        "$1"
-      );
+      const trimmedSubnetNumberHex = paddedSubnetNumberHex.replace(/0{4}$/, "");
 
       // Собираем подсеть
       const subnet = ipPrefix + trimmedSubnetNumberHex + "/" + subnetMaskLength;
@@ -265,88 +274,6 @@ class IPv6Calculator {
     resultString += "</table>";
 
     return resultString;
-  }
-
-  static summarizeIPv6Routes(routes) {
-    // Функция для преобразования шестнадцатеричного числа в двоичную строку
-    const hexToBinary = (hex) =>
-      parseInt(hex, 16).toString(2).padStart(16, "0");
-
-    // Функция для нахождения общего префикса двух IPv6-адресов
-    const findCommonPrefix = (address1, address2) => {
-      const blocks1 = address1.split(":");
-      const blocks2 = address2.split(":");
-      let commonPrefix = "";
-
-      for (let i = 0; i < Math.min(blocks1.length, blocks2.length); i++) {
-        const binaryBlock1 = hexToBinary(blocks1[i]);
-        const binaryBlock2 = hexToBinary(blocks2[i]);
-
-        const minBinaryLength = Math.min(
-          binaryBlock1.length,
-          binaryBlock2.length
-        );
-
-        for (let j = 0; j < minBinaryLength; j++) {
-          if (binaryBlock1[j] === binaryBlock2[j]) {
-            commonPrefix += binaryBlock1[j];
-          } else {
-            break;
-          }
-        }
-
-        // Если найдено несовпадение битов, прерываем цикл
-        if (commonPrefix.length !== (i + 1) * 16) {
-          break;
-        }
-      }
-
-      return commonPrefix;
-    };
-
-    // Находим общий префикс всех адресов
-    let commonPrefix = routes.reduce((prefix, route) => {
-      const routePrefix = route.split("/")[0];
-      if (!prefix) return routePrefix;
-      return findCommonPrefix(prefix, routePrefix);
-    }, "");
-
-    console.log("Common Prefix (binary):", commonPrefix);
-
-    // Находим самую короткую маску префикса
-    const shortestPrefixLength = Math.max(
-      ...routes.map((route) => parseInt(route.split("/")[1]))
-    );
-
-    console.log("Shortest Prefix Length:", shortestPrefixLength);
-    // Учитываем маску префикса
-    const maskLength = shortestPrefixLength;
-    const maskLengthBlocks = Math.floor(maskLength / 16);
-    const maskLengthBits = maskLength % 16;
-    const maskedCommonPrefix =
-      commonPrefix.slice(0, maskLengthBlocks * 16) + "0".repeat(maskLengthBits);
-
-    console.log("Masked Common Prefix (binary):", maskedCommonPrefix);
-
-    // Переводим общий префикс обратно в шестнадцатеричную форму
-    let summarizedRoute = "";
-    for (let i = 0; i < maskedCommonPrefix.length; i += 16) {
-      const hexBlock = parseInt(
-        maskedCommonPrefix.slice(i, i + 16),
-        2
-      ).toString(16);
-      summarizedRoute += hexBlock + ":";
-    }
-    summarizedRoute = summarizedRoute.slice(0, -1); // Убираем лишний двоеточий
-
-    console.log("Summarized Route (hexadecimal):", summarizedRoute);
-
-    // Учитываем маску итогового результата
-    summarizedRoute += `/${shortestPrefixLength}`;
-
-    console.log("Summarized Route with prefix length:", summarizedRoute);
-
-    return summarizedRoute;
   }
 }
 

@@ -21,7 +21,14 @@
       th {
         background-color: #f2f2f2;
       }
-
+      .input-group #input1 {
+        width: 300px;
+        height: 120px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+      }
       body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -174,12 +181,12 @@
           <input type="checkbox" id="toggleBtn" onclick="toggleFunction()" />
           <span></span>
         </label>
-        <label for="toggleBtn">Calculate</label>
+        <label for="toggleBtn" style="margin-left: 5px">Calculate</label>
       </div>
     </div>
     <div class="input-group">
       <label for="ipAddresses"
-        >Адреса для деагрегации (разделение через запятую):</label
+        >Адреса для деагрегации (разделение через новую строку):</label
       >
       <textarea id="input1" rows="5" placeholder="Enter IP Addresses">
         2001:DB8:0:1::/64
@@ -361,8 +368,10 @@
           subMask = convertDecimalMaskToHex(subnetMask);
           const calculator = new IPv6Calculator(ipAddress, subMask);
           // Запрашиваем информацию о подсетях с помощью диалогового окна
-          const subnetCount = subnetMask;
           // Проверяем, был ли введен текст
+          const subnetCount = prompt(
+            "Enter subnet mask (or click 'Cancel' to stop):"
+          );
           if (
             subnetCount === null ||
             (isNaN(subnetCount) &&
