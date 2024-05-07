@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Лабораторная4-5</string>
+    <string name="label_phone_number">Номер: %s</string>
+    <string name="label_email">"Электронаня почта": %s</string>
+    <string name="label_address">Адрес проживания: %s</string>
+
+
+</resources>

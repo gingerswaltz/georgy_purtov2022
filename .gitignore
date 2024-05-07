@@ -94,3 +94,9 @@ SAOD2/AVL/AVL.dSYM/Contents/Resources/DWARF/AVL
 *.pdb
 *.pdb
 /CompGraph/lab 4/venv
+/AndroidDev/Lab4-5/.gradle
+/AndroidDev/Lab4-5/app/build
+/AndroidDev/Lab6/.gradle
+/AndroidDev/Lab7/.gradle
+/AndroidDev/Lab7/gradle
+/AndroidDev/Lab8Java/gradle
