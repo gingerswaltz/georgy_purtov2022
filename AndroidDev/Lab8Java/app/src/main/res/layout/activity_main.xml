@@ -8,6 +8,7 @@
     <androidx.wear.widget.WearableRecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:backgroundTint="#D8A3A3" />
 
 </androidx.wear.widget.BoxInsetLayout>

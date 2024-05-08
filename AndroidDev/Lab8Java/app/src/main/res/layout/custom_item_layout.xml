@@ -8,7 +8,10 @@
         android:id="@+id/item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/white"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#73E438"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="italic" />
 
 </LinearLayout>

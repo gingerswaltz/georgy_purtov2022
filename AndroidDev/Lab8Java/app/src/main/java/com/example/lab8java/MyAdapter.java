@@ -15,6 +15,7 @@ import androidx.wear.widget.WearableRecyclerView;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private String[] data;
     private OnItemClickListener onItemClickListener;
+    private OnLongItemClickListener onLongItemClickListener;
 
     public MyAdapter(String[] data) {
         this.data = data;
@@ -22,6 +23,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.onItemClickListener = listener;
+    }
+
+    public void setOnLongItemClickListener(OnLongItemClickListener listener) {
+        this.onLongItemClickListener = listener;
     }
 
     @NonNull
@@ -35,6 +40,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         String item = data[position];
         holder.textView.setText(item);
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                int clickedPosition = holder.getAdapterPosition();
+                if (onLongItemClickListener != null && clickedPosition != RecyclerView.NO_POSITION) {
+                    onLongItemClickListener.onLongItemClick(clickedPosition);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +71,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public interface OnItemClickListener {
         void onItemClick(int position);
+    }
+
+    public interface OnLongItemClickListener {
+        void onLongItemClick(int position);
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
