@@ -206,50 +206,41 @@ class IpCalculator {
 }
 
 function calculateSupernet(networks) {
-  // Проверка, что networks является массивом и содержит хотя бы одну сеть
-  if (!Array.isArray(networks) || networks.length === 0) {
-    throw new Error("Входные данные должны быть массивом сетей");
+  // Функция для преобразования IP-адреса и маски в двоичный формат
+  function toBinary(ip) {
+    return ip.split('.').map(part => parseInt(part, 10).toString(2).padStart(8, '0')).join('');
   }
 
-  // Создаем массив для хранения всех масок подсетей
-  const subnetMasks = [];
-
-  // Преобразуем каждую сеть из формата "IP/маска" в объект {ip: 'IP', mask: маска}
-  for (const network of networks) {
-    const [ip, mask] = network.split("/");
-    subnetMasks.push({ ip, mask: parseInt(mask) });
-  }
-
-  // Сортируем массив сетей по IP адресу, чтобы найти сеть с наименьшим адресом
-  subnetMasks.sort((a, b) => {
-    const ipA = a.ip.split(".").map(Number);
-    const ipB = b.ip.split(".").map(Number);
-    for (let i = 0; i < 4; i++) {
-      if (ipA[i] !== ipB[i]) {
-        return ipA[i] - ipB[i];
+  // Функция для определения общих битов у сетей
+  function findCommonBits(networksBinary) {
+    const firstNetwork = networksBinary[0];
+    let commonBits = 0;
+    for (let i = 0; i < firstNetwork.length; i++) {
+      if (networksBinary.every(network => network[i] === firstNetwork[i])) {
+        commonBits++;
+      } else {
+        break;
       }
     }
-    return 0;
-  });
-
-  // Находим наименьшую маску подсети
-  const smallestMask = subnetMasks[0].mask;
-
-  // Находим максимальное количество адресов в сети
-  let maxAddresses = 0;
-  for (const subnet of subnetMasks) {
-    const addresses = Math.pow(2, 32 - subnet.mask);
-    if (addresses > maxAddresses) {
-      maxAddresses = addresses;
-    }
+    return commonBits;
   }
 
-  // Находим необходимую маску подсети для объединения сетей
-  let supernetMask = 32 - Math.ceil(Math.log2(maxAddresses * networks.length));
+  // Преобразование сетей в двоичный формат
+  const networksBinary = networks.map(network => {
+    const [ip, mask] = network.split('/');
+    return toBinary(ip).slice(0, parseInt(mask));
+  });
 
-  // Строим суперсеть
-  const supernetIP = subnetMasks[0].ip.split(".").map(Number);
-  const supernet = `${supernetIP.join(".")}/${supernetMask}`;
+  // Определение общих битов
+  const commonBits = findCommonBits(networksBinary);
 
-  return supernet;
+  // Формирование суммированного адреса сети
+  const summarizedNetwork = networksBinary[0].slice(0, commonBits).padEnd(32, '0');
+  const summarizedMask = '1'.repeat(commonBits).padEnd(32, '0');
+
+  // Преобразование двоичного адреса обратно в десятичный формат
+  const summarizedIP = `${parseInt(summarizedNetwork.slice(0, 8), 2)}.${parseInt(summarizedNetwork.slice(8, 16), 2)}.${parseInt(summarizedNetwork.slice(16, 24), 2)}.${parseInt(summarizedNetwork.slice(24), 2)}`;
+  const summarizedCIDR = `/${commonBits}`;
+
+  return `${summarizedIP}${summarizedCIDR}`;
 }
