@@ -18,7 +18,7 @@ namespace Lab5_TuringMachineGUI_v1
         private Label stateLabel;
         private Label headLabel;
         private Timer timer;
-        private const int AutoMoveInterval = 1000; // Интервал автоматического движения головки (в миллисекундах)
+        private const int AutoMoveInterval = 700; // Интервал автоматического движения головки (в миллисекундах)
 
         public Form1()
         {
@@ -73,7 +73,7 @@ namespace Lab5_TuringMachineGUI_v1
         private void Timer_Tick(object sender, EventArgs e)
         {
             // Выполнение одного шага машины Тьюринга
-            turingMachine.Step();
+            turingMachine.Step(this.timer);
             // Обновление отображения
             UpdateTapePictureBox();
             UpdateStateLabel();
@@ -103,7 +103,7 @@ namespace Lab5_TuringMachineGUI_v1
             }
 
             // Выполнение одного шага машины Тьюринга
-            turingMachine.Step();
+            turingMachine.Step(this.timer);
             // Обновление отображения
             UpdateTapePictureBox();
             UpdateStateLabel();
@@ -291,6 +291,8 @@ namespace Lab5_TuringMachineGUI_v1
 
     public class TuringMachine
     {
+        private bool errorShown;
+
         public string Tape { get; set; } // Лента автомата
         public int HeadIndex { get; set; } // Текущий индекс головки ленты
         public string State { get; set; } // Текущее состояние автомата
@@ -304,9 +306,10 @@ namespace Lab5_TuringMachineGUI_v1
             HeadIndex = 1; // Сбросить индекс головки ленты, установив 0
             State = "q1"; // Сбросить состояние автомата, установив начальное состояние "q0"
             Steps = 0; // Сбросить количество шагов, установив 0
+            errorShown = false;
         }
 
-        public void Step()
+        public void Step(Timer timer)
         {
             // Получить текущий символ на ленте
             char currentSymbol = Tape[HeadIndex];
@@ -329,11 +332,11 @@ namespace Lab5_TuringMachineGUI_v1
                 {
                     HeadIndex--;
                 }
-                else if (transition.MoveDirection == Direction.Right) 
+                else if (transition.MoveDirection == Direction.Right)
                 {
                     HeadIndex++;
                 }
-                
+
 
                 // Изменить текущее состояние
                 State = transition.NextState;
@@ -345,11 +348,16 @@ namespace Lab5_TuringMachineGUI_v1
                     return;
                 }
             }
-            else
+            else if (!errorShown) // Проверка, было ли уже показано сообщение об ошибке
             {
+                timer.Stop(); // Останавливаем таймер при ошибке
+                errorShown = true; // Устанавливаем флаг, чтобы сообщение об ошибке больше не показывалось
+
                 MessageBox.Show("Не найдено правило перехода для текущего состояния и символа.");
+
                 return;
             }
         }
     }
-}
+
+    }
