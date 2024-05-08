@@ -68,7 +68,7 @@ namespace Lab5_TuringMachineGUI_v1
             // 
             this.runButton.BackColor = System.Drawing.Color.Teal;
             this.runButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.runButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.runButton.Font = new System.Drawing.Font("GOST type A", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.runButton.ForeColor = System.Drawing.Color.White;
             this.runButton.Location = new System.Drawing.Point(1008, 308);
             this.runButton.Name = "runButton";
@@ -81,20 +81,20 @@ namespace Lab5_TuringMachineGUI_v1
             // stateLabel
             // 
             this.stateLabel.AutoSize = true;
-            this.stateLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.stateLabel.Font = new System.Drawing.Font("GOST type A", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.stateLabel.Location = new System.Drawing.Point(7, 170);
             this.stateLabel.Name = "stateLabel";
-            this.stateLabel.Size = new System.Drawing.Size(109, 25);
+            this.stateLabel.Size = new System.Drawing.Size(100, 25);
             this.stateLabel.TabIndex = 2;
             this.stateLabel.Text = "Состояние:";
             // 
             // headLabel
             // 
             this.headLabel.AutoSize = true;
-            this.headLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.headLabel.Font = new System.Drawing.Font("GOST type A", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.headLabel.Location = new System.Drawing.Point(12, -3);
             this.headLabel.Name = "headLabel";
-            this.headLabel.Size = new System.Drawing.Size(247, 25);
+            this.headLabel.Size = new System.Drawing.Size(238, 25);
             this.headLabel.TabIndex = 3;
             this.headLabel.Text = "Позиция головки автомата";
             // 
@@ -102,7 +102,7 @@ namespace Lab5_TuringMachineGUI_v1
             // 
             this.autoMoveButton.BackColor = System.Drawing.Color.Teal;
             this.autoMoveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.autoMoveButton.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.autoMoveButton.Font = new System.Drawing.Font("GOST type A", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.autoMoveButton.ForeColor = System.Drawing.Color.White;
             this.autoMoveButton.Location = new System.Drawing.Point(674, 359);
             this.autoMoveButton.Name = "autoMoveButton";
@@ -117,14 +117,14 @@ namespace Lab5_TuringMachineGUI_v1
             this.inputTextBox.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.inputTextBox.Location = new System.Drawing.Point(131, 170);
             this.inputTextBox.Name = "inputTextBox";
-            this.inputTextBox.Size = new System.Drawing.Size(655, 25);
+            this.inputTextBox.Size = new System.Drawing.Size(689, 25);
             this.inputTextBox.TabIndex = 5;
             // 
             // buttonInput
             // 
             this.buttonInput.BackColor = System.Drawing.Color.Teal;
             this.buttonInput.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonInput.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonInput.Font = new System.Drawing.Font("GOST type A", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonInput.ForeColor = System.Drawing.Color.White;
             this.buttonInput.Location = new System.Drawing.Point(826, 170);
             this.buttonInput.Name = "buttonInput";
@@ -137,10 +137,10 @@ namespace Lab5_TuringMachineGUI_v1
             // resultLabel
             // 
             this.resultLabel.AutoSize = true;
-            this.resultLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.resultLabel.Font = new System.Drawing.Font("GOST type A", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.resultLabel.Location = new System.Drawing.Point(16, 331);
             this.resultLabel.Name = "resultLabel";
-            this.resultLabel.Size = new System.Drawing.Size(100, 25);
+            this.resultLabel.Size = new System.Drawing.Size(106, 25);
             this.resultLabel.TabIndex = 7;
             this.resultLabel.Text = "Результат:";
             this.resultLabel.Click += new System.EventHandler(this.resultLabel_Click);
@@ -157,7 +157,7 @@ namespace Lab5_TuringMachineGUI_v1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.DarkSalmon;
             this.ClientSize = new System.Drawing.Size(1140, 884);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.buttonInput);
