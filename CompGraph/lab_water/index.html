@@ -84,10 +84,22 @@
 
         // Обрабатываем нажатие клавиши
         window.addEventListener("keydown", (event) => {
-          if (event.key === "p") {
-            pouringWater = !pouringWater; // Переключаем состояние наливания воды
-          } else if (event.key === "r") {
-            rotateCup(); // Поворот чаши
+          switch (event.key) {
+            case "p":
+              pouringWater = !pouringWater; // Переключаем состояние наливания воды
+              break;
+            case "w":
+              rotateCup("x", -Math.PI / 12); // Поворот по оси X вверх
+              break;
+            case "s":
+              rotateCup("x", Math.PI / 12); // Поворот по оси X вниз
+              break;
+            case "a":
+              rotateCup("z", -Math.PI / 12); // Поворот по оси Z влево
+              break;
+            case "d":
+              rotateCup("z", Math.PI / 12); // Поворот по оси Z вправо
+              break;
           }
         });
       }
@@ -134,14 +146,15 @@
       }
 
       // Поворот чаши
-      function rotateCup() {
-        const rotationAngle = Math.PI / 6;
-        cup.rotation.x += rotationAngle; // Поворот по оси X
-        cup.rotation.z += rotationAngle; // Поворот по оси Z
+      function rotateCup(axis, angle) {
+        if (axis === "x") {
+          cup.rotation.x += angle; // Поворот по оси X
+        } else if (axis === "z") {
+          cup.rotation.z += angle; // Поворот по оси Z
+        }
 
         // Обновляем угловую скорость чаши
-        angularVelocity.x = rotationAngle / deltaTime;
-        angularVelocity.z = rotationAngle / deltaTime;
+        angularVelocity[axis] = angle / deltaTime;
       }
 
       // Проверка наличия воды под текущим вокселем
@@ -173,6 +186,8 @@
 
       // Физическая симуляция
       function simulatePhysics() {
+        const cupInverseMatrix = cup.matrixWorld.clone().invert();
+
         waterVoxels.forEach((voxel) => {
           // Применение гравитации и инерции
           if (!isVoxelBelow(voxel)) {
@@ -185,7 +200,7 @@
           // Преобразование позиции в локальную систему координат чаши
           const localPosition = new THREE.Vector3()
             .copy(voxel.mesh.position)
-            .applyMatrix4(cup.matrixWorld.clone().invert());
+            .applyMatrix4(cupInverseMatrix);
 
           // Проверка столкновений с границами чаши в локальной системе координат
           if (localPosition.y - voxelSize / 2 < -cupHeight / 2) {
@@ -213,16 +228,11 @@
             voxel.velocity.z = 0;
           }
 
-          // Обработка взаимодействий между вокселями
-          if (isVoxelNearby(voxel)) {
-            voxel.velocity.multiplyScalar(0.9); // Демпфирование скорости при столкновении
-          }
-
           // Преобразование позиции обратно в мировую систему координат
           voxel.mesh.position.copy(localPosition.applyMatrix4(cup.matrixWorld));
 
-          // Применение угловой скорости для имитации инерции
-          if (angularVelocity.length() > 0) {
+          // Обновляем позицию вокселя с учетом угловой скорости чаши (инерция)
+          if (!isVoxelBelow(voxel) && isVoxelNearby(voxel)) {
             const inertiaForce = new THREE.Vector3().crossVectors(
               angularVelocity,
               localPosition
